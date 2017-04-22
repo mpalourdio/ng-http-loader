@@ -17,7 +17,33 @@ and shows a spinner during pending requests.
 ## Usage
 
 In order to have this module listening to your http requests, replace all your ``http`` uses by [http: HttpInterceptorService](src/app/http-interceptor.service.ts).
+Then from your Angular `AppModule`:
 
+```typescript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+[...]
+import { AppComponent } from './app.component';
+import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,    
+    NgHttpLoaderModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+In your app.component.html, add :
+```xml
+<spinner></spinner>
+```
 ## Requirements
 
 It's compatible with Angular 4+.
