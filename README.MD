@@ -1,7 +1,6 @@
 [![Build Status](https://travis-ci.org/mpalourdio/ng-http-loader.svg?branch=master)](https://travis-ci.org/mpalourdio/ng-http-loader)  
 
 # ng-http-loader
-================
 
 ## Installation
 
