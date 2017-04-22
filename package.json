@@ -1,5 +1,5 @@
 {
-  "name": "ng-http-interceptor",
+  "name": "ng-http-loader",
   "version": "0.0.1",
   "scripts": {
     "prepare-deploy": "gulp inline-templates && gulp clean-dist && ngc -p tsconfig.ngc.json && gulp clean-tmp && gulp copy-all",
@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mpalourdio/ng4-http-loader"
+    "url": "https://github.com/mpalourdio/ng-http-loader"
   },
   "author": {
     "name": "Michel Palourdio",
@@ -24,7 +24,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mpalourdio/ng4-http-loader/issues"
+    "url": "https://github.com/mpalourdio/ng-http-loader/issues"
   },
   "main": "./dist/main.js",
   "dependencies": {
