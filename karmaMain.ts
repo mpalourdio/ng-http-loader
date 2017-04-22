@@ -1,4 +1,4 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { NgHttpInterceptorModule } from './src/app/ng-http-interceptor.module';
+import { NgHttpLoaderModule } from './src/app/ng-http-loader.module';
 
-platformBrowserDynamic().bootstrapModule(NgHttpInterceptorModule);
+platformBrowserDynamic().bootstrapModule(NgHttpLoaderModule);

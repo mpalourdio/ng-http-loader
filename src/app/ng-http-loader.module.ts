@@ -28,5 +28,5 @@ import { HttpModule } from '@angular/http';
         HttpInterceptorServiceFactoryProvider,
     ]
 })
-export class NgHttpInterceptorModule {
+export class NgHttpLoaderModule {
 }
