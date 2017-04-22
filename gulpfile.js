@@ -16,12 +16,12 @@ gulp.task('inline-templates', ['clean-tmp'], function () {
 });
 
 gulp.task('clean-tmp', function () {
-    return gulp.src(tmpDir, {read: false})
+    return gulp.src(tmpDir, { read: false })
         .pipe(clean());
 });
 
 gulp.task('clean-dist', function () {
-    return gulp.src(distDir, {read: false})
+    return gulp.src(distDir, { read: false })
         .pipe(clean());
 });
 
@@ -30,4 +30,9 @@ gulp.task('copy-package-json', function () {
         .pipe(gulp.dest(distDir));
 });
 
-gulp.task('copy-all', ['copy-package-json']);
+gulp.task('copy-misc-files', function () {
+    return gulp.src(['README.MD', 'LICENSE'])
+        .pipe(gulp.dest(distDir));
+});
+
+gulp.task('copy-all', ['copy-package-json', 'copy-misc-files']);
