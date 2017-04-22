@@ -45,7 +45,7 @@ In your app.component.html, add :
 <spinner></spinner>
 ```
 
-Then, in order to have this module listening to your http requests, replace all the ``@angular/http`` imports by [http: HttpInterceptorService](src/app/http-interceptor.service.ts).
+Then, in order to have this module listening to your http requests, replace all the ``@angular/http`` usages by [http: HttpInterceptorService](src/app/http-interceptor.service.ts).
 
 ## Requirements
 
