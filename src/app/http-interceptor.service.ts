@@ -43,7 +43,7 @@ export class HttpInterceptorService extends Http {
             .map(result => {
                 return result;
             })
-            .catch((error) => {
+            .catch(error => {
                 return error;
             })
             .finally(() => {
