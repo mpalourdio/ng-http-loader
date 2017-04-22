@@ -17,8 +17,7 @@ and shows a spinner during pending requests.
 
 ## Usage
 
-In order to have this module listening to your http requests, replace all your ``http`` uses by [http: HttpInterceptorService](src/app/http-interceptor.service.ts).
-Then from your Angular `AppModule`:
+From your Angular `AppModule`:
 
 ```typescript
 import { BrowserModule } from '@angular/platform-browser';
@@ -45,9 +44,12 @@ In your app.component.html, add :
 ```xml
 <spinner></spinner>
 ```
+
+Then, in order to have this module listening to your http requests, replace all your ``http`` uses by [http: HttpInterceptorService](src/app/http-interceptor.service.ts).
+
 ## Requirements
 
-It's compatible with Angular 4+.
+Compatible with Angular 4+.
 
 ## Credits
 
