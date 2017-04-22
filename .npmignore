@@ -1,0 +1,23 @@
+# Node
+node_modules/*
+npm-debug.log
+src
+tmp
+dist
+.angular-cli.json
+.editorconfig
+.gitignore
+.npmignore
+.travis.yml
+gulpfile.js
+karma.conf.js
+karmaMain.ts
+polyfills.ts
+protractor.conf.js
+test.ts
+tsconfig.json
+tsconfig.ngc.json
+tsconfig.spec.json
+tslint.json
+yarn.lock
+*.iml

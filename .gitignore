@@ -1,0 +1,8 @@
+node_modules/*
+npm-debug.log
+*.map
+*.d.ts
+**/*.ngfactory.ts
+tmp
+*.iml
+dist

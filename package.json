@@ -1,0 +1,69 @@
+{
+  "name": "ng-http-interceptor",
+  "version": "0.0.1",
+  "scripts": {
+    "prepare-deploy": "gulp inline-templates && gulp clean-dist && ngc -p tsconfig.ngc.json && gulp clean-tmp && gulp copy-all",
+    "test": "ng test --watch false"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mpalourdio/ng4-http-loader"
+  },
+  "author": {
+    "name": "Michel Palourdio",
+    "email": "mpalourdio@gmail.com"
+  },
+  "keywords": [
+    "angular",
+    "ng2",
+    "ng4",
+    "loader",
+    "spinner",
+    "spinkit",
+    "interceptor"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mpalourdio/ng4-http-loader/issues"
+  },
+  "main": "./dist/main.js",
+  "dependencies": {
+    "@angular/common": "^4.0.0",
+    "@angular/compiler": "^4.0.0",
+    "@angular/core": "^4.0.0",
+    "@angular/http": "^4.0.0",
+    "@angular/platform-browser": "^4.0.0",
+    "@angular/platform-browser-dynamic": "^4.0.0",
+    "@angular/router": "^4.0.0",
+    "core-js": "^2.4.1",
+    "rxjs": "^5.1.0",
+    "zone.js": "^0.8.4"
+  },
+  "devDependencies": {
+    "@angular/cli": "1.0.0",
+    "@angular/compiler-cli": "^4.0.0",
+    "@types/jasmine": "2.5.38",
+    "@types/node": "~6.0.60",
+    "codelyzer": "~2.0.0",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-inline-angular-templates": "^0.1.5",
+    "gulp-inline-ng2-template": "^4.0.0",
+    "jasmine-core": "~2.5.2",
+    "jasmine-spec-reporter": "~3.2.0",
+    "karma": "~1.4.1",
+    "karma-cli": "~1.0.1",
+    "karma-coverage-istanbul-reporter": "^0.2.0",
+    "karma-jasmine": "~1.1.0",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "phantomjs-prebuilt": "^2.1.14",
+    "protractor": "~5.1.0",
+    "ts-node": "~2.0.0",
+    "tslint": "~4.5.0",
+    "typescript": "~2.2.0"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  }
+}
