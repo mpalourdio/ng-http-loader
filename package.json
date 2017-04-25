@@ -26,7 +26,6 @@
   "bugs": {
     "url": "https://github.com/mpalourdio/ng-http-loader/issues"
   },
-  "main": "./dist/main.js",
   "dependencies": {
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
