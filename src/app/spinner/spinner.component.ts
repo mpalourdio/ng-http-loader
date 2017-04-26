@@ -17,14 +17,14 @@ import { Spinkit } from '../spinkits';
     templateUrl: './spinner.component.html',
     styleUrls: [
         './spinner.component.css',
-        './sk-double-bounce.css',
-        './sk-chasing-dots.css',
-        './sk-cube-grid.css',
-        './sk-rotating-plane.css',
-        './sk-spinner-pulse.css',
-        './sk-three-bounce.css',
-        './sk-wandering-cubes.css',
-        './sk-wave.css',
+        './spinkit-css/sk-double-bounce.css',
+        './spinkit-css/sk-chasing-dots.css',
+        './spinkit-css/sk-cube-grid.css',
+        './spinkit-css/sk-rotating-plane.css',
+        './spinkit-css/sk-spinner-pulse.css',
+        './spinkit-css/sk-three-bounce.css',
+        './spinkit-css/sk-wandering-cubes.css',
+        './spinkit-css/sk-wave.css',
     ]
 })
 export class SpinnerComponent implements OnDestroy {
