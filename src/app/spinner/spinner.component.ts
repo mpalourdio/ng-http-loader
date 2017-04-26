@@ -7,18 +7,34 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { Component, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { HttpInterceptorService } from '../http-interceptor.service';
 import { Subscription } from 'rxjs/Rx';
+import { Spinkit } from '../spinkits';
 
 @Component({
     selector: 'spinner',
     templateUrl: './spinner.component.html',
-    styleUrls: ['./spinner.component.css']
+    styleUrls: [
+        './spinner.component.css',
+        './sk-double-bounce.css',
+        './sk-chasing-dots.css',
+        './sk-cube-grid.css',
+        './sk-rotating-plane.css',
+        './sk-spinner-pulse.css',
+        './sk-three-bounce.css',
+        './sk-wandering-cubes.css',
+        './sk-wave.css',
+    ]
 })
 export class SpinnerComponent implements OnDestroy {
     public isSpinnerVisible: boolean;
     private subscription: Subscription;
+    public Spinkit = Spinkit;
+    @Input()
+    public backgroundColor: string;
+    @Input()
+    public spinner = Spinkit.skCubeGrid;
 
     constructor(private http: HttpInterceptorService) {
         this.subscription = this.http

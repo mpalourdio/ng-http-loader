@@ -12,8 +12,8 @@ $ npm install ng-http-loader --save
 
 ## What does it do ?
 
-This package provides an HTTP Interceptor, and a spinner component. The HTTP interceptor listens to all HTTP requests
-and shows a spinner during pending requests.
+This package provides an HTTP Interceptor, and a spinner component (All from [SpinKit](https://github.com/tobiasahlin/SpinKit) at the moment).
+The HTTP interceptor listens to all HTTP requests and shows a spinner during pending requests.
 
 ## Usage
 
@@ -44,6 +44,13 @@ In your app.component.html, add :
 ```xml
 <spinner></spinner>
 ```
+
+You can too customize the background-color and the spinner type :
+```xml
+<spinner [backgroundColor]="'#ff0000'" [spinner]="Spinkit.skWave"></spinner>
+```
+
+The different spinners avalaible are referenced in [this class](src/app/spinkits.ts).
 
 Then, in order to have this module listening to your http requests, replace all the ``@angular/http`` usages by [http: HttpInterceptorService](src/app/http-interceptor.service.ts).
 
