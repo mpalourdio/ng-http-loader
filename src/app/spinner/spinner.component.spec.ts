@@ -7,7 +7,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { async, ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { SpinnerComponent } from './spinner.component';
 import { HttpInterceptorServiceFactoryProvider } from '../http-interceptor.service';
 import { HttpModule } from '@angular/http';
@@ -30,17 +30,15 @@ describe('SpinnerComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(SpinnerComponent);
         component = fixture.componentInstance;
-        fixture.detectChanges();
     });
 
     it('should create the spinner component', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should create the spinner component with default values', fakeAsync(() => {
+    it('should create the spinner component with default values', () => {
         component.isSpinnerVisible = true;
         fixture.detectChanges();
-        tick();
 
         const element = fixture
             .debugElement
@@ -48,14 +46,12 @@ describe('SpinnerComponent', () => {
             .nativeElement;
 
         expect(element.className).toBe('sk-cube-grid colored');
-    }));
+    });
 
-    it('should not set the colored class if background-color is defined', fakeAsync(() => {
+    it('should not set the colored class if background-color is defined', () => {
         component.isSpinnerVisible = true;
         component.backgroundColor = '#ff0000';
-
         fixture.detectChanges();
-        tick();
 
         const element = fixture
             .debugElement
@@ -63,22 +59,20 @@ describe('SpinnerComponent', () => {
             .nativeElement;
 
         expect(element.className).toBe('sk-cube-grid');
-    }));
+    });
 
-    it('should not display anything by default', fakeAsync(() => {
+    it('should not display anything by default', () => {
         const element = fixture
             .debugElement
             .query(By.css('#http-loader'));
 
         expect(element).toBeNull();
-    }));
+    });
 
-    it('should be able to specify another known spinner', fakeAsync(() => {
+    it('should be able to specify another known spinner', () => {
         component.isSpinnerVisible = true;
         component.spinner = Spinkit.skRotatingPlane;
-
         fixture.detectChanges();
-        tick();
 
         const element = fixture
             .debugElement
@@ -86,5 +80,5 @@ describe('SpinnerComponent', () => {
             .nativeElement;
 
         expect(element.className).toBe('sk-rotating-plane colored-parent');
-    }));
+    });
 });
