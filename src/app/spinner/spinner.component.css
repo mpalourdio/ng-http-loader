@@ -4,7 +4,7 @@
     height: 100%;
     width: 100%;
     position: fixed;
-    z-index: 9999
+    z-index: 9999;
 }
 
 .loader-bg {
@@ -13,7 +13,7 @@
     position: absolute;
     filter: alpha(opacity=70);
     opacity: .7;
-    background-color: #f1f1f1
+    background-color: #f1f1f1;
 }
 
 .sk-cube-grid {
@@ -25,7 +25,7 @@
 .sk-cube-grid .sk-cube {
     width: 33%;
     height: 33%;
-    background-color: #333;
+
     float: left;
     -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
     animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
