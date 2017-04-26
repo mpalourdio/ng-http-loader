@@ -8,19 +8,57 @@
  */
 
 import { inject, TestBed } from '@angular/core/testing';
-import { HttpInterceptorService, HttpInterceptorServiceFactoryProvider } from './http-interceptor.service';
-import { HttpModule } from '@angular/http';
+import { HttpInterceptorService } from './http-interceptor.service';
+import { HttpModule, RequestOptions, Response, ResponseOptions } from '@angular/http';
+import { MockBackend, MockConnection } from '@angular/http/testing';
+import { Observable } from 'rxjs/Observable';
 
 describe('HttpInterceptorService', () => {
+
+    function HttpInterceptorMockBackendServiceFactory(backend: MockBackend, defaultOptions: RequestOptions) {
+        return new HttpInterceptorService(backend, defaultOptions);
+    }
+
+    const HttpInterceptorServiceFactoryProvider = {
+        provide: HttpInterceptorService,
+        useFactory: HttpInterceptorMockBackendServiceFactory,
+        deps: [MockBackend, RequestOptions]
+    };
+
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [HttpModule],
-            providers: [HttpInterceptorService, HttpInterceptorServiceFactoryProvider]
+            providers: [MockBackend, HttpInterceptorService, HttpInterceptorServiceFactoryProvider]
         });
     });
 
     it('should create the HttpInterceptorService',
         inject([HttpInterceptorService], (service: HttpInterceptorService) => {
             expect(service).toBeTruthy();
-        }));
+        })
+    );
+
+    it('should be aware of the pending http requests',
+        inject([HttpInterceptorService, MockBackend], (service: HttpInterceptorService, backend: MockBackend) => {
+
+            const connections: MockConnection[] = [],
+                responseMock = {key: 'value'},
+                mockResponse: Response = new Response(new ResponseOptions({body: responseMock, status: 200}));
+
+            function runQuery(url: string): Observable<Response> {
+                return service.get(url);
+            }
+
+            backend.connections.subscribe((c: MockConnection) => connections.push(c));
+            Observable.forkJoin([runQuery('http://www.fake.url'), runQuery('http://www2.fake.url')]).subscribe();
+
+            expect(service.pendingRequests).toBe(2);
+
+            connections[0].mockRespond(mockResponse);
+            expect(service.pendingRequests).toBe(1);
+
+            connections[1].mockRespond(mockResponse);
+            expect(service.pendingRequests).toBe(0);
+        })
+    );
 });

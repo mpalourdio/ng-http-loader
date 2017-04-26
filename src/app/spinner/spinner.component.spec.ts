@@ -7,21 +7,33 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { async, ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { SpinnerComponent } from './spinner.component';
-import { HttpInterceptorServiceFactoryProvider } from '../http-interceptor.service';
-import { HttpModule } from '@angular/http';
+import { HttpModule, RequestOptions, Response, ResponseOptions } from '@angular/http';
 import { By } from '@angular/platform-browser';
 import { Spinkit } from '../spinkits';
+import { MockBackend, MockConnection } from '@angular/http/testing';
+import { HttpInterceptorService } from '../http-interceptor.service';
+import { Observable } from 'rxjs/Observable';
 
 describe('SpinnerComponent', () => {
     let component: SpinnerComponent;
     let fixture: ComponentFixture<SpinnerComponent>;
 
+    function HttpInterceptorMockBackendServiceFactory(backend: MockBackend, defaultOptions: RequestOptions) {
+        return new HttpInterceptorService(backend, defaultOptions);
+    }
+
+    const HttpInterceptorServiceFactoryProvider = {
+        provide: HttpInterceptorService,
+        useFactory: HttpInterceptorMockBackendServiceFactory,
+        deps: [MockBackend, RequestOptions]
+    };
+
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [SpinnerComponent],
-            providers: [HttpInterceptorServiceFactoryProvider],
+            providers: [MockBackend, HttpInterceptorServiceFactoryProvider],
             imports: [HttpModule]
         })
             .compileComponents();
@@ -81,4 +93,28 @@ describe('SpinnerComponent', () => {
 
         expect(element.className).toBe('sk-rotating-plane colored-parent');
     });
+
+    it('should show and hide the spinner according to the pending http requests',
+        inject([HttpInterceptorService, MockBackend], (service: HttpInterceptorService, backend: MockBackend) => {
+
+            const connections: MockConnection[] = [],
+                responseMock = {key: 'value'},
+                mockResponse: Response = new Response(new ResponseOptions({body: responseMock, status: 200}));
+
+            function runQuery(url: string): Observable<Response> {
+                return service.get(url);
+            }
+
+            backend.connections.subscribe((c: MockConnection) => connections.push(c));
+            Observable.forkJoin([runQuery('http://www.fake.url'), runQuery('http://www2.fake.url')]).subscribe();
+
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            connections[0].mockRespond(mockResponse);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            connections[1].mockRespond(mockResponse);
+            expect(component.isSpinnerVisible).toBeFalsy();
+        })
+    );
 });
