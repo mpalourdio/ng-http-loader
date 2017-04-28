@@ -117,4 +117,19 @@ describe('SpinnerComponent', () => {
             expect(component.isSpinnerVisible).toBeFalsy();
         })
     );
+
+    it('should hide and show a the spinner for a single http request',
+        inject([HttpInterceptorService, MockBackend], (service: HttpInterceptorService, backend: MockBackend) => {
+            let connection: MockConnection;
+            const responseMock = {key: 'value'},
+                mockResponse: Response = new Response(new ResponseOptions({body: responseMock, status: 200}));
+
+            backend.connections.subscribe((c: MockConnection) => connection = c);
+            service.get('http://www.fake.url').subscribe();
+            expect(component.isSpinnerVisible).toBeTruthy();
+            connection.mockRespond(mockResponse);
+            expect(component.isSpinnerVisible).toBeFalsy();
+
+        })
+    );
 });
