@@ -60,4 +60,4 @@ Compatible with Angular 4+.
 
 ## Credits
 
-The spinner has been taken from [SpinKit](https://github.com/tobiasahlin/SpinKit).
+The spinners/loaders have been taken from [SpinKit](https://github.com/tobiasahlin/SpinKit).
