@@ -7,7 +7,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { inject, TestBed } from '@angular/core/testing';
+import { async, inject, TestBed } from '@angular/core/testing';
 import { HttpInterceptorService } from './http-interceptor.service';
 import { HttpModule, RequestOptions, Response, ResponseOptions } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
@@ -61,4 +61,18 @@ describe('HttpInterceptorService', () => {
             expect(service.pendingRequests).toBe(0);
         })
     );
+
+    it('should correctly notify the pendingRequestsStatus observable', async(
+        inject([HttpInterceptorService], (service: HttpInterceptorService) => {
+            const pendingRequestsStatus = service.pendingRequestsStatus;
+
+            pendingRequestsStatus
+                .subscribe(
+                    next => expect(next).toBeTruthy(),
+                    error => console.log(error)
+                );
+
+            service.get('http://www.fake.url');
+        })
+    ));
 });
