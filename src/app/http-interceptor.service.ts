@@ -22,14 +22,14 @@ import { Observable, Subject } from 'rxjs/Rx';
 @Injectable()
 export class HttpInterceptorService extends Http {
     private _pendingRequests = 0;
-    private pendingRequestsStatus: Subject<boolean> = new Subject<boolean>();
+    private _pendingRequestsStatus: Subject<boolean> = new Subject<boolean>();
 
     constructor(backend: ConnectionBackend, defaultOptions: RequestOptions) {
         super(backend, defaultOptions);
     }
 
-    getPendingRequestStatusSubject() {
-        return this.pendingRequestsStatus;
+    get pendingRequestsStatus(): Observable<boolean> {
+        return this._pendingRequestsStatus.asObservable();
     }
 
     get pendingRequests(): number {
@@ -40,7 +40,7 @@ export class HttpInterceptorService extends Http {
         this._pendingRequests++;
 
         if (1 === this._pendingRequests) {
-            this.pendingRequestsStatus.next(true);
+            this._pendingRequestsStatus.next(true);
         }
 
         return super.request(url, options)
@@ -54,7 +54,7 @@ export class HttpInterceptorService extends Http {
                 this._pendingRequests--;
 
                 if (0 === this._pendingRequests) {
-                    this.pendingRequestsStatus.next(false);
+                    this._pendingRequestsStatus.next(false);
                 }
             });
     }

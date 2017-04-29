@@ -38,7 +38,7 @@ export class SpinnerComponent implements OnDestroy {
 
     constructor(private http: HttpInterceptorService) {
         this.subscription = this.http
-            .getPendingRequestStatusSubject()
+            .pendingRequestsStatus
             .subscribe(isSpinnerVisible => {
                 this.isSpinnerVisible = isSpinnerVisible;
             });
