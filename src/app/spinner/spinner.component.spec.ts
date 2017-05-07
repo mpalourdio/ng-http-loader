@@ -94,6 +94,19 @@ describe('SpinnerComponent', () => {
         expect(element.className).toBe('sk-rotating-plane colored-parent');
     });
 
+    it('should allow us to specify a custom background-color', () => {
+        component.isSpinnerVisible = true;
+        component.backgroundColor = '#ff0000';
+        fixture.detectChanges();
+
+        const element = fixture
+            .debugElement
+            .query(By.css('.sk-cube.sk-cube1'))
+            .nativeElement;
+
+        expect(element.style['background-color']).toBe('rgb(255, 0, 0)');
+    });
+
     it('should show and hide the spinner according to the pending http requests',
         inject([HttpInterceptorService, MockBackend], (service: HttpInterceptorService, backend: MockBackend) => {
 
