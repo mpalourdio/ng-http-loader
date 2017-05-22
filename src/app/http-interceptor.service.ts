@@ -48,7 +48,7 @@ export class HttpInterceptorService extends Http {
                 return result;
             })
             .catch(error => {
-                return error;
+                return Observable.throw(error);
             })
             .finally(() => {
                 this._pendingRequests--;
