@@ -69,10 +69,25 @@ describe('HttpInterceptorService', () => {
             pendingRequestsStatus
                 .subscribe(
                     next => expect(next).toBeTruthy(),
-                    error => console.log(error)
+                    error => expect(1).toBe(2)
                 );
 
             service.get('http://www.fake.url');
         })
     ));
+
+    it('should fail correctly',
+        inject([HttpInterceptorService, MockBackend], (service: HttpInterceptorService, backend: MockBackend) => {
+
+            const statusText = 'NOT FOUND';
+            backend.connections.subscribe((connection: MockConnection) => {
+                connection.mockError(new Response(new ResponseOptions({status: 404, statusText: statusText})) as any);
+            });
+
+            service.get('http://www.fake.url').subscribe(
+                next => expect(1).toBe(2),
+                (error: Response) => expect(error.statusText).toBe(statusText)
+            );
+        })
+    );
 });
