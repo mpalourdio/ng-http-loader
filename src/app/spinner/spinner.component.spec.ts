@@ -142,7 +142,6 @@ describe('SpinnerComponent', () => {
             expect(component.isSpinnerVisible).toBeTruthy();
             connection.mockRespond(mockResponse);
             expect(component.isSpinnerVisible).toBeFalsy();
-
         })
     );
 });
