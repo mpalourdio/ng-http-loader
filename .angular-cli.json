@@ -12,7 +12,7 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "../tsconfig.spec.json",
-      "prefix": "app",
+      "prefix": null,
       "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
