@@ -50,7 +50,7 @@ You can too customize the background-color and the spinner type :
 <spinner [backgroundColor]="'#ff0000'" [spinner]="Spinkit.skWave"></spinner>
 ```
 
-The different spinners avalaible are referenced in [this class](src/app/spinkits.ts).
+The different spinners available are referenced in [this class](src/app/spinkits.ts).
 
 Then, in order to have this module listening to your http requests, replace all the ``@angular/http`` usages by [http: HttpInterceptorService](src/app/http-interceptor.service.ts).
 
