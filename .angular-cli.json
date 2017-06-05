@@ -9,7 +9,7 @@
       "outDir": "dist",
       "main": "../karmaMain.ts",
       "polyfills": "../polyfills.ts",
-      "test": "test.ts",
+      "test": "../test.ts",
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "../tsconfig.spec.json",
       "prefix": null,
