@@ -47,7 +47,6 @@
     "codelyzer": "~3.0.1",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
-    "gulp-inline-angular-templates": "^0.1.5",
     "gulp-inline-ng2-template": "^4.0.0",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
