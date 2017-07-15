@@ -11,6 +11,7 @@ import { Component, Input, OnDestroy } from '@angular/core';
 import { HttpInterceptorService } from '../http-interceptor.service';
 import { Subscription } from 'rxjs/Rx';
 import { Spinkit } from '../spinkits';
+import { PendingInterceptorService } from '../pending-interceptor.service';
 
 @Component({
     selector: 'spinner',
@@ -29,6 +30,7 @@ import { Spinkit } from '../spinkits';
 })
 export class SpinnerComponent implements OnDestroy {
     public isSpinnerVisible: boolean;
+    private oldSubscription: Subscription;
     private subscription: Subscription;
     public Spinkit = Spinkit;
     @Input()
@@ -36,8 +38,20 @@ export class SpinnerComponent implements OnDestroy {
     @Input()
     public spinner = Spinkit.skCubeGrid;
 
-    constructor(private http: HttpInterceptorService) {
-        this.subscription = this.http
+    constructor(private http: HttpInterceptorService, private pendingRequestInterceptorService: PendingInterceptorService) {
+        this.oldSubscription = this.http
+            .pendingRequestsStatus
+            .subscribe(isSpinnerVisible => {
+                if (isSpinnerVisible) {
+                    console.log(
+                        'HttpInterceptorService is deprecated and will soon be removed ' +
+                        'in favor of HttpClientModule. Please upgrade !'
+                    );
+                }
+                this.isSpinnerVisible = isSpinnerVisible;
+            });
+
+        this.subscription = this.pendingRequestInterceptorService
             .pendingRequestsStatus
             .subscribe(isSpinnerVisible => {
                 this.isSpinnerVisible = isSpinnerVisible;
@@ -45,6 +59,7 @@ export class SpinnerComponent implements OnDestroy {
     }
 
     ngOnDestroy(): void {
+        this.oldSubscription.unsubscribe();
         this.subscription.unsubscribe();
     }
 }

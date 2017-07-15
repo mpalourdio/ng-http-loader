@@ -12,6 +12,14 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { HttpInterceptorServiceFactoryProvider } from './http-interceptor.service';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
+import { PendingInterceptorService, PendingInterceptorServiceFactoryProvider } from './pending-interceptor.service';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+
+const PendingInterceptorServiceExistingProvider = {
+    provide: HTTP_INTERCEPTORS,
+    useExisting: PendingInterceptorService,
+    multi: true
+};
 
 @NgModule({
     declarations: [
@@ -19,13 +27,16 @@ import { HttpModule } from '@angular/http';
     ],
     imports: [
         CommonModule,
-        HttpModule
+        HttpModule,
+        HttpClientModule
     ],
     exports: [
         SpinnerComponent,
     ],
     providers: [
         HttpInterceptorServiceFactoryProvider,
+        PendingInterceptorServiceExistingProvider,
+        PendingInterceptorServiceFactoryProvider
     ]
 })
 export class NgHttpLoaderModule {

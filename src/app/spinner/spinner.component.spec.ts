@@ -9,12 +9,15 @@
 
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { SpinnerComponent } from './spinner.component';
-import { HttpModule, RequestOptions, Response, ResponseOptions } from '@angular/http';
+import { HttpModule, RequestOptions } from '@angular/http';
 import { By } from '@angular/platform-browser';
 import { Spinkit } from '../spinkits';
-import { MockBackend, MockConnection } from '@angular/http/testing';
+import { MockBackend } from '@angular/http/testing';
 import { HttpInterceptorService } from '../http-interceptor.service';
 import { Observable } from 'rxjs/Observable';
+import { PendingInterceptorService } from '../pending-interceptor.service';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 describe('SpinnerComponent', () => {
     let component: SpinnerComponent;
@@ -30,11 +33,22 @@ describe('SpinnerComponent', () => {
         deps: [MockBackend, RequestOptions]
     };
 
+    const PendingInterceptorServiceExistingProvider = {
+        provide: HTTP_INTERCEPTORS,
+        useExisting: PendingInterceptorService,
+        multi: true
+    };
+
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [SpinnerComponent],
-            providers: [MockBackend, HttpInterceptorServiceFactoryProvider],
-            imports: [HttpModule]
+            providers: [
+                MockBackend,
+                PendingInterceptorService,
+                PendingInterceptorServiceExistingProvider,
+                HttpInterceptorServiceFactoryProvider
+            ],
+            imports: [HttpModule, HttpClientTestingModule]
         })
             .compileComponents();
     }));
@@ -108,40 +122,37 @@ describe('SpinnerComponent', () => {
     });
 
     it('should show and hide the spinner according to the pending http requests',
-        inject([HttpInterceptorService, MockBackend], (service: HttpInterceptorService, backend: MockBackend) => {
+        inject(
+            [PendingInterceptorService, HttpClient, HttpTestingController],
+            (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
 
-            const connections: MockConnection[] = [],
-                responseMock = {key: 'value'},
-                mockResponse: Response = new Response(new ResponseOptions({body: responseMock, status: 200}));
+                function runQuery(url: string): Observable<any> {
+                    return http.get(url);
+                }
 
-            function runQuery(url: string): Observable<Response> {
-                return service.get(url);
-            }
+                Observable.forkJoin([runQuery('/fake'), runQuery('/fake2')]).subscribe();
 
-            backend.connections.subscribe((c: MockConnection) => connections.push(c));
-            Observable.forkJoin([runQuery('http://www.fake.url'), runQuery('http://www2.fake.url')]).subscribe();
+                const firstRequest = httpMock.expectOne('/fake');
+                const secondRequest = httpMock.expectOne('/fake2');
 
-            expect(component.isSpinnerVisible).toBeTruthy();
+                expect(component.isSpinnerVisible).toBeTruthy();
 
-            connections[0].mockRespond(mockResponse);
-            expect(component.isSpinnerVisible).toBeTruthy();
+                firstRequest.flush({});
+                expect(component.isSpinnerVisible).toBeTruthy();
 
-            connections[1].mockRespond(mockResponse);
-            expect(component.isSpinnerVisible).toBeFalsy();
-        })
+                secondRequest.flush({});
+                expect(component.isSpinnerVisible).toBeFalsy();
+            })
     );
 
     it('should hide and show a the spinner for a single http request',
-        inject([HttpInterceptorService, MockBackend], (service: HttpInterceptorService, backend: MockBackend) => {
-            let connection: MockConnection;
-            const responseMock = {key: 'value'},
-                mockResponse: Response = new Response(new ResponseOptions({body: responseMock, status: 200}));
-
-            backend.connections.subscribe((c: MockConnection) => connection = c);
-            service.get('http://www.fake.url').subscribe();
-            expect(component.isSpinnerVisible).toBeTruthy();
-            connection.mockRespond(mockResponse);
-            expect(component.isSpinnerVisible).toBeFalsy();
-        })
+        inject(
+            [PendingInterceptorService, HttpClient, HttpTestingController],
+            (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
+                http.get('/fake').subscribe();
+                expect(component.isSpinnerVisible).toBeTruthy();
+                httpMock.expectOne('/fake').flush({});
+                expect(component.isSpinnerVisible).toBeFalsy();
+            })
     );
 });
