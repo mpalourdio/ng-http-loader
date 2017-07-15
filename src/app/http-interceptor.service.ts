@@ -19,6 +19,10 @@ import {
 } from '@angular/http';
 import { Observable, Subject } from 'rxjs/Rx';
 
+/**
+ * @deprecated Prefer the new HttpClientModule.
+ * From 4.3, Http interceptors are built in.
+ */
 @Injectable()
 export class HttpInterceptorService extends Http {
     private _pendingRequests = 0;
