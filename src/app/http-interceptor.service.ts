@@ -69,10 +69,28 @@ export class HttpInterceptorService extends Http {
     }
 }
 
+/**
+ * @deprecated Prefer the new HttpClientModule.
+ * From 4.3, Http interceptors are built in.
+ *
+ * The next release of ng-http-loader will require angular ^4.3.0.
+ * Please upgrade !
+ *
+ * @see https://angular.io/guide/http
+ */
 export function HttpInterceptorServiceFactory(backend: XHRBackend, defaultOptions: RequestOptions) {
     return new HttpInterceptorService(backend, defaultOptions);
 }
 
+/**
+ * @deprecated Prefer the new HttpClientModule.
+ * From 4.3, Http interceptors are built in.
+ *
+ * The next release of ng-http-loader will require angular ^4.3.0.
+ * Please upgrade !
+ *
+ * @see https://angular.io/guide/http
+ */
 export let HttpInterceptorServiceFactoryProvider = {
     provide: HttpInterceptorService,
     useFactory: HttpInterceptorServiceFactory,
