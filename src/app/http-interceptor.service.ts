@@ -22,6 +22,11 @@ import { Observable, Subject } from 'rxjs/Rx';
 /**
  * @deprecated Prefer the new HttpClientModule.
  * From 4.3, Http interceptors are built in.
+ *
+ * The next release of ng-http-loader will require angular ^4.3.0.
+ * Please upgrade !
+ *
+ * @see https://angular.io/guide/http
  */
 @Injectable()
 export class HttpInterceptorService extends Http {
