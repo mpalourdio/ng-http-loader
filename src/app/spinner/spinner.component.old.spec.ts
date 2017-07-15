@@ -17,7 +17,7 @@ import { HttpInterceptorService } from '../http-interceptor.service';
 import { Observable } from 'rxjs/Observable';
 import { PendingInterceptorService } from '../pending-interceptor.service';
 
-describe('SpinnerComponent', () => {
+describe('__old__SpinnerComponent', () => {
     let component: SpinnerComponent;
     let fixture: ComponentFixture<SpinnerComponent>;
 
@@ -45,11 +45,11 @@ describe('SpinnerComponent', () => {
         component = fixture.componentInstance;
     });
 
-    it('should create the spinner component', () => {
+    it('__old__should create the spinner component', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should create the spinner component with default values', () => {
+    it('__old__should create the spinner component with default values', () => {
         component.isSpinnerVisible = true;
         fixture.detectChanges();
 
@@ -61,7 +61,7 @@ describe('SpinnerComponent', () => {
         expect(element.className).toBe('sk-cube-grid colored');
     });
 
-    it('should not set the colored class if background-color is defined', () => {
+    it('__old__should not set the colored class if background-color is defined', () => {
         component.isSpinnerVisible = true;
         component.backgroundColor = '#ff0000';
         fixture.detectChanges();
@@ -74,7 +74,7 @@ describe('SpinnerComponent', () => {
         expect(element.className).toBe('sk-cube-grid');
     });
 
-    it('should not display anything by default', () => {
+    it('__old__should not display anything by default', () => {
         const element = fixture
             .debugElement
             .query(By.css('#http-loader'));
@@ -82,7 +82,7 @@ describe('SpinnerComponent', () => {
         expect(element).toBeNull();
     });
 
-    it('should be able to specify another known spinner', () => {
+    it('__old__should be able to specify another known spinner', () => {
         component.isSpinnerVisible = true;
         component.spinner = Spinkit.skRotatingPlane;
         fixture.detectChanges();
@@ -95,7 +95,7 @@ describe('SpinnerComponent', () => {
         expect(element.className).toBe('sk-rotating-plane colored-parent');
     });
 
-    it('should allow us to specify a custom background-color', () => {
+    it('__old__should allow us to specify a custom background-color', () => {
         component.isSpinnerVisible = true;
         component.backgroundColor = '#ff0000';
         fixture.detectChanges();
@@ -108,7 +108,7 @@ describe('SpinnerComponent', () => {
         expect(element.style['background-color']).toBe('rgb(255, 0, 0)');
     });
 
-    it('should show and hide the spinner according to the pending http requests',
+    it('__old__should show and hide the spinner according to the pending http requests',
         inject([HttpInterceptorService, MockBackend], (service: HttpInterceptorService, backend: MockBackend) => {
 
             const connections: MockConnection[] = [],
@@ -132,7 +132,7 @@ describe('SpinnerComponent', () => {
         })
     );
 
-    it('should hide and show a the spinner for a single http request',
+    it('__old__should hide and show a the spinner for a single http request',
         inject([HttpInterceptorService, MockBackend], (service: HttpInterceptorService, backend: MockBackend) => {
             let connection: MockConnection;
             const responseMock = {key: 'value'},
