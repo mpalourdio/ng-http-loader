@@ -41,20 +41,20 @@ export class SpinnerComponent implements OnDestroy {
     constructor(private http: HttpInterceptorService, private pendingRequestInterceptorService: PendingInterceptorService) {
         this.oldSubscription = this.http
             .pendingRequestsStatus
-            .subscribe(isSpinnerVisible => {
-                if (isSpinnerVisible) {
+            .subscribe(hasPendingRequests => {
+                if (hasPendingRequests) {
                     console.log(
                         'HttpInterceptorService is deprecated and will soon be removed ' +
                         'in favor of HttpClientModule. Please upgrade !'
                     );
                 }
-                this.isSpinnerVisible = isSpinnerVisible;
+                this.isSpinnerVisible = hasPendingRequests;
             });
 
         this.subscription = this.pendingRequestInterceptorService
             .pendingRequestsStatus
-            .subscribe(isSpinnerVisible => {
-                this.isSpinnerVisible = isSpinnerVisible;
+            .subscribe(hasPendingRequests => {
+                this.isSpinnerVisible = hasPendingRequests;
             });
     }
 
