@@ -10,8 +10,9 @@
 import { async, inject, TestBed } from '@angular/core/testing';
 import { PendingInterceptorService } from './pending-interceptor.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/forkJoin';
 
 describe('PendingInterceptorService', () => {
 
@@ -66,8 +67,8 @@ describe('PendingInterceptorService', () => {
 
                 pendingRequestsStatus
                     .subscribe(
-                        next => expect(next).toBeTruthy(),
-                        error => expect(1).toBe(2)
+                        (next: boolean) => expect(next).toBeTruthy(),
+                        (error: HttpErrorResponse) => expect(1).toBe(2)
                     );
 
                 http.get('/fake').subscribe();
@@ -83,8 +84,8 @@ describe('PendingInterceptorService', () => {
                 const statusText = 'NOT FOUND';
 
                 http.get('/fake').subscribe(
-                    next => expect(1).toBe(2),
-                    (error: Response) => expect(error.statusText).toBe(statusText)
+                    (next: boolean) => expect(true).toBe(false),
+                    (error: HttpErrorResponse) => expect(error.statusText).toBe(statusText)
                 );
 
                 const testRequest = httpMock.expectOne('/fake');

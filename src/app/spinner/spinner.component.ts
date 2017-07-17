@@ -9,7 +9,7 @@
 
 import { Component, Input, OnDestroy } from '@angular/core';
 import { HttpInterceptorService } from '../http-interceptor.service';
-import { Subscription } from 'rxjs/Rx';
+import { Subscription } from 'rxjs/Subscription';
 import { Spinkit } from '../spinkits';
 import { PendingInterceptorService } from '../pending-interceptor.service';
 
