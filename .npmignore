@@ -4,6 +4,7 @@ npm-debug.log
 src
 tmp
 dist
+coverage
 .angular-cli.json
 .editorconfig
 .gitignore
