@@ -9,29 +9,17 @@
 
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { SpinnerComponent } from './spinner.component';
-import { HttpModule, RequestOptions } from '@angular/http';
 import { By } from '@angular/platform-browser';
 import { Spinkit } from '../spinkits';
-import { MockBackend } from '@angular/http/testing';
-import { HttpInterceptorService } from '../http-interceptor.service';
 import { Observable } from 'rxjs/Observable';
 import { PendingInterceptorService } from '../pending-interceptor.service';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import 'rxjs/add/observable/forkJoin';
 
 describe('SpinnerComponent', () => {
     let component: SpinnerComponent;
     let fixture: ComponentFixture<SpinnerComponent>;
-
-    function HttpInterceptorMockBackendServiceFactory(backend: MockBackend, defaultOptions: RequestOptions) {
-        return new HttpInterceptorService(backend, defaultOptions);
-    }
-
-    const HttpInterceptorServiceFactoryProvider = {
-        provide: HttpInterceptorService,
-        useFactory: HttpInterceptorMockBackendServiceFactory,
-        deps: [MockBackend, RequestOptions]
-    };
 
     const PendingInterceptorServiceExistingProvider = {
         provide: HTTP_INTERCEPTORS,
@@ -43,12 +31,10 @@ describe('SpinnerComponent', () => {
         TestBed.configureTestingModule({
             declarations: [SpinnerComponent],
             providers: [
-                MockBackend,
                 PendingInterceptorService,
                 PendingInterceptorServiceExistingProvider,
-                HttpInterceptorServiceFactoryProvider
             ],
-            imports: [HttpModule, HttpClientTestingModule]
+            imports: [HttpClientTestingModule]
         })
             .compileComponents();
     }));

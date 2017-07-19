@@ -8,7 +8,6 @@
  */
 
 import { Component, Input, OnDestroy } from '@angular/core';
-import { HttpInterceptorService } from '../http-interceptor.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Spinkit } from '../spinkits';
 import { PendingInterceptorService } from '../pending-interceptor.service';
@@ -30,27 +29,15 @@ import { PendingInterceptorService } from '../pending-interceptor.service';
 })
 export class SpinnerComponent implements OnDestroy {
     public isSpinnerVisible: boolean;
-    private oldSubscription: Subscription;
     private subscription: Subscription;
     public Spinkit = Spinkit;
+
     @Input()
     public backgroundColor: string;
     @Input()
     public spinner = Spinkit.skCubeGrid;
 
-    constructor(private http: HttpInterceptorService, private pendingRequestInterceptorService: PendingInterceptorService) {
-        this.oldSubscription = this.http
-            .pendingRequestsStatus
-            .subscribe(hasPendingRequests => {
-                if (hasPendingRequests) {
-                    console.log(
-                        'HttpInterceptorService is deprecated and will soon be removed ' +
-                        'in favor of HttpClientModule. Please upgrade !'
-                    );
-                }
-                this.isSpinnerVisible = hasPendingRequests;
-            });
-
+    constructor(private pendingRequestInterceptorService: PendingInterceptorService) {
         this.subscription = this.pendingRequestInterceptorService
             .pendingRequestsStatus
             .subscribe(hasPendingRequests => {
@@ -59,7 +46,6 @@ export class SpinnerComponent implements OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.oldSubscription.unsubscribe();
         this.subscription.unsubscribe();
     }
 }

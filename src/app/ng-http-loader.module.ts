@@ -9,9 +9,7 @@
 
 import { NgModule } from '@angular/core';
 import { SpinnerComponent } from './spinner/spinner.component';
-import { HttpInterceptorServiceFactoryProvider } from './http-interceptor.service';
 import { CommonModule } from '@angular/common';
-import { HttpModule } from '@angular/http';
 import { PendingInterceptorService, PendingInterceptorServiceFactoryProvider } from './pending-interceptor.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
@@ -27,16 +25,14 @@ const PendingInterceptorServiceExistingProvider = {
     ],
     imports: [
         CommonModule,
-        HttpModule,
-        HttpClientModule
+        HttpClientModule,
     ],
     exports: [
         SpinnerComponent,
     ],
     providers: [
-        HttpInterceptorServiceFactoryProvider,
         PendingInterceptorServiceExistingProvider,
-        PendingInterceptorServiceFactoryProvider
+        PendingInterceptorServiceFactoryProvider,
     ]
 })
 export class NgHttpLoaderModule {
