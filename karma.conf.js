@@ -8,6 +8,7 @@ module.exports = function (config) {
         plugins: [
             require('karma-jasmine'),
             require('karma-phantomjs-launcher'),
+            require('karma-chrome-launcher'),
             require('karma-jasmine-html-reporter'),
             require('karma-coverage-istanbul-reporter'),
             require('@angular/cli/plugins/karma')
@@ -22,12 +23,23 @@ module.exports = function (config) {
         angularCli: {
             environment: 'dev'
         },
+        customLaunchers: {
+            ChromeHeadless: {
+                base: 'Chromium',
+                flags: [
+                    '--headless',
+                    '--disable-gpu',
+                    // Without a remote debugging port, Google Chrome exits immediately.
+                    '--remote-debugging-port=9222',
+                ],
+            }
+        },
         reporters: ['progress', 'kjhtml'],
         port: 9876,
         colors: true,
         logLevel: config.LOG_INFO,
         autoWatch: true,
-        browsers: ['PhantomJS'],
+        browsers: ['ChromeHeadless', 'PhantomJS'],
         singleRun: false
     });
 };
