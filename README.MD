@@ -15,6 +15,10 @@ $ npm install ng-http-loader --save
 This package provides an HTTP Interceptor, and a spinner component (All from [SpinKit](https://github.com/tobiasahlin/SpinKit) at the moment).
 The HTTP interceptor listens to all HTTP requests and shows a spinner during pending requests.
 
+## HttpClientModule
+
+All http requests *MUST* be perfomed with the new ``HttpClientModule`` available from ``angular 4.3``. See this [blogpost](http://blog.ninja-squad.com/2017/07/17/http-client-module/) as reference.
+
 ## Usage
 
 From your Angular `AppModule`:
