@@ -17,7 +17,7 @@ The HTTP interceptor listens to all HTTP requests and shows a spinner during pen
 
 ## HttpClientModule
 
-All http requests *MUST* be perfomed with the new ``HttpClientModule`` available from ``angular 4.3``. See this [blogpost](http://blog.ninja-squad.com/2017/07/17/http-client-module/) as reference.
+All http requests *MUST* be performed with the new ``HttpClientModule`` available from ``angular 4.3``. See this [blogpost](http://blog.ninja-squad.com/2017/07/17/http-client-module/) as reference.
 
 ## Usage
 
