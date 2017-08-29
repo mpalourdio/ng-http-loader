@@ -41,9 +41,9 @@ export class PendingInterceptorService implements HttpInterceptor {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const shouldByPass = this.shouldBypass(req.url);
+        const shouldBypass = this.shouldBypass(req.url);
 
-        if (!shouldByPass) {
+        if (!shouldBypass) {
             this._pendingRequests++;
 
             if (1 === this._pendingRequests) {
@@ -58,7 +58,7 @@ export class PendingInterceptorService implements HttpInterceptor {
                 return Observable.throw(error);
             })
             .finally(() => {
-                if (!shouldByPass) {
+                if (!shouldBypass) {
                     this._pendingRequests--;
 
                     if (0 === this._pendingRequests) {
