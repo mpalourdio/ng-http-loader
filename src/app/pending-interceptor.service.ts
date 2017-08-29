@@ -20,6 +20,7 @@ import 'rxjs/add/observable/throw';
 export class PendingInterceptorService implements HttpInterceptor {
     private _pendingRequests = 0;
     private _pendingRequestsStatus: Subject<boolean> = new Subject<boolean>();
+    private _filteredUrlPatterns: RegExp[] = [];
 
     get pendingRequestsStatus(): Observable<boolean> {
         return this._pendingRequestsStatus.asObservable();
@@ -29,11 +30,25 @@ export class PendingInterceptorService implements HttpInterceptor {
         return this._pendingRequests;
     }
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        this._pendingRequests++;
+    get filteredUrlPatterns(): RegExp[] {
+        return this._filteredUrlPatterns;
+    }
 
-        if (1 === this._pendingRequests) {
-            this._pendingRequestsStatus.next(true);
+    private shouldBypass(url: string): boolean {
+        return this._filteredUrlPatterns.some((e: RegExp) => {
+            return e.test(url);
+        });
+    }
+
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        const shouldByPass = this.shouldBypass(req.url);
+
+        if (!shouldByPass) {
+            this._pendingRequests++;
+
+            if (1 === this._pendingRequests) {
+                this._pendingRequestsStatus.next(true);
+            }
         }
 
         return next.handle(req).map(event => {
@@ -43,10 +58,12 @@ export class PendingInterceptorService implements HttpInterceptor {
                 return Observable.throw(error);
             })
             .finally(() => {
-                this._pendingRequests--;
+                if (!shouldByPass) {
+                    this._pendingRequests--;
 
-                if (0 === this._pendingRequests) {
-                    this._pendingRequestsStatus.next(false);
+                    if (0 === this._pendingRequests) {
+                        this._pendingRequestsStatus.next(false);
+                    }
                 }
             });
     }

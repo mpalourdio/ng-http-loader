@@ -54,6 +54,15 @@ You can too customize the background-color and the spinner type :
 <spinner [backgroundColor]="'#ff0000'" [spinner]="Spinkit.skWave"></spinner>
 ```
 
+You can filter the requests that shouldn't be caught by the interceptor by providing an array of regex patterns :
+```xml
+<spinner 
+    [backgroundColor]="'#ff0000'"
+    [spinner]="Spinkit.skWave"
+    [filteredUrlPatterns]="['\\d', '[a-zA-Z]', 'my-api']>
+</spinner>
+```
+
 The different spinners available are referenced in [this class](src/app/spinkits.ts).
 
 ## Requirements
