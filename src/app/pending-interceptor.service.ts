@@ -35,7 +35,7 @@ export class PendingInterceptorService implements HttpInterceptor {
     }
 
     private shouldBypass(url: string): boolean {
-        return this._filteredUrlPatterns.some((e: RegExp) => {
+        return this._filteredUrlPatterns.some(e => {
             return e.test(url);
         });
     }
