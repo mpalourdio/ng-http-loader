@@ -59,7 +59,7 @@ You can filter the requests that shouldn't be caught by the interceptor by provi
 <spinner 
     [backgroundColor]="'#ff0000'"
     [spinner]="Spinkit.skWave"
-    [filteredUrlPatterns]="['\\d', '[a-zA-Z]', 'my-api']>
+    [filteredUrlPatterns]="['\\d', '[a-zA-Z]', 'my-api']">
 </spinner>
 ```
 
