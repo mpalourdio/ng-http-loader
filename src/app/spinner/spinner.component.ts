@@ -7,7 +7,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Spinkit } from '../spinkits';
 import { PendingInterceptorService } from '../pending-interceptor.service';
@@ -27,7 +27,7 @@ import { PendingInterceptorService } from '../pending-interceptor.service';
         './spinkit-css/sk-wave.css',
     ]
 })
-export class SpinnerComponent implements OnDestroy {
+export class SpinnerComponent implements OnDestroy, OnInit {
     public isSpinnerVisible: boolean;
     private subscription: Subscription;
     public Spinkit = Spinkit;
@@ -36,6 +36,8 @@ export class SpinnerComponent implements OnDestroy {
     public backgroundColor: string;
     @Input()
     public spinner = Spinkit.skCubeGrid;
+    @Input()
+    public filteredUrlPatterns: string[] = [];
 
     constructor(private pendingRequestInterceptorService: PendingInterceptorService) {
         this.subscription = this.pendingRequestInterceptorService
@@ -43,6 +45,18 @@ export class SpinnerComponent implements OnDestroy {
             .subscribe(hasPendingRequests => {
                 this.isSpinnerVisible = hasPendingRequests;
             });
+    }
+
+    ngOnInit(): void {
+        if (!(this.filteredUrlPatterns instanceof Array)) {
+            throw new TypeError('`filteredUrlPatterns` must be an array.');
+        }
+
+        if (!!this.filteredUrlPatterns.length) {
+            this.filteredUrlPatterns.forEach(e => {
+                this.pendingRequestInterceptorService.filteredUrlPatterns.push(new RegExp(e));
+            });
+        }
     }
 
     ngOnDestroy(): void {

@@ -141,4 +141,41 @@ describe('SpinnerComponent', () => {
                 expect(component.isSpinnerVisible).toBeFalsy();
             })
     );
+
+    it('should not show the spinner if the request is filtered',
+        inject(
+            [PendingInterceptorService, HttpClient, HttpTestingController],
+            (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
+                component.filteredUrlPatterns.push('fake');
+                fixture.detectChanges();
+
+                http.get('/fake').subscribe();
+                expect(component.isSpinnerVisible).toBeFalsy();
+                httpMock.expectOne('/fake').flush({});
+            })
+    );
+
+    it('should correctly filter with several requests and one pattern',
+        inject(
+            [PendingInterceptorService, HttpClient, HttpTestingController],
+            (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
+                component.filteredUrlPatterns.push('\\d');
+                fixture.detectChanges();
+
+                http.get('/12345').subscribe();
+                expect(component.isSpinnerVisible).toBeFalsy();
+                httpMock.expectOne('/12345').flush({});
+
+                http.get('/fake').subscribe();
+                expect(component.isSpinnerVisible).toBeTruthy();
+                httpMock.expectOne('/fake').flush({});
+                expect(component.isSpinnerVisible).toBeFalsy();
+            })
+    );
+
+    it('should throw an error if filteredUrlPatterns is not an array', () => {
+        component.filteredUrlPatterns = null;
+        expect(() => fixture.detectChanges())
+            .toThrow(new Error('`filteredUrlPatterns` must be an array.'));
+    });
 });
