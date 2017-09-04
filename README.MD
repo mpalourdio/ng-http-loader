@@ -65,7 +65,7 @@ You can filter the requests that shouldn't be caught by the interceptor by provi
 
 The different spinners available are referenced in [this class](src/app/spinkits.ts).
 
-Each Spinkit component defined in [SPINKIT_COMPONENTS](src/app/ng-http-loader.module.ts) can be used independently.
+Each Spinkit component defined in [SPINKIT_COMPONENTS](src/app/spinkits.ts#L31) can be used independently.
 
 ## Requirements
 
