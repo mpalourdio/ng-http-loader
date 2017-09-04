@@ -10,7 +10,7 @@
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { SpinnerComponent } from './spinner.component';
 import { By } from '@angular/platform-browser';
-import { Spinkit } from '../spinkits';
+import { Spinkit, SPINKIT_COMPONENTS } from '../spinkits';
 import { Observable } from 'rxjs/Observable';
 import { PendingInterceptorService } from '../pending-interceptor.service';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
@@ -29,7 +29,7 @@ describe('SpinnerComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [SpinnerComponent],
+            declarations: [SpinnerComponent, SPINKIT_COMPONENTS],
             providers: [
                 PendingInterceptorService,
                 PendingInterceptorServiceExistingProvider,

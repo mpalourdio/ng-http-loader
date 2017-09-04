@@ -12,6 +12,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { CommonModule } from '@angular/common';
 import { PendingInterceptorService, PendingInterceptorServiceFactoryProvider } from './pending-interceptor.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { SPINKIT_COMPONENTS } from './spinkits';
 
 const PendingInterceptorServiceExistingProvider = {
     provide: HTTP_INTERCEPTORS,
@@ -22,6 +23,7 @@ const PendingInterceptorServiceExistingProvider = {
 @NgModule({
     declarations: [
         SpinnerComponent,
+        SPINKIT_COMPONENTS,
     ],
     imports: [
         CommonModule,
@@ -29,6 +31,7 @@ const PendingInterceptorServiceExistingProvider = {
     ],
     exports: [
         SpinnerComponent,
+        SPINKIT_COMPONENTS,
     ],
     providers: [
         PendingInterceptorServiceExistingProvider,
