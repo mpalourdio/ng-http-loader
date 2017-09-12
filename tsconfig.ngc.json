@@ -5,9 +5,5 @@
     },
     "include": [
         "./tmp"
-    ],
-    "angularCompilerOptions": {
-        "strictMetadataEmit": true,
-        "skipTemplateCodegen": true
-    }
+    ]
 }
