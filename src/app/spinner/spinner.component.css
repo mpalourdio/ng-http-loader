@@ -13,6 +13,6 @@
     justify-content: center;
 }
 
-.colored-parent, .colored > div {
+::ng-deep .colored-parent, ::ng-deep .colored > div {
     background-color: #333;
 }
