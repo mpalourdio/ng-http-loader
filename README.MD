@@ -49,7 +49,9 @@ In your app.component.html, add :
 <spinner></spinner>
 ```
 
-You can too customize the background-color and the spinner type:
+## Customizing the spinner
+
+You can customize the background-color and the spinner type:
 ```xml
 <spinner [backgroundColor]="'#ff0000'" [spinner]="spinkit.skWave"></spinner>
 ```
@@ -76,6 +78,7 @@ Otherwise, you can simply reference the chosen spinner as a simple string:
 <spinner backgroundColor="#ff0000" spinner="sk-wave"></spinner>
 ```
 
+## Requests filtering
 
 You can filter the requests that shouldn't be caught by the interceptor by providing an array of regex patterns :
 ```xml
