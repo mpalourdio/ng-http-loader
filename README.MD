@@ -17,7 +17,7 @@ The HTTP interceptor listens to all HTTP requests and shows a spinner during pen
 
 ## HttpClientModule
 
-All http requests *MUST* be performed with the new ``HttpClientModule`` available from ``angular 4.3``. See this [blog post](http://blog.ninja-squad.com/2017/07/17/http-client-module/) as reference.
+All http requests **MUST** be performed with the new ``HttpClientModule`` available from ``angular 4.3``. See this [blog post](http://blog.ninja-squad.com/2017/07/17/http-client-module/) as reference.
 
 ## Usage
 
@@ -49,10 +49,33 @@ In your app.component.html, add :
 <spinner></spinner>
 ```
 
-You can too customize the background-color and the spinner type :
+You can too customize the background-color and the spinner type:
 ```xml
-<spinner [backgroundColor]="'#ff0000'" [spinner]="Spinkit.skWave"></spinner>
+<spinner [backgroundColor]="'#ff0000'" [spinner]="spinkit.skWave"></spinner>
 ```
+
+To use this syntax, you must reference the ``Spinkit`` const as a public property in you app.component.ts:
+
+```typescript
+import { Spinkit } from 'ng-http-loader/spinkits';
+
+@Component({
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+    public spinkit = Spinkit;
+    [...]
+}
+```
+
+Otherwise, you can simply reference the chosen spinner as a simple string:
+
+```xml
+<spinner backgroundColor="#ff0000" spinner="sk-wave"></spinner>
+```
+
 
 You can filter the requests that shouldn't be caught by the interceptor by providing an array of regex patterns :
 ```xml
