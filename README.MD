@@ -82,7 +82,7 @@ The different spinners available are referenced in [this class](src/app/spinkits
 
 ## Requests filtering
 
-You can filter the requests that shouldn't be caught by the interceptor by providing an array of regex patterns :
+You can filter the requests that shouldn't be caught by the interceptor by providing an array of regex patterns:
 ```xml
 <spinner 
     [backgroundColor]="'#ff0000'"
@@ -97,7 +97,8 @@ Each Spinkit component defined in [SPINKIT_COMPONENTS](src/app/spinkits.ts#L31) 
 
 ## Requirements
 
-Compatible with Angular 4.3+.
+Compatible with Angular 4.3+. Performing http requests with the new API from ``HttpClientModule`` is **mandatory**. Otherwise,
+the spinner will not be fired **at all**.
 
 ## Credits
 
