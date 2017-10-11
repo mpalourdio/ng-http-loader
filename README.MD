@@ -36,7 +36,7 @@ import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
   ],
   imports: [
     BrowserModule,    
-    NgHttpLoaderModule,
+    NgHttpLoaderModule, <============
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -67,7 +67,7 @@ import { Spinkit } from 'ng-http-loader/spinkits';
     styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-    public spinkit = Spinkit;
+    public spinkit = Spinkit; <============
     [...]
 }
 ```
