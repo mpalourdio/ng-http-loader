@@ -28,6 +28,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 [...]
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http'; <============
 import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module'; <============
 
 @NgModule({
@@ -35,7 +36,8 @@ import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module'; <====
     AppComponent
   ],
   imports: [
-    BrowserModule,    
+    BrowserModule,
+    HttpClientModule, <============ (Perform http requests with this module)
     NgHttpLoaderModule, <============
   ],
   providers: [],
