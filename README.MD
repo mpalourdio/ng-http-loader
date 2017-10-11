@@ -28,7 +28,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 [...]
 import { AppComponent } from './app.component';
-import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module';
+import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module'; <============
 
 @NgModule({
   declarations: [
@@ -59,7 +59,7 @@ You can customize the background-color and the spinner type:
 **_To use this syntax, you must reference the ``Spinkit`` const as a public property in you app.component.ts_**:
 
 ```typescript
-import { Spinkit } from 'ng-http-loader/spinkits';
+import { Spinkit } from 'ng-http-loader/spinkits'; <============
 
 @Component({
     selector: 'app-root',
