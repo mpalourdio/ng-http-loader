@@ -56,7 +56,7 @@ You can customize the background-color and the spinner type:
 <spinner [backgroundColor]="'#ff0000'" [spinner]="spinkit.skWave"></spinner>
 ```
 
-To use this syntax, you must reference the ``Spinkit`` const as a public property in you app.component.ts:
+**_To use this syntax, you must reference the ``Spinkit`` const as a public property in you app.component.ts_**:
 
 ```typescript
 import { Spinkit } from 'ng-http-loader/spinkits';
@@ -71,6 +71,8 @@ export class AppComponent {
     [...]
 }
 ```
+The different spinners available are referenced in [this class](src/app/spinkits.ts).
+
 
 Otherwise, you can simply reference the chosen spinner as a simple string:
 
@@ -89,7 +91,7 @@ You can filter the requests that shouldn't be caught by the interceptor by provi
 </spinner>
 ```
 
-The different spinners available are referenced in [this class](src/app/spinkits.ts).
+## Misc
 
 Each Spinkit component defined in [SPINKIT_COMPONENTS](src/app/spinkits.ts#L31) can be used independently.
 
