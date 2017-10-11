@@ -74,7 +74,7 @@ export class AppComponent {
 The different spinners available are referenced in [this class](src/app/spinkits.ts).
 
 
-Otherwise, you can simply reference the chosen spinner as a simple string:
+**_Otherwise, you can simply reference the chosen spinner as a simple string_**:
 
 ```xml
 <spinner backgroundColor="#ff0000" spinner="sk-wave"></spinner>
