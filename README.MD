@@ -84,7 +84,7 @@ The different spinners available are referenced in [this class](src/app/spinkits
 
 ## Requests filtering
 
-You can filter the requests that shouldn't be caught by the interceptor by providing an array of regex patterns:
+You can filter the requests that shouldn't be caught by the interceptor by providing **an array of regex patterns**:
 ```xml
 <spinner 
     [backgroundColor]="'#ff0000'"
