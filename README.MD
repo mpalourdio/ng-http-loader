@@ -86,7 +86,7 @@ You can filter the requests that shouldn't be caught by the interceptor by provi
 ```xml
 <spinner 
     [backgroundColor]="'#ff0000'"
-    [spinner]="Spinkit.skWave"
+    [spinner]="spinkit.skWave"
     [filteredUrlPatterns]="['\\d', '[a-zA-Z]', 'my-api']">
 </spinner>
 ```
