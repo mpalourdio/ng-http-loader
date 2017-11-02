@@ -10,36 +10,29 @@
       "main": "../karmaMain.ts",
       "polyfills": "../polyfills.ts",
       "test": "../test.ts",
-      "tsconfig": "tsconfig.app.json",
+      "tsconfig": "../tsconfig.json",
       "testTsconfig": "../tsconfig.spec.json",
       "prefix": null,
-      "scripts": [],
-      "environmentSource": "environments/environment.ts",
-      "environments": {
-        "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
-      }
+      "scripts": []
     }
   ],
-  "e2e": {
-    "protractor": {
-      "config": "./protractor.conf.js"
-    }
-  },
   "lint": [
     {
-      "project": "src/tsconfig.app.json"
+      "project": "../tsconfig.json",
+      "exclude": "**/node_modules/**"
     },
     {
-      "project": "src/tsconfig.spec.json"
+      "project": "../tsconfig.spec.json",
+      "exclude": "**/node_modules/**"
     },
     {
-      "project": "e2e/tsconfig.e2e.json"
+      "project": "../tsconfig.ngc.json",
+      "exclude": "**/node_modules/**"
     }
   ],
   "test": {
     "karma": {
-      "config": "./karma.conf.js"
+      "config": "../karma.conf.js"
     }
   },
   "defaults": {
