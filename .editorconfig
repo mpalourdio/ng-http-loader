@@ -9,7 +9,7 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 end_of_line = lf
 
-[package.json]
+[{package.json,.angular-cli.json,tslint.json,karma.conf.js}]
 indent_style = space
 indent_size = 2
 
