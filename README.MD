@@ -15,6 +15,17 @@ $ npm install ng-http-loader --save
 This package provides an HTTP Interceptor, and a spinner component (All from [SpinKit](https://github.com/tobiasahlin/SpinKit) at the moment).
 The HTTP interceptor listens to all HTTP requests and shows a spinner during pending requests.
 
+## Angular 4 / Angular 5
+
+The latest compatible module version with angular 4 is **``0.3.4``**.
+If you want to use Angular 5, use **``^0.4.0``**.
+
+If you experience errors like below, **please double check the version you use.**
+
+``ERROR in Error: Metadata version mismatch for module []/angular/node_modules/ng-http-loader/ng-http-loader
+  .module.d.ts, found version 4, expected 3, resolving symbol AppModule in C:/Users/......./angular/src/app/app.module.ts``
+  
+
 ## Requirements
 
 Compatible with Angular 4.3+. Performing http requests with the new API from ``HttpClientModule`` is **mandatory**. Otherwise,
