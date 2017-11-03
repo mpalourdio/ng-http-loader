@@ -22,8 +22,8 @@ If you want to use Angular 5, use **``^0.4.0``**.
 
 If you experience errors like below, **please double check the version you use.**
 
-``ERROR in Error: Metadata version mismatch for module []/angular/node_modules/ng-http-loader/ng-http-loader
-  .module.d.ts, found version 4, expected 3, resolving symbol AppModule in C:/Users/......./angular/src/app/app.module.ts``
+``ERROR in Error: Metadata version mismatch for module [...]/angular/node_modules/ng-http-loader/ng-http-loader
+  .module.d.ts, found version 4, expected 3, resolving symbol AppModule in [...]/angular/src/app/app.module.ts``
   
 
 ## Requirements
