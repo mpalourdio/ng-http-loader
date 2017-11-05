@@ -8,33 +8,24 @@
  */
 
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
-import { SpinnerComponent } from '../../src/spinner/spinner.component';
+import { SpinnerComponent } from '../../../src/components/spinner/spinner.component';
 import { By } from '@angular/platform-browser';
-import { Spinkit, SPINKIT_COMPONENTS } from '../../src/spinkits';
+import { Spinkit, SPINKIT_COMPONENTS } from '../../../src/spinkits';
 import { Observable } from 'rxjs/Observable';
-import { PendingInterceptorService } from '../../src/pending-interceptor.service';
-import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { PendingInterceptorService } from '../../../src/services/pending-interceptor.service';
+import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { NgHttpLoaderServicesModule } from '../../../src/services/ng-http-loader-services.module';
 import 'rxjs/add/observable/forkJoin';
 
 describe('SpinnerComponent', () => {
     let component: SpinnerComponent;
     let fixture: ComponentFixture<SpinnerComponent>;
 
-    const PendingInterceptorServiceExistingProvider = {
-        provide: HTTP_INTERCEPTORS,
-        useExisting: PendingInterceptorService,
-        multi: true
-    };
-
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [SpinnerComponent, SPINKIT_COMPONENTS],
-            providers: [
-                PendingInterceptorService,
-                PendingInterceptorServiceExistingProvider,
-            ],
-            imports: [HttpClientTestingModule]
+            imports: [NgHttpLoaderServicesModule, HttpClientTestingModule]
         })
             .compileComponents();
     }));

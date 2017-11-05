@@ -8,7 +8,7 @@
  */
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { SkThreeBounceComponent } from '../../src/sk-three-bounce/sk-three-bounce.component';
+import { SkThreeBounceComponent } from '../../../src/components/sk-three-bounce/sk-three-bounce.component';
 
 
 describe('SkThreeBounceComponent', () => {

@@ -8,7 +8,7 @@
  */
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { SkChasingDotsComponent } from '../../src/sk-chasing-dots/sk-chasing-dots.component';
+import { SkChasingDotsComponent } from '../../../src/components/sk-chasing-dots/sk-chasing-dots.component';
 
 
 describe('SkChasingDotsComponent', () => {

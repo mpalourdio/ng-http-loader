@@ -8,7 +8,7 @@
  */
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { SkCubeGridComponent } from '../../src/sk-cube-grid/sk-cube-grid.component';
+import { SkCubeGridComponent } from '../../../src/components/sk-cube-grid/sk-cube-grid.component';
 
 
 describe('SkCubeGridComponent', () => {

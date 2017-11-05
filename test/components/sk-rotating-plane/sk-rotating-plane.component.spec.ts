@@ -8,7 +8,7 @@
  */
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { SkRotatingPlaneComponent } from '../../src/sk-rotating-plane/sk-rotating-plane.component';
+import { SkRotatingPlaneComponent } from '../../../src/components/sk-rotating-plane/sk-rotating-plane.component';
 
 
 describe('SkRotatingPlaneComponent', () => {
