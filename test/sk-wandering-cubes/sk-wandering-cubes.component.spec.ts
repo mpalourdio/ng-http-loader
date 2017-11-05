@@ -8,22 +8,22 @@
  */
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { SkWanderingCubesComponent } from '../../src/sk-wandering-cubes/sk-wandering-cubes.component';
 
-import { SkDoubleBounceComponent } from './sk-double-bounce.component';
 
-describe('SkDoubleBounceComponent', () => {
-    let component: SkDoubleBounceComponent;
-    let fixture: ComponentFixture<SkDoubleBounceComponent>;
+describe('SkWanderingCubesComponent', () => {
+    let component: SkWanderingCubesComponent;
+    let fixture: ComponentFixture<SkWanderingCubesComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [SkDoubleBounceComponent]
+            declarations: [SkWanderingCubesComponent]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(SkDoubleBounceComponent);
+        fixture = TestBed.createComponent(SkWanderingCubesComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

@@ -8,11 +8,11 @@
  */
 
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
-import { SpinnerComponent } from './spinner.component';
+import { SpinnerComponent } from '../../src/spinner/spinner.component';
 import { By } from '@angular/platform-browser';
-import { Spinkit, SPINKIT_COMPONENTS } from '../spinkits';
+import { Spinkit, SPINKIT_COMPONENTS } from '../../src/spinkits';
 import { Observable } from 'rxjs/Observable';
-import { PendingInterceptorService } from '../pending-interceptor.service';
+import { PendingInterceptorService } from '../../src/pending-interceptor.service';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import 'rxjs/add/observable/forkJoin';

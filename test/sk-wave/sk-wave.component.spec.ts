@@ -8,22 +8,22 @@
  */
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { SkWaveComponent } from '../../src/sk-wave/sk-wave.component';
 
-import { SkChasingDotsComponent } from './sk-chasing-dots.component';
 
-describe('SkChasingDotsComponent', () => {
-    let component: SkChasingDotsComponent;
-    let fixture: ComponentFixture<SkChasingDotsComponent>;
+describe('SkWaveComponent', () => {
+    let component: SkWaveComponent;
+    let fixture: ComponentFixture<SkWaveComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [SkChasingDotsComponent]
+            declarations: [SkWaveComponent]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(SkChasingDotsComponent);
+        fixture = TestBed.createComponent(SkWaveComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

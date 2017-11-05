@@ -6,7 +6,7 @@ const tmpDir = './tmp';
 const distDir = './dist';
 
 gulp.task('inline-templates', ['clean-tmp'], function () {
-    return gulp.src(['!./src/app/**/*.spec.ts', './src/app/**/*.ts'])
+    return gulp.src('./src/**/*.ts')
         .pipe(inlineNg2Template({
             base: '/src',
             target: 'es6',

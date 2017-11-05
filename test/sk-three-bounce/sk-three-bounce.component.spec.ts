@@ -8,22 +8,22 @@
  */
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { SkThreeBounceComponent } from '../../src/sk-three-bounce/sk-three-bounce.component';
 
-import { SkCubeGridComponent } from './sk-cube-grid.component';
 
-describe('SkCubeGridComponent', () => {
-    let component: SkCubeGridComponent;
-    let fixture: ComponentFixture<SkCubeGridComponent>;
+describe('SkThreeBounceComponent', () => {
+    let component: SkThreeBounceComponent;
+    let fixture: ComponentFixture<SkThreeBounceComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [SkCubeGridComponent]
+            declarations: [SkThreeBounceComponent]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(SkCubeGridComponent);
+        fixture = TestBed.createComponent(SkThreeBounceComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

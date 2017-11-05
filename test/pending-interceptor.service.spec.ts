@@ -8,7 +8,7 @@
  */
 
 import { async, inject, TestBed } from '@angular/core/testing';
-import { PendingInterceptorService } from './pending-interceptor.service';
+import { PendingInterceptorService } from '../src/pending-interceptor.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HTTP_INTERCEPTORS, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';

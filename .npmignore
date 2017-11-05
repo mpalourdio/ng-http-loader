@@ -12,9 +12,7 @@ coverage
 .travis.yml
 gulpfile.js
 karma.conf.js
-karmaMain.ts
 polyfills.ts
-protractor.conf.js
 test.ts
 tsconfig.json
 tsconfig.ngc.json

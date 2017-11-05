@@ -6,8 +6,9 @@
   "apps": [
     {
       "root": "src",
+      "appRoot": "",
       "outDir": "dist",
-      "main": "../karmaMain.ts",
+      "main": "../main.ts",
       "polyfills": "../polyfills.ts",
       "test": "../test.ts",
       "tsconfig": "../tsconfig.json",

@@ -4,9 +4,16 @@
         "module": "commonjs",
         "target": "es5",
         "outDir": "./dist",
-        "rootDir": "./tmp"
+        "rootDir": "./tmp",
+        "noImplicitAny": true,
+        "allowUnusedLabels": false,
+        "noImplicitReturns": true
     },
     "include": [
         "./tmp"
-    ]
+    ],
+    "angularCompilerOptions": {
+        "strictMetadataEmit": true,
+        "skipTemplateCodegen": true
+    }
 }

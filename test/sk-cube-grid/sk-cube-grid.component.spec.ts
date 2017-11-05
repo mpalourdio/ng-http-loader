@@ -8,22 +8,22 @@
  */
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { SkCubeGridComponent } from '../../src/sk-cube-grid/sk-cube-grid.component';
 
-import { SkRotatingPlaneComponent } from './sk-rotating-plane.component';
 
-describe('SkRotatingPlaneComponent', () => {
-    let component: SkRotatingPlaneComponent;
-    let fixture: ComponentFixture<SkRotatingPlaneComponent>;
+describe('SkCubeGridComponent', () => {
+    let component: SkCubeGridComponent;
+    let fixture: ComponentFixture<SkCubeGridComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [SkRotatingPlaneComponent]
+            declarations: [SkCubeGridComponent]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(SkRotatingPlaneComponent);
+        fixture = TestBed.createComponent(SkCubeGridComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
