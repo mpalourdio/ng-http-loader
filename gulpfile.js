@@ -31,7 +31,7 @@ gulp.task('copy-package-json', function () {
 });
 
 gulp.task('copy-misc-files', function () {
-    return gulp.src(['README.MD', 'LICENSE'])
+    return gulp.src(['README.MD', 'LICENSE', 'CHANGELOG.MD'])
         .pipe(gulp.dest(distDir));
 });
 
