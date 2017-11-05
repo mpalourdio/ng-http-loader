@@ -2,6 +2,10 @@
 
 # ng-http-loader
 
+## Changelog
+
+[Please read the changelog](CHANGELOG.MD)
+
 ## Installation
 
 To install this library, run:
