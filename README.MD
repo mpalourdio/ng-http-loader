@@ -142,7 +142,7 @@ You can filter the requests that shouldn't be caught by the interceptor by provi
 
 ## Misc
 
-Each Spinkit component defined in [SPINKIT_COMPONENTS](src/spinkits.ts#L31) can be used independently.
+Each Spinkit component defined in [SPINKIT_COMPONENTS](src/spinkits.ts#L30) can be used independently.
 
 ## Credits
 
