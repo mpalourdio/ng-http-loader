@@ -7,3 +7,4 @@ tmp
 *.iml
 dist
 coverage
+.idea/

@@ -21,3 +21,4 @@ tsconfig.spec.json
 tslint.json
 yarn.lock
 *.iml
+.idea/
