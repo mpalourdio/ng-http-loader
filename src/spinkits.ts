@@ -7,14 +7,14 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { SkCubeGridComponent } from './sk-cube-grid/sk-cube-grid.component';
-import { SkChasingDotsComponent } from './sk-chasing-dots/sk-chasing-dots.component';
-import { SkDoubleBounceComponent } from './sk-double-bounce/sk-double-bounce.component';
-import { SkRotatingPlaneComponent } from './sk-rotating-plane/sk-rotating-plane.component';
-import { SkSpinnerPulseComponent } from './sk-spinner-pulse/sk-spinner-pulse.component';
-import { SkThreeBounceComponent } from './sk-three-bounce/sk-three-bounce.component';
-import { SkWanderingCubesComponent } from './sk-wandering-cubes/sk-wandering-cubes.component';
-import { SkWaveComponent } from './sk-wave/sk-wave.component';
+import { SkCubeGridComponent } from './components/sk-cube-grid/sk-cube-grid.component';
+import { SkChasingDotsComponent } from './components/sk-chasing-dots/sk-chasing-dots.component';
+import { SkDoubleBounceComponent } from './components/sk-double-bounce/sk-double-bounce.component';
+import { SkRotatingPlaneComponent } from './components/sk-rotating-plane/sk-rotating-plane.component';
+import { SkSpinnerPulseComponent } from './components/sk-spinner-pulse/sk-spinner-pulse.component';
+import { SkThreeBounceComponent } from './components/sk-three-bounce/sk-three-bounce.component';
+import { SkWanderingCubesComponent } from './components/sk-wandering-cubes/sk-wandering-cubes.component';
+import { SkWaveComponent } from './components/sk-wave/sk-wave.component';
 
 export const Spinkit = {
     skChasingDots: 'sk-chasing-dots',
@@ -26,7 +26,6 @@ export const Spinkit = {
     skWanderingCubes: 'sk-wandering-cubes',
     skWave: 'sk-wave',
 };
-
 
 export const SPINKIT_COMPONENTS = [
     SkCubeGridComponent,

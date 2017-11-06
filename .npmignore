@@ -12,6 +12,7 @@ coverage
 .travis.yml
 gulpfile.js
 karma.conf.js
+main.ts
 polyfills.ts
 test.ts
 tsconfig.json
@@ -20,3 +21,4 @@ tsconfig.spec.json
 tslint.json
 yarn.lock
 *.iml
+.idea/

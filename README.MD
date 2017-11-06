@@ -2,6 +2,10 @@
 
 # ng-http-loader
 
+## Changelog
+
+[Please read the changelog](CHANGELOG.MD)
+
 ## Installation
 
 To install this library, run:
@@ -55,6 +59,33 @@ import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module'; <====
     BrowserModule,
     HttpClientModule, <============ (Perform http requests with this module)
     NgHttpLoaderModule, <============
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+or (splitted modules mode for more convenience)
+
+```typescript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+[...]
+import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http'; <============
+import { NgHttpLoaderComponentsModule } from 'ng-http-loader/components/ng-http-loader-components.module'; <============
+import { NgHttpLoaderServicesModule } from 'ng-http-loader/services/ng-http-loader-services.module'; <============
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule, <============ (Perform http requests with this module)
+    NgHttpLoaderServicesModule, <============
+    NgHttpLoaderComponentsModule, <============
   ],
   providers: [],
   bootstrap: [AppComponent]

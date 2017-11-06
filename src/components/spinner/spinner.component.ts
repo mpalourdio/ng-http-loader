@@ -9,8 +9,8 @@
 
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { Spinkit } from '../spinkits';
-import { PendingInterceptorService } from '../pending-interceptor.service';
+import { Spinkit } from '../../spinkits';
+import { PendingInterceptorService } from '../../services/pending-interceptor.service';
 
 @Component({
     selector: 'spinner',
