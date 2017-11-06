@@ -27,7 +27,7 @@ If you want to use Angular 5, use **``^0.4.0``**.
 If you experience errors like below, **please double check the version you use.**
 
 ``ERROR in Error: Metadata version mismatch for module [...]/angular/node_modules/ng-http-loader/ng-http-loader
-  .module.d.ts, found version 4, expected 3, resolving symbol AppModule in [...]/angular/src/app/app.module.ts``
+  .module.d.ts, found version 4, expected 3, resolving symbol AppModule in [...]/angular/src/app.module.ts``
   
 
 ## Requirements
@@ -120,7 +120,7 @@ export class AppComponent {
     [...]
 }
 ```
-The different spinners available are referenced in [this class](src/app/spinkits.ts).
+The different spinners available are referenced in [this class](src/spinkits.ts).
 
 
 **_Otherwise, you can simply reference the chosen spinner as a simple string_**:
@@ -142,7 +142,7 @@ You can filter the requests that shouldn't be caught by the interceptor by provi
 
 ## Misc
 
-Each Spinkit component defined in [SPINKIT_COMPONENTS](src/app/spinkits.ts#L31) can be used independently.
+Each Spinkit component defined in [SPINKIT_COMPONENTS](src/spinkits.ts#L31) can be used independently.
 
 ## Credits
 
