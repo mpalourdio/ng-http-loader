@@ -149,14 +149,14 @@
     tree-kill "^1.0.0"
 
 "@schematics/angular@~0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-0.1.0.tgz#cd6c445ead33144a532523d1ccac68c38a2b0050"
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-0.1.1.tgz#e0ebb7206a4382fecee235a790f689281229defb"
   dependencies:
     "@angular-devkit/core" "0.0.20"
 
 "@types/jasmine@*":
-  version "2.6.2"
-  resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.6.2.tgz#6e6d4cb183cd55c7a1ad6270bced10fdd5367a3c"
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.6.3.tgz#586963bfdd35e38f24a0a0b63a438cf521292ed9"
 
 "@types/jasmine@~2.5.53":
   version "2.5.54"
