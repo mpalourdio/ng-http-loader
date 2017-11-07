@@ -10,7 +10,7 @@
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/finally';
@@ -19,7 +19,7 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class PendingInterceptorService implements HttpInterceptor {
     private _pendingRequests = 0;
-    private _pendingRequestsStatus: Subject<boolean> = new Subject<boolean>();
+    private _pendingRequestsStatus = new ReplaySubject<boolean>(1);
     private _filteredUrlPatterns: RegExp[] = [];
 
     get pendingRequestsStatus(): Observable<boolean> {
