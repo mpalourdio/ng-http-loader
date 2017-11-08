@@ -169,4 +169,18 @@ describe('SpinnerComponent', () => {
         expect(() => fixture.detectChanges())
             .toThrow(new Error('`filteredUrlPatterns` must be an array.'));
     });
+
+    it('should show the spinner even if the component is created after the http request is performed', inject(
+        [PendingInterceptorService, HttpClient, HttpTestingController],
+        (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
+            http.get('/fake').subscribe();
+
+            const newFixture = TestBed.createComponent(SpinnerComponent);
+            const newComponent = newFixture.componentInstance;
+            expect(newComponent.isSpinnerVisible).toBeTruthy();
+            httpMock.expectOne('/fake').flush({});
+            expect(newComponent.isSpinnerVisible).toBeFalsy();
+            httpMock.verify();
+        }
+    ));
 });
