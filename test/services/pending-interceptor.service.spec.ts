@@ -76,6 +76,22 @@ describe('PendingInterceptorService', () => {
             })
     ));
 
+    it('should correctly notify the pendingRequestsStatus observable, even if subscribed after', async(
+        inject(
+            [PendingInterceptorService, HttpClient, HttpTestingController],
+            (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
+                http.get('/fake').subscribe();
+                httpMock.expectOne('/fake');
+
+                const pendingRequestsStatus = service.pendingRequestsStatus;
+                pendingRequestsStatus
+                    .subscribe(
+                        (next: boolean) => expect(next).toBeTruthy(),
+                        (error: HttpErrorResponse) => expect(1).toBe(2)
+                    );
+            })
+    ));
+
     it('should fail correctly',
         inject(
             [PendingInterceptorService, HttpClient, HttpTestingController],

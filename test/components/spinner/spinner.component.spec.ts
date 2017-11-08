@@ -98,75 +98,85 @@ describe('SpinnerComponent', () => {
         expect(element.style['background-color']).toBe('rgb(255, 0, 0)');
     });
 
-    it('should show and hide the spinner according to the pending http requests',
-        inject(
-            [PendingInterceptorService, HttpClient, HttpTestingController],
-            (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
+    it('should show and hide the spinner according to the pending http requests', inject(
+        [PendingInterceptorService, HttpClient, HttpTestingController],
+        (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
 
-                function runQuery(url: string): Observable<any> {
-                    return http.get(url);
-                }
+            function runQuery(url: string): Observable<any> {
+                return http.get(url);
+            }
 
-                Observable.forkJoin([runQuery('/fake'), runQuery('/fake2')]).subscribe();
+            Observable.forkJoin([runQuery('/fake'), runQuery('/fake2')]).subscribe();
 
-                const firstRequest = httpMock.expectOne('/fake');
-                const secondRequest = httpMock.expectOne('/fake2');
+            const firstRequest = httpMock.expectOne('/fake');
+            const secondRequest = httpMock.expectOne('/fake2');
 
-                expect(component.isSpinnerVisible).toBeTruthy();
+            expect(component.isSpinnerVisible).toBeTruthy();
 
-                firstRequest.flush({});
-                expect(component.isSpinnerVisible).toBeTruthy();
+            firstRequest.flush({});
+            expect(component.isSpinnerVisible).toBeTruthy();
 
-                secondRequest.flush({});
-                expect(component.isSpinnerVisible).toBeFalsy();
-            })
-    );
+            secondRequest.flush({});
+            expect(component.isSpinnerVisible).toBeFalsy();
+        }
+    ));
 
-    it('should hide and show a the spinner for a single http request',
-        inject(
-            [PendingInterceptorService, HttpClient, HttpTestingController],
-            (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
-                http.get('/fake').subscribe();
-                expect(component.isSpinnerVisible).toBeTruthy();
-                httpMock.expectOne('/fake').flush({});
-                expect(component.isSpinnerVisible).toBeFalsy();
-            })
-    );
+    it('should hide and show a the spinner for a single http request', inject(
+        [PendingInterceptorService, HttpClient, HttpTestingController],
+        (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
+            http.get('/fake').subscribe();
+            expect(component.isSpinnerVisible).toBeTruthy();
+            httpMock.expectOne('/fake').flush({});
+            expect(component.isSpinnerVisible).toBeFalsy();
+        }
+    ));
 
-    it('should not show the spinner if the request is filtered',
-        inject(
-            [PendingInterceptorService, HttpClient, HttpTestingController],
-            (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
-                component.filteredUrlPatterns.push('fake');
-                fixture.detectChanges();
+    it('should not show the spinner if the request is filtered', inject(
+        [PendingInterceptorService, HttpClient, HttpTestingController],
+        (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
+            component.filteredUrlPatterns.push('fake');
+            fixture.detectChanges();
 
-                http.get('/fake').subscribe();
-                expect(component.isSpinnerVisible).toBeFalsy();
-                httpMock.expectOne('/fake').flush({});
-            })
-    );
+            http.get('/fake').subscribe();
+            expect(component.isSpinnerVisible).toBeFalsy();
+            httpMock.expectOne('/fake').flush({});
+        }
+    ));
 
-    it('should correctly filter with several requests and one pattern',
-        inject(
-            [PendingInterceptorService, HttpClient, HttpTestingController],
-            (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
-                component.filteredUrlPatterns.push('\\d');
-                fixture.detectChanges();
+    it('should correctly filter with several requests and one pattern', inject(
+        [PendingInterceptorService, HttpClient, HttpTestingController],
+        (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
+            component.filteredUrlPatterns.push('\\d');
+            fixture.detectChanges();
 
-                http.get('/12345').subscribe();
-                expect(component.isSpinnerVisible).toBeFalsy();
-                httpMock.expectOne('/12345').flush({});
+            http.get('/12345').subscribe();
+            expect(component.isSpinnerVisible).toBeFalsy();
+            httpMock.expectOne('/12345').flush({});
 
-                http.get('/fake').subscribe();
-                expect(component.isSpinnerVisible).toBeTruthy();
-                httpMock.expectOne('/fake').flush({});
-                expect(component.isSpinnerVisible).toBeFalsy();
-            })
-    );
+            http.get('/fake').subscribe();
+            expect(component.isSpinnerVisible).toBeTruthy();
+            httpMock.expectOne('/fake').flush({});
+            expect(component.isSpinnerVisible).toBeFalsy();
+        }
+    ));
 
     it('should throw an error if filteredUrlPatterns is not an array', () => {
         component.filteredUrlPatterns = null;
         expect(() => fixture.detectChanges())
             .toThrow(new Error('`filteredUrlPatterns` must be an array.'));
     });
+
+    it('should show the spinner even if the component is created after the http request is performed', inject(
+        [PendingInterceptorService, HttpClient, HttpTestingController],
+        (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
+            http.get('/fake').subscribe();
+
+            const newFixture = TestBed.createComponent(SpinnerComponent);
+            const newComponent = newFixture.componentInstance;
+            expect(newComponent.isSpinnerVisible).toBeTruthy();
+            httpMock.expectOne('/fake').flush({});
+            expect(newComponent.isSpinnerVisible).toBeFalsy();
+            httpMock.verify();
+        }
+    ));
 });
