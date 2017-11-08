@@ -1,3 +1,8 @@
+## v0.5.1
+
+This release fixes a bug that could cause the spinner to not show if an http request were performed **before** the spinner component was initialized.  
+The responsible ``Subject`` has been replaced by a ``ReplaySubject``.
+
 ## v0.5.0
 
 The module is now splitted in sub-modules for more convenience. See [usage](https://github.com/mpalourdio/ng-http-loader#usage).  
