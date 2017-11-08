@@ -19,7 +19,7 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class PendingInterceptorService implements HttpInterceptor {
     private _pendingRequests = 0;
-    private _pendingRequestsStatus = new ReplaySubject<boolean>(1);
+    private _pendingRequestsStatus: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
     private _filteredUrlPatterns: RegExp[] = [];
 
     get pendingRequestsStatus(): Observable<boolean> {
