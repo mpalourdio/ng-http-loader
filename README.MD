@@ -22,7 +22,7 @@ The HTTP interceptor listens to all HTTP requests and shows a spinner during pen
 ## Angular 4 / Angular 5
 
 The latest compatible module version with angular 4 is **``0.3.4``**.
-If you want to use Angular 5, use **``^0.4.0``**.
+If you want to use Angular 5, use **``^0.5.0``**.
 
 If you experience errors like below, **please double check the version you use.**
 
