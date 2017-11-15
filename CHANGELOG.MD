@@ -1,3 +1,13 @@
+# Changelog
+
+## v0.6.0
+
+This release adds the ``debounceDelay`` parameter (default is 0). It allows to discard the spinner for fast and repeated http requests, which can be annoying under some conditions.
+
+See [customization](https://github.com/mpalourdio/ng-http-loader#customizing-the-spinner)
+
+The library footprint has been reduced by minifying templates and stylesheets before inlining them.
+
 ## v0.5.1
 
 This release fixes a bug that could cause the spinner to not show if an http request were performed **before** the spinner component was initialized.  
