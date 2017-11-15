@@ -8,6 +8,8 @@ See [customization](https://github.com/mpalourdio/ng-http-loader#customizing-the
 
 The library footprint has been reduced by minifying templates and stylesheets before inlining them.
 
+The library now takes advantage of [RxJS lettable operators](https://github.com/ReactiveX/rxjs/blob/master/doc/lettable-operators.md)
+
 ## v0.5.1
 
 This release fixes a bug that could cause the spinner to not show if an http request were performed **before** the spinner component was initialized.  

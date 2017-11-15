@@ -13,7 +13,7 @@ import { Spinkit } from '../../spinkits';
 import { PendingInterceptorService } from '../../services/pending-interceptor.service';
 import { timer } from 'rxjs/observable/timer';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/debounce';
+import { debounce } from 'rxjs/operators';
 
 @Component({
     selector: 'spinner',
@@ -37,7 +37,7 @@ export class SpinnerComponent implements OnDestroy, OnInit {
     constructor(private pendingRequestInterceptorService: PendingInterceptorService) {
         this.subscription = this.pendingRequestInterceptorService
             .pendingRequestsStatus
-            .debounce(this.handleDebounce.bind(this))
+            .pipe(debounce(this.handleDebounce.bind(this)))
             .subscribe(hasPendingRequests => {
                 this.isSpinnerVisible = hasPendingRequests;
             });
