@@ -11,6 +11,9 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Spinkit } from '../../spinkits';
 import { PendingInterceptorService } from '../../services/pending-interceptor.service';
+import { timer } from 'rxjs/observable/timer';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/debounce';
 
 @Component({
     selector: 'spinner',
@@ -28,10 +31,13 @@ export class SpinnerComponent implements OnDestroy, OnInit {
     public spinner = Spinkit.skCubeGrid;
     @Input()
     public filteredUrlPatterns: string[] = [];
+    @Input()
+    public debounceDelay = 0;
 
     constructor(private pendingRequestInterceptorService: PendingInterceptorService) {
         this.subscription = this.pendingRequestInterceptorService
             .pendingRequestsStatus
+            .debounce(this.handleDebounce.bind(this))
             .subscribe(hasPendingRequests => {
                 this.isSpinnerVisible = hasPendingRequests;
             });
@@ -51,5 +57,13 @@ export class SpinnerComponent implements OnDestroy, OnInit {
 
     ngOnDestroy(): void {
         this.subscription.unsubscribe();
+    }
+
+    private handleDebounce(hasPendingRequests: boolean): Observable<number> {
+        if (hasPendingRequests) {
+            return timer(this.debounceDelay);
+        }
+
+        return timer(0);
     }
 }
