@@ -11,9 +11,7 @@ import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/finally';
+import { catchError, finalize, map } from 'rxjs/operators';
 import 'rxjs/add/observable/throw';
 
 @Injectable()
@@ -51,13 +49,14 @@ export class PendingInterceptorService implements HttpInterceptor {
             }
         }
 
-        return next.handle(req).map(event => {
-            return event;
-        })
-            .catch(error => {
+        return next.handle(req).pipe(
+            map(event => {
+                return event;
+            }),
+            catchError(error => {
                 return Observable.throw(error);
-            })
-            .finally(() => {
+            }),
+            finalize(() => {
                 if (!shouldBypass) {
                     this._pendingRequests--;
 
@@ -65,7 +64,8 @@ export class PendingInterceptorService implements HttpInterceptor {
                         this._pendingRequestsStatus.next(false);
                     }
                 }
-            });
+            })
+        );
     }
 }
 
