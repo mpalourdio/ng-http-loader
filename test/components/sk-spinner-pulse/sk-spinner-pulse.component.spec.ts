@@ -9,6 +9,7 @@
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SkSpinnerPulseComponent } from '../../../src/components/sk-spinner-pulse/sk-spinner-pulse.component';
+import { By } from '@angular/platform-browser';
 
 
 describe('SkSpinnerPulseComponent', () => {
@@ -25,10 +26,21 @@ describe('SkSpinnerPulseComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(SkSpinnerPulseComponent);
         component = fixture.componentInstance;
-        fixture.detectChanges();
     });
 
     it('should be created', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should be possible to set background-color', () => {
+        component.backgroundColor = '#ff0000';
+        fixture.detectChanges();
+
+        const element = fixture
+            .debugElement
+            .query(By.css('.sk-spinner-pulse'))
+            .nativeElement;
+
+        expect(element.style['background-color']).toBe('rgb(255, 0, 0)');
     });
 });

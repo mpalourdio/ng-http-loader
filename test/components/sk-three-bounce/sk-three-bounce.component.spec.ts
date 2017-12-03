@@ -9,6 +9,7 @@
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SkThreeBounceComponent } from '../../../src/components/sk-three-bounce/sk-three-bounce.component';
+import { By } from '@angular/platform-browser';
 
 
 describe('SkThreeBounceComponent', () => {
@@ -25,10 +26,21 @@ describe('SkThreeBounceComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(SkThreeBounceComponent);
         component = fixture.componentInstance;
-        fixture.detectChanges();
     });
 
     it('should be created', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should be possible to set background-color', () => {
+        component.backgroundColor = '#ff0000';
+        fixture.detectChanges();
+
+        const element = fixture
+            .debugElement
+            .query(By.css('.sk-child'))
+            .nativeElement;
+
+        expect(element.style['background-color']).toBe('rgb(255, 0, 0)');
     });
 });

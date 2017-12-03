@@ -9,6 +9,7 @@
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SkWaveComponent } from '../../../src/components/sk-wave/sk-wave.component';
+import { By } from '@angular/platform-browser';
 
 
 describe('SkWaveComponent', () => {
@@ -25,10 +26,21 @@ describe('SkWaveComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(SkWaveComponent);
         component = fixture.componentInstance;
-        fixture.detectChanges();
     });
 
     it('should be created', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should be possible to set background-color', () => {
+        component.backgroundColor = '#ff0000';
+        fixture.detectChanges();
+
+        const element = fixture
+            .debugElement
+            .query(By.css('.sk-rect'))
+            .nativeElement;
+
+        expect(element.style['background-color']).toBe('rgb(255, 0, 0)');
     });
 });

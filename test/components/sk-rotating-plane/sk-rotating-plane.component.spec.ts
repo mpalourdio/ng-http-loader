@@ -9,6 +9,7 @@
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SkRotatingPlaneComponent } from '../../../src/components/sk-rotating-plane/sk-rotating-plane.component';
+import { By } from '@angular/platform-browser';
 
 
 describe('SkRotatingPlaneComponent', () => {
@@ -25,10 +26,21 @@ describe('SkRotatingPlaneComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(SkRotatingPlaneComponent);
         component = fixture.componentInstance;
-        fixture.detectChanges();
     });
 
     it('should be created', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should be possible to set background-color', () => {
+        component.backgroundColor = '#ff0000';
+        fixture.detectChanges();
+
+        const element = fixture
+            .debugElement
+            .query(By.css('.sk-rotating-plane'))
+            .nativeElement;
+
+        expect(element.style['background-color']).toBe('rgb(255, 0, 0)');
     });
 });

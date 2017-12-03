@@ -9,6 +9,7 @@
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SkCubeGridComponent } from '../../../src/components/sk-cube-grid/sk-cube-grid.component';
+import { By } from '@angular/platform-browser';
 
 
 describe('SkCubeGridComponent', () => {
@@ -25,10 +26,21 @@ describe('SkCubeGridComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(SkCubeGridComponent);
         component = fixture.componentInstance;
-        fixture.detectChanges();
     });
 
     it('should be created', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should be possible to set background-color', () => {
+        component.backgroundColor = '#ff0000';
+        fixture.detectChanges();
+
+        const element = fixture
+            .debugElement
+            .query(By.css('.sk-cube'))
+            .nativeElement;
+
+        expect(element.style['background-color']).toBe('rgb(255, 0, 0)');
     });
 });

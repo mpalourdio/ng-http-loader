@@ -9,6 +9,7 @@
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SkDoubleBounceComponent } from '../../../src/components/sk-double-bounce/sk-double-bounce.component';
+import { By } from '@angular/platform-browser';
 
 
 describe('SkDoubleBounceComponent', () => {
@@ -25,10 +26,21 @@ describe('SkDoubleBounceComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(SkDoubleBounceComponent);
         component = fixture.componentInstance;
-        fixture.detectChanges();
     });
 
     it('should be created', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should be possible to set background-color', () => {
+        component.backgroundColor = '#ff0000';
+        fixture.detectChanges();
+
+        const element = fixture
+            .debugElement
+            .query(By.css('.double-bounce1'))
+            .nativeElement;
+
+        expect(element.style['background-color']).toBe('rgb(255, 0, 0)');
     });
 });
