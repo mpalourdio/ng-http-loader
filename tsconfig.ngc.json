@@ -1,21 +1,21 @@
 {
-    "extends": "./tsconfig.json",
-    "compilerOptions": {
-        "module": "commonjs",
-        "target": "es5",
-        "outDir": "./dist",
-        "rootDir": "./tmp",
-        "noImplicitAny": true,
-        "allowUnusedLabels": false,
-        "noImplicitReturns": true,
-        "declaration": true,
-        "removeComments": true
-    },
-    "include": [
-        "./tmp"
-    ],
-    "angularCompilerOptions": {
-        "strictMetadataEmit": true,
-        "skipTemplateCodegen": true
-    }
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "outDir": "./dist",
+    "rootDir": "./tmp",
+    "noImplicitAny": true,
+    "allowUnusedLabels": false,
+    "noImplicitReturns": true,
+    "declaration": true,
+    "removeComments": true
+  },
+  "include": [
+    "./tmp"
+  ],
+  "angularCompilerOptions": {
+    "strictMetadataEmit": true,
+    "skipTemplateCodegen": true
+  }
 }
