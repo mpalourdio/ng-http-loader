@@ -5,6 +5,5 @@ npm-debug.log
 **/*.ngfactory.ts
 tmp
 *.iml
-dist
 coverage
 .idea/
