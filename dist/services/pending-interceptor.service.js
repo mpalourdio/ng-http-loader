@@ -40,13 +40,18 @@ var PendingInterceptorService = (function () {
     PendingInterceptorService.prototype.intercept = function (req, next) {
         var _this = this;
         var shouldBypass = this.shouldBypass(req.url);
+        var request = req;
+        if (req.headers.has('No-Loading')) {
+            shouldBypass = true;
+            request = req.clone({ headers: request.headers.delete('No-Loading') });
+        }
         if (!shouldBypass) {
             this._pendingRequests++;
             if (1 === this._pendingRequests) {
                 this._pendingRequestsStatus.next(true);
             }
         }
-        return next.handle(req).pipe(operators_1.map(function (event) {
+        return next.handle(request).pipe(operators_1.map(function (event) {
             return event;
         }), operators_1.catchError(function (error) {
             return Observable_1.Observable.throw(error);

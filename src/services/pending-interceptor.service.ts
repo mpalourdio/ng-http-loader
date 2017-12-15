@@ -39,7 +39,12 @@ export class PendingInterceptorService implements HttpInterceptor {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const shouldBypass = this.shouldBypass(req.url);
+        let shouldBypass = this.shouldBypass(req.url);
+        let request = req;
+        if (req.headers.has('No-Loading')) {
+            shouldBypass = true;
+            request = req.clone({ headers: request.headers.delete('No-Loading') });
+        }
 
         if (!shouldBypass) {
             this._pendingRequests++;
@@ -49,7 +54,7 @@ export class PendingInterceptorService implements HttpInterceptor {
             }
         }
 
-        return next.handle(req).pipe(
+        return next.handle(request).pipe(
             map(event => {
                 return event;
             }),
