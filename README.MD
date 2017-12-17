@@ -8,6 +8,10 @@
 
 [Please read the changelog](CHANGELOG.MD)
 
+## Contributing
+
+Use the [fork](https://github.com/mpalourdio/ng-http-loader#fork-destination-box), Luke (And add tests).
+
 ## Installation
 
 To install this library, run:
