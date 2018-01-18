@@ -3,7 +3,6 @@ node_modules/*
 npm-debug.log
 src
 tmp
-dist
 coverage
 .angular-cli.json
 .editorconfig

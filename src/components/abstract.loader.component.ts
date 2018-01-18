@@ -8,9 +8,11 @@
  */
 
 import { Input } from '@angular/core';
-
 export abstract class AbstractLoader {
 
     @Input()
     public backgroundColor: string;
+
+    constructor() {
+    }
 }

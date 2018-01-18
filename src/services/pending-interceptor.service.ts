@@ -16,6 +16,8 @@ import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class PendingInterceptorService implements HttpInterceptor {
+    filteredHeader: string;
+
     private _pendingRequests = 0;
     private _pendingRequestsStatus: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
     private _filteredUrlPatterns: RegExp[] = [];
@@ -39,7 +41,13 @@ export class PendingInterceptorService implements HttpInterceptor {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const shouldBypass = this.shouldBypass(req.url);
+        let shouldBypass = this.shouldBypass(req.url);
+        let request = req;
+
+        if (this.filteredHeader && req.headers.has(this.filteredHeader)) {
+            shouldBypass = true;
+            request = req.clone({ headers: request.headers.delete(this.filteredHeader) });
+        }
 
         if (!shouldBypass) {
             this._pendingRequests++;
@@ -49,7 +57,7 @@ export class PendingInterceptorService implements HttpInterceptor {
             }
         }
 
-        return next.handle(req).pipe(
+        return next.handle(request).pipe(
             map(event => {
                 return event;
             }),
