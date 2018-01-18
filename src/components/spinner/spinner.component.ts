@@ -33,6 +33,10 @@ export class SpinnerComponent implements OnDestroy, OnInit {
     public filteredUrlPatterns: string[] = [];
     @Input()
     public debounceDelay = 0;
+    @Input()
+    set excludeHeaders(header: string) {
+        this.pendingRequestInterceptorService.filteredHeader = header;
+    }
 
     constructor(private pendingRequestInterceptorService: PendingInterceptorService) {
         this.subscription = this.pendingRequestInterceptorService

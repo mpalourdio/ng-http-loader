@@ -20,6 +20,13 @@ var SpinnerComponent = (function () {
             _this.isSpinnerVisible = hasPendingRequests;
         });
     }
+    Object.defineProperty(SpinnerComponent.prototype, "excludeHeaders", {
+        set: function (header) {
+            this.pendingRequestInterceptorService.filteredHeader = header;
+        },
+        enumerable: true,
+        configurable: true
+    });
     SpinnerComponent.prototype.ngOnInit = function () {
         var _this = this;
         if (!(this.filteredUrlPatterns instanceof Array)) {
@@ -55,6 +62,7 @@ var SpinnerComponent = (function () {
         "spinner": [{ type: core_1.Input },],
         "filteredUrlPatterns": [{ type: core_1.Input },],
         "debounceDelay": [{ type: core_1.Input },],
+        "excludeHeaders": [{ type: core_1.Input },],
     };
     return SpinnerComponent;
 }());
