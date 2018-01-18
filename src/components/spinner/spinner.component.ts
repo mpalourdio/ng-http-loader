@@ -34,8 +34,12 @@ export class SpinnerComponent implements OnDestroy, OnInit {
     @Input()
     public debounceDelay = 0;
     @Input()
-    set excludeHeaders(header: string) {
-        this.pendingRequestInterceptorService.filteredHeader = header;
+    set excludeHeader(header: string) {
+        if (typeof header === 'string') {
+            this.pendingRequestInterceptorService.filteredHeader = header;
+        }else {
+            throw new TypeError('`excludeHeader` must be an string.');
+        }
     }
 
     constructor(private pendingRequestInterceptorService: PendingInterceptorService) {

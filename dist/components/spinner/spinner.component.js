@@ -20,9 +20,14 @@ var SpinnerComponent = (function () {
             _this.isSpinnerVisible = hasPendingRequests;
         });
     }
-    Object.defineProperty(SpinnerComponent.prototype, "excludeHeaders", {
+    Object.defineProperty(SpinnerComponent.prototype, "excludeHeader", {
         set: function (header) {
-            this.pendingRequestInterceptorService.filteredHeader = header;
+            if (typeof header === 'string') {
+                this.pendingRequestInterceptorService.filteredHeader = header;
+            }
+            else {
+                throw new TypeError('`excludeHeader` must be an string.');
+            }
         },
         enumerable: true,
         configurable: true
@@ -62,7 +67,7 @@ var SpinnerComponent = (function () {
         "spinner": [{ type: core_1.Input },],
         "filteredUrlPatterns": [{ type: core_1.Input },],
         "debounceDelay": [{ type: core_1.Input },],
-        "excludeHeaders": [{ type: core_1.Input },],
+        "excludeHeader": [{ type: core_1.Input },],
     };
     return SpinnerComponent;
 }());
