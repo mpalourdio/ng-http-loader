@@ -41,9 +41,9 @@ var PendingInterceptorService = (function () {
         var _this = this;
         var shouldBypass = this.shouldBypass(req.url);
         var request = req;
-        if (req.headers.has('No-Loading')) {
+        if (this.filteredHeader && req.headers.has(this.filteredHeader)) {
             shouldBypass = true;
-            request = req.clone({ headers: request.headers.delete('No-Loading') });
+            request = req.clone({ headers: request.headers.delete(this.filteredHeader) });
         }
         if (!shouldBypass) {
             this._pendingRequests++;

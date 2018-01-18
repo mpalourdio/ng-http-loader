@@ -8,9 +8,17 @@
  */
 
 import { Input } from '@angular/core';
-
+import { PendingInterceptorService } from '../services/pending-interceptor.service';
 export abstract class AbstractLoader {
 
     @Input()
     public backgroundColor: string;
+
+    @Input()
+    set excludeHeaders(header: string) {
+        this.pendingInterceptorService.filteredHeader = header;
+    }
+
+    constructor(private pendingInterceptorService: PendingInterceptorService) {
+    }
 }
