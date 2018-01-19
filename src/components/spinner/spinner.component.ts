@@ -33,6 +33,8 @@ export class SpinnerComponent implements OnDestroy, OnInit {
     public filteredUrlPatterns: string[] = [];
     @Input()
     public debounceDelay = 0;
+    @Input()
+    public entryComponent = null;
 
     constructor(private pendingRequestInterceptorService: PendingInterceptorService) {
         this.subscription = this.pendingRequestInterceptorService
@@ -44,6 +46,8 @@ export class SpinnerComponent implements OnDestroy, OnInit {
     }
 
     ngOnInit(): void {
+        this.disableEmbeddedSpinnerIfComponentOutletIsDefined();
+
         if (!(this.filteredUrlPatterns instanceof Array)) {
             throw new TypeError('`filteredUrlPatterns` must be an array.');
         }
@@ -52,6 +56,13 @@ export class SpinnerComponent implements OnDestroy, OnInit {
             this.filteredUrlPatterns.forEach(e => {
                 this.pendingRequestInterceptorService.filteredUrlPatterns.push(new RegExp(e));
             });
+        }
+    }
+
+    private disableEmbeddedSpinnerIfComponentOutletIsDefined() {
+        if (null != this.entryComponent) {
+            console.log('\'spinner\' and \'entryComponent\' are both defined, \'spinner\' property will be ignored');
+            this.spinner = null;
         }
     }
 
