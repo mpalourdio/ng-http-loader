@@ -136,6 +136,18 @@ The different spinners available are referenced in [this class](src/spinkits.ts)
 <spinner backgroundColor="#ff0000" spinner="sk-wave"></spinner>
 ```
 
+## Defining your own spinner
+
+You can define your own component instead of the built-in ones. The steps are:
+
+- Create your own component
+- Add it to the [entryComponent](https://angular.io/guide/ngmodule-faq#what-is-an-entry-component) definition in your module
+- Reference your component in a public property in your ``app.component.ts``
+- Reference the property in the spinner component like this :
+```xml
+<spinner [entryComponent]="myAwesomeComponent"></spinner>
+```
+
 ## Requests filtering
 
 You can also filter the http requests that shouldn't be caught by the interceptor by providing **an array of regex patterns**:
