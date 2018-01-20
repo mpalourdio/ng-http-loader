@@ -46,7 +46,7 @@ export class SpinnerComponent implements OnDestroy, OnInit {
     }
 
     ngOnInit(): void {
-        this.disableEmbeddedSpinnerIfComponentOutletIsDefined();
+        this.nullifySpinnerIfComponentOutletIsDefined();
 
         if (!(this.filteredUrlPatterns instanceof Array)) {
             throw new TypeError('`filteredUrlPatterns` must be an array.');
@@ -59,12 +59,12 @@ export class SpinnerComponent implements OnDestroy, OnInit {
         }
     }
 
-    private disableEmbeddedSpinnerIfComponentOutletIsDefined() {
+    private nullifySpinnerIfComponentOutletIsDefined(): void {
         if (null != this.entryComponent) {
-            console.log('\'spinner\' and \'entryComponent\' are both defined, \'spinner\' property will be ignored');
             this.spinner = null;
         }
     }
+
 
     ngOnDestroy(): void {
         this.subscription.unsubscribe();
