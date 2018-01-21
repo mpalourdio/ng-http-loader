@@ -10,7 +10,7 @@
 
 ## Contributing
 
-Use the fork, Luke (And add tests).
+Use the fork, Luke. PR without tests will likely not be merged.
 
 ## Installation
 
