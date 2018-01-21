@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.7.0
+
+This release adds the ``entryComponent`` property. It allows to specify your own component instead of the built-in ones. It uses the [NgComponentOutlet](https://angular.io/api/common/NgComponentOutlet) feature.
+
+See [Defining your own spinner](https://github.com/mpalourdio/ng-http-loader#defining-your-own-spinner) section.
+
 ## v0.6.0
 
 This release adds the ``debounceDelay`` parameter (default is 0). It allows to discard the spinner for fast and repeated http requests, which can be annoying under some conditions.

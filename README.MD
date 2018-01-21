@@ -10,7 +10,7 @@
 
 ## Contributing
 
-Use the fork, Luke (And add tests).
+Use the fork, Luke. PR without tests will likely not be merged.
 
 ## Installation
 
@@ -134,6 +134,18 @@ The different spinners available are referenced in [this class](src/spinkits.ts)
 
 ```xml
 <spinner backgroundColor="#ff0000" spinner="sk-wave"></spinner>
+```
+
+## Defining your own spinner
+
+You can define your own loader component in place of the built-in ones. The needed steps are:
+
+- Create your component
+- Add it to the [entryComponent](https://angular.io/guide/ngmodule-faq#what-is-an-entry-component) definition in your module definition
+- Reference your component in a public property in your ``app.component.ts``
+- Reference the property in the spinner component like this :
+```xml
+<spinner [entryComponent]="myAwesomeComponent"></spinner>
 ```
 
 ## Requests filtering
