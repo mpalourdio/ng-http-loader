@@ -34,7 +34,7 @@ export class SpinnerComponent implements OnDestroy, OnInit {
     @Input()
     public debounceDelay = 0;
     @Input()
-    public entryComponent = null;
+    public entryComponent: any = null;
 
     constructor(private pendingRequestInterceptorService: PendingInterceptorService) {
         this.subscription = this.pendingRequestInterceptorService
