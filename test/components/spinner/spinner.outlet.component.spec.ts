@@ -22,7 +22,6 @@ describe('SpinnerNgOutletComponent', () => {
     let fixture: ComponentFixture<SpinnerComponent>;
 
     beforeEach(async(() => {
-
         TestBed.configureTestingModule({
             declarations: [SpinnerComponent, SPINKIT_COMPONENTS],
             imports: [NgHttpLoaderServicesModule, HttpClientTestingModule]
@@ -33,7 +32,6 @@ describe('SpinnerNgOutletComponent', () => {
                 }
             })
             .compileComponents();
-
     }));
 
     beforeEach(() => {
