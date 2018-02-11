@@ -2,7 +2,7 @@
 
 ## v0.7.1
 
-This release is a bug fix release. It slightly changes the behavior of the ``filteredUrlPatterns`` so this parameter takes care of query strings too.
+This release is a bug fix release. It slightly improves the behavior of the ``filteredUrlPatterns`` so this parameter takes care of query strings too.
 
 ## v0.7.0
 
