@@ -151,6 +151,26 @@ describe('SpinnerComponent', () => {
         }
     )));
 
+    it('should take care of query strings in filteredUrlPatterns', fakeAsync(inject(
+        [PendingInterceptorService, HttpClient, HttpTestingController],
+        (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
+            component.filteredUrlPatterns.push('bar');
+            fixture.detectChanges();
+
+            http.get(
+                '/api/service',
+                {
+                    'params': {
+                        'foo': 'bar'
+                    }
+                }
+            ).subscribe();
+            tick();
+            expect(component.isSpinnerVisible).toBeFalsy();
+            httpMock.expectOne('/api/service?foo=bar').flush({});
+        }
+    )));
+
     it('should correctly filter with several requests and one pattern', fakeAsync(inject(
         [PendingInterceptorService, HttpClient, HttpTestingController],
         (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {

@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.7.1
+
+This release is a bug fix release. It slightly improves the behavior of the ``filteredUrlPatterns`` so this parameter takes care of query strings too.
+
 ## v0.7.0
 
 This release adds the ``entryComponent`` property. It allows to specify your own component instead of the built-in ones. It uses the [NgComponentOutlet](https://angular.io/api/common/NgComponentOutlet) feature.
