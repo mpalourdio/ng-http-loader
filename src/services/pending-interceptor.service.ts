@@ -69,7 +69,7 @@ export class PendingInterceptorService implements HttpInterceptor {
     }
 }
 
-export function PendingInterceptorServiceFactory() {
+export function PendingInterceptorServiceFactory(): PendingInterceptorService {
     return new PendingInterceptorService();
 }
 
