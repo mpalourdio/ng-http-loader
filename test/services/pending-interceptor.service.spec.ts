@@ -92,27 +92,25 @@ describe('PendingInterceptorService', () => {
             })
     ));
 
-    it('should fail correctly',
-        inject(
-            [PendingInterceptorService, HttpClient, HttpTestingController],
-            (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
+    it('should fail correctly', inject(
+        [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
 
-                const statusText = 'NOT FOUND';
+            const statusText = 'NOT FOUND';
 
-                http.get('/fake').subscribe(
-                    (next: boolean) => expect(true).toBe(false),
-                    (error: HttpErrorResponse) => expect(error.statusText).toBe(statusText)
-                );
+            http.get('/fake').subscribe(
+                (next: boolean) => expect(true).toBe(false),
+                (error: HttpErrorResponse) => expect(error.statusText).toBe(statusText)
+            );
 
-                const testRequest = httpMock.expectOne('/fake');
-                testRequest.flush({}, {
-                    'headers': {
-                        'name': 'useless-header'
-                    },
-                    'status': 404,
-                    'statusText': statusText
-                });
-                httpMock.verify();
-            })
-    );
+            const testRequest = httpMock.expectOne('/fake');
+            testRequest.flush({}, {
+                'headers': {
+                    'name': 'useless-header'
+                },
+                'status': 404,
+                'statusText': statusText
+            });
+            httpMock.verify();
+        }
+    ));
 });
