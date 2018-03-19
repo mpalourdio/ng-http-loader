@@ -33,31 +33,30 @@ describe('PendingInterceptorService', () => {
         expect(service).toBeTruthy();
     }));
 
-    it('should be aware of the pending http requests',
-        inject(
-            [PendingInterceptorService, HttpClient, HttpTestingController],
-            (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
+    it('should be aware of the pending http requests', inject(
+        [PendingInterceptorService, HttpClient, HttpTestingController],
+        (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
 
-                function runQuery(url: string): Observable<any> {
-                    return http.get(url);
-                }
+            function runQuery(url: string): Observable<any> {
+                return http.get(url);
+            }
 
-                Observable.forkJoin([runQuery('/fake'), runQuery('/fake2')]).subscribe();
+            Observable.forkJoin([runQuery('/fake'), runQuery('/fake2')]).subscribe();
 
-                const firstRequest = httpMock.expectOne('/fake');
-                const secondRequest = httpMock.expectOne('/fake2');
+            const firstRequest = httpMock.expectOne('/fake');
+            const secondRequest = httpMock.expectOne('/fake2');
 
-                expect(service.pendingRequests).toBe(2);
-                firstRequest.flush({});
+            expect(service.pendingRequests).toBe(2);
+            firstRequest.flush({});
 
-                expect(service.pendingRequests).toBe(1);
-                secondRequest.flush({});
+            expect(service.pendingRequests).toBe(1);
+            secondRequest.flush({});
 
-                expect(service.pendingRequests).toBe(0);
+            expect(service.pendingRequests).toBe(0);
 
-                httpMock.verify();
-            })
-    );
+            httpMock.verify();
+        }
+    ));
 
     it('should correctly notify the pendingRequestsStatus observable', async(
         inject(
