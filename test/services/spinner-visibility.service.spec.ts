@@ -26,9 +26,9 @@ describe('SpinnerVisibilityService', () => {
         expect(service.visibilityObservable).toBeTruthy();
     }));
 
-    it('should pipe \'true\' when calling show()', inject([SpinnerVisibilityService], (service: SpinnerVisibilityService) => {
-        service.show();
-        service.visibilityObservable.subscribe(result => {
+    it('should pipe \'true\' when calling show()', inject([SpinnerVisibilityService], (spinner: SpinnerVisibilityService) => {
+        spinner.show();
+        spinner.visibilityObservable.subscribe(result => {
                 expect(result).toBeTruthy();
             },
             error => {
@@ -36,9 +36,9 @@ describe('SpinnerVisibilityService', () => {
             });
     }));
 
-    it('should pipe \'false\' when calling hide()', inject([SpinnerVisibilityService], (service: SpinnerVisibilityService) => {
-        service.hide();
-        service.visibilityObservable.subscribe(result => {
+    it('should pipe \'false\' when calling hide()', inject([SpinnerVisibilityService], (spinner: SpinnerVisibilityService) => {
+        spinner.hide();
+        spinner.visibilityObservable.subscribe(result => {
                 expect(result).toBeFalsy();
             },
             error => {
