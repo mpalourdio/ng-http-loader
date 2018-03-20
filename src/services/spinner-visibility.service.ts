@@ -8,14 +8,15 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 @Injectable()
 export class SpinnerVisibilityService {
-    private _visibilitySubject: Subject<boolean> = new Subject<boolean>();
+    private _visibilitySubject: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
 
-    get visibilitySubject(): Subject<boolean> {
-        return this._visibilitySubject;
+    get visibilityObservable(): Observable<boolean> {
+        return this._visibilitySubject.asObservable();
     }
 }
 

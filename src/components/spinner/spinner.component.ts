@@ -45,7 +45,7 @@ export class SpinnerComponent implements OnDestroy, OnInit {
             .subscribe(this.handleSpinnerVisibility().bind(this));
 
         this.visibilitySubscription = this.spinnerVisibilityService
-            .visibilitySubject
+            .visibilityObservable
             .subscribe(this.handleSpinnerVisibility().bind(this));
     }
 
