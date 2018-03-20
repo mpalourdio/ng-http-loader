@@ -172,11 +172,11 @@ import { SpinnerVisibilityService } from 'ng-http-loader/services/spinner-visibi
 })
 export class MyComponent {
 
-    constructor(private visibilityService: SpinnerVisibilityService) {
+    constructor(private spinner: SpinnerVisibilityService) {
         // show the spinner
-        visibilityService.show();
+        spinner.show();
         // hide the spinner
-        visibilityService.hide();
+        spinner.hide();
     }
 }
 ```

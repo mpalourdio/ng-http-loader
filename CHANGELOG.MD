@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.9.0
+
+This release adds the more friendly SpinnerVisibilityService#show() && SpinnerVisibilityService#hide() methods as public API.  
+The ``visibilitySubject`` introduced in v0.8.0 is now a ``ReplaySubject``, and its getter returns now an observable.
+
+See the [Manually show and hide the spinner](https://github.com/mpalourdio/ng-http-loader#manually-show-and-hide-the-spinner) section.
+
 ## v0.8.0
 
 This release adds the ``SpinnerVisibilityService``, a simple injectable service that allows you to manually show/hide the spinner.
