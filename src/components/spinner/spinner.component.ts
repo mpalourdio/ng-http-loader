@@ -49,10 +49,6 @@ export class SpinnerComponent implements OnDestroy, OnInit {
             .subscribe(this.handleSpinnerVisibility().bind(this));
     }
 
-    private handleSpinnerVisibility(): (v: boolean) => void {
-        return v => this.isSpinnerVisible = v;
-    }
-
     ngOnInit(): void {
         this.nullifySpinnerIfComponentOutletIsDefined();
 
@@ -67,15 +63,19 @@ export class SpinnerComponent implements OnDestroy, OnInit {
         }
     }
 
+    ngOnDestroy(): void {
+        this.pendingSubscription.unsubscribe();
+        this.visibilitySubscription.unsubscribe();
+    }
+
     private nullifySpinnerIfComponentOutletIsDefined(): void {
         if (null != this.entryComponent) {
             this.spinner = null;
         }
     }
 
-    ngOnDestroy(): void {
-        this.pendingSubscription.unsubscribe();
-        this.visibilitySubscription.unsubscribe();
+    private handleSpinnerVisibility(): (v: boolean) => void {
+        return v => this.isSpinnerVisible = v;
     }
 
     private handleDebounce(hasPendingRequests: boolean): Observable<number> {
