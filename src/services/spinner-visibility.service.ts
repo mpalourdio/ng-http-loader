@@ -18,6 +18,14 @@ export class SpinnerVisibilityService {
     get visibilityObservable(): Observable<boolean> {
         return this._visibilitySubject.asObservable();
     }
+
+    public show(): void {
+        this._visibilitySubject.next(true);
+    }
+
+    public hide(): void {
+        this._visibilitySubject.next(false);
+    }
 }
 
 export function SpinnerVisibilityServiceFactory(): SpinnerVisibilityService {

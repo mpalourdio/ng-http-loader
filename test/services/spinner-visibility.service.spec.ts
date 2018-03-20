@@ -23,6 +23,26 @@ describe('SpinnerVisibilityService', () => {
     }));
 
     it('should define a subject', inject([SpinnerVisibilityService], (service: SpinnerVisibilityService) => {
-        expect(service.visibilitySubject).toBeTruthy();
+        expect(service.visibilityObservable).toBeTruthy();
+    }));
+
+    it('should pipe \'true\' when calling show()', inject([SpinnerVisibilityService], (service: SpinnerVisibilityService) => {
+        service.show();
+        service.visibilityObservable.subscribe(result => {
+                expect(result).toBeTruthy();
+            },
+            error => {
+                expect(true).toBeFalsy();
+            });
+    }));
+
+    it('should pipe \'false\' when calling hide()', inject([SpinnerVisibilityService], (service: SpinnerVisibilityService) => {
+        service.hide();
+        service.visibilityObservable.subscribe(result => {
+                expect(result).toBeFalsy();
+            },
+            error => {
+                expect(true).toBeFalsy();
+            });
     }));
 });

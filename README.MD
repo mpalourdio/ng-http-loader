@@ -174,9 +174,9 @@ export class MyComponent {
 
     constructor(private visibilityService: SpinnerVisibilityService) {
         // show the spinner
-        visibilityService.visibilitySubject.next(true);
+        visibilityService.show();
         // hide the spinner
-        visibilityService.visibilitySubject.next(false);
+        visibilityService.hide();
     }
 }
 ```

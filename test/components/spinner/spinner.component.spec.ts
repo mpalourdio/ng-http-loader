@@ -290,10 +290,10 @@ describe('SpinnerComponent', () => {
 
     it('should be possible to manually show/hide the spinner', inject(
         [SpinnerVisibilityService], (visibilityService: SpinnerVisibilityService) => {
-            visibilityService.visibilitySubject.next(true);
+            visibilityService.show();
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            visibilityService.visibilitySubject.next(false);
+            visibilityService.hide();
             expect(component.isSpinnerVisible).toBeFalsy();
         }
     ));
