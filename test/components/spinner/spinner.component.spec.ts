@@ -16,6 +16,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { NgHttpLoaderServicesModule } from '../../../src/services/ng-http-loader-services.module';
 import 'rxjs/add/observable/forkJoin';
+import { SpinnerVisibilityService } from '../../../src/services/spinner-visibility.service';
 
 describe('SpinnerComponent', () => {
     let component: SpinnerComponent;
@@ -286,4 +287,14 @@ describe('SpinnerComponent', () => {
             discardPeriodicTasks();
         }
     )));
+
+    it('should be possible to manually show/hide the spinner', inject(
+        [SpinnerVisibilityService], (visibilityService: SpinnerVisibilityService) => {
+            visibilityService.visibilitySubject.next(true);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            visibilityService.visibilitySubject.next(false);
+            expect(component.isSpinnerVisible).toBeFalsy();
+        }
+    ));
 });
