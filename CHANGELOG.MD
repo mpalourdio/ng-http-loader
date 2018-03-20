@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.8.0
+
+This release adds the ``SpinnerVisibilityService``, a simple injectable service that allows you to manually show/hide the spinner.
+
+See the [Manually show and hide the spinner](https://github.com/mpalourdio/ng-http-loader#manually-show-and-hide-the-spinner) section.
+
 ## v0.7.1
 
 This release is a bug fix release. It slightly improves the behavior of the ``filteredUrlPatterns`` so this parameter takes care of query strings too.
@@ -8,7 +14,7 @@ This release is a bug fix release. It slightly improves the behavior of the ``fi
 
 This release adds the ``entryComponent`` property. It allows to specify your own component instead of the built-in ones. It uses the [NgComponentOutlet](https://angular.io/api/common/NgComponentOutlet) feature.
 
-See [Defining your own spinner](https://github.com/mpalourdio/ng-http-loader#defining-your-own-spinner) section.
+See the [Defining your own spinner](https://github.com/mpalourdio/ng-http-loader#defining-your-own-spinner) section.
 
 ## v0.6.0
 

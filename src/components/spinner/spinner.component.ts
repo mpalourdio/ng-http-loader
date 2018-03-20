@@ -14,6 +14,7 @@ import { PendingInterceptorService } from '../../services/pending-interceptor.se
 import { timer } from 'rxjs/observable/timer';
 import { Observable } from 'rxjs/Observable';
 import { debounce } from 'rxjs/operators';
+import { SpinnerVisibilityService } from '../../services/spinner-visibility.service';
 
 @Component({
     selector: 'spinner',
@@ -22,9 +23,10 @@ import { debounce } from 'rxjs/operators';
 })
 export class SpinnerComponent implements OnDestroy, OnInit {
     public isSpinnerVisible: boolean;
-    private subscription: Subscription;
-    public Spinkit = Spinkit;
+    private pendingSubscription: Subscription;
+    private visibilitySubscription: Subscription;
 
+    public Spinkit = Spinkit;
     @Input()
     public backgroundColor: string;
     @Input()
@@ -36,13 +38,19 @@ export class SpinnerComponent implements OnDestroy, OnInit {
     @Input()
     public entryComponent: any = null;
 
-    constructor(private pendingRequestInterceptorService: PendingInterceptorService) {
-        this.subscription = this.pendingRequestInterceptorService
+    constructor(private pendingInterceptorService: PendingInterceptorService, private spinnerVisibilityService: SpinnerVisibilityService) {
+        this.pendingSubscription = this.pendingInterceptorService
             .pendingRequestsStatus
             .pipe(debounce(this.handleDebounce.bind(this)))
-            .subscribe(hasPendingRequests => {
-                this.isSpinnerVisible = hasPendingRequests;
-            });
+            .subscribe(this.handleSpinnerVisibility().bind(this));
+
+        this.visibilitySubscription = this.spinnerVisibilityService
+            .visibilitySubject
+            .subscribe(this.handleSpinnerVisibility().bind(this));
+    }
+
+    private handleSpinnerVisibility(): (v: boolean) => void {
+        return v => this.isSpinnerVisible = v;
     }
 
     ngOnInit(): void {
@@ -54,7 +62,7 @@ export class SpinnerComponent implements OnDestroy, OnInit {
 
         if (!!this.filteredUrlPatterns.length) {
             this.filteredUrlPatterns.forEach(e => {
-                this.pendingRequestInterceptorService.filteredUrlPatterns.push(new RegExp(e));
+                this.pendingInterceptorService.filteredUrlPatterns.push(new RegExp(e));
             });
         }
     }
@@ -65,9 +73,9 @@ export class SpinnerComponent implements OnDestroy, OnInit {
         }
     }
 
-
     ngOnDestroy(): void {
-        this.subscription.unsubscribe();
+        this.pendingSubscription.unsubscribe();
+        this.visibilitySubscription.unsubscribe();
     }
 
     private handleDebounce(hasPendingRequests: boolean): Observable<number> {

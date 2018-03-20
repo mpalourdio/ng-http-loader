@@ -11,6 +11,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PendingInterceptorService, PendingInterceptorServiceFactoryProvider } from './pending-interceptor.service';
+import { SpinnerVisibilityServiceFactoryProvider } from './spinner-visibility.service';
 
 const PendingInterceptorServiceExistingProvider = {
     provide: HTTP_INTERCEPTORS,
@@ -25,6 +26,7 @@ const PendingInterceptorServiceExistingProvider = {
     providers: [
         PendingInterceptorServiceExistingProvider,
         PendingInterceptorServiceFactoryProvider,
+        SpinnerVisibilityServiceFactoryProvider,
     ],
 })
 export class NgHttpLoaderServicesModule {

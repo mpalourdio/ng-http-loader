@@ -158,6 +158,29 @@ You can also filter the http requests that shouldn't be caught by the intercepto
 <spinner [filteredUrlPatterns]="['\\d', '[a-zA-Z]', 'my-api']"></spinner>
 ```
 
+## Manually show and hide the spinner
+
+You can manually show and hide the spinner component if needed. You must use the ``SpinnerVisibilityService`` for this purpose.  
+
+```typescript
+import { SpinnerVisibilityService } from 'ng-http-loader/services/spinner-visibility.service';
+
+@Component({
+    selector: 'my-component',
+    templateUrl: './my.component.html',
+    styleUrls: ['./my.component.css'],
+})
+export class MyComponent {
+
+    constructor(private visibilityService: SpinnerVisibilityService) {
+        // show the spinner
+        visibilityService.visibilitySubject.next(true);
+        // hide the spinner
+        visibilityService.visibilitySubject.next(false);
+    }
+}
+```
+
 ## Misc
 
 Each Spinkit component defined in [SPINKIT_COMPONENTS](src/spinkits.ts#L30) can be used independently.

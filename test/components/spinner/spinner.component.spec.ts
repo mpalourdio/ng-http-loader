@@ -12,11 +12,11 @@ import { SpinnerComponent } from '../../../src/components/spinner/spinner.compon
 import { By } from '@angular/platform-browser';
 import { Spinkit, SPINKIT_COMPONENTS } from '../../../src/spinkits';
 import { Observable } from 'rxjs/Observable';
-import { PendingInterceptorService } from '../../../src/services/pending-interceptor.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { NgHttpLoaderServicesModule } from '../../../src/services/ng-http-loader-services.module';
 import 'rxjs/add/observable/forkJoin';
+import { SpinnerVisibilityService } from '../../../src/services/spinner-visibility.service';
 
 describe('SpinnerComponent', () => {
     let component: SpinnerComponent;
@@ -99,8 +99,7 @@ describe('SpinnerComponent', () => {
     });
 
     it('should show and hide the spinner according to the pending http requests', fakeAsync(inject(
-        [PendingInterceptorService, HttpClient, HttpTestingController],
-        (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
+        [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
 
             function runQuery(url: string): Observable<any> {
                 return http.get(url);
@@ -125,8 +124,7 @@ describe('SpinnerComponent', () => {
     )));
 
     it('should hide and show a the spinner for a single http request', fakeAsync(inject(
-        [PendingInterceptorService, HttpClient, HttpTestingController],
-        (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
+        [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             http.get('/fake').subscribe();
 
             tick();
@@ -139,8 +137,7 @@ describe('SpinnerComponent', () => {
     )));
 
     it('should not show the spinner if the request is filtered', fakeAsync(inject(
-        [PendingInterceptorService, HttpClient, HttpTestingController],
-        (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
+        [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             component.filteredUrlPatterns.push('fake');
             fixture.detectChanges();
 
@@ -152,8 +149,7 @@ describe('SpinnerComponent', () => {
     )));
 
     it('should take care of query strings in filteredUrlPatterns', fakeAsync(inject(
-        [PendingInterceptorService, HttpClient, HttpTestingController],
-        (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
+        [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             component.filteredUrlPatterns.push('bar');
             fixture.detectChanges();
 
@@ -172,8 +168,7 @@ describe('SpinnerComponent', () => {
     )));
 
     it('should correctly filter with several requests and one pattern', fakeAsync(inject(
-        [PendingInterceptorService, HttpClient, HttpTestingController],
-        (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
+        [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             component.filteredUrlPatterns.push('\\d');
             fixture.detectChanges();
 
@@ -197,28 +192,25 @@ describe('SpinnerComponent', () => {
         expect(() => fixture.detectChanges()).toThrow(new Error('`filteredUrlPatterns` must be an array.'));
     });
 
-    it('should show the spinner even if the component is created after the http request is performed',
-        fakeAsync(inject([PendingInterceptorService, HttpClient, HttpTestingController],
-            (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
-                http.get('/fake').subscribe();
+    it('should show the spinner even if the component is created after the http request is performed', fakeAsync(inject(
+        [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
+            http.get('/fake').subscribe();
 
-                const newFixture = TestBed.createComponent(SpinnerComponent);
-                const newComponent = newFixture.componentInstance;
+            const newFixture = TestBed.createComponent(SpinnerComponent);
+            const newComponent = newFixture.componentInstance;
 
-                tick();
-                expect(newComponent.isSpinnerVisible).toBeTruthy();
-                httpMock.expectOne('/fake').flush({});
+            tick();
+            expect(newComponent.isSpinnerVisible).toBeTruthy();
+            httpMock.expectOne('/fake').flush({});
 
-                tick();
-                expect(newComponent.isSpinnerVisible).toBeFalsy();
-                httpMock.verify();
-            }
-        ))
-    );
+            tick();
+            expect(newComponent.isSpinnerVisible).toBeFalsy();
+            httpMock.verify();
+        }
+    )));
 
     it('should correctly handle the debounce delay for a single http request', fakeAsync(inject(
-        [PendingInterceptorService, HttpClient, HttpTestingController],
-        (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
+        [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             component.debounceDelay = 2000;
             http.get('/fake').subscribe();
 
@@ -249,8 +241,7 @@ describe('SpinnerComponent', () => {
     )));
 
     it('should correctly handle the debounce delay for multiple http requests', fakeAsync(inject(
-        [PendingInterceptorService, HttpClient, HttpTestingController],
-        (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
+        [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             component.debounceDelay = 2000;
 
             function runQuery(url: string): Observable<any> {
@@ -296,4 +287,14 @@ describe('SpinnerComponent', () => {
             discardPeriodicTasks();
         }
     )));
+
+    it('should be possible to manually show/hide the spinner', inject(
+        [SpinnerVisibilityService], (visibilityService: SpinnerVisibilityService) => {
+            visibilityService.visibilitySubject.next(true);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            visibilityService.visibilitySubject.next(false);
+            expect(component.isSpinnerVisible).toBeFalsy();
+        }
+    ));
 });
