@@ -15,8 +15,8 @@ import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { NgHttpLoaderServicesModule } from '../../../src/services/ng-http-loader-services.module';
-import 'rxjs/add/observable/forkJoin';
 import { SpinnerVisibilityService } from '../../../src/services/spinner-visibility.service';
+import 'rxjs/add/observable/forkJoin';
 
 describe('SpinnerComponent', () => {
     let component: SpinnerComponent;
