@@ -1,6 +1,6 @@
 sudo: required
 language: node_js
 node_js:
-  - 6.13.1
+  - 6.14.0
   - lts/*
   - node
