@@ -6,7 +6,7 @@
 
 ## Changelog
 
-[Please read the changelog](CHANGELOG.MD)
+[Please read the changelog](CHANGELOG.md)
 
 ## Contributing
 
