@@ -11,10 +11,11 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Spinkit } from '../../spinkits';
 import { PendingInterceptorService } from '../../services/pending-interceptor.service';
+import { SpinnerVisibilityService } from '../../services/spinner-visibility.service';
 import { timer } from 'rxjs/observable/timer';
 import { Observable } from 'rxjs/Observable';
+import { merge } from 'rxjs/observable/merge';
 import { debounce } from 'rxjs/operators';
-import { SpinnerVisibilityService } from '../../services/spinner-visibility.service';
 
 @Component({
     selector: 'spinner',
@@ -23,8 +24,7 @@ import { SpinnerVisibilityService } from '../../services/spinner-visibility.serv
 })
 export class SpinnerComponent implements OnDestroy, OnInit {
     public isSpinnerVisible: boolean;
-    private pendingSubscription: Subscription;
-    private visibilitySubscription: Subscription;
+    private subscriptions: Subscription;
 
     public Spinkit = Spinkit;
     @Input()
@@ -39,13 +39,10 @@ export class SpinnerComponent implements OnDestroy, OnInit {
     public entryComponent: any = null;
 
     constructor(private pendingInterceptorService: PendingInterceptorService, private spinnerVisibilityService: SpinnerVisibilityService) {
-        this.pendingSubscription = this.pendingInterceptorService
-            .pendingRequestsStatus
-            .pipe(debounce(this.handleDebounce.bind(this)))
-            .subscribe(this.handleSpinnerVisibility().bind(this));
-
-        this.visibilitySubscription = this.spinnerVisibilityService
-            .visibilityObservable
+        this.subscriptions = merge(
+            this.pendingInterceptorService.pendingRequestsStatus.pipe(debounce(this.handleDebounce.bind(this))),
+            this.spinnerVisibilityService.visibilityObservable,
+        )
             .subscribe(this.handleSpinnerVisibility().bind(this));
     }
 
@@ -64,8 +61,7 @@ export class SpinnerComponent implements OnDestroy, OnInit {
     }
 
     ngOnDestroy(): void {
-        this.pendingSubscription.unsubscribe();
-        this.visibilitySubscription.unsubscribe();
+        this.subscriptions.unsubscribe();
     }
 
     private nullifySpinnerIfComponentOutletIsDefined(): void {
