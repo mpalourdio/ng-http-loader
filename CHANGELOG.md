@@ -4,7 +4,7 @@
 
 This release fixes a bug on the SpinKit Sk-Wave component that only appeared after template inlining.
 
-See [this thread](https://github.com/tobiasahlin/SpinKit/issues/139).
+See [this thread](https://github.com/tobiasahlin/SpinKit/issues/139) for details.
 
 ## v0.9.0
 
