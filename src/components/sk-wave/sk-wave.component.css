@@ -30,6 +30,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 }
 
 .sk-wave .sk-rect {
+    float: left;
+    margin-right: 1px;
     height: 100%;
     width: 6px;
     display: inline-block;
