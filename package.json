@@ -1,6 +1,6 @@
 {
   "name": "ng-http-loader",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "scripts": {
     "prepare-deploy": "gulp inline-templates && gulp clean-dist && ngc -p tsconfig.ngc.json && gulp clean-tmp && gulp copy-all",
     "test": "ng test --watch false"

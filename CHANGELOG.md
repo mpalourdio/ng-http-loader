@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.9.1
+
+This release fixes a bug on the SpinKit Sk-Wave that only appeared after template inlining.
+
+See [this thread](https://github.com/tobiasahlin/SpinKit/issues/139).
+
 ## v0.9.0
 
 This release adds the more friendly SpinnerVisibilityService#show() && SpinnerVisibilityService#hide() methods as public API.  
