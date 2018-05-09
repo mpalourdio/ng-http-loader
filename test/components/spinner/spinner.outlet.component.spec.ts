@@ -13,7 +13,6 @@ import { By } from '@angular/platform-browser';
 import { SPINKIT_COMPONENTS } from '../../../src/spinkits';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NgHttpLoaderServicesModule } from '../../../src/services/ng-http-loader-services.module';
-import 'rxjs/add/observable/forkJoin';
 import { SkThreeBounceComponent } from '../../../src/components/sk-three-bounce/sk-three-bounce.component';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 

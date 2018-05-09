@@ -11,8 +11,7 @@ import { async, inject, TestBed } from '@angular/core/testing';
 import { PendingInterceptorService } from '../../src/services/pending-interceptor.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HTTP_INTERCEPTORS, HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/forkJoin';
+import { Observable, forkJoin } from 'rxjs';
 
 describe('PendingInterceptorService', () => {
 
@@ -41,7 +40,7 @@ describe('PendingInterceptorService', () => {
                 return http.get(url);
             }
 
-            Observable.forkJoin([runQuery('/fake'), runQuery('/fake2')]).subscribe();
+            forkJoin([runQuery('/fake'), runQuery('/fake2')]).subscribe();
 
             const firstRequest = httpMock.expectOne('/fake');
             const secondRequest = httpMock.expectOne('/fake2');

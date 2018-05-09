@@ -5,7 +5,7 @@ src
 tmp
 dist
 coverage
-.angular-cli.json
+angular.json
 .editorconfig
 .gitignore
 .npmignore
