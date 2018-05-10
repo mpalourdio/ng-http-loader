@@ -14,7 +14,8 @@
             "main": "./test.ts",
             "karmaConfig": "./karma.conf.js",
             "polyfills": "./polyfills.ts",
-            "tsConfig": "./tsconfig.spec.json"
+            "tsConfig": "./tsconfig.spec.json",
+            "watch": false
           }
         }
       }
