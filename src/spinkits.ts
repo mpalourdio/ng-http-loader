@@ -7,8 +7,8 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { SkCubeGridComponent } from './components/sk-cube-grid/sk-cube-grid.component';
 import { SkChasingDotsComponent } from './components/sk-chasing-dots/sk-chasing-dots.component';
+import { SkCubeGridComponent } from './components/sk-cube-grid/sk-cube-grid.component';
 import { SkDoubleBounceComponent } from './components/sk-double-bounce/sk-double-bounce.component';
 import { SkRotatingPlaneComponent } from './components/sk-rotating-plane/sk-rotating-plane.component';
 import { SkSpinnerPulseComponent } from './components/sk-spinner-pulse/sk-spinner-pulse.component';

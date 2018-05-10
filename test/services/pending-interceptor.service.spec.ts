@@ -7,11 +7,11 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { async, inject, TestBed } from '@angular/core/testing';
-import { PendingInterceptorService } from '../../src/services/pending-interceptor.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HTTP_INTERCEPTORS, HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, forkJoin } from 'rxjs';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { async, inject, TestBed } from '@angular/core/testing';
+import { forkJoin, Observable } from 'rxjs';
+import { PendingInterceptorService } from '../../src/services/pending-interceptor.service';
 
 describe('PendingInterceptorService', () => {
 

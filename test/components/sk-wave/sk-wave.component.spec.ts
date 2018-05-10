@@ -8,8 +8,8 @@
  */
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { SkWaveComponent } from '../../../src/components/sk-wave/sk-wave.component';
 import { By } from '@angular/platform-browser';
+import { SkWaveComponent } from '../../../src/components/sk-wave/sk-wave.component';
 
 
 describe('SkWaveComponent', () => {

@@ -7,8 +7,8 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { NgHttpLoaderComponentsModule } from './components/ng-http-loader-components.module';
 import { NgHttpLoaderServicesModule } from './services/ng-http-loader-services.module';
 
