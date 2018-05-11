@@ -30,16 +30,16 @@ export class PendingInterceptorService implements HttpInterceptor {
         return this._filteredUrlPatterns;
     }
 
-    private shouldBypass(url: string): boolean {
+    private shouldBypassUrl(url: string): boolean {
         return this._filteredUrlPatterns.some(e => {
             return e.test(url);
         });
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const shouldBypass = this.shouldBypass(req.urlWithParams);
+        const shouldBypassUrl = this.shouldBypassUrl(req.urlWithParams);
 
-        if (!shouldBypass) {
+        if (!shouldBypassUrl) {
             this._pendingRequests++;
 
             if (1 === this._pendingRequests) {
@@ -55,7 +55,7 @@ export class PendingInterceptorService implements HttpInterceptor {
                 return throwError(error);
             }),
             finalize(() => {
-                if (!shouldBypass) {
+                if (!shouldBypassUrl) {
                     this._pendingRequests--;
 
                     if (0 === this._pendingRequests) {
