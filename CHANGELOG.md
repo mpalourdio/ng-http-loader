@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.0
+
+This release introduces full support for angular 6 & RxJS 6.
+
 ## v0.9.1
 
 This release fixes a bug on the SpinKit Sk-Wave component that only appeared after template inlining.

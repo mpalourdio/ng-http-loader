@@ -7,9 +7,9 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 import { PendingInterceptorService, PendingInterceptorServiceFactoryProvider } from './pending-interceptor.service';
 import { SpinnerVisibilityServiceFactoryProvider } from './spinner-visibility.service';
 

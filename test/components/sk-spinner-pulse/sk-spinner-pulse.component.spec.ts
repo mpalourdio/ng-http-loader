@@ -8,8 +8,8 @@
  */
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { SkSpinnerPulseComponent } from '../../../src/components/sk-spinner-pulse/sk-spinner-pulse.component';
 import { By } from '@angular/platform-browser';
+import { SkSpinnerPulseComponent } from '../../../src/components/sk-spinner-pulse/sk-spinner-pulse.component';
 
 
 describe('SkSpinnerPulseComponent', () => {

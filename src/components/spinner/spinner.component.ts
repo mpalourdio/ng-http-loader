@@ -8,14 +8,11 @@
  */
 
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
-import { Spinkit } from '../../spinkits';
+import { merge, Observable, Subscription, timer } from 'rxjs';
+import { debounce } from 'rxjs/operators';
 import { PendingInterceptorService } from '../../services/pending-interceptor.service';
 import { SpinnerVisibilityService } from '../../services/spinner-visibility.service';
-import { timer } from 'rxjs/observable/timer';
-import { Observable } from 'rxjs/Observable';
-import { merge } from 'rxjs/observable/merge';
-import { debounce } from 'rxjs/operators';
+import { Spinkit } from '../../spinkits';
 
 @Component({
     selector: 'spinner',

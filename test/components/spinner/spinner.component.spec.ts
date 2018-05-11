@@ -7,16 +7,15 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { async, ComponentFixture, discardPeriodicTasks, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
-import { SpinnerComponent } from '../../../src/components/spinner/spinner.component';
-import { By } from '@angular/platform-browser';
-import { Spinkit, SPINKIT_COMPONENTS } from '../../../src/spinkits';
-import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { async, ComponentFixture, discardPeriodicTasks, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { forkJoin, Observable } from 'rxjs';
+import { SpinnerComponent } from '../../../src/components/spinner/spinner.component';
 import { NgHttpLoaderServicesModule } from '../../../src/services/ng-http-loader-services.module';
 import { SpinnerVisibilityService } from '../../../src/services/spinner-visibility.service';
-import 'rxjs/add/observable/forkJoin';
+import { Spinkit, SPINKIT_COMPONENTS } from '../../../src/spinkits';
 
 describe('SpinnerComponent', () => {
     let component: SpinnerComponent;
@@ -105,7 +104,7 @@ describe('SpinnerComponent', () => {
                 return http.get(url);
             }
 
-            Observable.forkJoin([runQuery('/fake'), runQuery('/fake2')]).subscribe();
+            forkJoin([runQuery('/fake'), runQuery('/fake2')]).subscribe();
 
             const firstRequest = httpMock.expectOne('/fake');
             const secondRequest = httpMock.expectOne('/fake2');
@@ -248,7 +247,7 @@ describe('SpinnerComponent', () => {
                 return http.get(url);
             }
 
-            Observable.forkJoin([runQuery('/fake'), runQuery('/fake2')]).subscribe();
+            forkJoin([runQuery('/fake'), runQuery('/fake2')]).subscribe();
 
             const firstRequest = httpMock.expectOne('/fake');
             const secondRequest = httpMock.expectOne('/fake2');

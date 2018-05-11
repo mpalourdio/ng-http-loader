@@ -8,8 +8,8 @@
  */
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { SkWanderingCubesComponent } from '../../../src/components/sk-wandering-cubes/sk-wandering-cubes.component';
 import { By } from '@angular/platform-browser';
+import { SkWanderingCubesComponent } from '../../../src/components/sk-wandering-cubes/sk-wandering-cubes.component';
 
 
 describe('SkWanderingCubesComponent', () => {

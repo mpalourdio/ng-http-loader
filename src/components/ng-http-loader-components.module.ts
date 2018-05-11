@@ -7,11 +7,11 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { SpinnerComponent } from './spinner/spinner.component';
+import { NgModule } from '@angular/core';
 import { SPINKIT_COMPONENTS } from '../spinkits';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
     declarations: [

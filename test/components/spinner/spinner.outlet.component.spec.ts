@@ -7,15 +7,14 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { SpinnerComponent } from '../../../src/components/spinner/spinner.component';
-import { By } from '@angular/platform-browser';
-import { SPINKIT_COMPONENTS } from '../../../src/spinkits';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { NgHttpLoaderServicesModule } from '../../../src/services/ng-http-loader-services.module';
-import 'rxjs/add/observable/forkJoin';
-import { SkThreeBounceComponent } from '../../../src/components/sk-three-bounce/sk-three-bounce.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { SkThreeBounceComponent } from '../../../src/components/sk-three-bounce/sk-three-bounce.component';
+import { SpinnerComponent } from '../../../src/components/spinner/spinner.component';
+import { NgHttpLoaderServicesModule } from '../../../src/services/ng-http-loader-services.module';
+import { SPINKIT_COMPONENTS } from '../../../src/spinkits';
 
 describe('SpinnerNgOutletComponent', () => {
     let component: SpinnerComponent;
