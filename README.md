@@ -185,6 +185,12 @@ export class MyComponent {
 }
 ```
 
+## Bypassing the HTTP interceptor
+
+Sometimes, when manually showing the spinner, an http request can be performed in background, and when finished, the spinner will automagically disappear.  
+In order to avoid this behavior, you can call ``spinner.show(true)``. ``true`` forces the http interceptor not to be triggered until you explicitly call ``spinner.hide()``.
+
+
 ## Misc
 
 Each Spinkit component defined in [SPINKIT_COMPONENTS](src/spinkits.ts#L30) can be used independently.
