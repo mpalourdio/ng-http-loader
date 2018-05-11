@@ -296,4 +296,24 @@ describe('SpinnerComponent', () => {
             expect(component.isSpinnerVisible).toBeFalsy();
         }
     ));
+
+    it('should be possible to force the spinner visibility even if an http request ends before calling \'hide\'', fakeAsync(inject(
+        [SpinnerVisibilityService, HttpClient, HttpTestingController],
+        (spinner: SpinnerVisibilityService, http: HttpClient, httpMock: HttpTestingController) => {
+            // we manually show the spinner
+            spinner.show();
+            expect(component.isSpinnerVisible).toBeTruthy();
+            // then an http request is performed
+            http.get('/fake').subscribe();
+            tick();
+            expect(component.isSpinnerVisible).toBeTruthy();
+            // the http request ends, but we want the spinner to be still visible
+            httpMock.expectOne('/fake').flush({});
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            spinner.hide();
+            // this time the spinner is not displayed anymore
+            expect(component.isSpinnerVisible).toBeFalsy();
+        }
+    )));
 });
