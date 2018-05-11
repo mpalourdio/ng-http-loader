@@ -30,9 +30,9 @@ The HTTP interceptor listens to all HTTP requests and shows a spinner / loader i
 The latest compatible version with angular 4 is **``0.3.4``**.
 If you want to use Angular 5, use versions **``0.4.0``** and above.
 
-The latest compatible version with angular 5 is version **``0.9.2``**.
+The latest compatible version with angular 5 is version **``0.9.1``**.
 
-Versions above **``0.9.2`` are angular 6 / RxJs 6 compatible only.
+Versions above **``0.9.1``** are angular 6 / RxJS 6 compatible only.
 
 If you experience errors like below, **please double check the version you use.**
 
