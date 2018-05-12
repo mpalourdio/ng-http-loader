@@ -154,7 +154,6 @@ You can define your own loader component in place of the built-in ones. The need
 
 You can find some short examples [here](https://gist.github.com/mpalourdio/2c0bec03d610b24ff49db649fbb69a48) and [here](https://gist.github.com/mpalourdio/e05b4495de2abeeecfcf92d70e4ef93e).
 
-
 ## Requests filtering
 
 You can also filter the http requests that shouldn't be caught by the interceptor by providing **an array of regex patterns**:
