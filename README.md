@@ -168,7 +168,7 @@ You can manually show and hide the spinner component if needed. You must use the
 
 Sometimes, when manually showing the spinner, an http request can be performed in background, and when finished, the spinner would automagically disappear.  
 
-**For this reason, when calling ``SpinnerVisibilityService#show()``, it forces the http interceptor not to be triggered until you explicitly call ``spinner.hide()``.**
+**For this reason, when calling ``SpinnerVisibilityService#show()``, it forces the http interceptor not to be triggered until you explicitly call ``SpinnerVisibilityService#hide()``.**
 
 ```typescript
 import { SpinnerVisibilityService } from 'ng-http-loader/services/spinner-visibility.service';
