@@ -183,7 +183,7 @@ export class MyComponent {
         // show the spinner
         spinner.show();
         //////////////
-        // http requests performed between will have no side effect on the spinner
+        // http requests performed between won't have any side effect on the spinner
         /////////////
         // hide the spinner
         spinner.hide();
