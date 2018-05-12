@@ -297,7 +297,7 @@ describe('SpinnerComponent', () => {
         }
     ));
 
-    it('should be possible to force the spinner visibility even if an http request ends before calling \'hide\'', fakeAsync(inject(
+    it('should keep the spinner visible even if an http request ends before calling \'hide\'', fakeAsync(inject(
         [SpinnerVisibilityService, HttpClient, HttpTestingController],
         (spinner: SpinnerVisibilityService, http: HttpClient, httpMock: HttpTestingController) => {
             // we manually show the spinner

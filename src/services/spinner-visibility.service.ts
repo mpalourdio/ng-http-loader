@@ -22,8 +22,8 @@ export class SpinnerVisibilityService {
         return this._visibilitySubject.asObservable();
     }
 
-    public show(bypassPendingInterceptorService: boolean = false): void {
-        this.pendingInterceptorService.forceByPass = bypassPendingInterceptorService;
+    public show(): void {
+        this.pendingInterceptorService.forceByPass = true;
         this._visibilitySubject.next(true);
     }
 
