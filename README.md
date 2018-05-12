@@ -165,7 +165,7 @@ You can also filter the http requests that shouldn't be caught by the intercepto
 
 You can manually show and hide the spinner component if needed. You must use the ``SpinnerVisibilityService`` for this purpose.  
 
-Sometimes, when manually showing the spinner, an http request can be performed in background, and when finished, the spinner would automagically disappear.  
+Sometimes, when manually showing the spinner, an http request could be performed in background, and when finished, the spinner would automagically disappear.  
 
 **For this reason, when calling ``SpinnerVisibilityService#show()``, it prevents the http interceptor from being triggered unless you explicitly call ``SpinnerVisibilityService#hide()``.**
 
