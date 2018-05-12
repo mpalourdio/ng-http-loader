@@ -32,7 +32,7 @@ If you want to use Angular 5, use versions **``0.4.0``** and above.
 
 The latest compatible version with angular 5 is version **``0.9.1``**.
 
-Versions above **``0.9.1``** are angular 6 / RxJS 6 compatible only.
+From version **``1.0.0``**, the module is angular 6 / RxJS 6 compatible only.
 
 If you experience errors like below, **please double check the version you use.**
 
@@ -154,7 +154,6 @@ You can define your own loader component in place of the built-in ones. The need
 
 You can find some short examples [here](https://gist.github.com/mpalourdio/2c0bec03d610b24ff49db649fbb69a48) and [here](https://gist.github.com/mpalourdio/e05b4495de2abeeecfcf92d70e4ef93e).
 
-
 ## Requests filtering
 
 You can also filter the http requests that shouldn't be caught by the interceptor by providing **an array of regex patterns**:
@@ -165,6 +164,10 @@ You can also filter the http requests that shouldn't be caught by the intercepto
 ## Manually show and hide the spinner
 
 You can manually show and hide the spinner component if needed. You must use the ``SpinnerVisibilityService`` for this purpose.  
+
+Sometimes, when manually showing the spinner, an http request could be performed in background, and when finished, the spinner would automagically disappear.  
+
+**For this reason, when calling ``SpinnerVisibilityService#show()``, it prevents the http interceptor from being triggered unless you explicitly call ``SpinnerVisibilityService#hide()``.**
 
 ```typescript
 import { SpinnerVisibilityService } from 'ng-http-loader/services/spinner-visibility.service';
@@ -179,6 +182,9 @@ export class MyComponent {
     constructor(private spinner: SpinnerVisibilityService) {
         // show the spinner
         spinner.show();
+        //////////////
+        // http requests performed between won't have any side effect on the spinner
+        /////////////
         // hide the spinner
         spinner.hide();
     }

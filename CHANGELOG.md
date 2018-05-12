@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.0.1
+
+This release is a bug fix release. It prevents the ``PendingInterceptorService`` from being triggered when using the ``SpinnerVisibilityService``.  
+See this [issue](https://github.com/mpalourdio/ng-http-loader/issues/64) for more details.
+
 ## v1.0.0
 
 This release introduces full support for angular 6 & RxJS 6.

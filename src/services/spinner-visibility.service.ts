@@ -9,29 +9,36 @@
 
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
+import { PendingInterceptorService } from './pending-interceptor.service';
 
 @Injectable()
 export class SpinnerVisibilityService {
     private _visibilitySubject: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
+
+    constructor(private pendingInterceptorService: PendingInterceptorService) {
+    }
 
     get visibilityObservable(): Observable<boolean> {
         return this._visibilitySubject.asObservable();
     }
 
     public show(): void {
+        this.pendingInterceptorService.forceByPass = true;
         this._visibilitySubject.next(true);
     }
 
     public hide(): void {
         this._visibilitySubject.next(false);
+        this.pendingInterceptorService.forceByPass = false;
     }
 }
 
-export function SpinnerVisibilityServiceFactory(): SpinnerVisibilityService {
-    return new SpinnerVisibilityService();
+export function SpinnerVisibilityServiceFactory(pendingInterceptorService: PendingInterceptorService): SpinnerVisibilityService {
+    return new SpinnerVisibilityService(pendingInterceptorService);
 }
 
 export let SpinnerVisibilityServiceFactoryProvider = {
     provide: SpinnerVisibilityService,
-    useFactory: SpinnerVisibilityServiceFactory
+    useFactory: SpinnerVisibilityServiceFactory,
+    deps: [PendingInterceptorService]
 };
