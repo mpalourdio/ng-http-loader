@@ -183,6 +183,9 @@ export class MyComponent {
     constructor(private spinner: SpinnerVisibilityService) {
         // show the spinner
         spinner.show();
+        //////////////
+        // http requests performed between will have no side effect on the spinner
+        /////////////
         // hide the spinner
         spinner.hide();
     }
