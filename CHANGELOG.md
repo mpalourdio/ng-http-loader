@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.2
+
+The compiler options have been adjusted so ng-http-loader is now an es2015 module, and can be tree-shaked.
+
 ## v1.0.1
 
 This release is a bug fix release. It prevents the ``PendingInterceptorService`` from being triggered when using the ``SpinnerVisibilityService``.  
