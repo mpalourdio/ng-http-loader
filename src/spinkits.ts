@@ -8,8 +8,11 @@
  */
 
 import { SkChasingDotsComponent } from './components/sk-chasing-dots/sk-chasing-dots.component';
+import { SkCircleComponent } from './components/sk-circle/sk-circle.component';
 import { SkCubeGridComponent } from './components/sk-cube-grid/sk-cube-grid.component';
 import { SkDoubleBounceComponent } from './components/sk-double-bounce/sk-double-bounce.component';
+import { SkFadingCircleComponent } from './components/sk-fading-circle/sk-fading-circle.component';
+import { SkFoldingCubeComponent } from './components/sk-folding-cube/sk-folding-cube.component';
 import { SkRotatingPlaneComponent } from './components/sk-rotating-plane/sk-rotating-plane.component';
 import { SkSpinnerPulseComponent } from './components/sk-spinner-pulse/sk-spinner-pulse.component';
 import { SkThreeBounceComponent } from './components/sk-three-bounce/sk-three-bounce.component';
@@ -18,8 +21,11 @@ import { SkWaveComponent } from './components/sk-wave/sk-wave.component';
 
 export const Spinkit = {
     skChasingDots: 'sk-chasing-dots',
+    skCircle: 'sk-circle',
     skCubeGrid: 'sk-cube-grid',
     skDoubleBounce: 'sk-double-bounce',
+    skFadingCircle: 'sk-fading-circle',
+    skFoldingCircle: 'sk-folding-circle',
     skRotatingPlane: 'sk-rotationg-plane',
     skSpinnerPulse: 'sk-spinner-pulse',
     skThreeBounce: 'sk-three-bounce',
@@ -28,9 +34,12 @@ export const Spinkit = {
 };
 
 export const SPINKIT_COMPONENTS = [
-    SkCubeGridComponent,
     SkChasingDotsComponent,
+    SkCircleComponent,
+    SkCubeGridComponent,
     SkDoubleBounceComponent,
+    SkFadingCircleComponent,
+    SkFoldingCubeComponent,
     SkRotatingPlaneComponent,
     SkSpinnerPulseComponent,
     SkThreeBounceComponent,
