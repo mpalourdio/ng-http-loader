@@ -7,6 +7,11 @@
         [backgroundColor]="backgroundColor">
     </sk-cube-grid>
 
+    <sk-circle
+        *ngIf="spinner === Spinkit.skWave"
+        [backgroundColor]="backgroundColor">
+    </sk-circle>
+
     <sk-chasing-dots
         *ngIf="spinner === Spinkit.skChasingDots"
         [backgroundColor]="backgroundColor">
@@ -16,6 +21,16 @@
         *ngIf="spinner === Spinkit.skDoubleBounce"
         [backgroundColor]="backgroundColor">
     </sk-double-bounce>
+
+    <sk-fading-circle
+        *ngIf="spinner === Spinkit.skFadingCircle"
+        [backgroundColor]="backgroundColor">
+    </sk-fading-circle>
+
+    <sk-folding-cube
+        *ngIf="spinner === Spinkit.skFoldingCircle"
+        [backgroundColor]="backgroundColor">
+    </sk-folding-cube>
 
     <sk-rotating-plane
         *ngIf="spinner === Spinkit.skRotatingPlane"
