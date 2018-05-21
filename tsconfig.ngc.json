@@ -2,7 +2,6 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "module": "es2015",
-    "target": "es2015",
     "outDir": "./dist",
     "rootDir": "./tmp",
     "noImplicitAny": true,
@@ -13,11 +12,7 @@
     "sourceMap": true,
     "inlineSources": true,
     "importHelpers": true,
-    "types": [],
-    "lib": [
-      "dom",
-      "es2015"
-    ]
+    "types": []
   },
   "include": [
     "./tmp"
