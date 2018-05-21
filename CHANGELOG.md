@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.3
+
+Some compiler options have been reverted, so the compilation target is ``es5`` like before v1.0.2.
+
 ## v1.0.2
 
 The compiler options have been adjusted so ng-http-loader is now an es2015 module, and can be tree-shaked.
