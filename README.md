@@ -55,7 +55,7 @@ import { NgModule } from '@angular/core';
 [...]
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http'; <============
-import { NgHttpLoaderModule } from 'ng-http-loader/ng-http-loader.module'; <============
+import { NgHttpLoaderModule } from 'ng-http-loader'; <============
 
 @NgModule({
   declarations: [
@@ -80,8 +80,8 @@ import { NgModule } from '@angular/core';
 [...]
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http'; <============
-import { NgHttpLoaderComponentsModule } from 'ng-http-loader/components/ng-http-loader-components.module'; <============
-import { NgHttpLoaderServicesModule } from 'ng-http-loader/services/ng-http-loader-services.module'; <============
+import { NgHttpLoaderComponentsModule } from 'ng-http-loader'; <============
+import { NgHttpLoaderServicesModule } from 'ng-http-loader'; <============
 
 @NgModule({
   declarations: [
@@ -119,7 +119,7 @@ You can customize the **background-color**, the **spinner type** and the **debou
 **_To use this syntax, you must reference the ``Spinkit`` const as a public property in your app.component.ts_**:
 
 ```typescript
-import { Spinkit } from 'ng-http-loader/spinkits'; <============
+import { Spinkit } from 'ng-http-loader'; <============
 
 @Component({
     selector: 'app-root',
@@ -170,7 +170,7 @@ Sometimes, when manually showing the spinner, an http request could be performed
 **For this reason, when calling ``SpinnerVisibilityService#show()``, it prevents the http interceptor from being triggered unless you explicitly call ``SpinnerVisibilityService#hide()``.**
 
 ```typescript
-import { SpinnerVisibilityService } from 'ng-http-loader/services/spinner-visibility.service';
+import { SpinnerVisibilityService } from 'ng-http-loader';
 
 @Component({
     selector: 'my-component',
