@@ -6,8 +6,6 @@ The module bundling now uses [ng-packagr](https://github.com/dherges/ng-packagr)
 The reason behind a new major release is because imports will break in existing codebases. 
 From now, you can/must simply use ``import { NgHttpLoaderModule } from 'ng-http-loader'`` without referencing the full path: they have changed, and this is the main reason a major release is introduced.
 
-Additionally, [missing spinkit](https://github.com/mpalourdio/ng-http-loader/pull/70) have been added.
-
 ## v1.0.3
 
 Some compiler options have been reverted, so the compilation target is ``es5`` like before v1.0.2.
