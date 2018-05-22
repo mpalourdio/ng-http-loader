@@ -71,12 +71,3 @@ export class PendingInterceptorService implements HttpInterceptor {
         );
     }
 }
-
-export function PendingInterceptorServiceFactory(): PendingInterceptorService {
-    return new PendingInterceptorService();
-}
-
-export let PendingInterceptorServiceFactoryProvider = {
-    provide: PendingInterceptorService,
-    useFactory: PendingInterceptorServiceFactory
-};

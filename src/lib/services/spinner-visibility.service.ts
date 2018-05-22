@@ -32,13 +32,3 @@ export class SpinnerVisibilityService {
         this.pendingInterceptorService.forceByPass = false;
     }
 }
-
-export function SpinnerVisibilityServiceFactory(pendingInterceptorService: PendingInterceptorService): SpinnerVisibilityService {
-    return new SpinnerVisibilityService(pendingInterceptorService);
-}
-
-export let SpinnerVisibilityServiceFactoryProvider = {
-    provide: SpinnerVisibilityService,
-    useFactory: SpinnerVisibilityServiceFactory,
-    deps: [PendingInterceptorService]
-};
