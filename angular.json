@@ -18,7 +18,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "./test.ts",
+            "main": "./src/test.ts",
             "karmaConfig": "./karma.conf.js",
             "polyfills": "./polyfills.ts",
             "tsConfig": "./tsconfig.spec.json",

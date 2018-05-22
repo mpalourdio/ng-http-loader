@@ -9,21 +9,21 @@
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { SkThreeBounceComponent } from '../../../src/components/sk-three-bounce/sk-three-bounce.component';
+import { SkWaveComponent } from '../../../lib/components/sk-wave/sk-wave.component';
 
-describe('SkThreeBounceComponent', () => {
-    let component: SkThreeBounceComponent;
-    let fixture: ComponentFixture<SkThreeBounceComponent>;
+describe('SkWaveComponent', () => {
+    let component: SkWaveComponent;
+    let fixture: ComponentFixture<SkWaveComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [SkThreeBounceComponent]
+            declarations: [SkWaveComponent]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(SkThreeBounceComponent);
+        fixture = TestBed.createComponent(SkWaveComponent);
         component = fixture.componentInstance;
     });
 
@@ -37,7 +37,7 @@ describe('SkThreeBounceComponent', () => {
 
         const element = fixture
             .debugElement
-            .query(By.css('.sk-child'))
+            .query(By.css('.sk-rect'))
             .nativeElement;
 
         expect(element.style['background-color']).toBe('rgb(255, 0, 0)');

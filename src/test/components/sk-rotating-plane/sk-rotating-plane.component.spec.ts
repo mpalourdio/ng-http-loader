@@ -9,21 +9,21 @@
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { SkSpinnerPulseComponent } from '../../../src/components/sk-spinner-pulse/sk-spinner-pulse.component';
+import { SkRotatingPlaneComponent } from '../../../lib/components/sk-rotating-plane/sk-rotating-plane.component';
 
-describe('SkSpinnerPulseComponent', () => {
-    let component: SkSpinnerPulseComponent;
-    let fixture: ComponentFixture<SkSpinnerPulseComponent>;
+describe('SkRotatingPlaneComponent', () => {
+    let component: SkRotatingPlaneComponent;
+    let fixture: ComponentFixture<SkRotatingPlaneComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [SkSpinnerPulseComponent]
+            declarations: [SkRotatingPlaneComponent]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(SkSpinnerPulseComponent);
+        fixture = TestBed.createComponent(SkRotatingPlaneComponent);
         component = fixture.componentInstance;
     });
 
@@ -37,7 +37,7 @@ describe('SkSpinnerPulseComponent', () => {
 
         const element = fixture
             .debugElement
-            .query(By.css('.sk-spinner-pulse'))
+            .query(By.css('.sk-rotating-plane'))
             .nativeElement;
 
         expect(element.style['background-color']).toBe('rgb(255, 0, 0)');

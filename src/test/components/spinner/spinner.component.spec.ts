@@ -12,10 +12,10 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { async, ComponentFixture, discardPeriodicTasks, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { forkJoin, Observable } from 'rxjs';
-import { SpinnerComponent } from '../../../src/components/spinner/spinner.component';
-import { NgHttpLoaderServicesModule } from '../../../src/services/ng-http-loader-services.module';
-import { SpinnerVisibilityService } from '../../../src/services/spinner-visibility.service';
-import { Spinkit, SPINKIT_COMPONENTS } from '../../../src/spinkits';
+import { SpinnerComponent } from '../../../lib/components/spinner/spinner.component';
+import { NgHttpLoaderServicesModule } from '../../../lib/services/ng-http-loader-services.module';
+import { SpinnerVisibilityService } from '../../../lib/services/spinner-visibility.service';
+import { Spinkit, SPINKIT_COMPONENTS } from '../../../lib/spinkits';
 
 describe('SpinnerComponent', () => {
     let component: SpinnerComponent;

@@ -9,21 +9,21 @@
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { SkChasingDotsComponent } from '../../../src/components/sk-chasing-dots/sk-chasing-dots.component';
+import { SkCubeGridComponent } from '../../../lib/components/sk-cube-grid/sk-cube-grid.component';
 
-describe('SkChasingDotsComponent', () => {
-    let component: SkChasingDotsComponent;
-    let fixture: ComponentFixture<SkChasingDotsComponent>;
+describe('SkCubeGridComponent', () => {
+    let component: SkCubeGridComponent;
+    let fixture: ComponentFixture<SkCubeGridComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [SkChasingDotsComponent]
+            declarations: [SkCubeGridComponent]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(SkChasingDotsComponent);
+        fixture = TestBed.createComponent(SkCubeGridComponent);
         component = fixture.componentInstance;
     });
 
@@ -37,7 +37,7 @@ describe('SkChasingDotsComponent', () => {
 
         const element = fixture
             .debugElement
-            .query(By.css('.sk-child'))
+            .query(By.css('.sk-cube'))
             .nativeElement;
 
         expect(element.style['background-color']).toBe('rgb(255, 0, 0)');

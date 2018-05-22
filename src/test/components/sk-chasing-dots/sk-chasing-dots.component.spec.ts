@@ -9,21 +9,21 @@
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { SkRotatingPlaneComponent } from '../../../src/components/sk-rotating-plane/sk-rotating-plane.component';
+import { SkChasingDotsComponent } from '../../../lib/components/sk-chasing-dots/sk-chasing-dots.component';
 
-describe('SkRotatingPlaneComponent', () => {
-    let component: SkRotatingPlaneComponent;
-    let fixture: ComponentFixture<SkRotatingPlaneComponent>;
+describe('SkChasingDotsComponent', () => {
+    let component: SkChasingDotsComponent;
+    let fixture: ComponentFixture<SkChasingDotsComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [SkRotatingPlaneComponent]
+            declarations: [SkChasingDotsComponent]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(SkRotatingPlaneComponent);
+        fixture = TestBed.createComponent(SkChasingDotsComponent);
         component = fixture.componentInstance;
     });
 
@@ -37,7 +37,7 @@ describe('SkRotatingPlaneComponent', () => {
 
         const element = fixture
             .debugElement
-            .query(By.css('.sk-rotating-plane'))
+            .query(By.css('.sk-child'))
             .nativeElement;
 
         expect(element.style['background-color']).toBe('rgb(255, 0, 0)');

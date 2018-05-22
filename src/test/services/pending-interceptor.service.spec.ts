@@ -11,7 +11,7 @@ import { HTTP_INTERCEPTORS, HttpClient, HttpErrorResponse } from '@angular/commo
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { async, inject, TestBed } from '@angular/core/testing';
 import { forkJoin, Observable } from 'rxjs';
-import { PendingInterceptorService } from '../../src/services/pending-interceptor.service';
+import { PendingInterceptorService } from '../../lib/services/pending-interceptor.service';
 
 describe('PendingInterceptorService', () => {
 
