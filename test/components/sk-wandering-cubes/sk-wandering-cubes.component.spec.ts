@@ -11,7 +11,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SkWanderingCubesComponent } from '../../../src/components/sk-wandering-cubes/sk-wandering-cubes.component';
 
-
 describe('SkWanderingCubesComponent', () => {
     let component: SkWanderingCubesComponent;
     let fixture: ComponentFixture<SkWanderingCubesComponent>;

@@ -11,7 +11,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SkCubeGridComponent } from '../../../src/components/sk-cube-grid/sk-cube-grid.component';
 
-
 describe('SkCubeGridComponent', () => {
     let component: SkCubeGridComponent;
     let fixture: ComponentFixture<SkCubeGridComponent>;

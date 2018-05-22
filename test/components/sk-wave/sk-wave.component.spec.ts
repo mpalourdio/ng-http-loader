@@ -11,7 +11,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SkWaveComponent } from '../../../src/components/sk-wave/sk-wave.component';
 
-
 describe('SkWaveComponent', () => {
     let component: SkWaveComponent;
     let fixture: ComponentFixture<SkWaveComponent>;

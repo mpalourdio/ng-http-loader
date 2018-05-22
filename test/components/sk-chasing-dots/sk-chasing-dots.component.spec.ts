@@ -11,7 +11,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SkChasingDotsComponent } from '../../../src/components/sk-chasing-dots/sk-chasing-dots.component';
 
-
 describe('SkChasingDotsComponent', () => {
     let component: SkChasingDotsComponent;
     let fixture: ComponentFixture<SkChasingDotsComponent>;

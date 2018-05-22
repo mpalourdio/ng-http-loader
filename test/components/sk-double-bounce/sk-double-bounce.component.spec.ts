@@ -11,7 +11,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SkDoubleBounceComponent } from '../../../src/components/sk-double-bounce/sk-double-bounce.component';
 
-
 describe('SkDoubleBounceComponent', () => {
     let component: SkDoubleBounceComponent;
     let fixture: ComponentFixture<SkDoubleBounceComponent>;

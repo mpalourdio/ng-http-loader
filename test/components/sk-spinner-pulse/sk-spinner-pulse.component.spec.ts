@@ -11,7 +11,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SkSpinnerPulseComponent } from '../../../src/components/sk-spinner-pulse/sk-spinner-pulse.component';
 
-
 describe('SkSpinnerPulseComponent', () => {
     let component: SkSpinnerPulseComponent;
     let fixture: ComponentFixture<SkSpinnerPulseComponent>;
