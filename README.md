@@ -17,7 +17,7 @@ Use the fork, Luke. PR without tests will likely not be merged.
 To install this library, run:
 
 ```bash
-$ npm install ng-http-loader --save
+$ npm install ng-http-loader --save / yarn add ng-http-loader
 ```
 
 ## What does it do ?
@@ -32,7 +32,7 @@ If you want to use Angular 5, use versions **``0.4.0``** and above.
 
 The latest compatible version with angular 5 is version **``0.9.1``**.
 
-From version **``1.0.0``**, the module is angular 6 / RxJS 6 compatible only.
+Versions **``1.0.0+``** and **``2.0.0+``** are angular 6 / RxJS 6 compatible only.
 
 If you experience errors like below, **please double check the version you use.**
 
