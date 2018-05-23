@@ -170,3 +170,4 @@ Each Spinkit component defined in [SPINKIT_COMPONENTS](src/lib/spinkits.ts#L30) 
 ## Credits
 
 [Tobias Ahlin](https://github.com/tobiasahlin), the awesome creator of [SpinKit](https://github.com/tobiasahlin/SpinKit).
+[David Herges](https://github.com/dherges), the awesome developer of [ng-packagr](https://github.com/dherges/ng-packagr).
