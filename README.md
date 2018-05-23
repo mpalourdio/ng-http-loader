@@ -36,8 +36,7 @@ From version **``1.0.0``**, the module is angular 6 / RxJS 6 compatible only.
 
 If you experience errors like below, **please double check the version you use.**
 
-``ERROR in Error: Metadata version mismatch for module [...]/angular/node_modules/ng-http-loader/ng-http-loader
-  .module.d.ts, found version x, expected y, resolving symbol AppModule in [...]/angular/src/app.module.ts``
+``ERROR in Error: Metadata version mismatch for module [...]/angular/node_modules/ng-http-loader/ng-http-loader.module.d.ts, found version x, expected y [...]``
 
 ## Requirements - HttpClientModule
 
@@ -65,33 +64,6 @@ import { NgHttpLoaderModule } from 'ng-http-loader'; <============
     BrowserModule,
     HttpClientModule, <============ (Perform http requests with this module)
     NgHttpLoaderModule, <============
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
-```
-
-or (splitted modules mode for more convenience)
-
-```typescript
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-[...]
-import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http'; <============
-import { NgHttpLoaderComponentsModule } from 'ng-http-loader'; <============
-import { NgHttpLoaderServicesModule } from 'ng-http-loader'; <============
-
-@NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule, <============ (Perform http requests with this module)
-    NgHttpLoaderServicesModule, <============
-    NgHttpLoaderComponentsModule, <============
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -131,7 +103,7 @@ export class AppComponent {
     [...]
 }
 ```
-The different spinners available are referenced in [this class](src/spinkits.ts).
+The different spinners available are referenced in [this class](src/lib/spinkits.ts).
 
 
 **_Otherwise, you can simply reference the chosen spinner as a simple string_**:
@@ -193,7 +165,7 @@ export class MyComponent {
 
 ## Misc
 
-Each Spinkit component defined in [SPINKIT_COMPONENTS](src/spinkits.ts#L30) can be used independently.
+Each Spinkit component defined in [SPINKIT_COMPONENTS](src/lib/spinkits.ts#L30) can be used independently.
 
 ## Credits
 

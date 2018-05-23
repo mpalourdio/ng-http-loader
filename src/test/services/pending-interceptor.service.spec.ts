@@ -7,24 +7,18 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { HTTP_INTERCEPTORS, HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { async, inject, TestBed } from '@angular/core/testing';
 import { forkJoin, Observable } from 'rxjs';
-import { PendingInterceptorService } from '../../lib/services/pending-interceptor.service';
+import { PendingInterceptorService, PendingInterceptorServiceInterceptor } from '../../lib/services/pending-interceptor.service';
 
 describe('PendingInterceptorService', () => {
-
-    const PendingInterceptorServiceExistingProvider = {
-        provide: HTTP_INTERCEPTORS,
-        useExisting: PendingInterceptorService,
-        multi: true
-    };
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule],
-            providers: [PendingInterceptorService, PendingInterceptorServiceExistingProvider]
+            providers: [PendingInterceptorServiceInterceptor]
         });
     });
 

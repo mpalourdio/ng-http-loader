@@ -8,20 +8,28 @@
  */
 
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { NgHttpLoaderComponentsModule } from './components/ng-http-loader-components.module';
-import { NgHttpLoaderServicesModule } from './services/ng-http-loader-services.module';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { PendingInterceptorServiceInterceptor } from './services/pending-interceptor.service';
+import { SPINKIT_COMPONENTS } from './spinkits';
 
 @NgModule({
+    declarations: [
+        SpinnerComponent,
+        SPINKIT_COMPONENTS,
+    ],
     imports: [
         CommonModule,
-        NgHttpLoaderComponentsModule,
-        NgHttpLoaderServicesModule,
+        HttpClientModule,
     ],
     exports: [
-        NgHttpLoaderComponentsModule,
-        NgHttpLoaderServicesModule,
+        SpinnerComponent,
+        SPINKIT_COMPONENTS,
     ],
+    providers: [
+        PendingInterceptorServiceInterceptor,
+    ]
 })
 export class NgHttpLoaderModule {
 }

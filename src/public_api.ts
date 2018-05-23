@@ -11,11 +11,8 @@ export * from './lib/components/sk-three-bounce/sk-three-bounce.component';
 export * from './lib/components/sk-wandering-cubes/sk-wandering-cubes.component';
 export * from './lib/components/sk-wave/sk-wave.component';
 export * from './lib/components/spinner/spinner.component';
-
 export * from './lib/components/abstract.loader.component';
-export * from './lib/components/ng-http-loader-components.module';
 
-export * from './lib/services/ng-http-loader-services.module';
 export * from './lib/services/pending-interceptor.service';
 export * from './lib/services/spinner-visibility.service';
 

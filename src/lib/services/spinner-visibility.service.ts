@@ -11,7 +11,9 @@ import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
 import { PendingInterceptorService } from './pending-interceptor.service';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class SpinnerVisibilityService {
     private _visibilitySubject: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
 

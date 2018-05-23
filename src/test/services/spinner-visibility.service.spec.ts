@@ -8,17 +8,13 @@
  */
 
 import { inject, TestBed } from '@angular/core/testing';
-import { PendingInterceptorService } from '../../lib/services/pending-interceptor.service';
 import { SpinnerVisibilityService } from '../../lib/services/spinner-visibility.service';
 
 describe('SpinnerVisibilityService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [
-                SpinnerVisibilityService,
-                PendingInterceptorService,
-            ]
+            providers: [SpinnerVisibilityService]
         });
     });
 

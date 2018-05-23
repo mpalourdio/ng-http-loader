@@ -13,7 +13,7 @@ import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { SkThreeBounceComponent } from '../../../lib/components/sk-three-bounce/sk-three-bounce.component';
 import { SpinnerComponent } from '../../../lib/components/spinner/spinner.component';
-import { NgHttpLoaderServicesModule } from '../../../lib/services/ng-http-loader-services.module';
+import { PendingInterceptorServiceInterceptor } from '../../../lib/services/pending-interceptor.service';
 import { SPINKIT_COMPONENTS } from '../../../lib/spinkits';
 
 describe('SpinnerNgOutletComponent', () => {
@@ -23,7 +23,8 @@ describe('SpinnerNgOutletComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [SpinnerComponent, SPINKIT_COMPONENTS],
-            imports: [NgHttpLoaderServicesModule, HttpClientTestingModule]
+            imports: [HttpClientTestingModule],
+            providers: [PendingInterceptorServiceInterceptor]
         })
             .overrideModule(BrowserDynamicTestingModule, {
                 set: {

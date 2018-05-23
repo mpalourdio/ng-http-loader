@@ -7,12 +7,14 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { ExistingProvider, Injectable } from '@angular/core';
 import { Observable, ReplaySubject, throwError } from 'rxjs';
 import { catchError, finalize, map } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class PendingInterceptorService implements HttpInterceptor {
     private _pendingRequests = 0;
     private _pendingRequestsStatus: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
@@ -71,3 +73,9 @@ export class PendingInterceptorService implements HttpInterceptor {
         );
     }
 }
+
+export const PendingInterceptorServiceInterceptor: ExistingProvider[] = [{
+    provide: HTTP_INTERCEPTORS,
+    useExisting: PendingInterceptorService,
+    multi: true
+}];
