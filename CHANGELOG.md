@@ -1,5 +1,14 @@
 # Changelog
 
+## v2.0.0
+
+The module bundling now uses [ng-packagr](https://github.com/dherges/ng-packagr).  
+From now, you must use ``import { xxxxxxx } from 'ng-http-loader'`` without referencing the full path.
+
+Also, ``NgHttpLoaderServicesModule`` && ``NgHttpLoaderComponentsModule`` have been removed and merged back to ``NgHttpLoaderModule``.  
+The ``injectables`` now take advantage of the new [Tree Shakable Providers features](https://blog.angular.io/version-6-of-angular-now-available-cc56b0efa7a4).  
+The integration in much cleaner, particularly with lazy loaded modules, and avoids the static ``forRoot()`` boilerplate. 
+
 ## v1.0.3
 
 Some compiler options have been reverted, so the compilation target is ``es5`` like before v1.0.2.
