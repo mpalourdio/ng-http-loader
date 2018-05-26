@@ -9,7 +9,7 @@
 
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { merge, Observable, Subscription, timer } from 'rxjs';
-import { debounce } from 'rxjs/operators';
+import { debounce, delayWhen, tap } from 'rxjs/operators';
 import { PendingInterceptorService } from '../../services/pending-interceptor.service';
 import { SpinnerVisibilityService } from '../../services/spinner-visibility.service';
 import { Spinkit } from '../../spinkits';
@@ -33,11 +33,19 @@ export class SpinnerComponent implements OnDestroy, OnInit {
     @Input()
     public debounceDelay = 0;
     @Input()
+    public minimumDuration = 0;
+    @Input()
     public entryComponent: any = null;
+
+    private startTime: number;
 
     constructor(private pendingInterceptorService: PendingInterceptorService, private spinnerVisibilityService: SpinnerVisibilityService) {
         this.subscriptions = merge(
-            this.pendingInterceptorService.pendingRequestsStatus.pipe(debounce(this.handleDebounce.bind(this))),
+            this.pendingInterceptorService.pendingRequestsStatus.pipe(
+                debounce(this.handleDebounceDelay.bind(this)),
+                tap(this.initStartTime.bind(this)),
+                delayWhen(this.handleMinimumDuration.bind(this))
+            ),
             this.spinnerVisibilityService.visibilityObservable,
         )
             .subscribe(this.handleSpinnerVisibility().bind(this));
@@ -71,11 +79,25 @@ export class SpinnerComponent implements OnDestroy, OnInit {
         return v => this.isSpinnerVisible = v;
     }
 
-    private handleDebounce(hasPendingRequests: boolean): Observable<number> {
+    private handleDebounceDelay(hasPendingRequests: boolean): Observable<number> {
         if (hasPendingRequests) {
             return timer(this.debounceDelay);
         }
 
         return timer(0);
+    }
+
+    private initStartTime(hasPendingRequests: boolean): void {
+        if (hasPendingRequests) {
+            this.startTime = Date.now();
+        }
+    }
+
+    private handleMinimumDuration(hasPendingRequests: boolean): Observable<number> {
+        if (hasPendingRequests) {
+            return timer(0);
+        }
+
+        return timer(this.minimumDuration + this.startTime - Date.now());
     }
 }

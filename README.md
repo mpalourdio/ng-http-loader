@@ -78,12 +78,13 @@ In your app.component.html, simply add :
 
 ## Customizing the spinner
 
-You can customize the **background-color**, the **spinner type** and the **debounce delay** (ie. after how many milliseconds the spinner will be displayed, if needed):
+You can customize the **background-color**, the **spinner type**, the **debounce delay** (ie. after how many milliseconds the spinner will be displayed, if needed), the **minimum duration** (ie. how many milliseconds should the spinner be displayed at least):
 ```xml
 <spinner 
     [backgroundColor]="'#ff0000'"
     [spinner]="spinkit.skWave"
     [debounceDelay]="200"
+    [minimumDuration]="500"
 >
 </spinner>
 ```
