@@ -3,7 +3,7 @@
 ## v2.1.0
 
 This release introduces the **minimum duration** option. It gives the possibility to force a minimum duration during which the spinner is visible.
-You can mix this parameter with the **debounce time** option :
+You can mix this parameter with the **debounce delay** option :
 
 ```xml
 <spinner 
