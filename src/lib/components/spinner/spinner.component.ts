@@ -21,9 +21,10 @@ import { Spinkit } from '../../spinkits';
 })
 export class SpinnerComponent implements OnDestroy, OnInit {
     public isSpinnerVisible: boolean;
+    public spinkit = Spinkit;
     private subscriptions: Subscription;
+    private startTime: number;
 
-    public Spinkit = Spinkit;
     @Input()
     public backgroundColor: string;
     @Input()
@@ -36,8 +37,6 @@ export class SpinnerComponent implements OnDestroy, OnInit {
     public minimumDuration = 0;
     @Input()
     public entryComponent: any = null;
-
-    private startTime: number;
 
     constructor(private pendingInterceptorService: PendingInterceptorService, private spinnerVisibilityService: SpinnerVisibilityService) {
         this.subscriptions = merge(
