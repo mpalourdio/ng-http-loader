@@ -4,5 +4,6 @@ node_js:
   - lts/*
   - node
 script:
-  - yarn test
+  - yarn test --coverage
   - yarn build
+  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
