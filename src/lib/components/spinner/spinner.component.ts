@@ -77,7 +77,7 @@ export class SpinnerComponent implements OnDestroy, OnInit {
         return v => this.isSpinnerVisible = v;
     }
 
-    private handleDebounceDelay(hasPendingRequests: boolean): Observable<number> {
+    private handleDebounceDelay(hasPendingRequests: boolean): Observable<number | never> {
         if (hasPendingRequests && !!this.debounceDelay) {
             return timer(this.debounceDelay);
         }
