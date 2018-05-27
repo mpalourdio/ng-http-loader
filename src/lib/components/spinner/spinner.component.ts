@@ -8,8 +8,8 @@
  */
 
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { merge, Observable, Subscription, timer } from 'rxjs';
-import { debounce, delayWhen, tap } from 'rxjs/operators';
+import { EMPTY, merge, Observable, Subscription, timer } from 'rxjs';
+import { debounce, delayWhen } from 'rxjs/operators';
 import { PendingInterceptorService } from '../../services/pending-interceptor.service';
 import { SpinnerVisibilityService } from '../../services/spinner-visibility.service';
 import { Spinkit } from '../../spinkits';
@@ -42,7 +42,6 @@ export class SpinnerComponent implements OnDestroy, OnInit {
         this.subscriptions = merge(
             this.pendingInterceptorService.pendingRequestsStatus.pipe(
                 debounce(this.handleDebounceDelay.bind(this)),
-                tap(this.initStartTime.bind(this)),
                 delayWhen(this.handleMinimumDuration.bind(this))
             ),
             this.spinnerVisibilityService.visibilityObservable,
@@ -79,24 +78,23 @@ export class SpinnerComponent implements OnDestroy, OnInit {
     }
 
     private handleDebounceDelay(hasPendingRequests: boolean): Observable<number> {
-        if (hasPendingRequests) {
+        if (hasPendingRequests && !!this.debounceDelay) {
             return timer(this.debounceDelay);
         }
 
-        return timer(0);
-    }
-
-    private initStartTime(hasPendingRequests: boolean): void {
-        if (hasPendingRequests) {
-            this.startTime = Date.now();
-        }
+        return EMPTY;
     }
 
     private handleMinimumDuration(hasPendingRequests: boolean): Observable<number> {
-        if (hasPendingRequests) {
+        if (hasPendingRequests || !this.minimumDuration) {
+            this.startTime = Date.now();
+
             return timer(0);
         }
 
-        return timer(this.minimumDuration - (Date.now() - this.startTime));
+        const timerObservable = timer(this.minimumDuration - (Date.now() - this.startTime));
+        this.startTime = null;
+
+        return timerObservable;
     }
 }
