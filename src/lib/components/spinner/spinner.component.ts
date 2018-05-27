@@ -97,6 +97,6 @@ export class SpinnerComponent implements OnDestroy, OnInit {
             return timer(0);
         }
 
-        return timer(this.minimumDuration + this.startTime - Date.now());
+        return timer(this.minimumDuration - (Date.now() - this.startTime));
     }
 }
