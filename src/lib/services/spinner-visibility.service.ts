@@ -22,11 +22,11 @@ export class SpinnerVisibilityService {
 
     /** @deprecated Deprecated in favor of visibilityObservable$ */
     get visibilityObservable(): Observable<boolean> {
-        return this.visibilityObservable$;
+        return this._visibilitySubject.asObservable();
     }
 
     get visibilityObservable$(): Observable<boolean> {
-        return this._visibilitySubject.asObservable();
+        return this.visibilityObservable;
     }
 
     public show(): void {

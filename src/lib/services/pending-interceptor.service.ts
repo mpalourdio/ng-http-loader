@@ -23,11 +23,11 @@ export class PendingInterceptorService implements HttpInterceptor {
 
     /** @deprecated Deprecated in favor of pendingRequestsStatus$ */
     get pendingRequestsStatus(): Observable<boolean> {
-        return this.pendingRequestsStatus$;
+        return this._pendingRequestsStatus.asObservable();
     }
 
     get pendingRequestsStatus$(): Observable<boolean> {
-        return this._pendingRequestsStatus.asObservable();
+        return this.pendingRequestsStatus;
     }
 
     get pendingRequests(): number {
