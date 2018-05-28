@@ -21,7 +21,7 @@ Min. duration time: 300ms
 req starts  spinner shows    req ends     spinner hides
 ```
 
-``SpinnerVisibilityService#visibilityObservable`` and ``PendingInterceptorService#pendingRequestsStatus`` have been deprecated in favor of ``SpinnerVisibilityService#visibilityObservable$`` and ``PendingInterceptorService#pendingRequestsStatus$`` (note the **$** at the end).
+``SpinnerVisibilityService#visibilityObservable`` and ``PendingInterceptorService#pendingRequestsStatus`` have been respectively deprecated in favor of ``visibilityObservable$`` and ``pendingRequestsStatus$`` (note the **$**).
 
 ## v2.0.0
 
