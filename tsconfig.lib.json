@@ -9,7 +9,6 @@
     "importHelpers": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
-    "removeComments": true,
     "types": [],
     "lib": [
       "dom",

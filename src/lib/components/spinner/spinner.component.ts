@@ -40,11 +40,11 @@ export class SpinnerComponent implements OnDestroy, OnInit {
 
     constructor(private pendingInterceptorService: PendingInterceptorService, private spinnerVisibilityService: SpinnerVisibilityService) {
         this.subscriptions = merge(
-            this.pendingInterceptorService.pendingRequestsStatus.pipe(
+            this.pendingInterceptorService.pendingRequestsStatus$.pipe(
                 debounce(this.handleDebounceDelay.bind(this)),
                 delayWhen(this.handleMinimumDuration.bind(this))
             ),
-            this.spinnerVisibilityService.visibilityObservable,
+            this.spinnerVisibilityService.visibilityObservable$,
         )
             .subscribe(this.handleSpinnerVisibility().bind(this));
     }

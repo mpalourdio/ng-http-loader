@@ -55,7 +55,7 @@ describe('PendingInterceptorService', () => {
         inject(
             [PendingInterceptorService, HttpClient, HttpTestingController],
             (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
-                const pendingRequestsStatus = service.pendingRequestsStatus;
+                const pendingRequestsStatus = service.pendingRequestsStatus$;
 
                 pendingRequestsStatus
                     .subscribe(
@@ -75,7 +75,7 @@ describe('PendingInterceptorService', () => {
                 http.get('/fake').subscribe();
                 httpMock.expectOne('/fake');
 
-                const pendingRequestsStatus = service.pendingRequestsStatus;
+                const pendingRequestsStatus = service.pendingRequestsStatus$;
                 pendingRequestsStatus
                     .subscribe(
                         (next: boolean) => expect(next).toBeTruthy(),

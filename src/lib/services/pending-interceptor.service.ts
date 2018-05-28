@@ -21,7 +21,12 @@ export class PendingInterceptorService implements HttpInterceptor {
     private _filteredUrlPatterns: RegExp[] = [];
     private _forceByPass: boolean;
 
+    /** @deprecated Deprecated in favor of pendingRequestsStatus$ */
     get pendingRequestsStatus(): Observable<boolean> {
+        return this.pendingRequestsStatus$;
+    }
+
+    get pendingRequestsStatus$(): Observable<boolean> {
         return this._pendingRequestsStatus.asObservable();
     }
 

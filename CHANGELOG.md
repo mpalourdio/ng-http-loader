@@ -21,6 +21,8 @@ Min. duration time: 300ms
 req starts  spinner shows    req ends     spinner hides
 ```
 
+``SpinnerVisibilityService#visibilityObservable`` and ``PendingInterceptorService#pendingRequestsStatus`` have been deprecated in favor of ``SpinnerVisibilityService#visibilityObservable$`` and ``PendingInterceptorService#pendingRequestsStatus$`` (note the **$** at the end).
+
 ## v2.0.0
 
 The module bundling now uses [ng-packagr](https://github.com/dherges/ng-packagr).  
