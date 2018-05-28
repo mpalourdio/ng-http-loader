@@ -8,8 +8,7 @@ You can mix this parameter with the **debounce delay** option :
 ```xml
 <spinner 
     [debounceDelay]="100"
-    [minDuration]="300"
->
+    [minDuration]="300">
 </spinner>
 ```
 
