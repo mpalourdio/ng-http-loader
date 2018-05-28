@@ -84,8 +84,8 @@ You can customize the **background-color**, the **spinner type**, the **debounce
 <spinner 
     [backgroundColor]="'#ff0000'"
     [spinner]="spinkit.skWave"
-    [debounceDelay]="200"
-    [minimumDuration]="500"
+    [debounceDelay]="100"
+    [minDuration]="300"
 >
 </spinner>
 ```

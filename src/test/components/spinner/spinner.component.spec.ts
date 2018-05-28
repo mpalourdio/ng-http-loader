@@ -324,7 +324,7 @@ describe('SpinnerComponent', () => {
 
     it('should correctly handle the minimum spinner duration for a single http request', fakeAsync(inject(
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
-            component.minimumDuration = 5000;
+            component.minDuration = 5000;
             http.get('/fake').subscribe();
 
             // the http request is pending for 1 second now
@@ -360,7 +360,7 @@ describe('SpinnerComponent', () => {
 
     it('should correctly handle the minimum spinner duration for multiple http requests', fakeAsync(inject(
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
-            component.minimumDuration = 5000;
+            component.minDuration = 5000;
 
             function runQuery(url: string): Observable<any> {
                 return http.get(url);
@@ -405,7 +405,7 @@ describe('SpinnerComponent', () => {
 
     it('should still display the spinner when the minimum duration is inferior to the http request duration', fakeAsync(inject(
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
-            component.minimumDuration = 1000;
+            component.minDuration = 1000;
             http.get('/fake').subscribe();
 
             // the http request is pending for 1 second now
@@ -425,7 +425,7 @@ describe('SpinnerComponent', () => {
 
     it('should be possible to set the minimum duration without side effect on manual show/hide', inject(
         [SpinnerVisibilityService], (spinner: SpinnerVisibilityService) => {
-            component.minimumDuration = 10000;
+            component.minDuration = 10000;
             spinner.show();
             expect(component.isSpinnerVisible).toBeTruthy();
 
@@ -437,7 +437,7 @@ describe('SpinnerComponent', () => {
     it('should be possible to mix debounce delay and minimum duration', fakeAsync(inject(
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             // the spinner should not be visible the first second, then visible for 5 seconds
-            component.minimumDuration = 5000;
+            component.minDuration = 5000;
             component.debounceDelay = 1000;
 
             http.get('/fake').subscribe();

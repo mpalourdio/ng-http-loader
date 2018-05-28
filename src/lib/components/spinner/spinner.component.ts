@@ -34,7 +34,7 @@ export class SpinnerComponent implements OnDestroy, OnInit {
     @Input()
     public debounceDelay = 0;
     @Input()
-    public minimumDuration = 0;
+    public minDuration = 0;
     @Input()
     public entryComponent: any = null;
 
@@ -42,7 +42,7 @@ export class SpinnerComponent implements OnDestroy, OnInit {
         this.subscriptions = merge(
             this.pendingInterceptorService.pendingRequestsStatus$.pipe(
                 debounce(this.handleDebounceDelay.bind(this)),
-                delayWhen(this.handleMinimumDuration.bind(this))
+                delayWhen(this.handleMinDuration.bind(this))
             ),
             this.spinnerVisibilityService.visibilityObservable$,
         )
@@ -85,14 +85,14 @@ export class SpinnerComponent implements OnDestroy, OnInit {
         return EMPTY;
     }
 
-    private handleMinimumDuration(hasPendingRequests: boolean): Observable<number> {
-        if (hasPendingRequests || !this.minimumDuration) {
+    private handleMinDuration(hasPendingRequests: boolean): Observable<number> {
+        if (hasPendingRequests || !this.minDuration) {
             this.startTime = Date.now();
 
             return timer(0);
         }
 
-        const timerObservable = timer(this.minimumDuration - (Date.now() - this.startTime));
+        const timerObservable = timer(this.minDuration - (Date.now() - this.startTime));
         this.startTime = null;
 
         return timerObservable;
