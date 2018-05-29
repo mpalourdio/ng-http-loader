@@ -3,3 +3,9 @@ language: node_js
 node_js:
   - lts/*
   - node
+script:
+  - yarn test --code-coverage
+  - yarn build
+
+after_script:
+  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js

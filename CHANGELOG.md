@@ -1,5 +1,27 @@
 # Changelog
 
+## v2.1.0
+
+This release introduces the **minimum duration** option. It gives the possibility to force a minimum duration during which the spinner should be visible.
+You can mix this parameter with the **debounce delay** option :
+
+```xml
+<spinner 
+    [debounceDelay]="100"
+    [minDuration]="300">
+</spinner>
+```
+
+```
+Debounce delay: 100ms
+Min. duration time: 300ms
+---0ms--------100ms------------180ms-----------400ms--
+----|----------|-----------------|---------------|---- 
+req starts  spinner shows    req ends     spinner hides
+```
+
+``SpinnerVisibilityService#visibilityObservable`` and ``PendingInterceptorService#pendingRequestsStatus`` have been respectively deprecated in favor of ``visibilityObservable$`` and ``pendingRequestsStatus$`` (note the **$**).
+
 ## v2.0.0
 
 The module bundling now uses [ng-packagr](https://github.com/dherges/ng-packagr).  

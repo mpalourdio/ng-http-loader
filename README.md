@@ -1,6 +1,7 @@
 # ng-http-loader
 
 [![Build Status](https://travis-ci.org/mpalourdio/ng-http-loader.svg?branch=master)](https://travis-ci.org/mpalourdio/ng-http-loader)
+[![Coverage Status](https://coveralls.io/repos/github/mpalourdio/ng-http-loader/badge.svg?branch=master)](https://coveralls.io/github/mpalourdio/ng-http-loader?branch=master)
 [![npm](https://img.shields.io/npm/v/ng-http-loader.svg)](https://www.npmjs.com/package/ng-http-loader)
 [![npm](https://img.shields.io/npm/dm/ng-http-loader.svg)](https://www.npmjs.com/package/ng-http-loader)
 
@@ -78,13 +79,13 @@ In your app.component.html, simply add :
 
 ## Customizing the spinner
 
-You can customize the **background-color**, the **spinner type** and the **debounce delay** (ie. after how many milliseconds the spinner will be displayed, if needed):
+You can customize the **background-color**, the **spinner type**, the **debounce delay** (ie. after how many milliseconds the spinner will be visible, if needed), the **minimum duration** (ie. how many milliseconds should the spinner be visible at least):
 ```xml
 <spinner 
     [backgroundColor]="'#ff0000'"
     [spinner]="spinkit.skWave"
-    [debounceDelay]="200"
->
+    [debounceDelay]="100"
+    [minDuration]="300">
 </spinner>
 ```
 

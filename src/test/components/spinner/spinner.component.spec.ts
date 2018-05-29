@@ -9,7 +9,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { async, ComponentFixture, discardPeriodicTasks, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { forkJoin, Observable } from 'rxjs';
 import { SpinnerComponent } from '../../../lib/components/spinner/spinner.component';
@@ -222,11 +222,11 @@ describe('SpinnerComponent', () => {
             tick(999);
             expect(component.isSpinnerVisible).toBeFalsy();
 
-            // the http request is pending for 2 seconds now - the spinner will be displayed
+            // the http request is pending for 2 seconds now - the spinner will be visible
             tick(1);
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            // the http request is pending for 5 seconds now - the spinner is still displayed
+            // the http request is pending for 5 seconds now - the spinner is still visible
             tick(3000);
             expect(component.isSpinnerVisible).toBeTruthy();
 
@@ -234,9 +234,6 @@ describe('SpinnerComponent', () => {
             httpMock.expectOne('/fake').flush({});
             tick();
             expect(component.isSpinnerVisible).toBeFalsy();
-
-            // https://github.com/angular/angular/issues/10127
-            discardPeriodicTasks();
         }
     )));
 
@@ -261,20 +258,20 @@ describe('SpinnerComponent', () => {
             tick(999);
             expect(component.isSpinnerVisible).toBeFalsy();
 
-            // the http requests are pending for 2 seconds now - the spinner will be displayed
+            // the http requests are pending for 2 seconds now - the spinner will be visible
             tick(1);
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            // the http requests are pending for 5 seconds now - the spinner is still displayed
+            // the http requests are pending for 5 seconds now - the spinner is still visible
             tick(3000);
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            // the first http request is finally over, the spinner is still displayed
+            // the first http request is finally over, the spinner is still visible
             firstRequest.flush({});
             tick();
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            // the second request is pending for 8 seconds now - the spinner is still displayed
+            // the second request is pending for 8 seconds now - the spinner is still visible
             tick(3000);
             expect(component.isSpinnerVisible).toBeTruthy();
 
@@ -282,9 +279,6 @@ describe('SpinnerComponent', () => {
             secondRequest.flush({});
             tick();
             expect(component.isSpinnerVisible).toBeFalsy();
-
-            // https://github.com/angular/angular/issues/10127
-            discardPeriodicTasks();
         }
     )));
 
@@ -308,13 +302,14 @@ describe('SpinnerComponent', () => {
             http.get('/fake').subscribe();
             tick();
             expect(component.isSpinnerVisible).toBeTruthy();
+
             // the http request ends, but we want the spinner to be still visible
             httpMock.expectOne('/fake').flush({});
             tick();
             expect(component.isSpinnerVisible).toBeTruthy();
 
             spinner.hide();
-            // this time the spinner is not displayed anymore
+            // this time the spinner is not visible anymore
             expect(component.isSpinnerVisible).toBeFalsy();
 
             // the bypassPendingInterceptorService should be reset for next http requests
@@ -323,6 +318,153 @@ describe('SpinnerComponent', () => {
             expect(component.isSpinnerVisible).toBeTruthy();
             httpMock.expectOne('/fake2').flush({});
             tick();
+            expect(component.isSpinnerVisible).toBeFalsy();
+        }
+    )));
+
+    it('should correctly handle the minimum spinner duration for a single http request', fakeAsync(inject(
+        [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
+            component.minDuration = 5000;
+            http.get('/fake').subscribe();
+
+            // the http request is pending for 1 second now
+            tick(1000);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // the http request is pending for 2 seconds now
+            tick(1000);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // the http request is finally over, the spinner is still visible
+            httpMock.expectOne('/fake').flush({});
+            tick();
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // the http request is over but the spinner is still visible after 3 seconds
+            tick(1000);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // the spinner is still visible after 4 seconds
+            tick(1000);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // the spinner is still visible after 4,999 seconds
+            tick(999);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // the spinner is not visible anymore after 5 seconds
+            tick(1);
+            expect(component.isSpinnerVisible).toBeFalsy();
+        }
+    )));
+
+    it('should correctly handle the minimum spinner duration for multiple http requests', fakeAsync(inject(
+        [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
+            component.minDuration = 5000;
+
+            function runQuery(url: string): Observable<any> {
+                return http.get(url);
+            }
+
+            forkJoin([runQuery('/fake'), runQuery('/fake2')]).subscribe();
+
+            const firstRequest = httpMock.expectOne('/fake');
+            const secondRequest = httpMock.expectOne('/fake2');
+
+            // the http requests are pending for 1 second now
+            tick(1000);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // the http requests are pending for 2 seconds now
+            tick(1000);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // the first http request is finally over, the spinner is still visible
+            firstRequest.flush({});
+            tick();
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // the second http request is still pending after 3 seconds
+            tick(1000);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // the second http request is still pending after 4 seconds
+            tick(1000);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // the second http request is finally over too, the spinner is still visible
+            secondRequest.flush({});
+            tick();
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // After 5 seconds, the spinner is hidden
+            tick(1000);
+            expect(component.isSpinnerVisible).toBeFalsy();
+        }
+    )));
+
+    it('should still display the spinner when the minimum duration is inferior to the http request duration', fakeAsync(inject(
+        [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
+            component.minDuration = 1000;
+            http.get('/fake').subscribe();
+
+            // the http request is pending for 1 second now
+            tick(1000);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // the http request is pending for 2 seconds now
+            tick(1000);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // the http request is finally over after 2 seconds, the spinner is hidden
+            httpMock.expectOne('/fake').flush({});
+            tick();
+            expect(component.isSpinnerVisible).toBeFalsy();
+        }
+    )));
+
+    it('should be possible to set the minimum duration without side effect on manual show/hide', inject(
+        [SpinnerVisibilityService], (spinner: SpinnerVisibilityService) => {
+            component.minDuration = 10000;
+            spinner.show();
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            spinner.hide();
+            expect(component.isSpinnerVisible).toBeFalsy();
+        }
+    ));
+
+    it('should be possible to mix debounce delay and minimum duration', fakeAsync(inject(
+        [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
+            // the spinner should not be visible the first second, then visible for 5 seconds
+            component.minDuration = 5000;
+            component.debounceDelay = 1000;
+
+            http.get('/fake').subscribe();
+
+            // the http request is pending for 0,5 second now - spinner not visible because debounce
+            tick(500);
+            expect(component.isSpinnerVisible).toBeFalsy();
+
+            // the http request is pending for 1 second now - spinner visible
+            tick(500);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // the http request is finally over, the spinner is still visible
+            httpMock.expectOne('/fake').flush({});
+            tick();
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // after 3 seconds, the spinner is still visible
+            tick(2000);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // after 5,999 seconds, the spinner is still visible
+            tick(2999);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // after 6 seconds (1s for debounce + 5s min. duration), the spinner is hidden
+            tick(1);
             expect(component.isSpinnerVisible).toBeFalsy();
         }
     )));

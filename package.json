@@ -1,6 +1,6 @@
 {
   "name": "ng-http-loader",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "scripts": {
     "ng": "ng",
     "build": "ng build",
@@ -52,6 +52,7 @@
     "@types/node": "~8.9.4",
     "codelyzer": "~4.2.1",
     "core-js": "^2.5.4",
+    "coveralls": "^3.0.1",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~2.0.0",
@@ -60,7 +61,7 @@
     "karma-jasmine": "~1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
     "karma-phantomjs-launcher": "^1.0.4",
-    "ng-packagr": "^3.0.0-rc.5",
+    "ng-packagr": "^3.0.0",
     "phantomjs-prebuilt": "^2.1.14",
     "rxjs": "^6.0.0",
     "ts-node": "~5.0.1",
