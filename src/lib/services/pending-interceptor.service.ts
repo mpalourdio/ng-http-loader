@@ -39,10 +39,6 @@ export class PendingInterceptorService implements HttpInterceptor {
         return this._filteredUrlPatterns;
     }
 
-    get filteredMethods(): string[] {
-        return this._filteredMethods;
-    }
-
     set filteredMethods(httpMethods: string[]) {
         this._filteredMethods = httpMethods;
     }
