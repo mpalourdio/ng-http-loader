@@ -72,7 +72,7 @@ import { NgHttpLoaderModule } from 'ng-http-loader'; <============
 export class AppModule { }
 ```
 
-In your app.component.html, simply add :
+In your app.component.html, simply add:
 ```xml
 <spinner></spinner>
 ```
@@ -120,18 +120,23 @@ You can define your own loader component in place of the built-in ones. The need
 - Create your component
 - Add it to the [entryComponent](https://angular.io/guide/ngmodule-faq#what-is-an-entry-component) definition in your module definition
 - Reference your component in a public property in your ``app.component.ts``
-- Reference the property in the spinner component like this :
+- Reference the property in the spinner component like this:
 ```xml
 <spinner [entryComponent]="myAwesomeComponent"></spinner>
 ```
 
 You can find some short examples [here](https://gist.github.com/mpalourdio/2c0bec03d610b24ff49db649fbb69a48) and [here](https://gist.github.com/mpalourdio/e05b4495de2abeeecfcf92d70e4ef93e).
 
-## Requests filtering
+## Requests filtering by URL or by HTTP method
 
-You can also filter the http requests that shouldn't be caught by the interceptor by providing **an array of regex patterns**:
+You can filter the http requests that shouldn't be caught by the interceptor by providing **an array of regex patterns**:
 ```xml
 <spinner [filteredUrlPatterns]="['\\d', '[a-zA-Z]', 'my-api']"></spinner>
+```
+
+You can also filter the http requests that shouldn't be caught by the interceptor by providing **an array of HTTP methods** (case-insensitive):
+```xml
+<spinner [filteredMethods]="['gEt', 'POST', 'PuT']"></spinner>
 ```
 
 ## Manually show and hide the spinner
