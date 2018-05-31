@@ -98,7 +98,7 @@ describe('SpinnerComponent', () => {
         expect(element.style['background-color']).toBe('rgb(255, 0, 0)');
     });
 
-    it('should show and hide the spinner according to the pending http requests', fakeAsync(inject(
+    it('should show and hide the spinner according to the pending HTTP requests', fakeAsync(inject(
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
 
             function runQuery(url: string): Observable<any> {
@@ -123,7 +123,7 @@ describe('SpinnerComponent', () => {
         }
     )));
 
-    it('should hide and show a the spinner for a single http request', fakeAsync(inject(
+    it('should hide and show a the spinner for a single HTTP request', fakeAsync(inject(
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             http.get('/fake').subscribe();
 
@@ -136,9 +136,21 @@ describe('SpinnerComponent', () => {
         }
     )));
 
-    it('should not show the spinner if the request is filtered', fakeAsync(inject(
+    it('should not show the spinner if the request is filtered by url', fakeAsync(inject(
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             component.filteredUrlPatterns.push('fake');
+            fixture.detectChanges();
+
+            http.get('/fake').subscribe();
+            tick();
+            expect(component.isSpinnerVisible).toBeFalsy();
+            httpMock.expectOne('/fake').flush({});
+        }
+    )));
+
+    it('should not show the spinner if the request is filtered by HTTP method', fakeAsync(inject(
+        [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
+            component.filteredMethods.push('get');
             fixture.detectChanges();
 
             http.get('/fake').subscribe();
@@ -167,7 +179,7 @@ describe('SpinnerComponent', () => {
         }
     )));
 
-    it('should correctly filter with several requests and one pattern', fakeAsync(inject(
+    it('should correctly filter by URL with several requests and one pattern', fakeAsync(inject(
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             component.filteredUrlPatterns.push('\\d');
             fixture.detectChanges();
@@ -187,12 +199,37 @@ describe('SpinnerComponent', () => {
         }
     )));
 
+    it('should correctly filter by HTTP method with several requests', fakeAsync(inject(
+        [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
+            component.filteredMethods.push('pOsT');
+            fixture.detectChanges();
+
+            http.post('/12345', null).subscribe();
+            tick();
+            expect(component.isSpinnerVisible).toBeFalsy();
+            httpMock.expectOne('/12345').flush({});
+
+            http.get('/fake').subscribe();
+            tick();
+            expect(component.isSpinnerVisible).toBeTruthy();
+            httpMock.expectOne('/fake').flush({});
+
+            tick();
+            expect(component.isSpinnerVisible).toBeFalsy();
+        }
+    )));
+
     it('should throw an error if filteredUrlPatterns is not an array', () => {
         component.filteredUrlPatterns = null;
         expect(() => fixture.detectChanges()).toThrow(new Error('`filteredUrlPatterns` must be an array.'));
     });
 
-    it('should show the spinner even if the component is created after the http request is performed', fakeAsync(inject(
+    it('should throw an error if filteredMethods is not an array', () => {
+        component.filteredMethods = null;
+        expect(() => fixture.detectChanges()).toThrow(new Error('`filteredMethods` must be an array.'));
+    });
+
+    it('should show the spinner even if the component is created after the HTTP request is performed', fakeAsync(inject(
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             http.get('/fake').subscribe();
 
@@ -209,35 +246,35 @@ describe('SpinnerComponent', () => {
         }
     )));
 
-    it('should correctly handle the debounce delay for a single http request', fakeAsync(inject(
+    it('should correctly handle the debounce delay for a single HTTP request', fakeAsync(inject(
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             component.debounceDelay = 2000;
             http.get('/fake').subscribe();
 
-            // the http request is pending for 1 second now
+            // the HTTP request is pending for 1 second now
             tick(1000);
             expect(component.isSpinnerVisible).toBeFalsy();
 
-            // the http request is pending for 1,999 seconds now
+            // the HTTP request is pending for 1,999 seconds now
             tick(999);
             expect(component.isSpinnerVisible).toBeFalsy();
 
-            // the http request is pending for 2 seconds now - the spinner will be visible
+            // the HTTP request is pending for 2 seconds now - the spinner will be visible
             tick(1);
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            // the http request is pending for 5 seconds now - the spinner is still visible
+            // the HTTP request is pending for 5 seconds now - the spinner is still visible
             tick(3000);
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            // the http request is finally over, the spinner is hidden
+            // the HTTP request is finally over, the spinner is hidden
             httpMock.expectOne('/fake').flush({});
             tick();
             expect(component.isSpinnerVisible).toBeFalsy();
         }
     )));
 
-    it('should correctly handle the debounce delay for multiple http requests', fakeAsync(inject(
+    it('should correctly handle the debounce delay for multiple HTTP requests', fakeAsync(inject(
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             component.debounceDelay = 2000;
 
@@ -250,23 +287,23 @@ describe('SpinnerComponent', () => {
             const firstRequest = httpMock.expectOne('/fake');
             const secondRequest = httpMock.expectOne('/fake2');
 
-            // the http requests are pending for 1 second now
+            // the HTTP requests are pending for 1 second now
             tick(1000);
             expect(component.isSpinnerVisible).toBeFalsy();
 
-            // the http requests are pending for 1,999 seconds now
+            // the HTTP requests are pending for 1,999 seconds now
             tick(999);
             expect(component.isSpinnerVisible).toBeFalsy();
 
-            // the http requests are pending for 2 seconds now - the spinner will be visible
+            // the HTTP requests are pending for 2 seconds now - the spinner will be visible
             tick(1);
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            // the http requests are pending for 5 seconds now - the spinner is still visible
+            // the HTTP requests are pending for 5 seconds now - the spinner is still visible
             tick(3000);
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            // the first http request is finally over, the spinner is still visible
+            // the first HTTP request is finally over, the spinner is still visible
             firstRequest.flush({});
             tick();
             expect(component.isSpinnerVisible).toBeTruthy();
@@ -275,7 +312,7 @@ describe('SpinnerComponent', () => {
             tick(3000);
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            // the second http request is finally over, the spinner is hidden
+            // the second HTTP request is finally over, the spinner is hidden
             secondRequest.flush({});
             tick();
             expect(component.isSpinnerVisible).toBeFalsy();
@@ -292,18 +329,18 @@ describe('SpinnerComponent', () => {
         }
     ));
 
-    it('should keep the spinner visible even if an http request ends before calling \'hide\'', fakeAsync(inject(
+    it('should keep the spinner visible even if an HTTP request ends before calling \'hide\'', fakeAsync(inject(
         [SpinnerVisibilityService, HttpClient, HttpTestingController],
         (spinner: SpinnerVisibilityService, http: HttpClient, httpMock: HttpTestingController) => {
             // we manually show the spinner
             spinner.show();
             expect(component.isSpinnerVisible).toBeTruthy();
-            // then an http request is performed
+            // then an HTTP request is performed
             http.get('/fake').subscribe();
             tick();
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            // the http request ends, but we want the spinner to be still visible
+            // the HTTP request ends, but we want the spinner to be still visible
             httpMock.expectOne('/fake').flush({});
             tick();
             expect(component.isSpinnerVisible).toBeTruthy();
@@ -312,7 +349,7 @@ describe('SpinnerComponent', () => {
             // this time the spinner is not visible anymore
             expect(component.isSpinnerVisible).toBeFalsy();
 
-            // the bypassPendingInterceptorService should be reset for next http requests
+            // the bypassPendingInterceptorService should be reset for next HTTP requests
             http.get('/fake2').subscribe();
             tick();
             expect(component.isSpinnerVisible).toBeTruthy();
@@ -322,25 +359,25 @@ describe('SpinnerComponent', () => {
         }
     )));
 
-    it('should correctly handle the minimum spinner duration for a single http request', fakeAsync(inject(
+    it('should correctly handle the minimum spinner duration for a single HTTP request', fakeAsync(inject(
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             component.minDuration = 5000;
             http.get('/fake').subscribe();
 
-            // the http request is pending for 1 second now
+            // the HTTP request is pending for 1 second now
             tick(1000);
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            // the http request is pending for 2 seconds now
+            // the HTTP request is pending for 2 seconds now
             tick(1000);
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            // the http request is finally over, the spinner is still visible
+            // the HTTP request is finally over, the spinner is still visible
             httpMock.expectOne('/fake').flush({});
             tick();
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            // the http request is over but the spinner is still visible after 3 seconds
+            // the HTTP request is over but the spinner is still visible after 3 seconds
             tick(1000);
             expect(component.isSpinnerVisible).toBeTruthy();
 
@@ -358,7 +395,7 @@ describe('SpinnerComponent', () => {
         }
     )));
 
-    it('should correctly handle the minimum spinner duration for multiple http requests', fakeAsync(inject(
+    it('should correctly handle the minimum spinner duration for multiple HTTP requests', fakeAsync(inject(
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             component.minDuration = 5000;
 
@@ -371,28 +408,28 @@ describe('SpinnerComponent', () => {
             const firstRequest = httpMock.expectOne('/fake');
             const secondRequest = httpMock.expectOne('/fake2');
 
-            // the http requests are pending for 1 second now
+            // the HTTP requests are pending for 1 second now
             tick(1000);
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            // the http requests are pending for 2 seconds now
+            // the HTTP requests are pending for 2 seconds now
             tick(1000);
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            // the first http request is finally over, the spinner is still visible
+            // the first HTTP request is finally over, the spinner is still visible
             firstRequest.flush({});
             tick();
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            // the second http request is still pending after 3 seconds
+            // the second HTTP request is still pending after 3 seconds
             tick(1000);
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            // the second http request is still pending after 4 seconds
+            // the second HTTP request is still pending after 4 seconds
             tick(1000);
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            // the second http request is finally over too, the spinner is still visible
+            // the second HTTP request is finally over too, the spinner is still visible
             secondRequest.flush({});
             tick();
             expect(component.isSpinnerVisible).toBeTruthy();
@@ -403,20 +440,20 @@ describe('SpinnerComponent', () => {
         }
     )));
 
-    it('should still display the spinner when the minimum duration is inferior to the http request duration', fakeAsync(inject(
+    it('should still display the spinner when the minimum duration is inferior to the HTTP request duration', fakeAsync(inject(
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             component.minDuration = 1000;
             http.get('/fake').subscribe();
 
-            // the http request is pending for 1 second now
+            // the HTTP request is pending for 1 second now
             tick(1000);
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            // the http request is pending for 2 seconds now
+            // the HTTP request is pending for 2 seconds now
             tick(1000);
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            // the http request is finally over after 2 seconds, the spinner is hidden
+            // the HTTP request is finally over after 2 seconds, the spinner is hidden
             httpMock.expectOne('/fake').flush({});
             tick();
             expect(component.isSpinnerVisible).toBeFalsy();
@@ -442,15 +479,15 @@ describe('SpinnerComponent', () => {
 
             http.get('/fake').subscribe();
 
-            // the http request is pending for 0,5 second now - spinner not visible because debounce
+            // the HTTP request is pending for 0,5 second now - spinner not visible because debounce
             tick(500);
             expect(component.isSpinnerVisible).toBeFalsy();
 
-            // the http request is pending for 1 second now - spinner visible
+            // the HTTP request is pending for 1 second now - spinner visible
             tick(500);
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            // the http request is finally over, the spinner is still visible
+            // the HTTP request is finally over, the spinner is still visible
             httpMock.expectOne('/fake').flush({});
             tick();
             expect(component.isSpinnerVisible).toBeTruthy();
