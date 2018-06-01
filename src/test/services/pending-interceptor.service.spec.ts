@@ -26,7 +26,7 @@ describe('PendingInterceptorService', () => {
         expect(service).toBeTruthy();
     }));
 
-    it('should be aware of the pending http requests', inject(
+    it('should be aware of the pending HTTP requests', inject(
         [PendingInterceptorService, HttpClient, HttpTestingController],
         (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
 

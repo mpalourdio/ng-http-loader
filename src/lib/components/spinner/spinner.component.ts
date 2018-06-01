@@ -32,6 +32,8 @@ export class SpinnerComponent implements OnDestroy, OnInit {
     @Input()
     public filteredUrlPatterns: string[] = [];
     @Input()
+    public filteredMethods: string[] = [];
+    @Input()
     public debounceDelay = 0;
     @Input()
     public minDuration = 0;
@@ -61,6 +63,11 @@ export class SpinnerComponent implements OnDestroy, OnInit {
                 this.pendingInterceptorService.filteredUrlPatterns.push(new RegExp(e));
             });
         }
+
+        if (!(this.filteredMethods instanceof Array)) {
+            throw new TypeError('`filteredMethods` must be an array.');
+        }
+        this.pendingInterceptorService.filteredMethods = this.filteredMethods;
     }
 
     ngOnDestroy(): void {

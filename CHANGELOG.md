@@ -1,9 +1,13 @@
 # Changelog
 
+## v2.2.0
+
+This release adds the possibility to filter http requests that should not be handled by the interceptor by providing an array of HTTP methods to the component's ``filteredMethods`` property.
+
 ## v2.1.0
 
 This release introduces the **minimum duration** option. It gives the possibility to force a minimum duration during which the spinner should be visible.
-You can mix this parameter with the **debounce delay** option :
+You can mix this parameter with the **debounce delay** option:
 
 ```xml
 <spinner 
@@ -97,7 +101,7 @@ The responsible ``Subject`` has been replaced by a ``ReplaySubject``.
 The module is now splitted in sub-modules for more convenience. See [usage](https://github.com/mpalourdio/ng-http-loader#usage).  
 It's an **opt-in** feature. The "old" module import method, by simply declaring ``NgHttpLoaderModule``, is still fully supported. 
 
-**BC break** : paths of components and services have changed.
+**BC break**: paths of components and services have changed.
 - Components are now located in the ``components`` folders.
 - Services are now located in the ``services`` folders.
 
