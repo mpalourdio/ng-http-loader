@@ -134,7 +134,7 @@ You can filter the http requests that shouldn't be caught by the interceptor by 
 <spinner [filteredUrlPatterns]="['\\d', '[a-zA-Z]', 'my-api']"></spinner>
 ```
 
-You can also filter the http requests that shouldn't be caught by the interceptor by providing **an array of HTTP methods** (case-insensitive):
+You can also filter the http requests by providing **an array of HTTP methods** (case-insensitive):
 ```xml
 <spinner [filteredMethods]="['gEt', 'POST', 'PuT']"></spinner>
 ```
