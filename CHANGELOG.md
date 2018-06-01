@@ -2,7 +2,7 @@
 
 ## v2.2.0
 
-This release adds the possibility to filter http requests that should not be handled by the interceptor by providing an array of HTTP methods to the component's ``filteredMethods`` property.
+This release adds the possibility to filter HTTP requests that should not be handled by the interceptor by providing an array of HTTP methods to the component's ``filteredMethods`` property.
 
 ## v2.1.0
 
@@ -83,7 +83,7 @@ See the [Defining your own spinner](https://github.com/mpalourdio/ng-http-loader
 
 ## v0.6.0
 
-This release adds the ``debounceDelay`` parameter (default is 0). It allows to discard the spinner for fast and repeated http requests, which can be annoying under some conditions.
+This release adds the ``debounceDelay`` parameter (default is 0). It allows to discard the spinner for fast and repeated HTTP requests, which can be annoying under some conditions.
 
 See [customization](https://github.com/mpalourdio/ng-http-loader#customizing-the-spinner)
 
@@ -93,7 +93,7 @@ The library now takes advantage of [RxJS lettable operators](https://github.com/
 
 ## v0.5.1
 
-This release fixes a bug that could cause the spinner to not show if an http request were performed **before** the spinner component was initialized.  
+This release fixes a bug that could cause the spinner to not show if an HTTP request were performed **before** the spinner component was initialized.  
 The responsible ``Subject`` has been replaced by a ``ReplaySubject``.
 
 ## v0.5.0
@@ -115,7 +115,7 @@ Fixed default spinners background.
 
 ## v0.3.0
 
-This release gives the possibility to filter http requests that should not be handled by the interceptor by providing an array of URL regex to the component's ``filteredUrlPatterns`` property.
+This release gives the possibility to filter HTTP requests that should not be handled by the interceptor by providing an array of URL regex to the component's ``filteredUrlPatterns`` property.
 
 ## v0.2.0
 
