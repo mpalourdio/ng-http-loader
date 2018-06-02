@@ -59,7 +59,7 @@ export class PendingInterceptorService implements HttpInterceptor {
         });
     }
 
-    private shouldBypass(req: HttpRequest<any>) {
+    private shouldBypass(req: HttpRequest<any>): boolean {
         return this.shouldBypassUrl(req.urlWithParams)
             || this.shouldBypassMethod(req)
             || this._forceByPass;
