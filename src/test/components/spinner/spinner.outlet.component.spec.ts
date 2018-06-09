@@ -8,7 +8,9 @@
  */
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { NgModule } from '@angular/core/src/metadata/ng_module';
+import { async, ComponentFixture, MetadataOverride, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { SkThreeBounceComponent } from '../../../lib/components/sk-three-bounce/sk-three-bounce.component';
@@ -27,9 +29,7 @@ describe('SpinnerNgOutletComponent', () => {
             providers: [PendingInterceptorServiceInterceptor]
         })
             .overrideModule(BrowserDynamicTestingModule, {
-                set: {
-                    entryComponents: [SkThreeBounceComponent]
-                }
+                set: { entryComponents: [SkThreeBounceComponent] }
             })
             .compileComponents();
     }));
