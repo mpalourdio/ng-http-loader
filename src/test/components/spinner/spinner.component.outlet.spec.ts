@@ -16,7 +16,7 @@ import { SpinnerComponent } from '../../../lib/components/spinner/spinner.compon
 import { PendingInterceptorServiceInterceptor } from '../../../lib/services/pending-interceptor.service';
 import { SPINKIT_COMPONENTS } from '../../../lib/spinkits';
 
-describe('SpinnerNgOutletComponent', () => {
+describe('SpinnerComponentOutlet', () => {
     let component: SpinnerComponent;
     let fixture: ComponentFixture<SpinnerComponent>;
 
