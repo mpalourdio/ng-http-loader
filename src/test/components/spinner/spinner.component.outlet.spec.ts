@@ -50,7 +50,7 @@ describe('SpinnerComponentOutlet', () => {
         expect(element.className).toBe('sk-child sk-bounce1');
     });
 
-    it('should force [spinner] to null if entryComponent is defined', () => {
+    it('should force [spinner] to null if [entryComponent] is defined', () => {
         component.isSpinnerVisible = true;
         component.spinner = 'whatever';
         component.entryComponent = SkThreeBounceComponent;
