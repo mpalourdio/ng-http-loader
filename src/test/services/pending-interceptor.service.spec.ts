@@ -96,9 +96,6 @@ describe('PendingInterceptorService', () => {
 
             const testRequest = httpMock.expectOne('/fake');
             testRequest.flush({}, {
-                'headers': {
-                    'name': 'useless-header'
-                },
                 'status': 404,
                 'statusText': statusText
             });
