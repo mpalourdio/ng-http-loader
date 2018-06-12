@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.3.0
+
+This release adds the possibility to filter HTTP requests that should not be handled by the interceptor by providing an array of HTTP headers to the component's ``filteredHeaders`` property.
+
 ## v2.2.0
 
 This release adds the possibility to filter HTTP requests that should not be handled by the interceptor by providing an array of HTTP methods to the component's ``filteredMethods`` property.
