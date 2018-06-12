@@ -160,6 +160,23 @@ describe('SpinnerComponent', () => {
         }
     )));
 
+    it('should not show the spinner if the request is filtered by HTTP header', fakeAsync(inject(
+        [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
+            component.filteredHeaders.push('header-to-filter');
+            fixture.detectChanges();
+
+            http.get('/fake', {
+                headers: {
+                    'header-to-filter': 'value'
+                }
+            }).subscribe();
+
+            tick();
+            expect(component.isSpinnerVisible).toBeFalsy();
+            httpMock.expectOne('/fake').flush({});
+        }
+    )));
+
     it('should take care of query strings in filteredUrlPatterns', fakeAsync(inject(
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             component.filteredUrlPatterns.push('bar');
@@ -219,6 +236,30 @@ describe('SpinnerComponent', () => {
         }
     )));
 
+    it('should correctly filter by HTTP header with several requests', fakeAsync(inject(
+        [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
+            component.filteredHeaders.push('My-HeAdER');
+            fixture.detectChanges();
+
+            http.get('/12345', {
+                headers: {
+                    'my-header': 'value'
+                }
+            }).subscribe();
+            tick();
+            expect(component.isSpinnerVisible).toBeFalsy();
+            httpMock.expectOne('/12345').flush({});
+
+            http.get('/fake').subscribe();
+            tick();
+            expect(component.isSpinnerVisible).toBeTruthy();
+            httpMock.expectOne('/fake').flush({});
+
+            tick();
+            expect(component.isSpinnerVisible).toBeFalsy();
+        }
+    )));
+
     it('should throw an error if filteredUrlPatterns is not an array', () => {
         component.filteredUrlPatterns = null;
         expect(() => fixture.detectChanges()).toThrow(new Error('`filteredUrlPatterns` must be an array.'));
@@ -227,6 +268,11 @@ describe('SpinnerComponent', () => {
     it('should throw an error if filteredMethods is not an array', () => {
         component.filteredMethods = null;
         expect(() => fixture.detectChanges()).toThrow(new Error('`filteredMethods` must be an array.'));
+    });
+
+    it('should throw an error if filteredHeaders is not an array', () => {
+        component.filteredHeaders = null;
+        expect(() => fixture.detectChanges()).toThrow(new Error('`filteredHeaders` must be an array.'));
     });
 
     it('should show the spinner even if the component is created after the HTTP request is performed', fakeAsync(inject(

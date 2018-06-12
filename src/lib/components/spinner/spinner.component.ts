@@ -34,6 +34,8 @@ export class SpinnerComponent implements OnDestroy, OnInit {
     @Input()
     public filteredMethods: string[] = [];
     @Input()
+    public filteredHeaders: string[] = [];
+    @Input()
     public debounceDelay = 0;
     @Input()
     public minDuration = 0;
@@ -68,6 +70,11 @@ export class SpinnerComponent implements OnDestroy, OnInit {
             throw new TypeError('`filteredMethods` must be an array.');
         }
         this.pendingInterceptorService.filteredMethods = this.filteredMethods;
+
+        if (!(this.filteredHeaders instanceof Array)) {
+            throw new TypeError('`filteredHeaders` must be an array.');
+        }
+        this.pendingInterceptorService.filteredHeaders = this.filteredHeaders;
     }
 
     ngOnDestroy(): void {
