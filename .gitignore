@@ -1,5 +1,6 @@
 node_modules/*
 npm-debug.log
+yarn-error.log
 *.map
 *.d.ts
 **/*.ngfactory.ts
@@ -8,3 +9,4 @@ tmp
 dist
 coverage
 .idea/
+out-tsc
