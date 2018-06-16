@@ -43,8 +43,7 @@
   "defaultProject": "ng-http-loader",
   "schematics": {
     "@schematics/angular:component": {
-      "prefix": "",
-      "styleext": "css"
+      "prefix": ""
     },
     "@schematics/angular:directive": {
       "prefix": ""
