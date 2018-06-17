@@ -127,4 +127,4 @@ Definitely switch to the new HttpClientModule api available from angular 4.3
 
 ## v0.1.0
 
-Before completely removing HttpInterceptorService, provide a parallel implementation based on the new built-in angular 4.3 intercepto
+Before completely removing HttpInterceptorService, provide a parallel implementation based on the new built-in angular 4.3 interceptor
