@@ -28,10 +28,10 @@ The HTTP interceptor listens to all HTTP requests and shows a spinner / loader i
 
 ## Angular 4 / Angular 5 / Angular 6
 
-The latest compatible version with angular 4 is **``0.3.4``**.
+The latest compatible version with angular 4 is [**``0.3.4``**](https://github.com/mpalourdio/ng-http-loader/tree/0.3.4).
 If you want to use Angular 5, use versions **``0.4.0``** and above.
 
-The latest compatible version with angular 5 is version **``0.9.1``**.
+The latest compatible version with angular 5 is version [**``0.9.1``**](https://github.com/mpalourdio/ng-http-loader/tree/0.9.1).
 
 Versions **``1.0.0+``** and **``2.0.0+``** are angular 6 / RxJS 6 compatible only.
 
