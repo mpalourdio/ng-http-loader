@@ -17,7 +17,7 @@ import { SPINKIT_COMPONENTS } from './spinkits';
 @NgModule({
     declarations: [
         NgHttpLoaderComponent,
-        SPINKIT_COMPONENTS,
+        ...SPINKIT_COMPONENTS,
     ],
     imports: [
         CommonModule,
@@ -25,7 +25,7 @@ import { SPINKIT_COMPONENTS } from './spinkits';
     ],
     exports: [
         NgHttpLoaderComponent,
-        SPINKIT_COMPONENTS,
+        ...SPINKIT_COMPONENTS,
     ],
     providers: [
         PendingInterceptorServiceInterceptor,

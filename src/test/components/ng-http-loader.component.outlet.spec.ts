@@ -22,7 +22,7 @@ describe('NgHttpLoaderComponentOutlet', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [NgHttpLoaderComponent, SPINKIT_COMPONENTS],
+            declarations: [NgHttpLoaderComponent, ...SPINKIT_COMPONENTS],
             imports: [HttpClientTestingModule],
             providers: [PendingInterceptorServiceInterceptor]
         })
