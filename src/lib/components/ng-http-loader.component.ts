@@ -10,16 +10,16 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { EMPTY, merge, Observable, Subscription, timer } from 'rxjs';
 import { debounce, delayWhen } from 'rxjs/operators';
-import { PendingInterceptorService } from '../../services/pending-interceptor.service';
-import { SpinnerVisibilityService } from '../../services/spinner-visibility.service';
-import { Spinkit } from '../../spinkits';
+import { PendingInterceptorService } from '../services/pending-interceptor.service';
+import { SpinnerVisibilityService } from '../services/spinner-visibility.service';
+import { Spinkit } from '../spinkits';
 
 @Component({
-    selector: 'spinner',
-    templateUrl: './spinner.component.html',
-    styleUrls: ['./spinner.component.css']
+    selector: 'ng-http-loader',
+    templateUrl: './ng-http-loader.component.html',
+    styleUrls: ['./ng-http-loader.component.css']
 })
-export class SpinnerComponent implements OnDestroy, OnInit {
+export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     public isSpinnerVisible: boolean;
     public spinkit = Spinkit;
     private subscriptions: Subscription;

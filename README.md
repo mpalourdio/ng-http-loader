@@ -23,7 +23,7 @@ $ npm install ng-http-loader --save / yarn add ng-http-loader
 
 ## What does it do ?
 
-This package provides an HTTP Interceptor, and a spinner component (All from [SpinKit](https://github.com/tobiasahlin/SpinKit) at the moment).
+This package provides an HTTP Interceptor, and some spinner components (All from [SpinKit](https://github.com/tobiasahlin/SpinKit) at the moment).
 The HTTP interceptor listens to all HTTP requests and shows a spinner / loader indicator during pending http requests.
 
 ## Angular 4 / Angular 5 / Angular 6
@@ -74,19 +74,19 @@ export class AppModule { }
 
 In your app.component.html, simply add:
 ```xml
-<spinner></spinner>
+<ng-http-loader></ng-http-loader>
 ```
 
 ## Customizing the spinner
 
 You can customize the **background-color**, the **spinner type**, the **debounce delay** (ie. after how many milliseconds the spinner will be visible, if needed), the **minimum duration** (ie. how many milliseconds should the spinner be visible at least):
 ```xml
-<spinner 
+<ng-http-loader 
     [backgroundColor]="'#ff0000'"
     [spinner]="spinkit.skWave"
     [debounceDelay]="100"
     [minDuration]="300">
-</spinner>
+</ng-http-loader>
 ```
 
 **_To use this syntax, you must reference the ``Spinkit`` const as a public property in your app.component.ts_**:
@@ -110,7 +110,7 @@ The different spinners available are referenced in [this class](src/lib/spinkits
 **_Otherwise, you can simply reference the chosen spinner as a simple string_**:
 
 ```xml
-<spinner backgroundColor="#ff0000" spinner="sk-wave"></spinner>
+<ng-http-loader backgroundColor="#ff0000" spinner="sk-wave"></ng-http-loader>
 ```
 
 ## Defining your own spinner
@@ -120,9 +120,9 @@ You can define your own loader component in place of the built-in ones. The need
 - Create your component
 - Add it to the [entryComponent](https://angular.io/guide/ngmodule-faq#what-is-an-entry-component) definition in your module definition
 - Reference your component in a public property in your ``app.component.ts``
-- Reference the property in the spinner component like this:
+- Reference the property in the ng-http-loader component like this:
 ```xml
-<spinner [entryComponent]="myAwesomeComponent"></spinner>
+<ng-http-loader [entryComponent]="myAwesomeComponent"></ng-http-loader>
 ```
 
 You can find some short examples [here](https://gist.github.com/mpalourdio/2c0bec03d610b24ff49db649fbb69a48) and [here](https://gist.github.com/mpalourdio/e05b4495de2abeeecfcf92d70e4ef93e).
@@ -131,22 +131,22 @@ You can find some short examples [here](https://gist.github.com/mpalourdio/2c0be
 
 You can filter the http requests that shouldn't be caught by the interceptor by providing **an array of regex patterns**:
 ```xml
-<spinner [filteredUrlPatterns]="['\\d', '[a-zA-Z]', 'my-api']"></spinner>
+<ng-http-loader [filteredUrlPatterns]="['\\d', '[a-zA-Z]', 'my-api']"></ng-http-loader>
 ```
 
 You can filter the http requests by providing **an array of HTTP methods** (case insensitive):
 ```xml
-<spinner [filteredMethods]="['gEt', 'POST', 'PuT']"></spinner>
+<ng-http-loader [filteredMethods]="['gEt', 'POST', 'PuT']"></ng-http-loader>
 ```
 
 You can also filter the http requests by providing **an array of HTTP headers** (case insensitive):
 ```xml
-<spinner [filteredHeaders]="['hEaDeR', 'AnoTheR-HeAdEr']"></spinner>
+<ng-http-loader [filteredHeaders]="['hEaDeR', 'AnoTheR-HeAdEr']"></ng-http-loader>
 ```
 
 ## Manually show and hide the spinner
 
-You can manually show and hide the spinner component if needed. You must use the ``SpinnerVisibilityService`` for this purpose.  
+You can manually show and hide the spinner if needed. You must use the ``SpinnerVisibilityService`` for this purpose.  
 
 Sometimes, when manually showing the spinner, an http request could be performed in background, and when finished, the spinner would automagically disappear.  
 

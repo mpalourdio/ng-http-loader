@@ -12,18 +12,18 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { async, ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { forkJoin, Observable } from 'rxjs';
-import { SpinnerComponent } from '../../../lib/components/spinner/spinner.component';
-import { PendingInterceptorServiceInterceptor } from '../../../lib/services/pending-interceptor.service';
-import { SpinnerVisibilityService } from '../../../lib/services/spinner-visibility.service';
-import { Spinkit, SPINKIT_COMPONENTS } from '../../../lib/spinkits';
+import { NgHttpLoaderComponent } from '../../lib/components/ng-http-loader.component';
+import { PendingInterceptorServiceInterceptor } from '../../lib/services/pending-interceptor.service';
+import { SpinnerVisibilityService } from '../../lib/services/spinner-visibility.service';
+import { Spinkit, SPINKIT_COMPONENTS } from '../../lib/spinkits';
 
-describe('SpinnerComponent', () => {
-    let component: SpinnerComponent;
-    let fixture: ComponentFixture<SpinnerComponent>;
+describe('NgHttpLoaderComponent', () => {
+    let component: NgHttpLoaderComponent;
+    let fixture: ComponentFixture<NgHttpLoaderComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [SpinnerComponent, SPINKIT_COMPONENTS],
+            declarations: [NgHttpLoaderComponent, SPINKIT_COMPONENTS],
             imports: [HttpClientTestingModule],
             providers: [PendingInterceptorServiceInterceptor]
         })
@@ -31,15 +31,15 @@ describe('SpinnerComponent', () => {
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(SpinnerComponent);
+        fixture = TestBed.createComponent(NgHttpLoaderComponent);
         component = fixture.componentInstance;
     });
 
-    it('should create the spinner component', () => {
+    it('should create the ng-http-loader component', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should create the spinner component with default values', () => {
+    it('should create the ng-http-loader component with default values', () => {
         component.isSpinnerVisible = true;
         fixture.detectChanges();
 
@@ -123,7 +123,7 @@ describe('SpinnerComponent', () => {
         }
     )));
 
-    it('should hide and show a the spinner for a single HTTP request', fakeAsync(inject(
+    it('should hide and show the spinner for a single HTTP request', fakeAsync(inject(
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             http.get('/fake').subscribe();
 
@@ -279,7 +279,7 @@ describe('SpinnerComponent', () => {
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             http.get('/fake').subscribe();
 
-            const newFixture = TestBed.createComponent(SpinnerComponent);
+            const newFixture = TestBed.createComponent(NgHttpLoaderComponent);
             const newComponent = newFixture.componentInstance;
 
             tick();
