@@ -41,7 +41,7 @@ If you experience errors like below, **please double check the version you use.*
 
 ## Requirements - HttpClientModule
 
-Performing http requests with the ``HttpClientModule`` API is **mandatory**. Otherwise,the spinner will not be fired **at all**.
+Performing http requests with the ``HttpClientModule`` API is **mandatory**. Otherwise, the spinner will not be fired **at all**.
 
 See this [blog post](http://blog.ninja-squad.com/2017/07/17/http-client-module/) for an ``HttpClientModule`` introduction.
 
