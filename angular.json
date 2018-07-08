@@ -39,5 +39,6 @@
         }
       }
     }
-  }
+  },
+  "defaultProject": "ng-http-loader"
 }
