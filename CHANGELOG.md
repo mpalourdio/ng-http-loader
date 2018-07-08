@@ -1,5 +1,12 @@
 # Changelog
 
+## v3.0.0
+
+- All existing deprecations have been removed.
+- BC breaks => 
+    - ``SpinnerComponent`` has been renamed to ``NgHttpLoaderComponent``.
+    - The ``<spinner>`` component-selector has been renamed to ``<ng-http-loader>``.
+
 ## v2.3.0
 
 This release adds the possibility to filter HTTP requests that should not be handled by the interceptor by providing an array of HTTP headers to the component's ``filteredHeaders`` property.
@@ -14,10 +21,10 @@ This release introduces the **minimum duration** option. It gives the possibilit
 You can mix this parameter with the **debounce delay** option:
 
 ```xml
-<spinner 
+<ng-http-loader 
     [debounceDelay]="100"
     [minDuration]="300">
-</spinner>
+</ng-http-loader>
 ```
 
 ```
