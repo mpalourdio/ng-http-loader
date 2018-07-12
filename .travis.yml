@@ -4,6 +4,7 @@ node_js:
   - lts/*
   - node
 script:
+  - yarn lint
   - yarn test --code-coverage
   - yarn build
 

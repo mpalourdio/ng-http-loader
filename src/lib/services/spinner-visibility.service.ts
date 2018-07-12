@@ -20,13 +20,8 @@ export class SpinnerVisibilityService {
     constructor(private pendingInterceptorService: PendingInterceptorService) {
     }
 
-    /** @deprecated Deprecated in favor of visibilityObservable$ */
-    get visibilityObservable(): Observable<boolean> {
-        return this._visibilitySubject.asObservable();
-    }
-
     get visibilityObservable$(): Observable<boolean> {
-        return this.visibilityObservable;
+        return this._visibilitySubject.asObservable();
     }
 
     public show(): void {

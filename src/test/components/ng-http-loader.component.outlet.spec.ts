@@ -11,18 +11,18 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import { SkThreeBounceComponent } from '../../../lib/components/sk-three-bounce/sk-three-bounce.component';
-import { SpinnerComponent } from '../../../lib/components/spinner/spinner.component';
-import { PendingInterceptorServiceInterceptor } from '../../../lib/services/pending-interceptor.service';
-import { SPINKIT_COMPONENTS } from '../../../lib/spinkits';
+import { NgHttpLoaderComponent } from '../../lib/components/ng-http-loader.component';
+import { SkThreeBounceComponent } from '../../lib/components/sk-three-bounce/sk-three-bounce.component';
+import { PendingInterceptorServiceInterceptor } from '../../lib/services/pending-interceptor.service';
+import { SPINKIT_COMPONENTS } from '../../lib/spinkits';
 
-describe('SpinnerComponentOutlet', () => {
-    let component: SpinnerComponent;
-    let fixture: ComponentFixture<SpinnerComponent>;
+describe('NgHttpLoaderComponentOutlet', () => {
+    let component: NgHttpLoaderComponent;
+    let fixture: ComponentFixture<NgHttpLoaderComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [SpinnerComponent, SPINKIT_COMPONENTS],
+            declarations: [NgHttpLoaderComponent, ...SPINKIT_COMPONENTS],
             imports: [HttpClientTestingModule],
             providers: [PendingInterceptorServiceInterceptor]
         })
@@ -33,7 +33,7 @@ describe('SpinnerComponentOutlet', () => {
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(SpinnerComponent);
+        fixture = TestBed.createComponent(NgHttpLoaderComponent);
         component = fixture.componentInstance;
     });
 

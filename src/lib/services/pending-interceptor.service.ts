@@ -23,13 +23,8 @@ export class PendingInterceptorService implements HttpInterceptor {
     private _filteredHeaders: string[] = [];
     private _forceByPass: boolean;
 
-    /** @deprecated Deprecated in favor of pendingRequestsStatus$ */
-    get pendingRequestsStatus(): Observable<boolean> {
-        return this._pendingRequestsStatus.asObservable();
-    }
-
     get pendingRequestsStatus$(): Observable<boolean> {
-        return this.pendingRequestsStatus;
+        return this._pendingRequestsStatus.asObservable();
     }
 
     get pendingRequests(): number {

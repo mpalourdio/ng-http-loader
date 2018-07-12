@@ -40,13 +40,5 @@
       }
     }
   },
-  "defaultProject": "ng-http-loader",
-  "schematics": {
-    "@schematics/angular:component": {
-      "prefix": ""
-    },
-    "@schematics/angular:directive": {
-      "prefix": ""
-    }
-  }
+  "defaultProject": "ng-http-loader"
 }

@@ -10,22 +10,22 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { SpinnerComponent } from './components/spinner/spinner.component';
+import { NgHttpLoaderComponent } from './components/ng-http-loader.component';
 import { PendingInterceptorServiceInterceptor } from './services/pending-interceptor.service';
 import { SPINKIT_COMPONENTS } from './spinkits';
 
 @NgModule({
     declarations: [
-        SpinnerComponent,
-        SPINKIT_COMPONENTS,
+        NgHttpLoaderComponent,
+        ...SPINKIT_COMPONENTS,
     ],
     imports: [
         CommonModule,
         HttpClientModule,
     ],
     exports: [
-        SpinnerComponent,
-        SPINKIT_COMPONENTS,
+        NgHttpLoaderComponent,
+        ...SPINKIT_COMPONENTS,
     ],
     providers: [
         PendingInterceptorServiceInterceptor,
