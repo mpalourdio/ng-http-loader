@@ -378,6 +378,7 @@ describe('NgHttpLoaderComponent', () => {
     it('should be possible to manually show/hide the spinner in a Promise context', inject(
         [SpinnerVisibilityService], (spinner: SpinnerVisibilityService) => {
             spinner.show();
+            expect(component.isSpinnerVisible).toBeTruthy();
             Promise.resolve('resolved').then(() => {
                 spinner.hide();
                 expect(component.isSpinnerVisible).toBeFalsy();
