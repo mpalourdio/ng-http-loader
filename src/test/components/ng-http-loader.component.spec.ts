@@ -382,8 +382,7 @@ describe('NgHttpLoaderComponent', () => {
             Promise.resolve('resolved').then(() => {
                 spinner.hide();
                 expect(component.isSpinnerVisible).toBeFalsy();
-            }).catch(() => expect(true).toBeFalsy()
-            );
+            }).catch(() => expect(true).toBeFalsy());
         }
     ));
 
