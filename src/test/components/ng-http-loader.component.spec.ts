@@ -375,6 +375,17 @@ describe('NgHttpLoaderComponent', () => {
         }
     ));
 
+    it('should be possible to manually show/hide the spinner in a Promise context', inject(
+        [SpinnerVisibilityService], (spinner: SpinnerVisibilityService) => {
+            spinner.show();
+            Promise.resolve('resolved').then(() => {
+                spinner.hide();
+                expect(component.isSpinnerVisible).toBeFalsy();
+            }).catch(() => expect(true).toBeFalsy()
+            );
+        }
+    ));
+
     it('should keep the spinner visible even if an HTTP request ends before calling \'hide\'', fakeAsync(inject(
         [SpinnerVisibilityService, HttpClient, HttpTestingController],
         (spinner: SpinnerVisibilityService, http: HttpClient, httpMock: HttpTestingController) => {
