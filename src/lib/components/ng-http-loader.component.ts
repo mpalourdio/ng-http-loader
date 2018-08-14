@@ -55,26 +55,7 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
 
     ngOnInit(): void {
         this.nullifySpinnerIfEntryComponentIsDefined();
-
-        if (!(this.filteredUrlPatterns instanceof Array)) {
-            throw new TypeError('`filteredUrlPatterns` must be an array.');
-        }
-
-        if (!!this.filteredUrlPatterns.length) {
-            this.filteredUrlPatterns.forEach(e =>
-                this.pendingInterceptorService.filteredUrlPatterns.push(new RegExp(e))
-            );
-        }
-
-        if (!(this.filteredMethods instanceof Array)) {
-            throw new TypeError('`filteredMethods` must be an array.');
-        }
-        this.pendingInterceptorService.filteredMethods = this.filteredMethods;
-
-        if (!(this.filteredHeaders instanceof Array)) {
-            throw new TypeError('`filteredHeaders` must be an array.');
-        }
-        this.pendingInterceptorService.filteredHeaders = this.filteredHeaders;
+        this.initFilters();
     }
 
     ngOnDestroy(): void {
@@ -85,6 +66,38 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
         if (null != this.entryComponent) {
             this.spinner = null;
         }
+    }
+
+    private initFilters() {
+        this.initFilteredUrlPatterns();
+        this.initFilteredMethods();
+        this.initFilteredHeaders();
+    }
+
+    private initFilteredUrlPatterns() {
+        if (!(this.filteredUrlPatterns instanceof Array)) {
+            throw new TypeError('`filteredUrlPatterns` must be an array.');
+        }
+
+        if (!!this.filteredUrlPatterns.length) {
+            this.filteredUrlPatterns.forEach(e =>
+                this.pendingInterceptorService.filteredUrlPatterns.push(new RegExp(e))
+            );
+        }
+    }
+
+    private initFilteredMethods() {
+        if (!(this.filteredMethods instanceof Array)) {
+            throw new TypeError('`filteredMethods` must be an array.');
+        }
+        this.pendingInterceptorService.filteredMethods = this.filteredMethods;
+    }
+
+    private initFilteredHeaders() {
+        if (!(this.filteredHeaders instanceof Array)) {
+            throw new TypeError('`filteredHeaders` must be an array.');
+        }
+        this.pendingInterceptorService.filteredHeaders = this.filteredHeaders;
     }
 
     private handleSpinnerVisibility(): (v: boolean) => void {
