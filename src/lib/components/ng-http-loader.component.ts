@@ -61,9 +61,9 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
         }
 
         if (!!this.filteredUrlPatterns.length) {
-            this.filteredUrlPatterns.forEach(e => {
-                this.pendingInterceptorService.filteredUrlPatterns.push(new RegExp(e));
-            });
+            this.filteredUrlPatterns.forEach(e =>
+                this.pendingInterceptorService.filteredUrlPatterns.push(new RegExp(e))
+            );
         }
 
         if (!(this.filteredMethods instanceof Array)) {
