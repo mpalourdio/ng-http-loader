@@ -17,7 +17,7 @@ import { Spinkit } from '../spinkits';
 @Component({
     selector: 'ng-http-loader',
     templateUrl: './ng-http-loader.component.html',
-    styleUrls: ['./ng-http-loader.component.css']
+    styleUrls: ['./ng-http-loader.component.scss']
 })
 export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     public isSpinnerVisible: boolean;

@@ -6,6 +6,11 @@
       "root": "",
       "sourceRoot": "src",
       "projectType": "library",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
