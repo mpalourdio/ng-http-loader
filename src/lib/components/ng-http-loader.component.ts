@@ -45,12 +45,12 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     constructor(private pendingInterceptorService: PendingInterceptorService, private spinnerVisibilityService: SpinnerVisibilityService) {
         this.subscriptions = merge(
             this.pendingInterceptorService.pendingRequestsStatus$.pipe(
-                debounce(this.handleDebounceDelay.bind(this)),
-                delayWhen(this.handleMinDuration.bind(this))
+                debounce(h => this.handleDebounceDelay(h)),
+                delayWhen(h => this.handleMinDuration(h))
             ),
             this.spinnerVisibilityService.visibilityObservable$,
         )
-            .subscribe(this.handleSpinnerVisibility().bind(this));
+            .subscribe(h => this.handleSpinnerVisibility(h));
     }
 
     ngOnInit(): void {
@@ -100,8 +100,8 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
         this.pendingInterceptorService.filteredHeaders = this.filteredHeaders;
     }
 
-    private handleSpinnerVisibility(): (v: boolean) => void {
-        return v => this.isSpinnerVisible = v;
+    private handleSpinnerVisibility(hasPendingRequests: boolean): void {
+        this.isSpinnerVisible = hasPendingRequests;
     }
 
     private handleDebounceDelay(hasPendingRequests: boolean): Observable<number | never> {
