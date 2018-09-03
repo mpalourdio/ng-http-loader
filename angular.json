@@ -45,5 +45,8 @@
       }
     }
   },
-  "defaultProject": "ng-http-loader"
+  "defaultProject": "ng-http-loader",
+  "cli": {
+    "packageManager": "yarn"
+  }
 }
