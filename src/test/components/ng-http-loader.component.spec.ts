@@ -497,6 +497,43 @@ describe('NgHttpLoaderComponent', () => {
         }
     )));
 
+    it('should correctly handle the minimum spinner duration for multiple HTTP requests ran one after the others', fakeAsync(inject(
+        [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
+            component.minDuration = 2000;
+
+            function runQuery(url: string): Observable<any> {
+                return http.get(url);
+            }
+
+            runQuery('/fake').subscribe();
+            const firstRequest = httpMock.expectOne('/fake');
+
+            tick(1000);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // the first HTTP request is finally over, the spinner is still visible
+            firstRequest.flush({});
+            tick();
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // 200 ms happen after the first HTTP request has finished, a second HTTP request is launched
+            tick(200);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            runQuery('/fake2').subscribe();
+            const secondRequest = httpMock.expectOne('/fake2');
+
+            // After 900ms, the second http request ends. The spinner should still be visible
+            tick(700);
+            secondRequest.flush({});
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // 100 ms later, the spinner should be  hidden (1000+200+700+100=minDuration)
+            tick(100);
+            expect(component.isSpinnerVisible).toBeFalsy();
+        }
+    )));
+
     it('should still display the spinner when the minimum duration is inferior to the HTTP request duration', fakeAsync(inject(
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             component.minDuration = 1000;
