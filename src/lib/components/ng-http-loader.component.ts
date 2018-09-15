@@ -8,7 +8,7 @@
  */
 
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { EMPTY, merge, Observable, Subscription, timer } from 'rxjs';
+import { merge, Observable, Subscription, timer } from 'rxjs';
 import { debounce, delayWhen } from 'rxjs/operators';
 import { PendingInterceptorService } from '../services/pending-interceptor.service';
 import { SpinnerVisibilityService } from '../services/spinner-visibility.service';
@@ -63,7 +63,7 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     }
 
     private nullifySpinnerIfEntryComponentIsDefined(): void {
-        if (null != this.entryComponent) {
+        if (this.entryComponent) {
             this.spinner = null;
         }
     }
@@ -104,12 +104,12 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
         this.isSpinnerVisible = hasPendingRequests;
     }
 
-    private handleDebounceDelay(hasPendingRequests: boolean): Observable<number | never> {
+    private handleDebounceDelay(hasPendingRequests: boolean): Observable<number> {
         if (hasPendingRequests && !!this.debounceDelay) {
             return timer(this.debounceDelay);
         }
 
-        return EMPTY;
+        return timer(0);
     }
 
     private handleMinDuration(hasPendingRequests: boolean): Observable<number> {
