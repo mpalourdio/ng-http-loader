@@ -8,7 +8,8 @@
     "lint": "ng lint",
     "preversion": "yarn test",
     "version": "yarn build",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "prepublish": "cd dist"
   },
   "repository": {
     "type": "git",
