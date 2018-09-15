@@ -114,14 +114,17 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
 
     private handleMinDuration(hasPendingRequests: boolean): Observable<number> {
         if (hasPendingRequests || !this.minDuration) {
-            this.startTime = Date.now();
+            if (this.shouldInitStartTime()) {
+                this.startTime = Date.now();
+            }
 
             return timer(0);
         }
 
-        const timerObservable = timer(this.minDuration - (Date.now() - this.startTime));
-        this.startTime = null;
+        return timer(this.minDuration - (Date.now() - this.startTime));
+    }
 
-        return timerObservable;
+    private shouldInitStartTime(): boolean {
+        return !this.isSpinnerVisible;
     }
 }
