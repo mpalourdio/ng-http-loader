@@ -5,7 +5,10 @@
     "ng": "ng",
     "build": "ng build",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "preversion": "yarn test",
+    "version": "yarn build",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
