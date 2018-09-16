@@ -76,13 +76,13 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
         }
     }
 
-    private initFilters() {
+    private initFilters(): void {
         this.initFilteredUrlPatterns();
         this.initFilteredMethods();
         this.initFilteredHeaders();
     }
 
-    private initFilteredUrlPatterns() {
+    private initFilteredUrlPatterns(): void {
         if (!(this.filteredUrlPatterns instanceof Array)) {
             throw new TypeError('`filteredUrlPatterns` must be an array.');
         }
@@ -94,14 +94,14 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
         }
     }
 
-    private initFilteredMethods() {
+    private initFilteredMethods(): void {
         if (!(this.filteredMethods instanceof Array)) {
             throw new TypeError('`filteredMethods` must be an array.');
         }
         this.pendingInterceptorService.filteredMethods = this.filteredMethods;
     }
 
-    private initFilteredHeaders() {
+    private initFilteredHeaders(): void {
         if (!(this.filteredHeaders instanceof Array)) {
             throw new TypeError('`filteredHeaders` must be an array.');
         }
