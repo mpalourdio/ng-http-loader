@@ -15,7 +15,7 @@ Min. duration time: 300ms
 Before this, minDuration would have been applied to both HTTP requests.
 
 - Added the ``extraDuration`` option: 
-    - This option make the spinner visible a certain amount of time after the moment when it should have naturally been hidden. This allows to avoid flickering when, for example, multiple HTTP requests are ran sequentially.
+    - This option make the spinner visible a certain amount of time after the moment when it should have naturally been hidden. This avoids flickering when, for example, multiple HTTP requests are ran sequentially.
     - See [this issue](https://github.com/mpalourdio/ng-http-loader/issues/90) for reference
 
 ```
