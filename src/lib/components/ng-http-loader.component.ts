@@ -48,7 +48,9 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
         const [showSpinner, hideSpinner] = partition((h: boolean) => h)(this.pendingInterceptorService.pendingRequestsStatus$);
 
         this.subscriptions = merge(
-            showSpinner.pipe(debounce(() => timer(this.debounceDelay))),
+            merge(showSpinner, hideSpinner).pipe(
+                switchMap(() => showSpinner.pipe(debounce(() => timer(this.debounceDelay))))
+            ),
             showSpinner.pipe(
                 switchMap(() => hideSpinner.pipe(debounce(() => this.getHidingTimer())))
             ),
