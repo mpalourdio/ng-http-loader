@@ -8,8 +8,8 @@
  */
 
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { EMPTY, merge, Observable, Subscription, timer } from 'rxjs';
-import { debounce, delayWhen } from 'rxjs/operators';
+import { merge, Observable, Subscription, timer } from 'rxjs';
+import { debounce, distinctUntilChanged, partition, switchMap } from 'rxjs/operators';
 import { PendingInterceptorService } from '../services/pending-interceptor.service';
 import { SpinnerVisibilityService } from '../services/spinner-visibility.service';
 import { Spinkit } from '../spinkits';
@@ -23,7 +23,7 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     public isSpinnerVisible: boolean;
     public spinkit = Spinkit;
     private subscriptions: Subscription;
-    private startTime: number;
+    private visibleUntil: number = Date.now();
 
     @Input()
     public backgroundColor: string;
@@ -40,16 +40,21 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     @Input()
     public minDuration = 0;
     @Input()
+    public extraDuration = 0;
+    @Input()
     public entryComponent: any = null;
 
     constructor(private pendingInterceptorService: PendingInterceptorService, private spinnerVisibilityService: SpinnerVisibilityService) {
+        const [showSpinner, hideSpinner] = partition((h: boolean) => h)(this.pendingInterceptorService.pendingRequestsStatus$);
+
         this.subscriptions = merge(
-            this.pendingInterceptorService.pendingRequestsStatus$.pipe(
-                debounce(h => this.handleDebounceDelay(h)),
-                delayWhen(h => this.handleMinDuration(h))
+            showSpinner.pipe(debounce(() => timer(this.debounceDelay))),
+            showSpinner.pipe(
+                switchMap(() => hideSpinner.pipe(debounce(() => this.getHiddingTimer())))
             ),
             this.spinnerVisibilityService.visibilityObservable$,
         )
+            .pipe(distinctUntilChanged())
             .subscribe(h => this.handleSpinnerVisibility(h));
     }
 
@@ -68,13 +73,13 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
         }
     }
 
-    private initFilters() {
+    private initFilters(): void {
         this.initFilteredUrlPatterns();
         this.initFilteredMethods();
         this.initFilteredHeaders();
     }
 
-    private initFilteredUrlPatterns() {
+    private initFilteredUrlPatterns(): void {
         if (!(this.filteredUrlPatterns instanceof Array)) {
             throw new TypeError('`filteredUrlPatterns` must be an array.');
         }
@@ -86,45 +91,29 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
         }
     }
 
-    private initFilteredMethods() {
+    private initFilteredMethods(): void {
         if (!(this.filteredMethods instanceof Array)) {
             throw new TypeError('`filteredMethods` must be an array.');
         }
         this.pendingInterceptorService.filteredMethods = this.filteredMethods;
     }
 
-    private initFilteredHeaders() {
+    private initFilteredHeaders(): void {
         if (!(this.filteredHeaders instanceof Array)) {
             throw new TypeError('`filteredHeaders` must be an array.');
         }
         this.pendingInterceptorService.filteredHeaders = this.filteredHeaders;
     }
 
-    private handleSpinnerVisibility(hasPendingRequests: boolean): void {
-        this.isSpinnerVisible = hasPendingRequests;
-    }
-
-    private handleDebounceDelay(hasPendingRequests: boolean): Observable<number | never> {
-        if (hasPendingRequests && !!this.debounceDelay) {
-            return timer(this.debounceDelay);
+    private handleSpinnerVisibility(showSpinner: boolean): void {
+        const now = Date.now();
+        if (showSpinner && this.visibleUntil <= now) {
+            this.visibleUntil = now + this.minDuration;
         }
-
-        return EMPTY;
+        this.isSpinnerVisible = showSpinner;
     }
 
-    private handleMinDuration(hasPendingRequests: boolean): Observable<number> {
-        if (hasPendingRequests || !this.minDuration) {
-            if (this.shouldInitStartTime()) {
-                this.startTime = Date.now();
-            }
-
-            return timer(0);
-        }
-
-        return timer(this.minDuration - (Date.now() - this.startTime));
-    }
-
-    private shouldInitStartTime(): boolean {
-        return !this.isSpinnerVisible;
+    private getHiddingTimer(): Observable<number> {
+        return timer(Math.max(this.extraDuration, this.visibleUntil - Date.now()));
     }
 }
