@@ -24,6 +24,7 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     public spinkit = Spinkit;
     private subscriptions: Subscription;
     private startTime: number;
+    private extraDurationTimer: number;
 
     @Input()
     public backgroundColor: string;
@@ -39,6 +40,8 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     public debounceDelay = 0;
     @Input()
     public minDuration = 0;
+    @Input()
+    public extraDuration = 0;
     @Input()
     public entryComponent: any = null;
 
@@ -101,7 +104,18 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     }
 
     private handleSpinnerVisibility(hasPendingRequests: boolean): void {
-        this.isSpinnerVisible = hasPendingRequests;
+        if (hasPendingRequests) {
+            if (this.extraDurationTimer) {
+                clearTimeout(this.extraDurationTimer);
+            }
+            this.isSpinnerVisible = true;
+        } else {
+            if (this.extraDuration) {
+                this.extraDurationTimer = setTimeout(() => this.isSpinnerVisible = false, this.extraDuration);
+            } else {
+                this.isSpinnerVisible = false;
+            }
+        }
     }
 
     private handleDebounceDelay(hasPendingRequests: boolean): Observable<number | never> {
