@@ -501,11 +501,7 @@ describe('NgHttpLoaderComponent', () => {
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             component.minDuration = 2000;
 
-            function runQuery(url: string): Observable<any> {
-                return http.get(url);
-            }
-
-            runQuery('/fake').subscribe();
+            http.get('/fake').subscribe();
             const firstRequest = httpMock.expectOne('/fake');
 
             tick(1000);
@@ -518,7 +514,7 @@ describe('NgHttpLoaderComponent', () => {
 
             // But 200 ms after the first HTTP request has finished, a second HTTP request is launched
             tick(200);
-            runQuery('/fake2').subscribe();
+            http.get('/fake2').subscribe();
             const secondRequest = httpMock.expectOne('/fake2');
             expect(component.isSpinnerVisible).toBeTruthy();
 
