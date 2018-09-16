@@ -107,7 +107,7 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
 
     private handleSpinnerVisibility(showSpinner: boolean): void {
         const now = Date.now();
-        if (showSpinner && this.visibleUntil < now) {
+        if (showSpinner && this.visibleUntil <= now) {
             this.visibleUntil = now + this.minDuration;
         }
         this.isSpinnerVisible = showSpinner;
