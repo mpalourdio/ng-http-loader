@@ -3,7 +3,8 @@
 ## v3.1.0
 
 Awesome contribution by [gnom7](https://github.com/gnom7)
-- Better handling of sequential HTTP requests. Particularly when mixed with the ``minDuration option``. See [this issue](https://github.com/mpalourdio/ng-http-loader/issues/89) for reference.
+- Better handling of sequential HTTP requests. Particularly when mixed with the ``minDuration`` option. See [this issue](https://github.com/mpalourdio/ng-http-loader/issues/89) for reference.
+
 ```
 Min. duration time: 300ms
 ---0ms------------------------------200ms-------280ms----------------400ms|  
