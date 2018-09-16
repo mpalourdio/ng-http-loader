@@ -50,7 +50,7 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
         this.subscriptions = merge(
             showSpinner.pipe(debounce(() => timer(this.debounceDelay))),
             showSpinner.pipe(
-                switchMap(() => hideSpinner.pipe(debounce(() => this.getHiddingTimer())))
+                switchMap(() => hideSpinner.pipe(debounce(() => this.getHidingTimer())))
             ),
             this.spinnerVisibilityService.visibilityObservable$,
         )
@@ -113,7 +113,7 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
         this.isSpinnerVisible = showSpinner;
     }
 
-    private getHiddingTimer(): Observable<number> {
+    private getHidingTimer(): Observable<number> {
         return timer(Math.max(this.extraDuration, this.visibleUntil - Date.now()));
     }
 }
