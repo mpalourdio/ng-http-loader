@@ -528,6 +528,34 @@ describe('NgHttpLoaderComponent', () => {
         }
     )));
 
+    it('should correctly handle the extra spinner duration for a single HTTP request', fakeAsync(inject(
+        [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
+            component.extraDuration = 5000;
+            http.get('/fake').subscribe();
+
+            // the HTTP request is pending for 1 second now
+            tick(1000);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // the HTTP request is pending for 2 seconds now
+            tick(1000);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // the HTTP request is finally over, the spinner is still visible
+            httpMock.expectOne('/fake').flush({});
+            tick();
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // 4 seconds after the HTTP request is over but the spinner is still visible
+            tick(4000);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // the spinner is not visible anymore after 5 seconds
+            tick(1000);
+            expect(component.isSpinnerVisible).toBeFalsy();
+        }
+    )));
+
     it('should correctly handle the minimum spinner duration for multiple HTTP requests', fakeAsync(inject(
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             component.minDuration = 5000;
@@ -565,6 +593,55 @@ describe('NgHttpLoaderComponent', () => {
             // the second HTTP request is finally over too, the spinner is still visible
             secondRequest.flush({});
             tick();
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // After 5 seconds, the spinner is hidden
+            tick(1000);
+            expect(component.isSpinnerVisible).toBeFalsy();
+        }
+    )));
+
+    it('should correctly handle the extra spinner duration for multiple HTTP requests', fakeAsync(inject(
+        [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
+            component.extraDuration = 5000;
+
+            function runQuery(url: string): Observable<any> {
+                return http.get(url);
+            }
+
+            forkJoin([runQuery('/fake'), runQuery('/fake2')]).subscribe();
+
+            const firstRequest = httpMock.expectOne('/fake');
+            const secondRequest = httpMock.expectOne('/fake2');
+
+            // the HTTP requests are pending for 1 second now
+            tick(1000);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // the HTTP requests are pending for 2 seconds now
+            tick(1000);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // the first HTTP request is finally over, the spinner is still visible
+            firstRequest.flush({});
+            tick();
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // the second HTTP request is still pending after 3 seconds
+            tick(1000);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // the second HTTP request is still pending after 4 seconds
+            tick(1000);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // the second HTTP request is finally over too, the spinner is still visible
+            secondRequest.flush({});
+            tick();
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // After 4 seconds, the spinner is still visible
+            tick(4000);
             expect(component.isSpinnerVisible).toBeTruthy();
 
             // After 5 seconds, the spinner is hidden
@@ -673,10 +750,56 @@ describe('NgHttpLoaderComponent', () => {
         }
     ));
 
+    it('should be possible to set the extra duration without side effect on manual show/hide', inject(
+        [SpinnerVisibilityService], (spinner: SpinnerVisibilityService) => {
+            component.extraDuration = 10000;
+            spinner.show();
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            spinner.hide();
+            expect(component.isSpinnerVisible).toBeFalsy();
+        }
+    ));
+
     it('should be possible to mix debounce delay and minimum duration', fakeAsync(inject(
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             // the spinner should not be visible the first second, then visible for 5 seconds
             component.minDuration = 5000;
+            component.debounceDelay = 1000;
+
+            http.get('/fake').subscribe();
+
+            // the HTTP request is pending for 0,5 second now - spinner not visible because debounce
+            tick(500);
+            expect(component.isSpinnerVisible).toBeFalsy();
+
+            // the HTTP request is pending for 1 second now - spinner visible
+            tick(500);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // the HTTP request is finally over, the spinner is still visible
+            httpMock.expectOne('/fake').flush({});
+            tick();
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // after 3 seconds, the spinner is still visible
+            tick(2000);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // after 5,999 seconds, the spinner is still visible
+            tick(2999);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // after 6 seconds (1s for debounce + 5s min. duration), the spinner is hidden
+            tick(1);
+            expect(component.isSpinnerVisible).toBeFalsy();
+        }
+    )));
+
+    it('should be possible to mix debounce delay and extra duration', fakeAsync(inject(
+        [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
+            // the spinner should not be visible the first second, then visible for 5 seconds
+            component.extraDuration = 5000;
             component.debounceDelay = 1000;
 
             http.get('/fake').subscribe();
