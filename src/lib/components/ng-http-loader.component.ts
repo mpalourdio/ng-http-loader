@@ -47,6 +47,7 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     constructor(private pendingInterceptorService: PendingInterceptorService, private spinnerVisibilityService: SpinnerVisibilityService) {
         const showSpinner = this.pendingInterceptorService.pendingRequestsStatus$.pipe(filter(it => it));
         const hideSpinner = this.pendingInterceptorService.pendingRequestsStatus$.pipe(filter(it => !it));
+
         this.subscriptions = merge(
             showSpinner.pipe(debounce(() => timer(this.debounceDelay))),
             showSpinner.pipe(
@@ -55,7 +56,9 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
                 ))
             ),
             this.spinnerVisibilityService.visibilityObservable$,
-        ).pipe(distinctUntilChanged()).subscribe(status => this.handleSpinnerVisibility(status));
+        )
+            .pipe(distinctUntilChanged())
+            .subscribe(status => this.handleSpinnerVisibility(status));
     }
 
     ngOnInit(): void {
