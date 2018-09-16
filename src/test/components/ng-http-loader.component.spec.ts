@@ -527,7 +527,7 @@ describe('NgHttpLoaderComponent', () => {
             tick(900);
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            // 500 ms later, the second http request ends. the spinner should be hidden
+            // 500 ms later, the second http request ends. The spinner should be hidden
             // Total time spent visible (1000+200+900+500==2600 > minDuration)
             tick(500);
             secondRequest.flush({});
