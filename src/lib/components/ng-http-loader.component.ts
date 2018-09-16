@@ -23,7 +23,7 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     public isSpinnerVisible: boolean;
     public spinkit = Spinkit;
     private subscriptions: Subscription;
-    private startTime: number;
+    private visibleUntil: number = Date.now();
 
     @Input()
     public backgroundColor: string;
@@ -106,19 +106,15 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
         this.pendingInterceptorService.filteredHeaders = this.filteredHeaders;
     }
 
-    private handleSpinnerVisibility(hasPendingRequests: boolean): void {
-        if (hasPendingRequests) {
-            this.startTime = Date.now();
+    private handleSpinnerVisibility(showSpinner: boolean): void {
+        const now = Date.now();
+        if (showSpinner && this.visibleUntil < now) {
+            this.visibleUntil = now + this.minDuration;
         }
-        this.isSpinnerVisible = hasPendingRequests;
+        this.isSpinnerVisible = showSpinner;
     }
-
-    private getSpinnerVisibilityDuration(): number {
-        return Date.now() - this.startTime;
-    }
-
 
     private getHiddingTimer(): Observable<number> {
-        return timer(Math.max(this.extraDuration, this.minDuration - this.getSpinnerVisibilityDuration()));
+        return timer(Math.max(this.extraDuration, this.visibleUntil - Date.now()));
     }
 }

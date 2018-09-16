@@ -518,15 +518,16 @@ describe('NgHttpLoaderComponent', () => {
             const secondRequest = httpMock.expectOne('/fake2');
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            // After 900ms, the second http request ends. The spinner should
+            // After 900ms, the spinner should
             // still be visible because the second HTTP request is still pending
             tick(900);
             expect(component.isSpinnerVisible).toBeTruthy();
 
             // 500 ms later, the second http request ends. The spinner should be hidden
-            // Total time spent visible (1000+200+900+500==2600 > minDuration)
+            // Total time spent visible (1000+200+1400==2600 > minDuration)
             tick(500);
             secondRequest.flush({});
+            tick();
             expect(component.isSpinnerVisible).toBeFalsy();
         }
     )));
