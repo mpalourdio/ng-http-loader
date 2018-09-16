@@ -8,7 +8,7 @@
  */
 
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { merge, Subscription, timer } from 'rxjs';
+import { merge, Observable, Subscription, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, filter, switchMap } from 'rxjs/operators';
 import { PendingInterceptorService } from '../services/pending-interceptor.service';
 import { SpinnerVisibilityService } from '../services/spinner-visibility.service';
@@ -51,9 +51,7 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
         this.subscriptions = merge(
             showSpinner.pipe(debounce(() => timer(this.debounceDelay))),
             showSpinner.pipe(
-                switchMap(() => hideSpinner.pipe(
-                    debounce(() => timer(Math.max(this.extraDuration, this.minDuration - this.spinnerVisibleMillis())))
-                ))
+                switchMap(() => hideSpinner.pipe(debounce(() => this.getHiddingTimer())))
             ),
             this.spinnerVisibilityService.visibilityObservable$,
         )
@@ -115,7 +113,12 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
         this.isSpinnerVisible = hasPendingRequests;
     }
 
-    private spinnerVisibleMillis(): number {
+    private getSpinnerVisibilityDuration(): number {
         return Date.now() - this.startTime;
+    }
+
+
+    private getHiddingTimer(): Observable<number> {
+        return timer(Math.max(this.extraDuration, this.minDuration - this.getSpinnerVisibilityDuration()));
     }
 }
