@@ -320,6 +320,22 @@ describe('NgHttpLoaderComponent', () => {
         }
     )));
 
+    it('should correctly handle the debounce delay for HTTP request finished before spinner should be shown', fakeAsync(inject(
+        [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
+            component.debounceDelay = 2000;
+            http.get('/fake').subscribe();
+
+            // the HTTP request is pending for 1 second now
+            tick(1000);
+            expect(component.isSpinnerVisible).toBeFalsy();
+
+            // the HTTP request is over, the spinner shouldn't be shown after debounceDelay terminated
+            httpMock.expectOne('/fake').flush({});
+            tick(1000);
+            expect(component.isSpinnerVisible).toBeFalsy();
+        }
+    )));
+
     it('should correctly handle the debounce delay for multiple HTTP requests', fakeAsync(inject(
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             component.debounceDelay = 2000;
