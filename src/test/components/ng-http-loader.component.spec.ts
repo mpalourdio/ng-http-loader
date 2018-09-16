@@ -531,6 +531,40 @@ describe('NgHttpLoaderComponent', () => {
         }
     )));
 
+    it('should handle the extra spinner duration for multiple HTTP requests ran one after the others', fakeAsync(inject(
+        [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
+            component.extraDuration = 10;
+
+            function runQuery(url: string): Observable<any> {
+                return http.get(url);
+            }
+
+            runQuery('/fake').subscribe();
+            const firstRequest = httpMock.expectOne('/fake');
+
+            tick(1000);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // the first HTTP request is finally over, the spinner is still visible for at least 10ms
+            firstRequest.flush({});
+            tick(5);
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // But 5 ms after the first HTTP request has finished, a second HTTP request has been launched
+            runQuery('/fake2').subscribe();
+            const secondRequest = httpMock.expectOne('/fake2');
+
+            // After 700ms, the second http request ends. The spinner is still visible
+            tick(700);
+            secondRequest.flush({});
+            expect(component.isSpinnerVisible).toBeTruthy();
+
+            // 10ms later, the spinner should be  hidden (extraDuration)
+            tick(10);
+            expect(component.isSpinnerVisible).toBeFalsy();
+        }
+    )));
+
     it('should still display the spinner when the minimum duration is inferior to the HTTP request duration', fakeAsync(inject(
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             component.minDuration = 1000;
