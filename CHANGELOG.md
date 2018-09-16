@@ -1,5 +1,29 @@
 # Changelog
 
+## v3.1.0
+
+Awesome contribution by [gnom7](https://github.com/gnom7)
+- Better handling of sequential HTTP requests. Particularly when mixed with the ``minDuration option``. See [this issue](https://github.com/mpalourdio/ng-http-loader/issues/89) for reference.
+```
+Min. duration time: 300ms
+---0ms------------------------------200ms-------280ms----------------400ms|  
+----|---------------------------------------------|-----------------------|  
+(req1 starts and spinner shows)  (req1 ends)  (req2 starts)   (req2 ends and spinner hides)
+```
+
+Before this, minDuration would have been applied to both HTTP requests.
+
+- Added the ``extraDuration`` option: 
+    - This option make the spinner visible a certain amount of time after the moment when it should have naturally been hidden. This allows to avoid flickering when, for example, multiple HTTP requests are ran sequentially.
+    - See [this issue](https://github.com/mpalourdio/ng-http-loader/issues/90) for reference
+
+```
+Extra duration time: 60ms
+---0ms----------200ms------260ms---- |  
+----|------------|----------|--------|  
+req starts   req ends  spinner hides
+```
+
 ## v3.0.0
 
 - All existing deprecations have been removed.
