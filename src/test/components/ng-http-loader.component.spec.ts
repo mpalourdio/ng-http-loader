@@ -790,7 +790,7 @@ describe('NgHttpLoaderComponent', () => {
             tick(2999);
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            // after 6 seconds (1s for debounce + 5s min. duration), the spinner is hidden
+            // after 6 seconds (1s for debounce + 5s extra. duration), the spinner is hidden
             tick(1);
             expect(component.isSpinnerVisible).toBeFalsy();
         }
