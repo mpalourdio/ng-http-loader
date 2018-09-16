@@ -9,7 +9,7 @@
 
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { merge, Observable, Subscription, timer } from 'rxjs';
-import { debounce, distinctUntilChanged, filter, switchMap } from 'rxjs/operators';
+import { debounce, distinctUntilChanged, partition, switchMap } from 'rxjs/operators';
 import { PendingInterceptorService } from '../services/pending-interceptor.service';
 import { SpinnerVisibilityService } from '../services/spinner-visibility.service';
 import { Spinkit } from '../spinkits';
@@ -45,8 +45,7 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     public entryComponent: any = null;
 
     constructor(private pendingInterceptorService: PendingInterceptorService, private spinnerVisibilityService: SpinnerVisibilityService) {
-        const showSpinner = this.pendingInterceptorService.pendingRequestsStatus$.pipe(filter(it => it));
-        const hideSpinner = this.pendingInterceptorService.pendingRequestsStatus$.pipe(filter(it => !it));
+        const [showSpinner, hideSpinner] = partition((h: boolean) => h)(this.pendingInterceptorService.pendingRequestsStatus$);
 
         this.subscriptions = merge(
             showSpinner.pipe(debounce(() => timer(this.debounceDelay))),
@@ -56,7 +55,7 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
             this.spinnerVisibilityService.visibilityObservable$,
         )
             .pipe(distinctUntilChanged())
-            .subscribe(status => this.handleSpinnerVisibility(status));
+            .subscribe(h => this.handleSpinnerVisibility(h));
     }
 
     ngOnInit(): void {
