@@ -86,8 +86,7 @@ You can customize the **background-color**, the **spinner type**, the **debounce
     [spinner]="spinkit.skWave"
     [debounceDelay]="100"
     [minDuration]="300"
-    [extraDuration]="300"
-    >
+    [extraDuration]="300">
 </ng-http-loader>
 ```
 
