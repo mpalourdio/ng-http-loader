@@ -546,7 +546,7 @@ describe('NgHttpLoaderComponent', () => {
             tick();
             expect(component.isSpinnerVisible).toBeTruthy();
 
-            // 4 seconds after the HTTP request is over but the spinner is still visible
+            // 4 seconds after the HTTP request is over, the spinner is still visible
             tick(4000);
             expect(component.isSpinnerVisible).toBeTruthy();
 
