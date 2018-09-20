@@ -697,7 +697,7 @@ atob@^2.1.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
 
-autoprefixer@^8.0.0, autoprefixer@^8.4.1:
+autoprefixer@^8.4.1:
   version "8.6.5"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-8.6.5.tgz#343f3d193ed568b3208e00117a1b96eb691d4ee9"
   dependencies:
@@ -706,6 +706,17 @@ autoprefixer@^8.0.0, autoprefixer@^8.4.1:
     normalize-range "^0.1.2"
     num2fraction "^1.2.2"
     postcss "^6.0.23"
+    postcss-value-parser "^3.2.3"
+
+autoprefixer@^9.0.0:
+  version "9.1.5"
+  resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-9.1.5.tgz#8675fd8d1c0d43069f3b19a2c316f3524e4f6671"
+  dependencies:
+    browserslist "^4.1.0"
+    caniuse-lite "^1.0.30000884"
+    normalize-range "^0.1.2"
+    num2fraction "^1.2.2"
+    postcss "^7.0.2"
     postcss-value-parser "^3.2.3"
 
 aws-sign2@~0.7.0:
@@ -1011,12 +1022,20 @@ browserify-zlib@^0.2.0:
   dependencies:
     pako "~1.0.5"
 
-browserslist@^3.0.0, browserslist@^3.2.8:
+browserslist@^3.2.8:
   version "3.2.8"
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-3.2.8.tgz#b0005361d6471f0f5952797a76fc985f1f978fc6"
   dependencies:
     caniuse-lite "^1.0.30000844"
     electron-to-chromium "^1.3.47"
+
+browserslist@^4.0.0, browserslist@^4.1.0:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.1.1.tgz#328eb4ff1215b12df6589e9ab82f8adaa4fc8cd6"
+  dependencies:
+    caniuse-lite "^1.0.30000884"
+    electron-to-chromium "^1.3.62"
+    node-releases "^1.0.0-alpha.11"
 
 buffer-alloc-unsafe@^1.1.0:
   version "1.1.0"
@@ -1135,7 +1154,7 @@ camelcase@^4.0.0, camelcase@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-4.1.0.tgz#d545635be1e33c542649c69173e5de6acfae34dd"
 
-caniuse-lite@^1.0.30000844, caniuse-lite@^1.0.30000864:
+caniuse-lite@^1.0.30000844, caniuse-lite@^1.0.30000864, caniuse-lite@^1.0.30000884:
   version "1.0.30000885"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000885.tgz#e889e9f8e7e50e769f2a49634c932b8aee622984"
 
@@ -1237,7 +1256,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-clean-css@4.2.x, clean-css@^4.1.11, clean-css@^4.x:
+clean-css@4.2.x, clean-css@^4.1.11:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-4.2.1.tgz#2d411ef76b8569b6d0c84068dabe85b0aa5e5c17"
   dependencies:
@@ -1928,6 +1947,10 @@ electron-to-chromium@^1.3.47:
   version "1.3.67"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.67.tgz#5e8f3ffac89b4b0402c7e1a565be06f3a109abbc"
 
+electron-to-chromium@^1.3.62:
+  version "1.3.70"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.70.tgz#ded377256d92d81b4257d36c65aa890274afcfd2"
+
 elliptic@^6.0.0:
   version "6.4.1"
   resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.4.1.tgz#c2d0b7776911b86722c632c3c06c60f2f819939a"
@@ -2372,7 +2395,7 @@ find-up@^1.0.0:
     path-exists "^2.0.0"
     pinkie-promise "^2.0.0"
 
-find-up@^2.0.0, find-up@^2.1.0:
+find-up@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/find-up/-/find-up-2.1.0.tgz#45d1b7e506c717ddd482775a2b77920a3c0c57a7"
   dependencies:
@@ -2456,9 +2479,9 @@ fs-access@^1.0.0:
   dependencies:
     null-check "^1.0.0"
 
-fs-extra@^6.0.0:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-6.0.1.tgz#8abc128f7946e310135ddc93b98bddb410e7a34b"
+fs-extra@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-7.0.0.tgz#8cc3f47ce07ef7b3593a11b9fb245f7e34c041d6"
   dependencies:
     graceful-fs "^4.1.2"
     jsonfile "^4.0.0"
@@ -3630,7 +3653,14 @@ less-loader@^4.1.0:
     loader-utils "^1.1.0"
     pify "^3.0.0"
 
-less@^3.0.0, less@^3.7.1:
+less-plugin-npm-import@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/less-plugin-npm-import/-/less-plugin-npm-import-2.1.0.tgz#823e6986c93318a98171ca858848b6bead55bf3e"
+  dependencies:
+    promise "~7.0.1"
+    resolve "~1.1.6"
+
+less@^3.7.1, less@^3.8.0:
   version "3.8.1"
   resolved "https://registry.yarnpkg.com/less/-/less-3.8.1.tgz#f31758598ef5a1930dd4caefa9e4340641e71e1d"
   dependencies:
@@ -4096,32 +4126,33 @@ neo-async@^2.5.0:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.5.2.tgz#489105ce7bc54e709d736b195f82135048c50fcc"
 
-ng-packagr@^3.0.0:
-  version "3.0.6"
-  resolved "https://registry.yarnpkg.com/ng-packagr/-/ng-packagr-3.0.6.tgz#0257993244616e2a7ce8dabbc7f4e65cef6a137c"
+ng-packagr@^4.1.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/ng-packagr/-/ng-packagr-4.2.0.tgz#9e2babac0402f761c64908996dae99e54a07fe3e"
   dependencies:
     "@ngtools/json-schema" "^1.1.0"
-    autoprefixer "^8.0.0"
-    browserslist "^3.0.0"
+    autoprefixer "^9.0.0"
+    browserslist "^4.0.0"
     chalk "^2.3.1"
+    chokidar "^2.0.3"
+    clean-css "^4.1.11"
     commander "^2.12.0"
-    fs-extra "^6.0.0"
+    fs-extra "^7.0.0"
     glob "^7.1.2"
     injection-js "^2.2.1"
-    less "^3.0.0"
-    node-sass "^4.5.3"
+    less "^3.8.0"
+    less-plugin-npm-import "^2.1.0"
+    node-sass "^4.9.3"
     node-sass-tilde-importer "^1.0.0"
-    postcss "^6.0.2"
-    postcss-clean "^1.1.0"
-    postcss-url "^7.3.0"
-    read-pkg-up "^3.0.0"
+    postcss "^7.0.0"
+    postcss-url "^8.0.0"
+    read-pkg-up "^4.0.0"
     rimraf "^2.6.1"
-    rollup "^0.59.0"
+    rollup "^0.66.0"
     rollup-plugin-commonjs "^9.1.3"
     rollup-plugin-node-resolve "^3.0.0"
     rollup-plugin-sourcemaps "^0.4.2"
     rxjs "^6.0.0"
-    strip-bom "^3.0.0"
     stylus "^0.54.5"
     uglify-js "^3.0.7"
     update-notifier "^2.3.0"
@@ -4200,13 +4231,19 @@ node-pre-gyp@^0.10.0:
     semver "^5.3.0"
     tar "^4"
 
+node-releases@^1.0.0-alpha.11:
+  version "1.0.0-alpha.11"
+  resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.0.0-alpha.11.tgz#73c810acc2e5b741a17ddfbb39dfca9ab9359d8a"
+  dependencies:
+    semver "^5.3.0"
+
 node-sass-tilde-importer@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/node-sass-tilde-importer/-/node-sass-tilde-importer-1.0.2.tgz#1a15105c153f648323b4347693fdb0f331bad1ce"
   dependencies:
     find-parent-dir "^0.3.0"
 
-node-sass@^4.5.3, node-sass@^4.9.3:
+node-sass@^4.9.3:
   version "4.9.3"
   resolved "https://registry.yarnpkg.com/node-sass/-/node-sass-4.9.3.tgz#f407cf3d66f78308bb1e346b24fa428703196224"
   dependencies:
@@ -4709,13 +4746,6 @@ posix-character-classes@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
 
-postcss-clean@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/postcss-clean/-/postcss-clean-1.1.0.tgz#c2d61d5d8caf19a585adba16897726c2674c4207"
-  dependencies:
-    clean-css "^4.x"
-    postcss "^6.x"
-
 postcss-import@^11.1.0:
   version "11.1.0"
   resolved "https://registry.yarnpkg.com/postcss-import/-/postcss-import-11.1.0.tgz#55c9362c9192994ec68865d224419df1db2981f0"
@@ -4741,7 +4771,7 @@ postcss-loader@^2.1.5:
     postcss-load-config "^2.0.0"
     schema-utils "^0.4.0"
 
-postcss-url@^7.3.0, postcss-url@^7.3.2:
+postcss-url@^7.3.2:
   version "7.3.2"
   resolved "https://registry.yarnpkg.com/postcss-url/-/postcss-url-7.3.2.tgz#5fea273807fb84b38c461c3c9a9e8abd235f7120"
   dependencies:
@@ -4751,13 +4781,31 @@ postcss-url@^7.3.0, postcss-url@^7.3.2:
     postcss "^6.0.1"
     xxhashjs "^0.2.1"
 
+postcss-url@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/postcss-url/-/postcss-url-8.0.0.tgz#7b10059bd12929cdbb1971c60f61a0e5af86b4ca"
+  dependencies:
+    mime "^2.3.1"
+    minimatch "^3.0.4"
+    mkdirp "^0.5.0"
+    postcss "^7.0.2"
+    xxhashjs "^0.2.1"
+
 postcss-value-parser@^3.2.3:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-3.3.0.tgz#87f38f9f18f774a4ab4c8a232f5c5ce8872a9d15"
 
-postcss@^6.0.0, postcss@^6.0.1, postcss@^6.0.2, postcss@^6.0.22, postcss@^6.0.23, postcss@^6.x:
+postcss@^6.0.0, postcss@^6.0.1, postcss@^6.0.22, postcss@^6.0.23:
   version "6.0.23"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-6.0.23.tgz#61c82cc328ac60e677645f979054eb98bc0e3324"
+  dependencies:
+    chalk "^2.4.1"
+    source-map "^0.6.1"
+    supports-color "^5.4.0"
+
+postcss@^7.0.0, postcss@^7.0.2:
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-7.0.2.tgz#7b5a109de356804e27f95a960bef0e4d5bc9bb18"
   dependencies:
     chalk "^2.4.1"
     source-map "^0.6.1"
@@ -4797,6 +4845,12 @@ promise-inflight@^1.0.1:
 promise@^7.1.1:
   version "7.3.1"
   resolved "https://registry.yarnpkg.com/promise/-/promise-7.3.1.tgz#064b72602b18f90f29192b8b1bc418ffd1ebd3bf"
+  dependencies:
+    asap "~2.0.3"
+
+promise@~7.0.1:
+  version "7.0.4"
+  resolved "http://registry.npmjs.org/promise/-/promise-7.0.4.tgz#363e84a4c36c8356b890fed62c91ce85d02ed539"
   dependencies:
     asap "~2.0.3"
 
@@ -4949,11 +5003,11 @@ read-pkg-up@^1.0.1:
     find-up "^1.0.0"
     read-pkg "^1.0.0"
 
-read-pkg-up@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/read-pkg-up/-/read-pkg-up-3.0.0.tgz#3ed496685dba0f8fe118d0691dc51f4a1ff96f07"
+read-pkg-up@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/read-pkg-up/-/read-pkg-up-4.0.0.tgz#1b221c6088ba7799601c808f91161c66e58f8978"
   dependencies:
-    find-up "^2.0.0"
+    find-up "^3.0.0"
     read-pkg "^3.0.0"
 
 read-pkg@^1.0.0:
@@ -5180,7 +5234,7 @@ resolve-url@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/resolve-url/-/resolve-url-0.2.1.tgz#2c637fe77c893afd2a663fe21aa9080068e2052a"
 
-resolve@1.1.x:
+resolve@1.1.x, resolve@~1.1.6:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.1.7.tgz#203114d82ad2c5ed9e8e0411b3932875e889e97b"
 
@@ -5246,9 +5300,9 @@ rollup-pluginutils@^2.0.1:
     estree-walker "^0.5.2"
     micromatch "^2.3.11"
 
-rollup@^0.59.0:
-  version "0.59.4"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.59.4.tgz#6f80f7017c22667ff1bf3e62adf8624a44cc44aa"
+rollup@^0.66.0:
+  version "0.66.1"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.66.1.tgz#4374a478a98ff075ee0e5bcafb9ab78ca968a301"
   dependencies:
     "@types/estree" "0.0.39"
     "@types/node" "*"
