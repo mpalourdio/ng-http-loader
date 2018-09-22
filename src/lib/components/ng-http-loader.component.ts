@@ -58,14 +58,14 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     }
 
     private initializeSubscription() {
-        const [showSpinner, hideSpinner] = partition((h: boolean) => h)(this.pendingInterceptorService.pendingRequestsStatus$);
+        const [showSpinner$, hideSpinner$] = partition((h: boolean) => h)(this.pendingInterceptorService.pendingRequestsStatus$);
 
         this.subscriptions = merge(
             this.pendingInterceptorService.pendingRequestsStatus$.pipe(
-                switchMap(() => showSpinner.pipe(debounce(() => timer(this.debounceDelay))))
+                switchMap(() => showSpinner$.pipe(debounce(() => timer(this.debounceDelay))))
             ),
-            showSpinner.pipe(
-                switchMap(() => hideSpinner.pipe(debounce(() => this.getHidingTimer())))
+            showSpinner$.pipe(
+                switchMap(() => hideSpinner$.pipe(debounce(() => this.getVisibilityTimer())))
             ),
             this.spinnerVisibilityService.visibilityObservable$,
         )
@@ -112,14 +112,13 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     }
 
     private handleSpinnerVisibility(showSpinner: boolean): void {
-        const now = Date.now();
-        if (showSpinner && this.visibleUntil <= now) {
-            this.visibleUntil = now + this.minDuration;
+        if (showSpinner) {
+            this.visibleUntil = Date.now() + this.minDuration;
         }
         this.isSpinnerVisible = showSpinner;
     }
 
-    private getHidingTimer(): Observable<number> {
+    private getVisibilityTimer(): Observable<number> {
         return timer(Math.max(this.extraDuration, this.visibleUntil - Date.now()));
     }
 }

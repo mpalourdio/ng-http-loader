@@ -11,7 +11,7 @@
           "styleext": "scss"
         }
       },
-      "architect": {
+      "targets": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
