@@ -1,5 +1,9 @@
 # Changelog
 
+## v3.1.1
+
+The Subscriptions that had been previously moved from constructor to ``ngOnInit`` are back in constructor. This avoids testing if the subscription exists in ``ngOnDestroy`` before unsubscribing.
+
 ## v3.1.0
 
 Awesome contribution by [gnom7](https://github.com/gnom7)
