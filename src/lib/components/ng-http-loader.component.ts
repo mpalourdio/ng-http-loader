@@ -45,12 +45,12 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     public entryComponent: any = null;
 
     constructor(private pendingInterceptorService: PendingInterceptorService, private spinnerVisibilityService: SpinnerVisibilityService) {
+        this.initializeSubscription();
     }
 
     ngOnInit(): void {
         this.nullifySpinnerIfEntryComponentIsDefined();
         this.initFilters();
-        this.initializeSubscription();
     }
 
     ngOnDestroy(): void {
