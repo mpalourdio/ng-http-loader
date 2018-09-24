@@ -45,19 +45,6 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     public entryComponent: any = null;
 
     constructor(private pendingInterceptorService: PendingInterceptorService, private spinnerVisibilityService: SpinnerVisibilityService) {
-        this.initializeSubscription();
-    }
-
-    ngOnInit(): void {
-        this.nullifySpinnerIfEntryComponentIsDefined();
-        this.initFilters();
-    }
-
-    ngOnDestroy(): void {
-        this.subscriptions.unsubscribe();
-    }
-
-    private initializeSubscription() {
         const [showSpinner$, hideSpinner$] = partition((h: boolean) => h)(this.pendingInterceptorService.pendingRequestsStatus$);
 
         this.subscriptions = merge(
@@ -71,6 +58,15 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
         )
             .pipe(distinctUntilChanged())
             .subscribe(h => this.handleSpinnerVisibility(h));
+    }
+
+    ngOnInit(): void {
+        this.nullifySpinnerIfEntryComponentIsDefined();
+        this.initFilters();
+    }
+
+    ngOnDestroy(): void {
+        this.subscriptions.unsubscribe();
     }
 
     private nullifySpinnerIfEntryComponentIsDefined(): void {
