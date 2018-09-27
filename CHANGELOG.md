@@ -2,7 +2,7 @@
 
 ## v3.1.1
 
-The Subscriptions that had been previously moved from constructor to ``ngOnInit`` are back in constructor. This avoids testing if the subscription exists in ``ngOnDestroy`` before unsubscribing.
+The Subscriptions that had been previously moved from constructor to ``ngOnInit`` are back in constructor. This avoids testing if the subscriptions exist in ``ngOnDestroy`` before unsubscribing them.
 
 ## v3.1.0
 
@@ -16,7 +16,7 @@ Min. duration time: 300ms
 (req1 starts and spinner shows)  (req1 ends)  (req2 starts)   (req2 ends and spinner hides)
 ```
 
-Before this, minDuration would have been applied to both HTTP requests.
+Before this, ``minDuration`` would have been applied to both HTTP requests.
 
 - Added the ``extraDuration`` option: 
     - This option make the spinner visible a certain amount of time after the moment when it should have naturally been hidden. This avoids flickering when, for example, multiple HTTP requests are ran sequentially.
