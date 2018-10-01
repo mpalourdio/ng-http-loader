@@ -2,12 +2,12 @@
 
 ## v3.1.1
 
-The Subscriptions that had been previously moved from constructor to ``ngOnInit`` are back in constructor. This avoids testing if the subscriptions exist in ``ngOnDestroy`` before unsubscribing them.
+The Subscriptions that had been previously moved from constructor to `ngOnInit` are back in constructor. This avoids testing if the subscriptions exist in `ngOnDestroy` before unsubscribing them.
 
 ## v3.1.0
 
 Awesome contribution by [gnom7](https://github.com/gnom7)
-- Better handling of sequential HTTP requests. Particularly when mixed with the ``minDuration`` option. See [this issue](https://github.com/mpalourdio/ng-http-loader/issues/89) for reference.
+- Better handling of sequential HTTP requests. Particularly when mixed with the `minDuration` option. See [this issue](https://github.com/mpalourdio/ng-http-loader/issues/89) for reference.
 
 ```
 Min. duration time: 300ms
@@ -16,9 +16,9 @@ Min. duration time: 300ms
 (req1 starts and spinner shows)  (req1 ends)  (req2 starts)   (req2 ends and spinner hides)
 ```
 
-Before this, ``minDuration`` would have been applied to both HTTP requests.
+Before this, `minDuration` would have been applied to both HTTP requests.
 
-- Added the ``extraDuration`` option: 
+- Added the `extraDuration` option: 
     - This option make the spinner visible a certain amount of time after the moment when it should have naturally been hidden. This avoids flickering when, for example, multiple HTTP requests are ran sequentially.
     - See [this issue](https://github.com/mpalourdio/ng-http-loader/issues/90) for reference
 
@@ -33,16 +33,16 @@ req starts   req ends  spinner hides
 
 - All existing deprecations have been removed.
 - BC breaks => 
-    - ``SpinnerComponent`` has been renamed to ``NgHttpLoaderComponent``.
-    - The ``<spinner>`` component-selector has been renamed to ``<ng-http-loader>``.
+    - `SpinnerComponent` has been renamed to `NgHttpLoaderComponent`.
+    - The `<spinner>` component-selector has been renamed to `<ng-http-loader>`.
 
 ## v2.3.0
 
-This release adds the possibility to filter HTTP requests that should not be handled by the interceptor by providing an array of HTTP headers to the component's ``filteredHeaders`` property.
+This release adds the possibility to filter HTTP requests that should not be handled by the interceptor by providing an array of HTTP headers to the component's `filteredHeaders` property.
 
 ## v2.2.0
 
-This release adds the possibility to filter HTTP requests that should not be handled by the interceptor by providing an array of HTTP methods to the component's ``filteredMethods`` property.
+This release adds the possibility to filter HTTP requests that should not be handled by the interceptor by providing an array of HTTP methods to the component's `filteredMethods` property.
 
 ## v2.1.0
 
@@ -64,20 +64,20 @@ Min. duration time: 300ms
 req starts  spinner shows    req ends     spinner hides
 ```
 
-``SpinnerVisibilityService#visibilityObservable`` and ``PendingInterceptorService#pendingRequestsStatus`` have been respectively deprecated in favor of ``visibilityObservable$`` and ``pendingRequestsStatus$`` (note the **$**).
+`SpinnerVisibilityService#visibilityObservable` and `PendingInterceptorService#pendingRequestsStatus` have been respectively deprecated in favor of `visibilityObservable$` and `pendingRequestsStatus$` (note the **$**).
 
 ## v2.0.0
 
 The module bundling now uses [ng-packagr](https://github.com/dherges/ng-packagr).  
-From now, you must use ``import { xxxxxxx } from 'ng-http-loader'`` without referencing the full path.
+From now, you must use `import { xxxxxxx } from 'ng-http-loader'` without referencing the full path.
 
-Also, ``NgHttpLoaderServicesModule`` && ``NgHttpLoaderComponentsModule`` have been removed and merged back to ``NgHttpLoaderModule``.  
-The ``injectables`` now take advantage of the new [Tree Shakable Providers features](https://blog.angular.io/version-6-of-angular-now-available-cc56b0efa7a4).  
-The integration in much cleaner, particularly with lazy loaded modules, and avoids the static ``forRoot()`` boilerplate. 
+Also, `NgHttpLoaderServicesModule` && `NgHttpLoaderComponentsModule` have been removed and merged back to `NgHttpLoaderModule`.  
+The `injectables` now take advantage of the new [Tree Shakable Providers features](https://blog.angular.io/version-6-of-angular-now-available-cc56b0efa7a4).  
+The integration in much cleaner, particularly with lazy loaded modules, and avoids the static `forRoot()` boilerplate. 
 
 ## v1.0.3
 
-Some compiler options have been reverted, so the compilation target is ``es5`` like before v1.0.2.
+Some compiler options have been reverted, so the compilation target is `es5` like before v1.0.2.
 
 ## v1.0.2
 
@@ -85,7 +85,7 @@ The compiler options have been adjusted so ng-http-loader is now an es2015 modul
 
 ## v1.0.1
 
-This release is a bug fix release. It prevents the ``PendingInterceptorService`` from being triggered when using the ``SpinnerVisibilityService``.  
+This release is a bug fix release. It prevents the `PendingInterceptorService` from being triggered when using the `SpinnerVisibilityService`.  
 See this [issue](https://github.com/mpalourdio/ng-http-loader/issues/64) for more details.
 
 ## v1.0.0
@@ -101,29 +101,29 @@ See [this thread](https://github.com/tobiasahlin/SpinKit/issues/139) for details
 ## v0.9.0
 
 This release adds the more friendly SpinnerVisibilityService#show() && SpinnerVisibilityService#hide() methods as public API.  
-The ``visibilitySubject`` introduced in v0.8.0 is now a ``ReplaySubject``, and its getter returns now an observable.
+The `visibilitySubject` introduced in v0.8.0 is now a `ReplaySubject`, and its getter returns now an observable.
 
 See the [Manually show and hide the spinner](https://github.com/mpalourdio/ng-http-loader#manually-show-and-hide-the-spinner) section.
 
 ## v0.8.0
 
-This release adds the ``SpinnerVisibilityService``, a simple injectable service that allows you to manually show/hide the spinner.
+This release adds the `SpinnerVisibilityService`, a simple injectable service that allows you to manually show/hide the spinner.
 
 See the [Manually show and hide the spinner](https://github.com/mpalourdio/ng-http-loader#manually-show-and-hide-the-spinner) section.
 
 ## v0.7.1
 
-This release is a bug fix release. It slightly improves the behavior of the ``filteredUrlPatterns`` so this parameter takes care of query strings too.
+This release is a bug fix release. It slightly improves the behavior of the `filteredUrlPatterns` so this parameter takes care of query strings too.
 
 ## v0.7.0
 
-This release adds the ``entryComponent`` property. It allows to specify your own component instead of the built-in ones. It uses the [NgComponentOutlet](https://angular.io/api/common/NgComponentOutlet) feature.
+This release adds the `entryComponent` property. It allows to specify your own component instead of the built-in ones. It uses the [NgComponentOutlet](https://angular.io/api/common/NgComponentOutlet) feature.
 
 See the [Defining your own spinner](https://github.com/mpalourdio/ng-http-loader#defining-your-own-spinner) section.
 
 ## v0.6.0
 
-This release adds the ``debounceDelay`` parameter (default is 0). It allows to discard the spinner for fast and repeated HTTP requests, which can be annoying under some conditions.
+This release adds the `debounceDelay` parameter (default is 0). It allows to discard the spinner for fast and repeated HTTP requests, which can be annoying under some conditions.
 
 See [customization](https://github.com/mpalourdio/ng-http-loader#customizing-the-spinner)
 
@@ -134,20 +134,20 @@ The library now takes advantage of [RxJS lettable operators](https://github.com/
 ## v0.5.1
 
 This release fixes a bug that could cause the spinner to not show if an HTTP request were performed **before** the spinner component was initialized.  
-The responsible ``Subject`` has been replaced by a ``ReplaySubject``.
+The responsible `Subject` has been replaced by a `ReplaySubject`.
 
 ## v0.5.0
 
 The module is now splitted in sub-modules for more convenience. See [usage](https://github.com/mpalourdio/ng-http-loader#usage).  
-It's an **opt-in** feature. The "old" module import method, by simply declaring ``NgHttpLoaderModule``, is still fully supported. 
+It's an **opt-in** feature. The "old" module import method, by simply declaring `NgHttpLoaderModule`, is still fully supported. 
 
 **BC break**: paths of components and services have changed.
-- Components are now located in the ``components`` folders.
-- Services are now located in the ``services`` folders.
+- Components are now located in the `components` folders.
+- Services are now located in the `services` folders.
 
 ## v0.4.0
 
-Added **angular 5** full support. The last version compatible with angular 4 is ``version 0.3.4``
+Added **angular 5** full support. The last version compatible with angular 4 is `version 0.3.4`
 
 ## v0.3.4
 
@@ -155,7 +155,7 @@ Fixed default spinners background.
 
 ## v0.3.0
 
-This release gives the possibility to filter HTTP requests that should not be handled by the interceptor by providing an array of URL regex to the component's ``filteredUrlPatterns`` property.
+This release gives the possibility to filter HTTP requests that should not be handled by the interceptor by providing an array of URL regex to the component's `filteredUrlPatterns` property.
 
 ## v0.2.0
 
