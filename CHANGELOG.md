@@ -3,7 +3,7 @@
 ## v3.1.2
 
 Added [browserslist](https://github.com/browserslist/browserslist) support.  
-Some cleanup has been made in existing CSS files to let the CSS auto-prefixer do the job regarding supported browsers.  
+Some cleanup has been done in CSS files to let the CSS auto-prefixer do the job automatically regarding supported browsers.  
 Consequently, IE 9/10 compatibility has been added.
 
 ## v3.1.1
