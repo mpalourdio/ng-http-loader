@@ -1,5 +1,11 @@
 # Changelog
 
+## v3.1.2
+
+Added [browserslist](https://github.com/browserslist/browserslist) support.  
+Some cleanup has been made in existing CSS files to let the CSS auto-prefixer do the job regarding supported browsers.  
+Consequently, IE 9/10 compatibility has been added.
+
 ## v3.1.1
 
 The Subscriptions that had been previously moved from constructor to `ngOnInit` are back in constructor. This avoids testing if the subscriptions exist in `ngOnDestroy` before unsubscribing them.
