@@ -13,7 +13,7 @@ import { AbstractLoader } from '../abstract.loader.component';
 @Component({
     selector: 'sk-chasing-dots',
     templateUrl: './sk-chasing-dots.component.html',
-    styleUrls: ['./sk-chasing-dots.component.css']
+    styleUrls: ['./sk-chasing-dots.component.scss']
 })
 export class SkChasingDotsComponent extends AbstractLoader {
 }

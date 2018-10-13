@@ -18,23 +18,42 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
+@import "../variables";
 
-.sk-spinner-pulse {
-    position: relative;
-    top: 50%;
-    width: 40px;
-    height: 40px;
-    margin: auto;
-    border-radius: 100%;
-    animation: sk-pulseScaleOut 1s infinite ease-in-out;
+.sk-wave {
+    $rectCount: 5;
+    $animationDuration: 1.2s;
+    $delayRange: 0.4s;
+
+    position: $spinkit-position;
+    top: $spinkit-top;
+    margin: $spinkit-spinner-margin;
+    width: $spinkit-size * 1.25;
+    height: $spinkit-size;
+    text-align: center;
+    font-size: 10px;
+
+    .sk-rect {
+        float: left;
+        margin-right: 1px;
+        height: 100%;
+        width: 6px;
+        display: inline-block;
+        animation: sk-waveStretchDelay $animationDuration infinite ease-in-out;
+    }
+
+    @for $i from 1 through $rectCount {
+        .sk-rect#{$i} {
+            animation-delay: - $animationDuration + $delayRange / ($rectCount - 1) * ($i - 1);
+        }
+    }
 }
 
-@keyframes sk-pulseScaleOut {
-    0% {
-        transform: scale(0);
+@keyframes sk-waveStretchDelay {
+    0%, 40%, 100% {
+        transform: scaleY(0.4)
     }
-    100% {
-        transform: scale(1);
-        opacity: 0;
+    20% {
+        transform: scaleY(1.0)
     }
 }

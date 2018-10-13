@@ -13,7 +13,7 @@ import { AbstractLoader } from '../abstract.loader.component';
 @Component({
     selector: 'sk-wave',
     templateUrl: './sk-wave.component.html',
-    styleUrls: ['./sk-wave.component.css']
+    styleUrls: ['./sk-wave.component.scss']
 })
 export class SkWaveComponent extends AbstractLoader {
 }

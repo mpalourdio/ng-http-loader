@@ -18,51 +18,52 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
+@import "../variables";
 
-.sk-wave {
-    position: relative;
-    top: 50%;
-    margin: auto;
-    width: 50px;
-    height: 40px;
-    text-align: center;
-    font-size: 10px;
+.sk-double-bounce {
+    top: $spinkit-top;
+    width: $spinkit-size;
+    height: $spinkit-size;
+    position: $spinkit-position;
+    margin: $spinkit-spinner-margin;
 }
 
-.sk-wave .sk-rect {
-    float: left;
-    margin-right: 1px;
+.sk-double-bounce .sk-child {
+    width: 100%;
     height: 100%;
-    width: 6px;
-    display: inline-block;
-    animation: sk-waveStretchDelay 1.2s infinite ease-in-out;
+    border-radius: 50%;
+    background-color: #333;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-animation: sk-doubleBounce 2s infinite ease-in-out;
+    animation: sk-doubleBounce 2s infinite ease-in-out;
 }
 
-.sk-wave .sk-rect1 {
-    animation-delay: -1.2s;
+.sk-double-bounce .sk-double-bounce2 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
 }
 
-.sk-wave .sk-rect2 {
-    animation-delay: -1.1s;
-}
-
-.sk-wave .sk-rect3 {
-    animation-delay: -1s;
-}
-
-.sk-wave .sk-rect5 {
-    animation-delay: -0.8s;
-}
-
-.sk-wave .sk-rect4 {
-    animation-delay: -0.9s;
-}
-
-@keyframes sk-waveStretchDelay {
-    0%, 40%, 100% {
-        transform: scaleY(0.4);
+@-webkit-keyframes sk-doubleBounce {
+    0%, 100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
     }
-    20% {
-        transform: scaleY(1);
+    50% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@keyframes sk-doubleBounce {
+    0%, 100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    50% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
     }
 }

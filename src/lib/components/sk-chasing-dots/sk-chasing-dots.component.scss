@@ -18,31 +18,34 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
+@import "../variables";
 
 .sk-chasing-dots {
-    top: 50%;
-    margin: auto;
-    width: 40px;
-    height: 40px;
-    position: relative;
+    $animationDuration: 2.0s;
+
+    top: $spinkit-top;
+    margin: $spinkit-spinner-margin;
+    width: $spinkit-size;
+    height: $spinkit-size;
+    position: $spinkit-position;
     text-align: center;
-    animation: sk-chasingDotsRotate 2s infinite linear;
-}
+    animation: sk-chasingDotsRotate $animationDuration infinite linear;
 
-.sk-chasing-dots .sk-child {
-    width: 60%;
-    height: 60%;
-    display: inline-block;
-    position: absolute;
-    top: 0;
-    border-radius: 100%;
-    animation: sk-chasingDotsBounce 2s infinite ease-in-out;
-}
+    .sk-child {
+        width: 60%;
+        height: 60%;
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        border-radius: 100%;
+        animation: sk-chasingDotsBounce $animationDuration infinite ease-in-out;
+    }
 
-.sk-chasing-dots .sk-dot2 {
-    top: auto;
-    bottom: 0;
-    animation-delay: -1s;
+    .sk-dot2 {
+        top: auto;
+        bottom: 0;
+        animation-delay: - $animationDuration/2;
+    }
 }
 
 @keyframes sk-chasingDotsRotate {

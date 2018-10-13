@@ -13,7 +13,7 @@ import { AbstractLoader } from '../abstract.loader.component';
 @Component({
     selector: 'sk-wandering-cubes',
     templateUrl: './sk-wandering-cubes.component.html',
-    styleUrls: ['./sk-wandering-cubes.component.css']
+    styleUrls: ['./sk-wandering-cubes.component.scss']
 })
 export class SkWanderingCubesComponent extends AbstractLoader {
 }

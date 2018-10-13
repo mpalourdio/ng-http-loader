@@ -13,7 +13,7 @@ import { AbstractLoader } from '../abstract.loader.component';
 @Component({
     selector: 'sk-cube-grid',
     templateUrl: './sk-cube-grid.component.html',
-    styleUrls: ['./sk-cube-grid.component.css']
+    styleUrls: ['./sk-cube-grid.component.scss']
 })
 export class SkCubeGridComponent extends AbstractLoader {
 }

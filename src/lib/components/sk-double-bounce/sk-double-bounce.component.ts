@@ -13,7 +13,7 @@ import { AbstractLoader } from '../abstract.loader.component';
 @Component({
     selector: 'sk-double-bounce',
     templateUrl: './sk-double-bounce.component.html',
-    styleUrls: ['./sk-double-bounce.component.css']
+    styleUrls: ['./sk-double-bounce.component.scss']
 })
 export class SkDoubleBounceComponent extends AbstractLoader {
 }

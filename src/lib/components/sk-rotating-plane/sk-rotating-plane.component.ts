@@ -13,7 +13,7 @@ import { AbstractLoader } from '../abstract.loader.component';
 @Component({
     selector: 'sk-rotating-plane',
     templateUrl: './sk-rotating-plane.component.html',
-    styleUrls: ['./sk-rotating-plane.component.css']
+    styleUrls: ['./sk-rotating-plane.component.scss']
 })
 export class SkRotatingPlaneComponent extends AbstractLoader {
 }

@@ -18,36 +18,25 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
+@import "../variables";
 
-.sk-three-bounce {
-    top: 50%;
-    position: relative;
-    margin: auto;
-    width: 80px;
-    text-align: center;
+.sk-rotating-plane {
+    position: $spinkit-position;
+    top: $spinkit-top;
+    width: $spinkit-size;
+    height: $spinkit-size;
+    margin: $spinkit-spinner-margin;
+    animation: sk-rotatePlane 1.2s infinite ease-in-out;
 }
 
-.sk-three-bounce .sk-child {
-    width: 20px;
-    height: 20px;
-    border-radius: 100%;
-    display: inline-block;
-    animation: sk-three-bounce 1.4s ease-in-out 0s infinite both;
-}
-
-.sk-three-bounce .sk-bounce1 {
-    animation-delay: -0.32s;
-}
-
-.sk-three-bounce .sk-bounce2 {
-    animation-delay: -0.16s;
-}
-
-@keyframes sk-three-bounce {
-    0%, 80%, 100% {
-        transform: scale(0);
+@keyframes sk-rotatePlane {
+    0% {
+        transform: perspective(120px) rotateX(0deg) rotateY(0deg);
     }
-    40% {
-        transform: scale(1);
+    50% {
+        transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    }
+    100% {
+        transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
     }
 }
