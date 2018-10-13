@@ -37,7 +37,7 @@ describe('SkDoubleBounceComponent', () => {
 
         const element = fixture
             .debugElement
-            .query(By.css('.double-bounce1'))
+            .query(By.css('.sk-double-bounce1'))
             .nativeElement;
 
         expect(element.style['background-color']).toBe('rgb(255, 0, 0)');
