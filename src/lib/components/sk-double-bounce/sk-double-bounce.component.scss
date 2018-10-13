@@ -37,33 +37,18 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     position: absolute;
     top: 0;
     left: 0;
-    -webkit-animation: sk-doubleBounce 2s infinite ease-in-out;
     animation: sk-doubleBounce 2s infinite ease-in-out;
 }
 
 .sk-double-bounce .sk-double-bounce2 {
-    -webkit-animation-delay: -1.0s;
     animation-delay: -1.0s;
-}
-
-@-webkit-keyframes sk-doubleBounce {
-    0%, 100% {
-        -webkit-transform: scale(0);
-        transform: scale(0);
-    }
-    50% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-    }
 }
 
 @keyframes sk-doubleBounce {
     0%, 100% {
-        -webkit-transform: scale(0);
         transform: scale(0);
     }
     50% {
-        -webkit-transform: scale(1);
         transform: scale(1);
     }
 }
