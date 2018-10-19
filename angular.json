@@ -11,7 +11,7 @@
           "styleext": "scss"
         }
       },
-      "targets": {
+      "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
@@ -26,8 +26,7 @@
             "karmaConfig": "./karma.conf.js",
             "polyfills": "./polyfills.ts",
             "tsConfig": "./tsconfig.spec.json",
-            "watch": false,
-            "sourceMap": true
+            "watch": false
           }
         },
         "lint": {
