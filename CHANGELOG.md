@@ -1,5 +1,10 @@
 # Changelog
 
+## v3.2.0
+
+`peerDependencies` section now targets `angular 7`. The module is still `angular 6` compatible, so this is not a major release.  
+Users are still encouraged to upgrade their applications ASAP.
+
 ## v3.1.2
 
 Added [browserslist](https://github.com/browserslist/browserslist) support.  
