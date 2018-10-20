@@ -54,8 +54,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 [...]
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http'; <============
-import { NgHttpLoaderModule } from 'ng-http-loader'; <============
+import { HttpClientModule } from '@angular/common/http'; // <============
+import { NgHttpLoaderModule } from 'ng-http-loader'; // <============
 
 @NgModule({
   declarations: [
@@ -63,8 +63,8 @@ import { NgHttpLoaderModule } from 'ng-http-loader'; <============
   ],
   imports: [
     BrowserModule,
-    HttpClientModule, <============ (Perform http requests with this module)
-    NgHttpLoaderModule, <============
+    HttpClientModule, // <============ (Perform http requests with this module)
+    NgHttpLoaderModule, // <============
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -93,7 +93,7 @@ You can customize the **background-color**, the **spinner type**, the **debounce
 **_To use this syntax, you must reference the `Spinkit` const as a public property in your app.component.ts_**:
 
 ```typescript
-import { Spinkit } from 'ng-http-loader'; <============
+import { Spinkit } from 'ng-http-loader'; // <============
 
 @Component({
     selector: 'app-root',
@@ -101,7 +101,7 @@ import { Spinkit } from 'ng-http-loader'; <============
     styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-    public spinkit = Spinkit; <============
+    public spinkit = Spinkit; // <============
     [...]
 }
 ```
