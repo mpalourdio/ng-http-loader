@@ -24,7 +24,7 @@ $ npm install ng-http-loader --save / yarn add ng-http-loader
 ## What does it do ?
 
 This package provides an HTTP Interceptor, and some spinner components (All from [SpinKit](https://github.com/tobiasahlin/SpinKit) at the moment).
-The HTTP interceptor listens to all HTTP requests and shows a spinner / loader indicator during pending http requests.
+The HTTP interceptor listens to all HTTP requests and shows a spinner / loader indicator during pending HTTP requests.
 
 ## Angular 4 / Angular 5 / Angular 6 / Angular 7
 
@@ -41,7 +41,7 @@ If you experience errors like below, **please double check the version you use.*
 
 ## Requirements - HttpClientModule
 
-Performing http requests with the `HttpClientModule` API is **mandatory**. Otherwise, the spinner will not be fired **at all**.
+Performing HTTP requests with the `HttpClientModule` API is **mandatory**. Otherwise, the spinner will not be fired **at all**.
 
 See this [blog post](http://blog.ninja-squad.com/2017/07/17/http-client-module/) for an `HttpClientModule` introduction.
 
@@ -63,7 +63,7 @@ import { NgHttpLoaderModule } from 'ng-http-loader'; // <============
   ],
   imports: [
     BrowserModule,
-    HttpClientModule, // <============ (Perform http requests with this module)
+    HttpClientModule, // <============ (Perform HTTP requests with this module)
     NgHttpLoaderModule, // <============
   ],
   providers: [],
@@ -130,17 +130,17 @@ You can find some short examples [here](https://gist.github.com/mpalourdio/2c0be
 
 ## Requests filtering by URL, HTTP method or HTTP headers
 
-You can filter the http requests that shouldn't be caught by the interceptor by providing **an array of regex patterns**:
+You can filter the HTTP requests that shouldn't be caught by the interceptor by providing **an array of regex patterns**:
 ```xml
 <ng-http-loader [filteredUrlPatterns]="['\\d', '[a-zA-Z]', 'my-api']"></ng-http-loader>
 ```
 
-You can filter the http requests by providing **an array of HTTP methods** (case insensitive):
+You can filter the HTTP requests by providing **an array of HTTP methods** (case insensitive):
 ```xml
 <ng-http-loader [filteredMethods]="['gEt', 'POST', 'PuT']"></ng-http-loader>
 ```
 
-You can also filter the http requests by providing **an array of HTTP headers** (case insensitive):
+You can also filter the HTTP requests by providing **an array of HTTP headers** (case insensitive):
 ```xml
 <ng-http-loader [filteredHeaders]="['hEaDeR', 'AnoTheR-HeAdEr']"></ng-http-loader>
 ```
@@ -149,9 +149,9 @@ You can also filter the http requests by providing **an array of HTTP headers** 
 
 You can manually show and hide the spinner if needed. You must use the `SpinnerVisibilityService` for this purpose.  
 
-Sometimes, when manually showing the spinner, an http request could be performed in background, and when finished, the spinner would automagically disappear.  
+Sometimes, when manually showing the spinner, an HTTP request could be performed in background, and when finished, the spinner would automagically disappear.  
 
-**For this reason, when calling `SpinnerVisibilityService#show()`, it prevents the http interceptor from being triggered unless you explicitly call `SpinnerVisibilityService#hide()`.**
+**For this reason, when calling `SpinnerVisibilityService#show()`, it prevents the HTTP interceptor from being triggered unless you explicitly call `SpinnerVisibilityService#hide()`.**
 
 ```typescript
 import { SpinnerVisibilityService } from 'ng-http-loader';
@@ -167,7 +167,7 @@ export class MyComponent {
         // show the spinner
         spinner.show();
         //////////////
-        // http requests performed between won't have any side effect on the spinner
+        // HTTP requests performed between won't have any side effect on the spinner
         /////////////
         // hide the spinner
         spinner.hide();
