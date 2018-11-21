@@ -52,7 +52,7 @@ From your Angular `AppModule`:
 ```typescript
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-[...]
+// [...]
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http'; // <============
 import { NgHttpLoaderModule } from 'ng-http-loader'; // <============
@@ -102,7 +102,6 @@ import { Spinkit } from 'ng-http-loader'; // <============
 })
 export class AppComponent {
     public spinkit = Spinkit; // <============
-    [...]
 }
 ```
 The different spinners available are referenced in [this class](src/lib/spinkits.ts).
@@ -167,7 +166,7 @@ export class MyComponent {
         // show the spinner
         spinner.show();
         //////////////
-        // HTTP requests performed between won't have any side effect on the spinner
+        // HTTP requests performed between show && hide won't have any side effect on the spinner.
         /////////////
         // hide the spinner
         spinner.hide();
@@ -177,7 +176,7 @@ export class MyComponent {
 
 ## Misc
 
-Each Spinkit component defined in [SPINKIT_COMPONENTS](src/lib/spinkits.ts#L30) can be used independently.
+Each Spinkit component defined in [SPINKIT_COMPONENTS](src/lib/spinkits.ts#L30) can be used individually.
 
 ## Credits
 
