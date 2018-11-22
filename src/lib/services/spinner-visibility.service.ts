@@ -15,7 +15,7 @@ import { PendingInterceptorService } from './pending-interceptor.service';
     providedIn: 'root'
 })
 export class SpinnerVisibilityService {
-    private _visibilitySubject: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
+    private _visibilitySubject = new ReplaySubject<boolean>(1);
 
     constructor(private pendingInterceptorService: PendingInterceptorService) {
     }

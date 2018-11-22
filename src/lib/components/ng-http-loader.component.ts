@@ -23,7 +23,7 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     public isSpinnerVisible: boolean;
     public spinkit = Spinkit;
     private subscriptions: Subscription;
-    private visibleUntil: number = Date.now();
+    private visibleUntil = Date.now();
 
     @Input()
     public backgroundColor: string;
