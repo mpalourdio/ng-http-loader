@@ -8,7 +8,7 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { NgHttpLoaderComponent } from './components/ng-http-loader.component';
 import { PendingInterceptorServiceInterceptor } from './services/pending-interceptor.service';
 import { SPINKIT_COMPONENTS } from './spinkits';
@@ -24,10 +24,15 @@ import { SPINKIT_COMPONENTS } from './spinkits';
     exports: [
         NgHttpLoaderComponent,
         ...SPINKIT_COMPONENTS,
-    ],
-    providers: [
-        PendingInterceptorServiceInterceptor,
     ]
 })
 export class NgHttpLoaderModule {
+    static forRoot(): ModuleWithProviders {
+        return {
+            ngModule: NgHttpLoaderModule,
+            providers: [
+                PendingInterceptorServiceInterceptor,
+            ]
+        };
+    }
 }
