@@ -8,7 +8,6 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { NgHttpLoaderComponent } from './components/ng-http-loader.component';
 import { PendingInterceptorServiceInterceptor } from './services/pending-interceptor.service';
@@ -21,7 +20,6 @@ import { SPINKIT_COMPONENTS } from './spinkits';
     ],
     imports: [
         CommonModule,
-        HttpClientModule,
     ],
     exports: [
         NgHttpLoaderComponent,
