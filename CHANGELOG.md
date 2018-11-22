@@ -6,7 +6,6 @@
 A static `forRoot()` has been added to the module declaration. You must now call this method when importing `NgHttpLoaderModule` in your root application module.
 This intends to fix providers problems when working with lazy modules in which you would want to import `NgHttpLoaderModule`.
 
-
 ## v3.2.0
 
 `peerDependencies` section now targets `angular 7`. The module is still `angular 6` compatible, so this is not a major release.  
