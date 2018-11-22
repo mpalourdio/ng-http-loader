@@ -6,7 +6,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "preversion": "yarn test",
+    "preversion": "yarn lint && yarn test",
     "version": "yarn build",
     "postversion": "git push && git push --tags"
   },
