@@ -32,7 +32,7 @@ export class NgHttpLoaderModule {
             ngModule: NgHttpLoaderModule,
             providers: [
                 PendingInterceptorServiceInterceptor,
-            ]
+            ],
         };
     }
 }
