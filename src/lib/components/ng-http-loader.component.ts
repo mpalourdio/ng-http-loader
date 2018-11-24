@@ -28,7 +28,7 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     @Input()
     public backgroundColor: string;
     @Input()
-    public spinner = Spinkit.skCubeGrid;
+    public spinner = Spinkit.skWave;
     @Input()
     public filteredUrlPatterns: string[] = [];
     @Input()

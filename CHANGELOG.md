@@ -1,10 +1,13 @@
 # Changelog
 
 ## v4.0.0
-`HttpClientModule` has been removed from imports. This caused some issues when external modules where imported in an application, and that those modules registered their own HTTP interceptors.  
+`HttpClientModule` has been removed from imports.  
+This caused some issues when external modules where imported in an application, and that those modules registered their own HTTP interceptors. See [this issue](https://github.com/angular/angular/issues/20575) for reference.
 
 A static `forRoot()` has been added to the module declaration. You must now call this method when importing `NgHttpLoaderModule` in your root application module.
-This intends to fix providers problems when working with lazy modules in which you would want to import `NgHttpLoaderModule`.
+This intends to fix providers problems when working with lazy modules in which you would want to import `NgHttpLoaderModule` for any reasons.
+
+The default spinner is now `Spinkit.skWave` (less CPU intensive). 
 
 ## v3.2.0
 

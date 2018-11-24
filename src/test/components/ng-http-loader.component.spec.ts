@@ -52,10 +52,10 @@ describe('NgHttpLoaderComponent', () => {
 
         const element = fixture
             .debugElement
-            .query(By.css('.sk-cube-grid'))
+            .query(By.css('.sk-wave'))
             .nativeElement;
 
-        expect(element.className).toBe('sk-cube-grid colored');
+        expect(element.className).toBe('sk-wave colored');
     });
 
     it('should destroy ng-http-loader as a view dependency without error', () => {
@@ -78,10 +78,10 @@ describe('NgHttpLoaderComponent', () => {
 
         const element = fixture
             .debugElement
-            .query(By.css('.sk-cube-grid'))
+            .query(By.css('.sk-wave'))
             .nativeElement;
 
-        expect(element.className).toBe('sk-cube-grid');
+        expect(element.className).toBe('sk-wave');
     });
 
     it('should not display anything by default', () => {
@@ -112,7 +112,7 @@ describe('NgHttpLoaderComponent', () => {
 
         const element = fixture
             .debugElement
-            .query(By.css('.sk-cube.sk-cube1'))
+            .query(By.css('.sk-rect.sk-rect1'))
             .nativeElement;
 
         expect(element.style['background-color']).toBe('rgb(255, 0, 0)');
