@@ -20,8 +20,8 @@ describe('NgHttpLoaderModule', () => {
         expect(ngHttpLoaderModule).toBeTruthy();
     });
 
-    it('should work with forRoot', () => {
-        const moduleWithProviders = NgHttpLoaderModule.forRoot();
-        expect(moduleWithProviders).toBeTruthy();
+    it('should create an instance with providers via forRoot()', () => {
+        const ngHttpLoaderModuleWithProviders = NgHttpLoaderModule.forRoot();
+        expect(ngHttpLoaderModuleWithProviders.providers[0][0]['useExisting'].name).toEqual('PendingInterceptorService');
     });
 });
