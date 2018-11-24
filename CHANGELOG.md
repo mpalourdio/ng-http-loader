@@ -1,5 +1,14 @@
 # Changelog
 
+## v4.0.0
+- `HttpClientModule` has been removed from imports.  
+This caused some issues when external modules were imported in an application, and those modules registered their own HTTP interceptors. See [this issue](https://github.com/angular/angular/issues/20575) for reference.
+
+- A static `forRoot()` method has been added to the module declaration. You must now [explicitly call this method](README.md#usage) when importing `NgHttpLoaderModule` in your root application module.
+This intends to avoid multiple providers instances when working with lazy modules in which you would want to import `NgHttpLoaderModule` again for any reason.
+
+- The default spinner is now `Spinkit.skWave` (less CPU intensive). 
+
 ## v3.2.0
 
 `peerDependencies` section now targets `angular 7`. The module is still `angular 6` compatible, so this is not a major release.  
@@ -7,9 +16,9 @@ Users are still encouraged to upgrade their applications ASAP.
 
 ## v3.1.2
 
-Added [browserslist](https://github.com/browserslist/browserslist) support.  
-Some cleanup has been done in CSS files to let the CSS auto-prefixer do the job automatically regarding supported browsers.  
-Spinkit CSS integration has been been replaced by SCSS.
+- Added [browserslist](https://github.com/browserslist/browserslist) support.  
+- Some cleanup has been done in CSS files to let the CSS auto-prefixer do the job automatically regarding supported browsers.  
+- Spinkit CSS integration has been been replaced by SCSS.
 
 ## v3.1.1
 

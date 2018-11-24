@@ -19,4 +19,9 @@ describe('NgHttpLoaderModule', () => {
     it('should create an instance', () => {
         expect(ngHttpLoaderModule).toBeTruthy();
     });
+
+    it('should work with forRoot', () => {
+        const moduleWithProviders = NgHttpLoaderModule.forRoot();
+        expect(moduleWithProviders).toBeTruthy();
+    });
 });
