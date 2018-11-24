@@ -110,7 +110,7 @@ export class PendingInterceptorService implements HttpInterceptor {
     }
 }
 
-export const PendingInterceptorServiceInterceptor: ExistingProvider[] = [{
+export const PendingInterceptorServiceProvider: ExistingProvider[] = [{
     provide: HTTP_INTERCEPTORS,
     useExisting: PendingInterceptorService,
     multi: true

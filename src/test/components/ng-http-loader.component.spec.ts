@@ -13,7 +13,7 @@ import { async, ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angu
 import { By } from '@angular/platform-browser';
 import { forkJoin, Observable } from 'rxjs';
 import { NgHttpLoaderComponent } from '../../lib/components/ng-http-loader.component';
-import { PendingInterceptorServiceInterceptor } from '../../lib/services/pending-interceptor.service';
+import { PendingInterceptorServiceProvider } from '../../lib/services/pending-interceptor.service';
 import { SpinnerVisibilityService } from '../../lib/services/spinner-visibility.service';
 import { Spinkit, SPINKIT_COMPONENTS } from '../../lib/spinkits';
 import { Component } from '@angular/core';
@@ -32,7 +32,7 @@ describe('NgHttpLoaderComponent', () => {
         TestBed.configureTestingModule({
             declarations: [NgHttpLoaderComponent, ComponentWithLoaderComponent, ...SPINKIT_COMPONENTS],
             imports: [HttpClientTestingModule],
-            providers: [PendingInterceptorServiceInterceptor]
+            providers: [PendingInterceptorServiceProvider]
         })
             .compileComponents();
     }));

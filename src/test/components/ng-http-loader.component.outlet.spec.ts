@@ -13,7 +13,7 @@ import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NgHttpLoaderComponent } from '../../lib/components/ng-http-loader.component';
 import { SkThreeBounceComponent } from '../../lib/components/sk-three-bounce/sk-three-bounce.component';
-import { PendingInterceptorServiceInterceptor } from '../../lib/services/pending-interceptor.service';
+import { PendingInterceptorServiceProvider } from '../../lib/services/pending-interceptor.service';
 import { SPINKIT_COMPONENTS } from '../../lib/spinkits';
 
 describe('NgHttpLoaderComponentOutlet', () => {
@@ -24,7 +24,7 @@ describe('NgHttpLoaderComponentOutlet', () => {
         TestBed.configureTestingModule({
             declarations: [NgHttpLoaderComponent, ...SPINKIT_COMPONENTS],
             imports: [HttpClientTestingModule],
-            providers: [PendingInterceptorServiceInterceptor]
+            providers: [PendingInterceptorServiceProvider]
         })
             .overrideModule(BrowserDynamicTestingModule, {
                 set: { entryComponents: [SkThreeBounceComponent] }

@@ -13,7 +13,7 @@ import { async, inject, TestBed } from '@angular/core/testing';
 import { forkJoin, Observable } from 'rxjs';
 import {
     PendingInterceptorService,
-    PendingInterceptorServiceInterceptor
+    PendingInterceptorServiceProvider
 } from '../../lib/services/pending-interceptor.service';
 
 describe('PendingInterceptorService', () => {
@@ -21,7 +21,7 @@ describe('PendingInterceptorService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule],
-            providers: [PendingInterceptorServiceInterceptor]
+            providers: [PendingInterceptorServiceProvider]
         });
     });
 
