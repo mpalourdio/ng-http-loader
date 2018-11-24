@@ -16,9 +16,9 @@ Users are still encouraged to upgrade their applications ASAP.
 
 ## v3.1.2
 
-Added [browserslist](https://github.com/browserslist/browserslist) support.  
-Some cleanup has been done in CSS files to let the CSS auto-prefixer do the job automatically regarding supported browsers.  
-Spinkit CSS integration has been been replaced by SCSS.
+- Added [browserslist](https://github.com/browserslist/browserslist) support.  
+- Some cleanup has been done in CSS files to let the CSS auto-prefixer do the job automatically regarding supported browsers.  
+- Spinkit CSS integration has been been replaced by SCSS.
 
 ## v3.1.1
 
