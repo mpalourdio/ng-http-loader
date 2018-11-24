@@ -5,7 +5,7 @@
 This caused some issues when external modules where imported in an application, and that those modules registered their own HTTP interceptors. See [this issue](https://github.com/angular/angular/issues/20575) for reference.
 
 - A static `forRoot()` method has been added to the module declaration. You must now [explicitly call this method](README.md#usage) when importing `NgHttpLoaderModule` in your root application module.
-This intends to avoid multiple providers instances when working with lazy modules in which you would want to import `NgHttpLoaderModule` for any reasons.
+This intends to avoid multiple providers instances when working with lazy modules in which you would want to import `NgHttpLoaderModule` again for any reasons.
 
 - The default spinner is now `Spinkit.skWave` (less CPU intensive). 
 
