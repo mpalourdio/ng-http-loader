@@ -9,6 +9,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { Component } from '@angular/core';
 import { async, ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { forkJoin, Observable } from 'rxjs';
@@ -16,12 +17,11 @@ import { NgHttpLoaderComponent } from '../../lib/components/ng-http-loader.compo
 import { PendingInterceptorServiceProvider } from '../../lib/services/pending-interceptor.service';
 import { SpinnerVisibilityService } from '../../lib/services/spinner-visibility.service';
 import { Spinkit, SPINKIT_COMPONENTS } from '../../lib/spinkits';
-import { Component } from '@angular/core';
 
 @Component({
-    template: '<ng-http-loader id="http-loader"></ng-http-loader>'
+    template: '<ng-http-loader id="ng-http-loader"></ng-http-loader>'
 })
-export class ComponentWithLoaderComponent {
+export class HostComponent {
 }
 
 describe('NgHttpLoaderComponent', () => {
@@ -30,7 +30,7 @@ describe('NgHttpLoaderComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [NgHttpLoaderComponent, ComponentWithLoaderComponent, ...SPINKIT_COMPONENTS],
+            declarations: [NgHttpLoaderComponent, HostComponent, ...SPINKIT_COMPONENTS],
             imports: [HttpClientTestingModule],
             providers: [PendingInterceptorServiceProvider]
         })
@@ -59,15 +59,15 @@ describe('NgHttpLoaderComponent', () => {
     });
 
     it('should destroy ng-http-loader as a view dependency without error', () => {
-        const fixtureWithLoader = TestBed.createComponent(ComponentWithLoaderComponent);
-        const componentWithLoader = fixtureWithLoader.componentInstance;
-        expect(componentWithLoader).toBeTruthy();
+        const hostFixture = TestBed.createComponent(HostComponent);
+        const hostComponentInstance = hostFixture.componentInstance;
+        expect(hostComponentInstance).toBeTruthy();
 
-        const element = fixtureWithLoader
+        const element = hostFixture
             .debugElement
-            .query(By.css('#http-loader'));
-        expect(element).toBeTruthy();
+            .query(By.css('#ng-http-loader'));
 
+        expect(element).toBeTruthy();
         // There shouldn't be any errors in the console when the testbed cleans up the component.
     });
 
