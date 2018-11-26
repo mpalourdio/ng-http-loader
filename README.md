@@ -65,7 +65,7 @@ import { NgHttpLoaderModule } from 'ng-http-loader'; // <============
   imports: [
     BrowserModule,
     HttpClientModule, // <============ (Perform HTTP requests with this module)
-    NgHttpLoaderModule.forRoot(), // <============
+    NgHttpLoaderModule.forRoot(), // <============ Don't forget to call 'forRoot()'!
   ],
   providers: [],
   bootstrap: [AppComponent]
