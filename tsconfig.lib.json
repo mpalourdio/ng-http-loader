@@ -6,7 +6,6 @@
     "module": "es2015",
     "declaration": true,
     "inlineSources": true,
-    "importHelpers": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "types": [],
