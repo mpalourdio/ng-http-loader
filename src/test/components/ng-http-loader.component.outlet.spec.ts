@@ -11,6 +11,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { of } from 'rxjs';
 import { NgHttpLoaderComponent } from '../../lib/components/ng-http-loader.component';
 import { SkThreeBounceComponent } from '../../lib/components/sk-three-bounce/sk-three-bounce.component';
 import { PendingInterceptorServiceProvider } from '../../lib/services/pending-interceptor.service';
@@ -38,7 +39,7 @@ describe('NgHttpLoaderComponentOutlet', () => {
     });
 
     it('should be possible to specify an entryComponent', () => {
-        component.isSpinnerVisible = true;
+        component.isSpinnerVisible = of(true);
         component.entryComponent = SkThreeBounceComponent;
         fixture.detectChanges();
 
@@ -51,7 +52,7 @@ describe('NgHttpLoaderComponentOutlet', () => {
     });
 
     it('should force [spinner] to null if [entryComponent] is defined', () => {
-        component.isSpinnerVisible = true;
+        component.isSpinnerVisible = of(true);
         component.spinner = 'whatever';
         component.entryComponent = SkThreeBounceComponent;
         fixture.detectChanges();

@@ -8,7 +8,7 @@
  */
 
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { merge, Observable, Subscription, timer } from 'rxjs';
+import { merge, Observable, of, Subscription, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, partition, switchMap } from 'rxjs/operators';
 import { PendingInterceptorService } from '../services/pending-interceptor.service';
 import { SpinnerVisibilityService } from '../services/spinner-visibility.service';
@@ -20,7 +20,7 @@ import { Spinkit } from '../spinkits';
     styleUrls: ['./ng-http-loader.component.scss']
 })
 export class NgHttpLoaderComponent implements OnDestroy, OnInit {
-    public isSpinnerVisible: boolean;
+    public isSpinnerVisible = of(false);
     public spinkit = Spinkit;
     private subscriptions: Subscription;
     private visibleUntil = Date.now();
@@ -111,7 +111,7 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
         if (showSpinner) {
             this.visibleUntil = Date.now() + this.minDuration;
         }
-        this.isSpinnerVisible = showSpinner;
+        this.isSpinnerVisible = of(showSpinner);
     }
 
     private getVisibilityTimer(): Observable<number> {
