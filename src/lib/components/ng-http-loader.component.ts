@@ -20,7 +20,7 @@ import { Spinkit } from '../spinkits';
     styleUrls: ['./ng-http-loader.component.scss']
 })
 export class NgHttpLoaderComponent implements OnDestroy, OnInit {
-    public isSpinnerVisible$ = new BehaviorSubject<boolean>(false);
+    public isSpinnerVisibleSubject = new BehaviorSubject<boolean>(false);
     public spinkit = Spinkit;
     private subscriptions: Subscription;
     private visibleUntil = Date.now();
@@ -69,6 +69,10 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
         this.subscriptions.unsubscribe();
     }
 
+    get isSpinnerVisible$(): Observable<boolean> {
+        return this.isSpinnerVisibleSubject.asObservable();
+    }
+
     private nullifySpinnerIfEntryComponentIsDefined(): void {
         if (null != this.entryComponent) {
             this.spinner = null;
@@ -111,7 +115,7 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
         if (showSpinner) {
             this.visibleUntil = Date.now() + this.minDuration;
         }
-        this.isSpinnerVisible$.next(showSpinner);
+        this.isSpinnerVisibleSubject.next(showSpinner);
     }
 
     private getVisibilityTimer(): Observable<number> {
