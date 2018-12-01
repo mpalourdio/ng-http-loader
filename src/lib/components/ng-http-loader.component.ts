@@ -58,7 +58,7 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
         )
             .pipe(
                 distinctUntilChanged(),
-                tap(h => this.updateVisibilityDuration(h))
+                tap(h => this.updateVisibilityExpiration(h))
             )
             .subscribe(h => this._isSpinnerVisible$.next(h));
     }
@@ -114,7 +114,7 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
         this.pendingInterceptorService.filteredHeaders = this.filteredHeaders;
     }
 
-    private updateVisibilityDuration(showSpinner: boolean): void {
+    private updateVisibilityExpiration(showSpinner: boolean): void {
         if (showSpinner) {
             this.visibleUntil = Date.now() + this.minDuration;
         }
