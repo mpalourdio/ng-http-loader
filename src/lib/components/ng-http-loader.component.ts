@@ -9,7 +9,7 @@
 
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, merge, Observable, Subscription, timer } from 'rxjs';
-import { debounce, distinctUntilChanged, partition, switchMap } from 'rxjs/operators';
+import { debounce, distinctUntilChanged, partition, switchMap, tap } from 'rxjs/operators';
 import { PendingInterceptorService } from '../services/pending-interceptor.service';
 import { SpinnerVisibilityService } from '../services/spinner-visibility.service';
 import { Spinkit } from '../spinkits';
@@ -56,8 +56,11 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
             ),
             this.spinnerVisibilityService.visibility$,
         )
-            .pipe(distinctUntilChanged())
-            .subscribe(h => this.handleSpinnerVisibility(h));
+            .pipe(
+                distinctUntilChanged(),
+                tap(h => this.updateVisibilityDuration(h))
+            )
+            .subscribe(h => this._isSpinnerVisible$.next(h));
     }
 
     ngOnInit(): void {
@@ -111,11 +114,10 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
         this.pendingInterceptorService.filteredHeaders = this.filteredHeaders;
     }
 
-    private handleSpinnerVisibility(showSpinner: boolean): void {
+    private updateVisibilityDuration(showSpinner: boolean): void {
         if (showSpinner) {
             this.visibleUntil = Date.now() + this.minDuration;
         }
-        this._isSpinnerVisible$.next(showSpinner);
     }
 
     private getVisibilityTimer$(): Observable<number> {
