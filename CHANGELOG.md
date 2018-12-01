@@ -1,7 +1,7 @@
 # Changelog
 
 ## v5.0.0
-Prior to this release, `NgHttpLoaderComponent#isSpinnerVisible` was a boolean. Because of unexpected behaviors when a component with `ChangeDetectionStrategy.OnPush` performed HTTP requests, it is now on `Observable<boolean>`.  
+Prior to this release, `NgHttpLoaderComponent#isSpinnerVisible` was a boolean. Because of unexpected behaviors when a component with `ChangeDetectionStrategy.OnPush` performed HTTP requests, it is now an `Observable<boolean>`.  
 The associated template now uses an `async pipe` in order to perform the show/hide logic.
 
 ## v4.0.0
