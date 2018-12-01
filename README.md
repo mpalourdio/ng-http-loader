@@ -34,7 +34,7 @@ If you want to use Angular 5, use versions **`0.4.0`** and above.
 The latest compatible version with angular 5 is version [**`0.9.1`**](https://github.com/mpalourdio/ng-http-loader/tree/0.9.1).
 
 Versions **`1.0.0+`**, **`2.0.0+`** and **`3.0.0+`** are angular 6 & 7 / RxJS 6 compatible only.  
-Versions **`4.0.0`** && **`5.0.0+`**is meant to be angular 7 compatible only.
+Versions **`4.0.0`** && **`5.0.0+`** are meant to be angular 7 compatible only.
 
 If you experience errors like below, **please double check the version you use.**
 
