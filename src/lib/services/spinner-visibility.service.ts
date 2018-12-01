@@ -15,22 +15,22 @@ import { PendingInterceptorService } from './pending-interceptor.service';
     providedIn: 'root'
 })
 export class SpinnerVisibilityService {
-    private _visibilitySubject = new ReplaySubject<boolean>(1);
+    private _visibility$ = new ReplaySubject<boolean>(1);
 
     constructor(private pendingInterceptorService: PendingInterceptorService) {
     }
 
-    get visibilityObservable$(): Observable<boolean> {
-        return this._visibilitySubject.asObservable();
+    get visibility$(): Observable<boolean> {
+        return this._visibility$.asObservable();
     }
 
     public show(): void {
         this.pendingInterceptorService.forceByPass = true;
-        this._visibilitySubject.next(true);
+        this._visibility$.next(true);
     }
 
     public hide(): void {
-        this._visibilitySubject.next(false);
+        this._visibility$.next(false);
         this.pendingInterceptorService.forceByPass = false;
     }
 }

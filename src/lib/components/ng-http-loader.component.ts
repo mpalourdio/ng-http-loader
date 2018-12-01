@@ -21,7 +21,7 @@ import { Spinkit } from '../spinkits';
 })
 export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     public spinkit = Spinkit;
-    private _isSpinnerVisible = new BehaviorSubject<boolean>(false);
+    private _isSpinnerVisible$ = new BehaviorSubject<boolean>(false);
     private subscriptions: Subscription;
     private visibleUntil = Date.now();
 
@@ -52,9 +52,9 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
                 switchMap(() => showSpinner$.pipe(debounce(() => timer(this.debounceDelay))))
             ),
             showSpinner$.pipe(
-                switchMap(() => hideSpinner$.pipe(debounce(() => this.getVisibilityTimer())))
+                switchMap(() => hideSpinner$.pipe(debounce(() => this.getVisibilityTimer$())))
             ),
-            this.spinnerVisibilityService.visibilityObservable$,
+            this.spinnerVisibilityService.visibility$,
         )
             .pipe(distinctUntilChanged())
             .subscribe(h => this.handleSpinnerVisibility(h));
@@ -70,7 +70,7 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     }
 
     get isSpinnerVisible$(): Observable<boolean> {
-        return this._isSpinnerVisible.asObservable();
+        return this._isSpinnerVisible$.asObservable();
     }
 
     private nullifySpinnerIfEntryComponentIsDefined(): void {
@@ -115,10 +115,10 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
         if (showSpinner) {
             this.visibleUntil = Date.now() + this.minDuration;
         }
-        this._isSpinnerVisible.next(showSpinner);
+        this._isSpinnerVisible$.next(showSpinner);
     }
 
-    private getVisibilityTimer(): Observable<number> {
+    private getVisibilityTimer$(): Observable<number> {
         return timer(Math.max(this.extraDuration, this.visibleUntil - Date.now()));
     }
 }

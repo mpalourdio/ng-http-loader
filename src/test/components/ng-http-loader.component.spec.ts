@@ -125,11 +125,11 @@ describe('NgHttpLoaderComponent', () => {
     it('should show and hide the spinner according to the pending HTTP requests', fakeAsync(inject(
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
 
-            function runQuery(url: string): Observable<any> {
+            function runQuery$(url: string): Observable<any> {
                 return http.get(url);
             }
 
-            forkJoin([runQuery('/fake'), runQuery('/fake2')]).subscribe();
+            forkJoin([runQuery$('/fake'), runQuery$('/fake2')]).subscribe();
 
             const firstRequest = httpMock.expectOne('/fake');
             const secondRequest = httpMock.expectOne('/fake2');
@@ -422,11 +422,11 @@ describe('NgHttpLoaderComponent', () => {
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             component.debounceDelay = 2000;
 
-            function runQuery(url: string): Observable<any> {
+            function runQuery$(url: string): Observable<any> {
                 return http.get(url);
             }
 
-            forkJoin([runQuery('/fake'), runQuery('/fake2')]).subscribe();
+            forkJoin([runQuery$('/fake'), runQuery$('/fake2')]).subscribe();
 
             const firstRequest = httpMock.expectOne('/fake');
             const secondRequest = httpMock.expectOne('/fake2');
@@ -582,11 +582,11 @@ describe('NgHttpLoaderComponent', () => {
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             component.minDuration = 5000;
 
-            function runQuery(url: string): Observable<any> {
+            function runQuery$(url: string): Observable<any> {
                 return http.get(url);
             }
 
-            forkJoin([runQuery('/fake'), runQuery('/fake2')]).subscribe();
+            forkJoin([runQuery$('/fake'), runQuery$('/fake2')]).subscribe();
 
             const firstRequest = httpMock.expectOne('/fake');
             const secondRequest = httpMock.expectOne('/fake2');
@@ -627,11 +627,11 @@ describe('NgHttpLoaderComponent', () => {
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             component.extraDuration = 5000;
 
-            function runQuery(url: string): Observable<any> {
+            function runQuery$(url: string): Observable<any> {
                 return http.get(url);
             }
 
-            forkJoin([runQuery('/fake'), runQuery('/fake2')]).subscribe();
+            forkJoin([runQuery$('/fake'), runQuery$('/fake2')]).subscribe();
 
             const firstRequest = httpMock.expectOne('/fake');
             const secondRequest = httpMock.expectOne('/fake2');
@@ -711,11 +711,11 @@ describe('NgHttpLoaderComponent', () => {
         [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
             component.extraDuration = 10;
 
-            function runQuery(url: string): Observable<any> {
+            function runQuery$(url: string): Observable<any> {
                 return http.get(url);
             }
 
-            runQuery('/fake').subscribe();
+            runQuery$('/fake').subscribe();
             const firstRequest = httpMock.expectOne('/fake');
 
             tick(1000);
@@ -727,7 +727,7 @@ describe('NgHttpLoaderComponent', () => {
             component.isSpinnerVisible$.subscribe(v => expect(v).toBeTruthy()).unsubscribe();
 
             // But 5 ms after the first HTTP request has finished, a second HTTP request has been launched
-            runQuery('/fake2').subscribe();
+            runQuery$('/fake2').subscribe();
             const secondRequest = httpMock.expectOne('/fake2');
 
             // After 700ms, the second http request ends. The spinner is still visible

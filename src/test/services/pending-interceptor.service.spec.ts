@@ -33,11 +33,11 @@ describe('PendingInterceptorService', () => {
         [PendingInterceptorService, HttpClient, HttpTestingController],
         (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
 
-            function runQuery(url: string): Observable<any> {
+            function runQuery$(url: string): Observable<any> {
                 return http.get(url);
             }
 
-            forkJoin([runQuery('/fake'), runQuery('/fake2')]).subscribe();
+            forkJoin([runQuery$('/fake'), runQuery$('/fake2')]).subscribe();
 
             const firstRequest = httpMock.expectOne('/fake');
             const secondRequest = httpMock.expectOne('/fake2');
@@ -58,9 +58,9 @@ describe('PendingInterceptorService', () => {
         inject(
             [PendingInterceptorService, HttpClient, HttpTestingController],
             (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
-                const pendingRequestsStatus = service.pendingRequestsStatus$;
+                const pendingRequestsStatus$ = service.pendingRequestsStatus$;
 
-                pendingRequestsStatus
+                pendingRequestsStatus$
                     .subscribe(
                         (next: boolean) => expect(next).toBeTruthy(),
                         (error: HttpErrorResponse) => expect(1).toBe(2)
@@ -78,8 +78,8 @@ describe('PendingInterceptorService', () => {
                 http.get('/fake').subscribe();
                 httpMock.expectOne('/fake');
 
-                const pendingRequestsStatus = service.pendingRequestsStatus$;
-                pendingRequestsStatus
+                const pendingRequestsStatus$ = service.pendingRequestsStatus$;
+                pendingRequestsStatus$
                     .subscribe(
                         (next: boolean) => expect(next).toBeTruthy(),
                         (error: HttpErrorResponse) => expect(1).toBe(2)
