@@ -163,7 +163,7 @@ describe('NgHttpLoaderComponent', () => {
 
             http.get('/fake').subscribe();
             tick();
-            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy());
+            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy()).unsubscribe();
             httpMock.expectOne('/fake').flush({});
         }
     )));
@@ -175,7 +175,7 @@ describe('NgHttpLoaderComponent', () => {
 
             http.get('/fake').subscribe();
             tick();
-            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy());
+            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy()).unsubscribe();
             httpMock.expectOne('/fake').flush({});
         }
     )));
@@ -192,7 +192,7 @@ describe('NgHttpLoaderComponent', () => {
             }).subscribe();
 
             tick();
-            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy());
+            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy()).unsubscribe();
             httpMock.expectOne('/fake').flush({});
         }
     )));
@@ -211,7 +211,7 @@ describe('NgHttpLoaderComponent', () => {
                 }
             ).subscribe();
             tick();
-            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy());
+            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy()).unsubscribe();
             httpMock.expectOne('/api/service?foo=bar').flush({});
         }
     )));
@@ -347,12 +347,12 @@ describe('NgHttpLoaderComponent', () => {
 
             // the HTTP request is pending for 1 second now
             tick(1000);
-            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy());
+            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy()).unsubscribe();
 
             // the HTTP request is over, the spinner shouldn't be shown after debounceDelay terminated
             httpMock.expectOne('/fake').flush({});
             tick(1000);
-            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy());
+            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy()).unsubscribe();
         }
     )));
 
@@ -363,7 +363,7 @@ describe('NgHttpLoaderComponent', () => {
 
             // the first HTTP request is pending for 1 second now
             tick(1000);
-            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy());
+            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy()).unsubscribe();
 
             // the first HTTP request is over
             httpMock.expectOne('/fake').flush({});
@@ -373,16 +373,16 @@ describe('NgHttpLoaderComponent', () => {
 
             // the second HTTP request is pending for 1 second now
             tick(1000);
-            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy());
+            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy()).unsubscribe();
 
             // the second HTTP request is over
             httpMock.expectOne('/fake2').flush({});
             tick();
-            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy());
+            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy()).unsubscribe();
 
             // the spinner shouldn't be shown after debounceDelay terminated
             tick(2000);
-            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy());
+            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy()).unsubscribe();
         }
     )));
 
@@ -394,23 +394,23 @@ describe('NgHttpLoaderComponent', () => {
 
             // both HTTP requests are pending for 1s now
             tick(1000);
-            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy());
+            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy()).unsubscribe();
 
             // the first HTTP request is over
             httpMock.expectOne('/fake').flush({});
 
             // the second HTTP request is pending for 2s now
             tick(1000);
-            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy());
+            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy()).unsubscribe();
 
             // the second HTTP request is over
             httpMock.expectOne('/fake2').flush({});
             tick();
-            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy());
+            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy()).unsubscribe();
 
             // the spinner shouldn't be shown after debounceDelay terminated
             tick(3000);
-            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy());
+            component.isSpinnerVisibleSubject.subscribe(v => expect(v).toBeFalsy()).unsubscribe();
         }
     )));
 
