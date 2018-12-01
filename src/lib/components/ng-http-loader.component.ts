@@ -20,8 +20,8 @@ import { Spinkit } from '../spinkits';
     styleUrls: ['./ng-http-loader.component.scss']
 })
 export class NgHttpLoaderComponent implements OnDestroy, OnInit {
-    private _isSpinnerVisibleSubject = new BehaviorSubject<boolean>(false);
     public spinkit = Spinkit;
+    private _isSpinnerVisibleSubject = new BehaviorSubject<boolean>(false);
     private subscriptions: Subscription;
     private visibleUntil = Date.now();
 
