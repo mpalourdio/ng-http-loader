@@ -70,7 +70,6 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     }
 
     get isSpinnerVisible$(): Observable<boolean> {
-        console.log('called');
         return this._isSpinnerVisibleSubject.asObservable();
     }
 
