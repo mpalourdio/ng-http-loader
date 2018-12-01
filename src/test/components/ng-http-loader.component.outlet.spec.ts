@@ -39,7 +39,9 @@ describe('NgHttpLoaderComponentOutlet', () => {
     });
 
     it('should be possible to specify an entryComponent', () => {
-        component.isSpinnerVisibleSubject = new BehaviorSubject<boolean>(true);
+        spyOnProperty(component, 'isSpinnerVisible$')
+            .and.returnValue(new BehaviorSubject(true).asObservable());
+
         component.entryComponent = SkThreeBounceComponent;
         fixture.detectChanges();
 
@@ -52,7 +54,9 @@ describe('NgHttpLoaderComponentOutlet', () => {
     });
 
     it('should force [spinner] to null if [entryComponent] is defined', () => {
-        component.isSpinnerVisibleSubject = new BehaviorSubject<boolean>(true);
+        spyOnProperty(component, 'isSpinnerVisible$')
+            .and.returnValue(new BehaviorSubject(true).asObservable());
+
         component.spinner = 'whatever';
         component.entryComponent = SkThreeBounceComponent;
         fixture.detectChanges();

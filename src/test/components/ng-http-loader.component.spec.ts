@@ -47,7 +47,8 @@ describe('NgHttpLoaderComponent', () => {
     });
 
     it('should create the ng-http-loader component with default values', () => {
-        component.isSpinnerVisibleSubject = new BehaviorSubject<boolean>(true);
+        spyOnProperty(component, 'isSpinnerVisible$')
+            .and.returnValue(new BehaviorSubject(true).asObservable());
         fixture.detectChanges();
 
         const element = fixture
@@ -72,7 +73,8 @@ describe('NgHttpLoaderComponent', () => {
     });
 
     it('should not set the colored class if background-color is defined', () => {
-        component.isSpinnerVisibleSubject = new BehaviorSubject<boolean>(true);
+        spyOnProperty(component, 'isSpinnerVisible$')
+            .and.returnValue(new BehaviorSubject(true).asObservable());
         component.backgroundColor = '#ff0000';
         fixture.detectChanges();
 
@@ -93,7 +95,8 @@ describe('NgHttpLoaderComponent', () => {
     });
 
     it('should be able to specify another known spinner', () => {
-        component.isSpinnerVisibleSubject = new BehaviorSubject<boolean>(true);
+        spyOnProperty(component, 'isSpinnerVisible$')
+            .and.returnValue(new BehaviorSubject(true).asObservable());
         component.spinner = Spinkit.skRotatingPlane;
         fixture.detectChanges();
 
@@ -106,7 +109,8 @@ describe('NgHttpLoaderComponent', () => {
     });
 
     it('should allow us to specify a custom background-color', () => {
-        component.isSpinnerVisibleSubject = new BehaviorSubject<boolean>(true);
+        spyOnProperty(component, 'isSpinnerVisible$')
+            .and.returnValue(new BehaviorSubject(true).asObservable());
         component.backgroundColor = '#ff0000';
         fixture.detectChanges();
 
