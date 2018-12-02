@@ -13,7 +13,7 @@ export * from './lib/components/sk-wave/sk-wave.component';
 export * from './lib/components/ng-http-loader.component';
 export * from './lib/components/abstract.loader.component';
 
-export * from './lib/services/pending-interceptor.service';
+export * from './lib/services/pending-requests-interceptor.service';
 export * from './lib/services/spinner-visibility.service';
 
 export * from './lib/ng-http-loader.module';

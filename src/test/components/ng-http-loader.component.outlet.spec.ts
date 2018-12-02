@@ -11,9 +11,10 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { BehaviorSubject } from 'rxjs';
 import { NgHttpLoaderComponent } from '../../lib/components/ng-http-loader.component';
 import { SkThreeBounceComponent } from '../../lib/components/sk-three-bounce/sk-three-bounce.component';
-import { PendingInterceptorServiceProvider } from '../../lib/services/pending-interceptor.service';
+import { PendingRequestsInterceptorProvider } from '../../lib/services/pending-requests-interceptor.service';
 import { SPINKIT_COMPONENTS } from '../../lib/spinkits';
 
 describe('NgHttpLoaderComponentOutlet', () => {
@@ -24,7 +25,7 @@ describe('NgHttpLoaderComponentOutlet', () => {
         TestBed.configureTestingModule({
             declarations: [NgHttpLoaderComponent, ...SPINKIT_COMPONENTS],
             imports: [HttpClientTestingModule],
-            providers: [PendingInterceptorServiceProvider]
+            providers: [PendingRequestsInterceptorProvider]
         })
             .overrideModule(BrowserDynamicTestingModule, {
                 set: { entryComponents: [SkThreeBounceComponent] }
@@ -38,7 +39,9 @@ describe('NgHttpLoaderComponentOutlet', () => {
     });
 
     it('should be possible to specify an entryComponent', () => {
-        component.isSpinnerVisible = true;
+        spyOnProperty(component, 'isVisible$')
+            .and.returnValue(new BehaviorSubject(true).asObservable());
+
         component.entryComponent = SkThreeBounceComponent;
         fixture.detectChanges();
 
@@ -51,11 +54,49 @@ describe('NgHttpLoaderComponentOutlet', () => {
     });
 
     it('should force [spinner] to null if [entryComponent] is defined', () => {
-        component.isSpinnerVisible = true;
-        component.spinner = 'whatever';
+        spyOnProperty(component, 'isVisible$')
+            .and.returnValue(new BehaviorSubject(true).asObservable());
+
+        component.spinner = 'spinner-name';
         component.entryComponent = SkThreeBounceComponent;
         fixture.detectChanges();
 
         expect(component.spinner).toBeNull();
+    });
+
+    it('should correctly check [entryComponent] with empty string', () => {
+        spyOnProperty(component, 'isVisible$')
+            .and.returnValue(new BehaviorSubject(true).asObservable());
+
+        const spinnerName = 'spinner-name';
+        component.spinner = spinnerName;
+        component.entryComponent = '';
+        fixture.detectChanges();
+
+        expect(component.spinner).toBe(spinnerName);
+    });
+
+    it('should correctly check [entryComponent] with null', () => {
+        spyOnProperty(component, 'isVisible$')
+            .and.returnValue(new BehaviorSubject(true).asObservable());
+
+        const spinnerName = 'spinner-name';
+        component.spinner = spinnerName;
+        component.entryComponent = null;
+        fixture.detectChanges();
+
+        expect(component.spinner).toBe(spinnerName);
+    });
+
+    it('should correctly check [entryComponent] with undefined', () => {
+        spyOnProperty(component, 'isVisible$')
+            .and.returnValue(new BehaviorSubject(true).asObservable());
+
+        const spinnerName = 'spinner-name';
+        component.spinner = spinnerName;
+        component.entryComponent = undefined;
+        fixture.detectChanges();
+
+        expect(component.spinner).toBe(spinnerName);
     });
 });

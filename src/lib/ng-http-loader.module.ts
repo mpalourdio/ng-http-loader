@@ -10,7 +10,7 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { NgHttpLoaderComponent } from './components/ng-http-loader.component';
-import { PendingInterceptorServiceProvider } from './services/pending-interceptor.service';
+import { PendingRequestsInterceptorProvider } from './services/pending-requests-interceptor.service';
 import { SPINKIT_COMPONENTS } from './spinkits';
 
 @NgModule({
@@ -31,7 +31,7 @@ export class NgHttpLoaderModule {
         return {
             ngModule: NgHttpLoaderModule,
             providers: [
-                PendingInterceptorServiceProvider,
+                PendingRequestsInterceptorProvider,
             ],
         };
     }

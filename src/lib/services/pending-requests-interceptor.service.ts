@@ -22,16 +22,16 @@ import { catchError, finalize, map } from 'rxjs/operators';
 @Injectable({
     providedIn: 'root'
 })
-export class PendingInterceptorService implements HttpInterceptor {
+export class PendingRequestsInterceptor implements HttpInterceptor {
     private _pendingRequests = 0;
-    private _pendingRequestsStatus = new ReplaySubject<boolean>(1);
+    private _pendingRequestsStatus$ = new ReplaySubject<boolean>(1);
     private _filteredUrlPatterns: RegExp[] = [];
     private _filteredMethods: string[] = [];
     private _filteredHeaders: string[] = [];
     private _forceByPass: boolean;
 
     get pendingRequestsStatus$(): Observable<boolean> {
-        return this._pendingRequestsStatus.asObservable();
+        return this._pendingRequestsStatus$.asObservable();
     }
 
     get pendingRequests(): number {
@@ -86,7 +86,7 @@ export class PendingInterceptorService implements HttpInterceptor {
             this._pendingRequests++;
 
             if (1 === this._pendingRequests) {
-                this._pendingRequestsStatus.next(true);
+                this._pendingRequestsStatus$.next(true);
             }
         }
 
@@ -102,7 +102,7 @@ export class PendingInterceptorService implements HttpInterceptor {
                     this._pendingRequests--;
 
                     if (0 === this._pendingRequests) {
-                        this._pendingRequestsStatus.next(false);
+                        this._pendingRequestsStatus$.next(false);
                     }
                 }
             })
@@ -110,8 +110,8 @@ export class PendingInterceptorService implements HttpInterceptor {
     }
 }
 
-export const PendingInterceptorServiceProvider: ExistingProvider[] = [{
+export const PendingRequestsInterceptorProvider: ExistingProvider[] = [{
     provide: HTTP_INTERCEPTORS,
-    useExisting: PendingInterceptorService,
+    useExisting: PendingRequestsInterceptor,
     multi: true
 }];
