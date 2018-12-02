@@ -63,4 +63,37 @@ describe('NgHttpLoaderComponentOutlet', () => {
 
         expect(component.spinner).toBeNull();
     });
+
+    it('should correctly check [entryComponent] with empty string', () => {
+        spyOnProperty(component, 'isVisible$')
+            .and.returnValue(new BehaviorSubject(true).asObservable());
+
+        component.spinner = 'whatever';
+        component.entryComponent = '';
+        fixture.detectChanges();
+
+        expect(component.spinner).toBe('whatever');
+    });
+
+    it('should correctly check [entryComponent] with null', () => {
+        spyOnProperty(component, 'isVisible$')
+            .and.returnValue(new BehaviorSubject(true).asObservable());
+
+        component.spinner = 'whatever';
+        component.entryComponent = null;
+        fixture.detectChanges();
+
+        expect(component.spinner).toBe('whatever');
+    });
+
+    it('should correctly check [entryComponent] with undefined', () => {
+        spyOnProperty(component, 'isVisible$')
+            .and.returnValue(new BehaviorSubject(true).asObservable());
+
+        component.spinner = 'whatever';
+        component.entryComponent = undefined;
+        fixture.detectChanges();
+
+        expect(component.spinner).toBe('whatever');
+    });
 });

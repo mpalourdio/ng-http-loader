@@ -77,7 +77,7 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     }
 
     private nullifySpinnerIfEntryComponentIsDefined(): void {
-        if (null != this.entryComponent) {
+        if (this.entryComponent) {
             this.spinner = null;
         }
     }
