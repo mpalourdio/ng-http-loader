@@ -22,7 +22,7 @@ import { catchError, finalize, map } from 'rxjs/operators';
 @Injectable({
     providedIn: 'root'
 })
-export class PendingInterceptorService implements HttpInterceptor {
+export class PendingRequestsInterceptor implements HttpInterceptor {
     private _pendingRequests = 0;
     private _pendingRequestsStatus$ = new ReplaySubject<boolean>(1);
     private _filteredUrlPatterns: RegExp[] = [];
@@ -110,8 +110,8 @@ export class PendingInterceptorService implements HttpInterceptor {
     }
 }
 
-export const PendingInterceptorServiceProvider: ExistingProvider[] = [{
+export const PendingRequestsInterceptorProvider: ExistingProvider[] = [{
     provide: HTTP_INTERCEPTORS,
-    useExisting: PendingInterceptorService,
+    useExisting: PendingRequestsInterceptor,
     multi: true
 }];

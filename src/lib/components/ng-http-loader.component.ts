@@ -10,7 +10,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, merge, Observable, Subscription, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, partition, switchMap, tap } from 'rxjs/operators';
-import { PendingInterceptorService } from '../services/pending-interceptor.service';
+import { PendingRequestsInterceptor } from '../services/pending-requests-interceptor.service';
 import { SpinnerVisibilityService } from '../services/spinner-visibility.service';
 import { Spinkit } from '../spinkits';
 
@@ -21,7 +21,7 @@ import { Spinkit } from '../spinkits';
 })
 export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     public spinkit = Spinkit;
-    private _isSpinnerVisible$ = new BehaviorSubject<boolean>(false);
+    private _isVisible$ = new BehaviorSubject<boolean>(false);
     private subscriptions: Subscription;
     private visibleUntil = Date.now();
 
@@ -44,23 +44,23 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     @Input()
     public entryComponent: any = null;
 
-    constructor(private pendingInterceptorService: PendingInterceptorService, private spinnerVisibilityService: SpinnerVisibilityService) {
-        const [showSpinner$, hideSpinner$] = partition((h: boolean) => h)(this.pendingInterceptorService.pendingRequestsStatus$);
+    constructor(private pendingRequestsInterceptor: PendingRequestsInterceptor, private spinnerVisibility: SpinnerVisibilityService) {
+        const [showSpinner$, hideSpinner$] = partition((h: boolean) => h)(this.pendingRequestsInterceptor.pendingRequestsStatus$);
 
         this.subscriptions = merge(
-            this.pendingInterceptorService.pendingRequestsStatus$.pipe(
+            this.pendingRequestsInterceptor.pendingRequestsStatus$.pipe(
                 switchMap(() => showSpinner$.pipe(debounce(() => timer(this.debounceDelay))))
             ),
             showSpinner$.pipe(
                 switchMap(() => hideSpinner$.pipe(debounce(() => this.getVisibilityTimer$())))
             ),
-            this.spinnerVisibilityService.visibility$,
+            this.spinnerVisibility.visibility$,
         )
             .pipe(
                 distinctUntilChanged(),
-                tap(h => this.updateVisibilityExpiration(h))
+                tap(h => this.updateExpirationDelay(h))
             )
-            .subscribe(h => this._isSpinnerVisible$.next(h));
+            .subscribe(h => this._isVisible$.next(h));
     }
 
     ngOnInit(): void {
@@ -72,8 +72,8 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
         this.subscriptions.unsubscribe();
     }
 
-    get isSpinnerVisible$(): Observable<boolean> {
-        return this._isSpinnerVisible$.asObservable();
+    get isVisible$(): Observable<boolean> {
+        return this._isVisible$.asObservable();
     }
 
     private nullifySpinnerIfEntryComponentIsDefined(): void {
@@ -95,7 +95,7 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
 
         if (!!this.filteredUrlPatterns.length) {
             this.filteredUrlPatterns.forEach(e =>
-                this.pendingInterceptorService.filteredUrlPatterns.push(new RegExp(e))
+                this.pendingRequestsInterceptor.filteredUrlPatterns.push(new RegExp(e))
             );
         }
     }
@@ -104,17 +104,17 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
         if (!(this.filteredMethods instanceof Array)) {
             throw new TypeError('`filteredMethods` must be an array.');
         }
-        this.pendingInterceptorService.filteredMethods = this.filteredMethods;
+        this.pendingRequestsInterceptor.filteredMethods = this.filteredMethods;
     }
 
     private initFilteredHeaders(): void {
         if (!(this.filteredHeaders instanceof Array)) {
             throw new TypeError('`filteredHeaders` must be an array.');
         }
-        this.pendingInterceptorService.filteredHeaders = this.filteredHeaders;
+        this.pendingRequestsInterceptor.filteredHeaders = this.filteredHeaders;
     }
 
-    private updateVisibilityExpiration(showSpinner: boolean): void {
+    private updateExpirationDelay(showSpinner: boolean): void {
         if (showSpinner) {
             this.visibleUntil = Date.now() + this.minDuration;
         }

@@ -12,26 +12,26 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { async, inject, TestBed } from '@angular/core/testing';
 import { forkJoin, Observable } from 'rxjs';
 import {
-    PendingInterceptorService,
-    PendingInterceptorServiceProvider
-} from '../../lib/services/pending-interceptor.service';
+    PendingRequestsInterceptor,
+    PendingRequestsInterceptorProvider
+} from '../../lib/services/pending-requests-interceptor.service';
 
-describe('PendingInterceptorService', () => {
+describe('PendingRequestsInterceptor', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule],
-            providers: [PendingInterceptorServiceProvider]
+            providers: [PendingRequestsInterceptorProvider]
         });
     });
 
-    it('should be created', inject([PendingInterceptorService], (service: PendingInterceptorService) => {
+    it('should be created', inject([PendingRequestsInterceptor], (service: PendingRequestsInterceptor) => {
         expect(service).toBeTruthy();
     }));
 
     it('should be aware of the pending HTTP requests', inject(
-        [PendingInterceptorService, HttpClient, HttpTestingController],
-        (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
+        [PendingRequestsInterceptor, HttpClient, HttpTestingController],
+        (service: PendingRequestsInterceptor, http: HttpClient, httpMock: HttpTestingController) => {
 
             function runQuery$(url: string): Observable<any> {
                 return http.get(url);
@@ -56,8 +56,8 @@ describe('PendingInterceptorService', () => {
 
     it('should correctly notify the pendingRequestsStatus observable', async(
         inject(
-            [PendingInterceptorService, HttpClient, HttpTestingController],
-            (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
+            [PendingRequestsInterceptor, HttpClient, HttpTestingController],
+            (service: PendingRequestsInterceptor, http: HttpClient, httpMock: HttpTestingController) => {
                 const pendingRequestsStatus$ = service.pendingRequestsStatus$;
 
                 pendingRequestsStatus$
@@ -73,8 +73,8 @@ describe('PendingInterceptorService', () => {
 
     it('should correctly notify the pendingRequestsStatus observable, even if subscribed after', async(
         inject(
-            [PendingInterceptorService, HttpClient, HttpTestingController],
-            (service: PendingInterceptorService, http: HttpClient, httpMock: HttpTestingController) => {
+            [PendingRequestsInterceptor, HttpClient, HttpTestingController],
+            (service: PendingRequestsInterceptor, http: HttpClient, httpMock: HttpTestingController) => {
                 http.get('/fake').subscribe();
                 httpMock.expectOne('/fake');
 

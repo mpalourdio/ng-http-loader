@@ -14,7 +14,7 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { BehaviorSubject } from 'rxjs';
 import { NgHttpLoaderComponent } from '../../lib/components/ng-http-loader.component';
 import { SkThreeBounceComponent } from '../../lib/components/sk-three-bounce/sk-three-bounce.component';
-import { PendingInterceptorServiceProvider } from '../../lib/services/pending-interceptor.service';
+import { PendingRequestsInterceptorProvider } from '../../lib/services/pending-requests-interceptor.service';
 import { SPINKIT_COMPONENTS } from '../../lib/spinkits';
 
 describe('NgHttpLoaderComponentOutlet', () => {
@@ -25,7 +25,7 @@ describe('NgHttpLoaderComponentOutlet', () => {
         TestBed.configureTestingModule({
             declarations: [NgHttpLoaderComponent, ...SPINKIT_COMPONENTS],
             imports: [HttpClientTestingModule],
-            providers: [PendingInterceptorServiceProvider]
+            providers: [PendingRequestsInterceptorProvider]
         })
             .overrideModule(BrowserDynamicTestingModule, {
                 set: { entryComponents: [SkThreeBounceComponent] }
@@ -39,7 +39,7 @@ describe('NgHttpLoaderComponentOutlet', () => {
     });
 
     it('should be possible to specify an entryComponent', () => {
-        spyOnProperty(component, 'isSpinnerVisible$')
+        spyOnProperty(component, 'isVisible$')
             .and.returnValue(new BehaviorSubject(true).asObservable());
 
         component.entryComponent = SkThreeBounceComponent;
@@ -54,7 +54,7 @@ describe('NgHttpLoaderComponentOutlet', () => {
     });
 
     it('should force [spinner] to null if [entryComponent] is defined', () => {
-        spyOnProperty(component, 'isSpinnerVisible$')
+        spyOnProperty(component, 'isVisible$')
             .and.returnValue(new BehaviorSubject(true).asObservable());
 
         component.spinner = 'whatever';

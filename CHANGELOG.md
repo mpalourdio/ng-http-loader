@@ -1,8 +1,10 @@
 # Changelog
 
 ## v5.0.0
-Prior to this release, `NgHttpLoaderComponent#isSpinnerVisible` was a boolean. Because of unexpected behaviors when a component with `ChangeDetectionStrategy.OnPush` performed HTTP requests, it is now an `Observable<boolean>`.  
+- Prior to this release, `NgHttpLoaderComponent#isSpinnerVisible` was a boolean. Because of unexpected behaviors when a component with `ChangeDetectionStrategy.OnPush` performed HTTP requests, it is now an `Observable<boolean>` and has been renamed to `NgHttpLoaderComponent#isVisible$`.  
 The associated template now uses an `async pipe` in order to perform the show/hide logic.
+
+- `PendingInterceptorService` has been renamed to `PendingRequestsInterceptor`.
 
 ## v4.0.0
 - `HttpClientModule` has been removed from imports.  
