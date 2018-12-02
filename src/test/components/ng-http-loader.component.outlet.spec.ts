@@ -57,7 +57,7 @@ describe('NgHttpLoaderComponentOutlet', () => {
         spyOnProperty(component, 'isVisible$')
             .and.returnValue(new BehaviorSubject(true).asObservable());
 
-        component.spinner = 'whatever';
+        component.spinner = 'spinner-name';
         component.entryComponent = SkThreeBounceComponent;
         fixture.detectChanges();
 
@@ -68,32 +68,35 @@ describe('NgHttpLoaderComponentOutlet', () => {
         spyOnProperty(component, 'isVisible$')
             .and.returnValue(new BehaviorSubject(true).asObservable());
 
-        component.spinner = 'whatever';
+        const spinnerName = 'spinner-name';
+        component.spinner = spinnerName;
         component.entryComponent = '';
         fixture.detectChanges();
 
-        expect(component.spinner).toBe('whatever');
+        expect(component.spinner).toBe(spinnerName);
     });
 
     it('should correctly check [entryComponent] with null', () => {
         spyOnProperty(component, 'isVisible$')
             .and.returnValue(new BehaviorSubject(true).asObservable());
 
-        component.spinner = 'whatever';
+        const spinnerName = 'spinner-name';
+        component.spinner = spinnerName;
         component.entryComponent = null;
         fixture.detectChanges();
 
-        expect(component.spinner).toBe('whatever');
+        expect(component.spinner).toBe(spinnerName);
     });
 
     it('should correctly check [entryComponent] with undefined', () => {
         spyOnProperty(component, 'isVisible$')
             .and.returnValue(new BehaviorSubject(true).asObservable());
 
-        component.spinner = 'whatever';
+        const spinnerName = 'spinner-name';
+        component.spinner = spinnerName;
         component.entryComponent = undefined;
         fixture.detectChanges();
 
-        expect(component.spinner).toBe('whatever');
+        expect(component.spinner).toBe(spinnerName);
     });
 });
