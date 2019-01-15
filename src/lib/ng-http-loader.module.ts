@@ -27,7 +27,7 @@ import { SPINKIT_COMPONENTS } from './spinkits';
     ],
 })
 export class NgHttpLoaderModule {
-    static forRoot(): ModuleWithProviders {
+    public static forRoot(): ModuleWithProviders {
         return {
             ngModule: NgHttpLoaderModule,
             providers: [
