@@ -2,6 +2,11 @@ dist: xenial
 
 language: node_js
 
+addons:
+  apt:
+    packages:
+      - chromium-browser
+
 node_js:
   - lts/*
   - node
