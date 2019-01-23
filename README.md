@@ -4,6 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/mpalourdio/ng-http-loader/badge.svg?branch=master)](https://coveralls.io/github/mpalourdio/ng-http-loader?branch=master)
 [![npm](https://img.shields.io/npm/v/ng-http-loader.svg)](https://www.npmjs.com/package/ng-http-loader)
 [![npm](https://img.shields.io/npm/dm/ng-http-loader.svg)](https://www.npmjs.com/package/ng-http-loader)
+[![npm](https://img.shields.io/npm/dt/ng-http-loader.svg)](https://www.npmjs.com/package/ng-http-loader)
 
 ## Changelog
 
