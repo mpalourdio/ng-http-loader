@@ -91,9 +91,6 @@ export class PendingRequestsInterceptor implements HttpInterceptor {
         }
 
         return next.handle(req).pipe(
-            map(event => {
-                return event;
-            }),
             catchError((error: HttpErrorResponse) => {
                 return throwError(error);
             }),
