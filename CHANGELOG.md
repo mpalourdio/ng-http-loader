@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.0.1
+- The `rxjs` `peerDependency` has been relaxed from `~6.3.3` to `^6.3.3` so that no warning is thrown when the `rxjs` version has been bumped at application side.
+
 ## v5.0.0
 - Prior to this release, `NgHttpLoaderComponent#isSpinnerVisible` was a boolean. Because of unexpected behaviors when a component with `ChangeDetectionStrategy.OnPush` performed HTTP requests, it is now an `Observable<boolean>` and has been renamed to `NgHttpLoaderComponent#isVisible$`.  
 The associated template now uses an `async pipe` in order to perform the show/hide logic.
