@@ -54,9 +54,11 @@ export class PendingRequestsInterceptor implements HttpInterceptor {
         this._forceByPass = value;
     }
 
-    private shouldBypassUrl(url: string): boolean {
+    private shouldBypassUrl(url: string, body?: object): boolean {
         return this._filteredUrlPatterns.some(e => {
-            return e.test(url);
+            return (
+              e.test(url) || body && JSON.stringify(body).match(e) ? true : false
+            );
         });
     }
 
@@ -74,7 +76,7 @@ export class PendingRequestsInterceptor implements HttpInterceptor {
 
     private shouldBypass(req: HttpRequest<any>): boolean {
         return this._forceByPass
-            || this.shouldBypassUrl(req.urlWithParams)
+            || this.shouldBypassUrl(req.urlWithParams, req.body)
             || this.shouldBypassMethod(req)
             || this.shouldBypassHeader(req);
     }
