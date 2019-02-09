@@ -17,7 +17,7 @@ import {
 } from '@angular/common/http';
 import { ExistingProvider, Injectable } from '@angular/core';
 import { Observable, ReplaySubject, throwError } from 'rxjs';
-import { catchError, finalize, map } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
