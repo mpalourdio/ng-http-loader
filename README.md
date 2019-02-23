@@ -80,14 +80,15 @@ In your app.component.html, simply add:
 
 ## Customizing the spinner
 
-You can customize the **background-color**, the **spinner type**, the **debounce delay** (ie. after how many milliseconds the spinner will be visible, if needed), the **minimum duration** (ie. how many milliseconds should the spinner be visible at least), the **extra duration** (ie. how many extra milliseconds should the spinner be visible):
+You can customize the **background-color**, the **spinner type**, the spinner **backdrop** (visible by default) the **debounce delay** (ie. after how many milliseconds the spinner will be visible, if needed), the **minimum duration** (ie. how many milliseconds should the spinner be visible at least), the **extra duration** (ie. how many extra milliseconds should the spinner be visible):
 ```xml
 <ng-http-loader 
     [backgroundColor]="'#ff0000'"
     [spinner]="spinkit.skWave"
     [debounceDelay]="100"
     [minDuration]="300"
-    [extraDuration]="300">
+    [extraDuration]="300"
+    [backdrop]="false">
 </ng-http-loader>
 ```
 
