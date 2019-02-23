@@ -85,10 +85,10 @@ You can customize the **background-color**, the **spinner type**, the spinner **
 <ng-http-loader 
     [backgroundColor]="'#ff0000'"
     [spinner]="spinkit.skWave"
+    [backdrop]="false"
     [debounceDelay]="100"
     [minDuration]="300"
-    [extraDuration]="300"
-    [backdrop]="false">
+    [extraDuration]="300">
 </ng-http-loader>
 ```
 
