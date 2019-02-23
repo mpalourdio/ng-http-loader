@@ -1,4 +1,4 @@
-<div id="spinner" *ngIf="isVisible$ | async">
+<div id="spinner" [class.backdrop]="backdrop" *ngIf="isVisible$ | async">
 
     <ng-container *ngComponentOutlet="entryComponent"></ng-container>
 

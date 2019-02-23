@@ -43,6 +43,8 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     public extraDuration = 0;
     @Input()
     public entryComponent: any = null;
+    @Input()
+    public backdrop = true;
 
     constructor(private pendingRequestsInterceptor: PendingRequestsInterceptor, private spinnerVisibility: SpinnerVisibilityService) {
         const [showSpinner$, hideSpinner$] = partition((h: boolean) => h)(this.pendingRequestsInterceptor.pendingRequestsStatus$);
