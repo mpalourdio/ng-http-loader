@@ -176,6 +176,10 @@ export class MyComponent {
 }
 ```
 
+## Internet explorer or Safari problem ?
+
+Just use a [real browser](https://download.mozilla.org).
+
 ## Misc
 
 Each Spinkit component defined in [SPINKIT_COMPONENTS](src/lib/spinkits.ts#L30) can be used individually.
