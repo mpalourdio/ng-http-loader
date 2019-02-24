@@ -1,6 +1,6 @@
 {
   "name": "ng-http-loader",
-  "version": "5.0.1",
+  "version": "5.1.0-beta.0",
   "scripts": {
     "ng": "ng",
     "build": "ng build",
