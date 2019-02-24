@@ -866,7 +866,7 @@ describe('NgHttpLoaderComponent', () => {
         expect(element).toBeTruthy();
     });
 
-    it('should be possible to remove the backdrop class', () => {
+    it('should be possible to remove the backdrop CSS class', () => {
         spyOnProperty(component, 'isVisible$')
             .and.returnValue(new BehaviorSubject(true).asObservable());
         component.backdrop = false;
