@@ -889,7 +889,7 @@ describe('NgHttpLoaderComponent', () => {
             .query(By.css('#spinner'))
             .nativeElement;
 
-        expect(element.style.opacity).toBe('0.7');
+        expect(element.style.opacity).toBe(`0${component.opacity}`);
     });
 
     it('should be possible to override opacity', () => {
