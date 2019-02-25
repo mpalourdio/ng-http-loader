@@ -1,7 +1,9 @@
 # Changelog
 
 ## v5.1.0
-- This release introduces the **backdrop** option (`true` by default). If set to `false`, the spinner background elements will remain clickable, without any background color.
+- This release introduces 2 new options: 
+    - **backdrop** (`true` by default): If set to `false`, the spinner background elements will remain clickable, without any background color.
+    - **opacity**: This option lets you override the spinner opacity (0.7 by default).
 
 ## v5.0.1
 - The `rxjs` `peerDependency` has been relaxed from `~6.3.3` to `^6.3.3` so that no warning is thrown when the `rxjs` version has been bumped at application side.

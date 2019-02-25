@@ -34,6 +34,7 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     @Input() public filteredMethods: string[] = [];
     @Input() public filteredUrlPatterns: string[] = [];
     @Input() public minDuration = 0;
+    @Input() public opacity = '.7';
     @Input() public spinner = Spinkit.skWave;
 
     constructor(private pendingRequestsInterceptor: PendingRequestsInterceptor, private spinnerVisibility: SpinnerVisibilityService) {

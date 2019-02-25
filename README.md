@@ -80,19 +80,28 @@ In your app.component.html, simply add:
 
 ## Customizing the spinner
 
-You can customize the **background-color**, the **spinner type**, the spinner **backdrop** (visible by default), the **debounce delay** (ie. after how many milliseconds the spinner will be visible, if needed), the **minimum duration** (ie. how many milliseconds should the spinner be visible at least), the **extra duration** (ie. how many extra milliseconds should the spinner be visible):
+You can customize the following parameters:
+  - The spinner **backdrop** (visible by default).
+  - The **background-color** (ie. the color of the spinner itself).
+  - The **debounce delay** (ie. after how many milliseconds the spinner will be visible, if needed).
+  - The **extra duration** (ie. how many extra milliseconds should the spinner be visible).
+  - The **minimum duration** (ie. how many milliseconds should the spinner be visible at least).
+  - The spinner **opacity**.
+  - The **spinner type**.
+
 ```xml
 <ng-http-loader 
-    [backgroundColor]="'#ff0000'"
-    [spinner]="spinkit.skWave"
     [backdrop]="false"
+    [backgroundColor]="'#ff0000'"
     [debounceDelay]="100"
+    [extraDuration]="300"
     [minDuration]="300"
-    [extraDuration]="300">
+    [opacity]=".6"
+    [spinner]="spinkit.skWave">
 </ng-http-loader>
 ```
 
-**_To use this syntax, you must reference the `Spinkit` const as a public property in your app.component.ts_**:
+**_To specify the spinner type this way, you must reference the `Spinkit` const as a public property in your app.component.ts_**:
 
 ```typescript
 import { Spinkit } from 'ng-http-loader'; // <============

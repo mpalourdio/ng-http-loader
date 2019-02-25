@@ -6,14 +6,13 @@
     transform: translate(-50%, -50%);
     position: fixed;
     z-index: 9999;
-    opacity: $spinner-opacity;
 
     &.backdrop {
         top: 0;
         left: 0;
         height: 100%;
         width: 100%;
-        background-color: $spinner-background-color;
+        background-color: $backdrop-background-color;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -22,5 +21,5 @@
 }
 
 ::ng-deep .colored-parent, ::ng-deep .colored > div {
-    background-color: $colored-background-color;
+    background-color: $spinkit-background-color;
 }

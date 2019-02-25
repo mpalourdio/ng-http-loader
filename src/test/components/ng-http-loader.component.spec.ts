@@ -878,4 +878,31 @@ describe('NgHttpLoaderComponent', () => {
 
         expect(element).toBeNull();
     });
+
+    it('should have a default opacity', () => {
+        spyOnProperty(component, 'isVisible$')
+            .and.returnValue(new BehaviorSubject(true).asObservable());
+        fixture.detectChanges();
+
+        const element: HTMLElement = fixture
+            .debugElement
+            .query(By.css('#spinner'))
+            .nativeElement;
+
+        expect(element.style.opacity).toBe('0.7');
+    });
+
+    it('should be possible to override opacity', () => {
+        spyOnProperty(component, 'isVisible$')
+            .and.returnValue(new BehaviorSubject(true).asObservable());
+        component.opacity = '.3';
+        fixture.detectChanges();
+
+        const element: HTMLElement = fixture
+            .debugElement
+            .query(By.css('#spinner'))
+            .nativeElement;
+
+        expect(element.style.opacity).toBe(`0${component.opacity}`);
+    });
 });
