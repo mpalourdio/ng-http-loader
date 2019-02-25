@@ -115,7 +115,7 @@ export class AppComponent {
     public spinkit = Spinkit; // <============
 }
 ```
-The different spinners available are referenced in [this class](src/lib/spinkits.ts).
+The different spinners available are referenced in [this file](src/lib/spinkits.ts).
 
 
 **_Otherwise, you can simply reference the spinner type as a simple string_**:
