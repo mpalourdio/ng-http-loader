@@ -118,7 +118,7 @@ export class AppComponent {
 The different spinners available are referenced in [this class](src/lib/spinkits.ts).
 
 
-**_Otherwise, you can simply reference the chosen spinner as a simple string_**:
+**_Otherwise, you can simply reference the spinner type as a simple string_**:
 
 ```xml
 <ng-http-loader backgroundColor="#ff0000" spinner="sk-wave"></ng-http-loader>
