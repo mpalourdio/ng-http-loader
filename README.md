@@ -136,7 +136,7 @@ You can define your own spinner component in place of the built-in ones. The nee
 <ng-http-loader [entryComponent]="myAwesomeComponent"></ng-http-loader>
 ```
 
-You can find some short examples [here](https://gist.github.com/mpalourdio/2c0bec03d610b24ff49db649fbb69a48) and [here](https://gist.github.com/mpalourdio/e05b4495de2abeeecfcf92d70e4ef93e).
+You can find some examples [here](https://gist.github.com/mpalourdio/2c0bec03d610b24ff49db649fbb69a48) and [here](https://gist.github.com/mpalourdio/e05b4495de2abeeecfcf92d70e4ef93e).
 
 ## Requests filtering by URL, HTTP method or HTTP headers
 
