@@ -1,19 +1,25 @@
 @import "variables";
 
 #spinner {
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
+    top: 50% ;
+    left: 50%;
+    transform: translate(-50%, -50%);
     position: fixed;
     z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: $spinner-opacity;
-    background-color: $spinner-background-color;
+
+    &.backdrop {
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: $backdrop-background-color;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: none;
+    }
 }
 
 ::ng-deep .colored-parent, ::ng-deep .colored > div {
-    background-color: $colored-background-color;
+    background-color: $spinner-color;
 }

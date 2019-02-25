@@ -11,6 +11,5 @@ import { Input } from '@angular/core';
 
 export abstract class AbstractLoader {
 
-    @Input()
-    public backgroundColor: string;
+    @Input() public backgroundColor: string;
 }

@@ -80,18 +80,28 @@ In your app.component.html, simply add:
 
 ## Customizing the spinner
 
-You can customize the **background-color**, the **spinner type**, the **debounce delay** (ie. after how many milliseconds the spinner will be visible, if needed), the **minimum duration** (ie. how many milliseconds should the spinner be visible at least), the **extra duration** (ie. how many extra milliseconds should the spinner be visible):
+You can customize the following parameters:
+  - The spinner **backdrop** (visible by default).
+  - The **background-color** (ie. the color of the spinner itself).
+  - The **debounce delay** (ie. after how many milliseconds the spinner will be visible, if needed).
+  - The **extra duration** (ie. how many extra milliseconds should the spinner be visible).
+  - The **minimum duration** (ie. how many milliseconds should the spinner be visible at least).
+  - The spinner **opacity**.
+  - The **spinner type**.
+
 ```xml
 <ng-http-loader 
+    [backdrop]="false"
     [backgroundColor]="'#ff0000'"
-    [spinner]="spinkit.skWave"
     [debounceDelay]="100"
+    [extraDuration]="300"
     [minDuration]="300"
-    [extraDuration]="300">
+    [opacity]=".6"
+    [spinner]="spinkit.skWave">
 </ng-http-loader>
 ```
 
-**_To use this syntax, you must reference the `Spinkit` const as a public property in your app.component.ts_**:
+**_To specify the spinner type this way, you must reference the `Spinkit` const as a public property in your app.component.ts_**:
 
 ```typescript
 import { Spinkit } from 'ng-http-loader'; // <============
@@ -105,18 +115,18 @@ export class AppComponent {
     public spinkit = Spinkit; // <============
 }
 ```
-The different spinners available are referenced in [this class](src/lib/spinkits.ts).
+The different spinners available are referenced in [this file](src/lib/spinkits.ts).
 
 
-**_Otherwise, you can simply reference the chosen spinner as a simple string_**:
+**_Otherwise, you can reference the spinner type as a simple string_**:
 
 ```xml
-<ng-http-loader backgroundColor="#ff0000" spinner="sk-wave"></ng-http-loader>
+<ng-http-loader spinner="sk-wave"></ng-http-loader>
 ```
 
 ## Defining your own spinner
 
-You can define your own loader component in place of the built-in ones. The needed steps are:
+You can define your own spinner component in place of the built-in ones. The needed steps are:
 
 - Create your component
 - Add it to the [entryComponents](https://angular.io/guide/ngmodule-faq#what-is-an-entry-component) array in your module's configuration
@@ -126,7 +136,7 @@ You can define your own loader component in place of the built-in ones. The need
 <ng-http-loader [entryComponent]="myAwesomeComponent"></ng-http-loader>
 ```
 
-You can find some short examples [here](https://gist.github.com/mpalourdio/2c0bec03d610b24ff49db649fbb69a48) and [here](https://gist.github.com/mpalourdio/e05b4495de2abeeecfcf92d70e4ef93e).
+You can find some examples [here](https://gist.github.com/mpalourdio/2c0bec03d610b24ff49db649fbb69a48) and [here](https://gist.github.com/mpalourdio/e05b4495de2abeeecfcf92d70e4ef93e).
 
 ## Requests filtering by URL, HTTP method or HTTP headers
 
@@ -174,6 +184,10 @@ export class MyComponent {
     }
 }
 ```
+
+## Internet explorer or Safari problem ?
+
+Just use a [real browser](https://download.mozilla.org).
 
 ## Misc
 

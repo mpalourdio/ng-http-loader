@@ -852,4 +852,57 @@ describe('NgHttpLoaderComponent', () => {
             component.isVisible$.subscribe(v => expect(v).toBeFalsy()).unsubscribe();
         }
     )));
+
+    it('should set the backdrop CSS class by default', () => {
+        spyOnProperty(component, 'isVisible$')
+            .and.returnValue(new BehaviorSubject(true).asObservable());
+        fixture.detectChanges();
+
+        const element = fixture
+            .debugElement
+            .query(By.css('.backdrop'))
+            .nativeElement;
+
+        expect(element).toBeTruthy();
+    });
+
+    it('should be possible to remove the backdrop CSS class', () => {
+        spyOnProperty(component, 'isVisible$')
+            .and.returnValue(new BehaviorSubject(true).asObservable());
+        component.backdrop = false;
+        fixture.detectChanges();
+
+        const element = fixture
+            .debugElement
+            .query(By.css('.backdrop'));
+
+        expect(element).toBeNull();
+    });
+
+    it('should have a default opacity', () => {
+        spyOnProperty(component, 'isVisible$')
+            .and.returnValue(new BehaviorSubject(true).asObservable());
+        fixture.detectChanges();
+
+        const element: HTMLElement = fixture
+            .debugElement
+            .query(By.css('#spinner'))
+            .nativeElement;
+
+        expect(element.style.opacity).toBe(`0${component.opacity}`);
+    });
+
+    it('should be possible to override opacity', () => {
+        spyOnProperty(component, 'isVisible$')
+            .and.returnValue(new BehaviorSubject(true).asObservable());
+        component.opacity = '.3';
+        fixture.detectChanges();
+
+        const element: HTMLElement = fixture
+            .debugElement
+            .query(By.css('#spinner'))
+            .nativeElement;
+
+        expect(element.style.opacity).toBe(`0${component.opacity}`);
+    });
 });
