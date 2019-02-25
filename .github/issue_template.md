@@ -6,6 +6,6 @@
 
 ## ng-http-loader version
 
-## It does not work as expected on internet explorer or safari
+## It does not work as expected on Internet explorer or Safari
 
-I just don't care :)
+Nothing works as expected on Internet explorer or Safari.
