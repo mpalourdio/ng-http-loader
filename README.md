@@ -121,7 +121,7 @@ The different spinners available are referenced in [this file](src/lib/spinkits.
 **_Otherwise, you can simply reference the spinner type as a simple string_**:
 
 ```xml
-<ng-http-loader backgroundColor="#ff0000" spinner="sk-wave"></ng-http-loader>
+<ng-http-loader spinner="sk-wave"></ng-http-loader>
 ```
 
 ## Defining your own spinner
