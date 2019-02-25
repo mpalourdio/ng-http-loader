@@ -126,7 +126,7 @@ The different spinners available are referenced in [this class](src/lib/spinkits
 
 ## Defining your own spinner
 
-You can define your own loader component in place of the built-in ones. The needed steps are:
+You can define your own spinner component in place of the built-in ones. The needed steps are:
 
 - Create your component
 - Add it to the [entryComponents](https://angular.io/guide/ngmodule-faq#what-is-an-entry-component) array in your module's configuration
