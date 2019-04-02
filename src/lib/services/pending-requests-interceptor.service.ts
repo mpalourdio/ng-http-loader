@@ -7,17 +7,10 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import {
-    HTTP_INTERCEPTORS,
-    HttpErrorResponse,
-    HttpEvent,
-    HttpHandler,
-    HttpInterceptor,
-    HttpRequest
-} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { ExistingProvider, Injectable } from '@angular/core';
-import { Observable, ReplaySubject, throwError } from 'rxjs';
-import { catchError, finalize } from 'rxjs/operators';
+import { Observable, ReplaySubject } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
