@@ -91,7 +91,6 @@ export class PendingRequestsInterceptor implements HttpInterceptor {
         }
 
         return next.handle(req).pipe(
-            catchError((error: HttpErrorResponse) => throwError(error)),
             finalize(() => {
                 if (!shouldBypass) {
                     this._pendingRequests--;
