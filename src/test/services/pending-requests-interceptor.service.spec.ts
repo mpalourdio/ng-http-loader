@@ -9,7 +9,7 @@
 
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { async, inject, TestBed } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 import { forkJoin, Observable } from 'rxjs';
 import {
     PendingRequestsInterceptor,
@@ -17,92 +17,86 @@ import {
 } from '../../lib/services/pending-requests-interceptor.service';
 
 describe('PendingRequestsInterceptor', () => {
+    let http: HttpClient;
+    let httpMock: HttpTestingController;
+    let pendingRequestsInterceptor: PendingRequestsInterceptor;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule],
             providers: [PendingRequestsInterceptorProvider]
         });
+
+        pendingRequestsInterceptor = TestBed.get(PendingRequestsInterceptor);
+        http = TestBed.get(HttpClient);
+        httpMock = TestBed.get(HttpTestingController);
     });
 
-    it('should be created', inject([PendingRequestsInterceptor], (service: PendingRequestsInterceptor) => {
-        expect(service).toBeTruthy();
-    }));
+    it('should be created', () => {
+        expect(pendingRequestsInterceptor).toBeTruthy();
+    });
 
-    it('should be aware of the pending HTTP requests', inject(
-        [PendingRequestsInterceptor, HttpClient, HttpTestingController],
-        (service: PendingRequestsInterceptor, http: HttpClient, httpMock: HttpTestingController) => {
-
-            function runQuery$(url: string): Observable<any> {
-                return http.get(url);
-            }
-
-            forkJoin([runQuery$('/fake'), runQuery$('/fake2')]).subscribe();
-
-            const firstRequest = httpMock.expectOne('/fake');
-            const secondRequest = httpMock.expectOne('/fake2');
-
-            expect(service.pendingRequests).toBe(2);
-            firstRequest.flush({});
-
-            expect(service.pendingRequests).toBe(1);
-            secondRequest.flush({});
-
-            expect(service.pendingRequests).toBe(0);
-
-            httpMock.verify();
+    it('should be aware of the pending HTTP requests', () => {
+        function runQuery$(url: string): Observable<any> {
+            return http.get(url);
         }
-    ));
 
-    it('should correctly notify the pendingRequestsStatus observable', async(
-        inject(
-            [PendingRequestsInterceptor, HttpClient, HttpTestingController],
-            (service: PendingRequestsInterceptor, http: HttpClient, httpMock: HttpTestingController) => {
-                const pendingRequestsStatus$ = service.pendingRequestsStatus$;
+        forkJoin([runQuery$('/fake'), runQuery$('/fake2')]).subscribe();
 
-                pendingRequestsStatus$
-                    .subscribe(
-                        (next: boolean) => expect(next).toBeTruthy(),
-                        (error: HttpErrorResponse) => expect(1).toBe(2)
-                    );
+        const firstRequest = httpMock.expectOne('/fake');
+        const secondRequest = httpMock.expectOne('/fake2');
 
-                http.get('/fake').subscribe();
-                httpMock.expectOne('/fake');
-            })
-    ));
+        expect(pendingRequestsInterceptor.pendingRequests).toBe(2);
+        firstRequest.flush({});
 
-    it('should correctly notify the pendingRequestsStatus observable, even if subscribed after', async(
-        inject(
-            [PendingRequestsInterceptor, HttpClient, HttpTestingController],
-            (service: PendingRequestsInterceptor, http: HttpClient, httpMock: HttpTestingController) => {
-                http.get('/fake').subscribe();
-                httpMock.expectOne('/fake');
+        expect(pendingRequestsInterceptor.pendingRequests).toBe(1);
+        secondRequest.flush({});
 
-                const pendingRequestsStatus$ = service.pendingRequestsStatus$;
-                pendingRequestsStatus$
-                    .subscribe(
-                        (next: boolean) => expect(next).toBeTruthy(),
-                        (error: HttpErrorResponse) => expect(1).toBe(2)
-                    );
-            })
-    ));
+        expect(pendingRequestsInterceptor.pendingRequests).toBe(0);
 
-    it('should fail correctly', inject(
-        [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
+        httpMock.verify();
+    });
 
-            const statusText = 'NOT FOUND';
+    it('should correctly notify the pendingRequestsStatus observable', async(() => {
+        const pendingRequestsStatus$ = pendingRequestsInterceptor.pendingRequestsStatus$;
 
-            http.get('/fake').subscribe(
-                (next: boolean) => expect(true).toBe(false),
-                (error: HttpErrorResponse) => expect(error.statusText).toBe(statusText)
+        pendingRequestsStatus$
+            .subscribe(
+                (next: boolean) => expect(next).toBeTruthy(),
+                (error: HttpErrorResponse) => expect(1).toBe(2)
             );
 
-            const testRequest = httpMock.expectOne('/fake');
-            testRequest.flush({}, {
-                'status': 404,
-                'statusText': statusText
-            });
-            httpMock.verify();
-        }
-    ));
+        http.get('/fake').subscribe();
+        httpMock.expectOne('/fake');
+    }));
+
+    it('should correctly notify the pendingRequestsStatus observable, even if subscribed after', async(() => {
+        const pendingRequestsStatus$ = pendingRequestsInterceptor.pendingRequestsStatus$;
+
+
+        http.get('/fake').subscribe();
+        httpMock.expectOne('/fake');
+
+        pendingRequestsStatus$
+            .subscribe(
+                (next: boolean) => expect(next).toBeTruthy(),
+                (error: HttpErrorResponse) => expect(1).toBe(2)
+            );
+    }));
+
+    it('should fail correctly', () => {
+        const statusText = 'NOT FOUND';
+
+        http.get('/fake').subscribe(
+            (next: boolean) => expect(true).toBe(false),
+            (error: HttpErrorResponse) => expect(error.statusText).toBe(statusText)
+        );
+
+        const testRequest = httpMock.expectOne('/fake');
+        testRequest.flush({}, {
+            'status': 404,
+            'statusText': statusText
+        });
+        httpMock.verify();
+    });
 });

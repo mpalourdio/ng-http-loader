@@ -7,42 +7,42 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { inject, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { SpinnerVisibilityService } from '../../lib/services/spinner-visibility.service';
 
 describe('SpinnerVisibilityService', () => {
+    let spinnerVisibilityService: SpinnerVisibilityService;
 
     beforeEach(() => {
-        TestBed.configureTestingModule({
-            providers: [SpinnerVisibilityService]
-        });
+        TestBed.configureTestingModule({});
+        spinnerVisibilityService = TestBed.get(SpinnerVisibilityService);
     });
 
-    it('should be created', inject([SpinnerVisibilityService], (service: SpinnerVisibilityService) => {
-        expect(service).toBeTruthy();
-    }));
+    it('should be created', () => {
+        expect(spinnerVisibilityService).toBeTruthy();
+    });
 
-    it('should define a subject', inject([SpinnerVisibilityService], (service: SpinnerVisibilityService) => {
-        expect(service.visibility$).toBeTruthy();
-    }));
+    it('should define a subject', () => {
+        expect(spinnerVisibilityService.visibility$).toBeTruthy();
+    });
 
-    it('should pipe \'true\' when calling show()', inject([SpinnerVisibilityService], (spinner: SpinnerVisibilityService) => {
-        spinner.show();
-        spinner.visibility$.subscribe(result => {
+    it('should pipe \'true\' when calling show()', () => {
+        spinnerVisibilityService.show();
+        spinnerVisibilityService.visibility$.subscribe(result => {
                 expect(result).toBeTruthy();
             },
             error => {
                 expect(true).toBeFalsy();
             });
-    }));
+    });
 
-    it('should pipe \'false\' when calling hide()', inject([SpinnerVisibilityService], (spinner: SpinnerVisibilityService) => {
-        spinner.hide();
-        spinner.visibility$.subscribe(result => {
+    it('should pipe \'false\' when calling hide()', () => {
+        spinnerVisibilityService.hide();
+        spinnerVisibilityService.visibility$.subscribe(result => {
                 expect(result).toBeFalsy();
             },
             error => {
                 expect(true).toBeFalsy();
             });
-    }));
+    });
 });

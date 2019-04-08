@@ -10,7 +10,7 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NgHttpLoaderModule } from '../../lib/ng-http-loader.module';
 
@@ -24,6 +24,8 @@ export class HostComponent {
 describe('NgHttpLoaderComponent OnPush', () => {
     let component: HostComponent;
     let fixture: ComponentFixture<HostComponent>;
+    let http: HttpClient;
+    let httpMock: HttpTestingController;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -36,27 +38,27 @@ describe('NgHttpLoaderComponent OnPush', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(HostComponent);
         component = fixture.componentInstance;
+        http = TestBed.get(HttpClient);
+        httpMock = TestBed.get(HttpTestingController);
     });
 
-    it('should work as expected when the host component has ChangeDetectionStrategy.OnPush', fakeAsync(inject(
-        [HttpClient, HttpTestingController], (http: HttpClient, httpMock: HttpTestingController) => {
-            http.get('/fake').subscribe();
-            tick();
-            fixture.detectChanges();
-            let spinner = fixture
-                .debugElement
-                .query(By.css('#spinner'))
-                .nativeElement;
-            expect(spinner).toBeTruthy();
+    it('should work as expected when the host component has ChangeDetectionStrategy.OnPush', fakeAsync(() => {
+        http.get('/fake').subscribe();
+        tick();
+        fixture.detectChanges();
+        let spinner = fixture
+            .debugElement
+            .query(By.css('#spinner'))
+            .nativeElement;
+        expect(spinner).toBeTruthy();
 
-            httpMock.expectOne('/fake').flush({});
-            tick();
-            fixture.detectChanges();
+        httpMock.expectOne('/fake').flush({});
+        tick();
+        fixture.detectChanges();
 
-            spinner = fixture
-                .debugElement
-                .query(By.css('#spinner'));
-            expect(spinner).toBeNull();
-        }
-    )));
+        spinner = fixture
+            .debugElement
+            .query(By.css('#spinner'));
+        expect(spinner).toBeNull();
+    }));
 });

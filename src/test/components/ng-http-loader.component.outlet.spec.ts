@@ -7,14 +7,12 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { BehaviorSubject } from 'rxjs';
 import { NgHttpLoaderComponent } from '../../lib/components/ng-http-loader.component';
 import { SkThreeBounceComponent } from '../../lib/components/sk-three-bounce/sk-three-bounce.component';
-import { PendingRequestsInterceptorProvider } from '../../lib/services/pending-requests-interceptor.service';
 import { SPINKIT_COMPONENTS } from '../../lib/spinkits';
 
 describe('NgHttpLoaderComponentOutlet', () => {
@@ -24,8 +22,6 @@ describe('NgHttpLoaderComponentOutlet', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [NgHttpLoaderComponent, ...SPINKIT_COMPONENTS],
-            imports: [HttpClientTestingModule],
-            providers: [PendingRequestsInterceptorProvider]
         })
             .overrideModule(BrowserDynamicTestingModule, {
                 set: { entryComponents: [SkThreeBounceComponent] }
