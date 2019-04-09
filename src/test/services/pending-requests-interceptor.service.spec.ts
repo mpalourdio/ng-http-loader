@@ -37,9 +37,7 @@ describe('PendingRequestsInterceptor', () => {
     });
 
     it('should be aware of the pending HTTP requests', () => {
-        function runQuery$(url: string): Observable<any> {
-            return http.get(url);
-        }
+        const runQuery$ = (url: string): Observable<any> => http.get(url);
 
         forkJoin([runQuery$('/fake'), runQuery$('/fake2')]).subscribe();
 
@@ -58,12 +56,11 @@ describe('PendingRequestsInterceptor', () => {
     });
 
     it('should correctly notify the pendingRequestsStatus observable', async(() => {
-        const pendingRequestsStatus$ = pendingRequestsInterceptor.pendingRequestsStatus$;
-
-        pendingRequestsStatus$
+        pendingRequestsInterceptor
+            .pendingRequestsStatus$
             .subscribe(
                 (next: boolean) => expect(next).toBeTruthy(),
-                (error: HttpErrorResponse) => expect(1).toBe(2)
+                () => expect(1).toBe(2)
             );
 
         http.get('/fake').subscribe();
@@ -71,16 +68,14 @@ describe('PendingRequestsInterceptor', () => {
     }));
 
     it('should correctly notify the pendingRequestsStatus observable, even if subscribed after', async(() => {
-        const pendingRequestsStatus$ = pendingRequestsInterceptor.pendingRequestsStatus$;
-
-
         http.get('/fake').subscribe();
         httpMock.expectOne('/fake');
 
-        pendingRequestsStatus$
+        pendingRequestsInterceptor
+            .pendingRequestsStatus$
             .subscribe(
                 (next: boolean) => expect(next).toBeTruthy(),
-                (error: HttpErrorResponse) => expect(1).toBe(2)
+                () => expect(1).toBe(2)
             );
     }));
 
@@ -88,7 +83,7 @@ describe('PendingRequestsInterceptor', () => {
         const statusText = 'NOT FOUND';
 
         http.get('/fake').subscribe(
-            (next: boolean) => expect(true).toBe(false),
+            () => expect(true).toBe(false),
             (error: HttpErrorResponse) => expect(error.statusText).toBe(statusText)
         );
 

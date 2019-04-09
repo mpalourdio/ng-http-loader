@@ -28,21 +28,19 @@ describe('SpinnerVisibilityService', () => {
 
     it('should pipe \'true\' when calling show()', () => {
         spinnerVisibilityService.show();
-        spinnerVisibilityService.visibility$.subscribe(result => {
-                expect(result).toBeTruthy();
-            },
-            error => {
-                expect(true).toBeFalsy();
-            });
+        spinnerVisibilityService.visibility$
+            .subscribe(
+                result => expect(result).toBeTruthy(),
+                () => expect(true).toBeFalsy()
+            );
     });
 
     it('should pipe \'false\' when calling hide()', () => {
         spinnerVisibilityService.hide();
-        spinnerVisibilityService.visibility$.subscribe(result => {
-                expect(result).toBeFalsy();
-            },
-            error => {
-                expect(true).toBeFalsy();
-            });
+        spinnerVisibilityService.visibility$
+            .subscribe(
+                result => expect(result).toBeFalsy(),
+                () => expect(true).toBeFalsy()
+            );
     });
 });
