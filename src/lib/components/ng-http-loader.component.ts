@@ -7,8 +7,8 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject, merge, Observable, Subscription, timer } from 'rxjs';
+import { Component, Input, OnInit } from '@angular/core';
+import { merge, Observable, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, partition, switchMap, tap } from 'rxjs/operators';
 import { PendingRequestsInterceptor } from '../services/pending-requests-interceptor.service';
 import { SpinnerVisibilityService } from '../services/spinner-visibility.service';
@@ -19,10 +19,10 @@ import { Spinkit } from '../spinkits';
     templateUrl: './ng-http-loader.component.html',
     styleUrls: ['./ng-http-loader.component.scss']
 })
-export class NgHttpLoaderComponent implements OnDestroy, OnInit {
+export class NgHttpLoaderComponent implements OnInit {
+
     public spinkit = Spinkit;
-    private _isVisible$ = new BehaviorSubject<boolean>(false);
-    private subscriptions: Subscription;
+    public isVisible$: Observable<boolean>;
     private visibleUntil = Date.now();
 
     @Input() public backdrop = true;
@@ -40,33 +40,21 @@ export class NgHttpLoaderComponent implements OnDestroy, OnInit {
     constructor(private pendingRequestsInterceptor: PendingRequestsInterceptor, private spinnerVisibility: SpinnerVisibilityService) {
         const [showSpinner$, hideSpinner$] = partition((h: boolean) => h)(this.pendingRequestsInterceptor.pendingRequestsStatus$);
 
-        this.subscriptions = merge(
-            this.pendingRequestsInterceptor.pendingRequestsStatus$.pipe(
-                switchMap(() => showSpinner$.pipe(debounce(() => timer(this.debounceDelay))))
-            ),
-            showSpinner$.pipe(
-                switchMap(() => hideSpinner$.pipe(debounce(() => this.getVisibilityTimer$())))
-            ),
+        this.isVisible$ = merge(
+            this.pendingRequestsInterceptor.pendingRequestsStatus$
+                .pipe(switchMap(() => showSpinner$.pipe(debounce(() => timer(this.debounceDelay))))),
+            showSpinner$
+                .pipe(switchMap(() => hideSpinner$.pipe(debounce(() => this.getVisibilityTimer$())))),
             this.spinnerVisibility.visibility$,
-        )
-            .pipe(
-                distinctUntilChanged(),
-                tap(h => this.updateExpirationDelay(h))
-            )
-            .subscribe(h => this._isVisible$.next(h));
+        ).pipe(
+            distinctUntilChanged(),
+            tap(h => this.updateExpirationDelay(h))
+        );
     }
 
     public ngOnInit(): void {
         this.nullifySpinnerIfEntryComponentIsDefined();
         this.initFilters();
-    }
-
-    public ngOnDestroy(): void {
-        this.subscriptions.unsubscribe();
-    }
-
-    get isVisible$(): Observable<boolean> {
-        return this._isVisible$.asObservable();
     }
 
     private nullifySpinnerIfEntryComponentIsDefined(): void {

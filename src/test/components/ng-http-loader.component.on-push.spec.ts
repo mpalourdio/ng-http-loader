@@ -40,6 +40,7 @@ describe('NgHttpLoaderComponent OnPush', () => {
         component = fixture.componentInstance;
         http = TestBed.get(HttpClient);
         httpMock = TestBed.get(HttpTestingController);
+        fixture.detectChanges();
     });
 
     it('should work as expected when the host component has ChangeDetectionStrategy.OnPush', fakeAsync(() => {
