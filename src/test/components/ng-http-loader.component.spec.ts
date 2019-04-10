@@ -799,6 +799,7 @@ describe('NgHttpLoaderComponent', () => {
 
     it('should be possible to override opacity', () => {
         component.isVisible$ = of(true);
+        component.opacity = '.3';
         fixture.detectChanges();
 
         const element: HTMLElement = fixture
