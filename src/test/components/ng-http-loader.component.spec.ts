@@ -42,6 +42,7 @@ describe('NgHttpLoaderComponent', () => {
         httpMock = TestBed.get(HttpTestingController);
         spinner = TestBed.get(SpinnerVisibilityService);
         visibilityStatus = false;
+        fixture.detectChanges();
         visibiltySubscription = component.isVisible$.subscribe(v => visibilityStatus = v);
     });
 
@@ -142,7 +143,7 @@ describe('NgHttpLoaderComponent', () => {
 
     it('should not show the spinner if the request is filtered by url', fakeAsync(() => {
         component.filteredUrlPatterns.push('fake');
-        fixture.detectChanges();
+        component.ngOnInit();
 
         http.get('/fake').subscribe();
         tick();
@@ -177,7 +178,7 @@ describe('NgHttpLoaderComponent', () => {
 
     it('should take care of query strings in filteredUrlPatterns', fakeAsync(() => {
         component.filteredUrlPatterns.push('bar');
-        fixture.detectChanges();
+        component.ngOnInit();
 
         http.get(
             '/api/service',
@@ -194,7 +195,7 @@ describe('NgHttpLoaderComponent', () => {
 
     it('should correctly filter by URL with several requests and one pattern', fakeAsync(() => {
         component.filteredUrlPatterns.push('\\d');
-        fixture.detectChanges();
+        component.ngOnInit();
 
         http.get('/12345').subscribe();
         tick();
@@ -252,17 +253,17 @@ describe('NgHttpLoaderComponent', () => {
 
     it('should throw an error if filteredUrlPatterns is not an array', () => {
         component.filteredUrlPatterns = null;
-        expect(() => fixture.detectChanges()).toThrow(new Error('`filteredUrlPatterns` must be an array.'));
+        expect(() => component.ngOnInit()).toThrow(new Error('`filteredUrlPatterns` must be an array.'));
     });
 
     it('should throw an error if filteredMethods is not an array', () => {
         component.filteredMethods = null;
-        expect(() => fixture.detectChanges()).toThrow(new Error('`filteredMethods` must be an array.'));
+        expect(() => component.ngOnInit()).toThrow(new Error('`filteredMethods` must be an array.'));
     });
 
     it('should throw an error if filteredHeaders is not an array', () => {
         component.filteredHeaders = null;
-        expect(() => fixture.detectChanges()).toThrow(new Error('`filteredHeaders` must be an array.'));
+        expect(() => component.ngOnInit()).toThrow(new Error('`filteredHeaders` must be an array.'));
     });
 
     it('should show the spinner even if the component is created after the HTTP request is performed', fakeAsync(() => {
@@ -270,6 +271,7 @@ describe('NgHttpLoaderComponent', () => {
 
         const newFixture = TestBed.createComponent(NgHttpLoaderComponent);
         const newComponent = newFixture.componentInstance;
+        newComponent.ngOnInit();
 
         let visibilityStatusForNewComponent = false;
         newComponent.isVisible$.subscribe(v => visibilityStatusForNewComponent = v);

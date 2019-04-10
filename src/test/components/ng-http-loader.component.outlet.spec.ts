@@ -32,6 +32,7 @@ describe('NgHttpLoaderComponentOutlet', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(NgHttpLoaderComponent);
         component = fixture.componentInstance;
+        fixture.detectChanges();
     });
 
     it('should be possible to specify an entryComponent', () => {
@@ -50,7 +51,7 @@ describe('NgHttpLoaderComponentOutlet', () => {
     it('should force [spinner] to null if [entryComponent] is defined', () => {
         component.spinner = 'spinner-name';
         component.entryComponent = SkThreeBounceComponent;
-        fixture.detectChanges();
+        component.ngOnInit();
 
         expect(component.spinner).toBeNull();
     });
@@ -59,7 +60,7 @@ describe('NgHttpLoaderComponentOutlet', () => {
         const spinnerName = 'spinner-name';
         component.spinner = spinnerName;
         component.entryComponent = '';
-        fixture.detectChanges();
+        component.ngOnInit();
 
         expect(component.spinner).toBe(spinnerName);
     });
@@ -68,7 +69,7 @@ describe('NgHttpLoaderComponentOutlet', () => {
         const spinnerName = 'spinner-name';
         component.spinner = spinnerName;
         component.entryComponent = null;
-        fixture.detectChanges();
+        component.ngOnInit();
 
         expect(component.spinner).toBe(spinnerName);
     });
@@ -77,7 +78,7 @@ describe('NgHttpLoaderComponentOutlet', () => {
         const spinnerName = 'spinner-name';
         component.spinner = spinnerName;
         component.entryComponent = undefined;
-        fixture.detectChanges();
+        component.ngOnInit();
 
         expect(component.spinner).toBe(spinnerName);
     });

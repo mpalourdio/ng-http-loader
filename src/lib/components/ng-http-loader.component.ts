@@ -38,6 +38,9 @@ export class NgHttpLoaderComponent implements OnInit {
     @Input() public spinner = Spinkit.skWave;
 
     constructor(private pendingRequestsInterceptor: PendingRequestsInterceptor, private spinnerVisibility: SpinnerVisibilityService) {
+    }
+
+    private initIsvisibleObservable(): void {
         const [showSpinner$, hideSpinner$] = partition((h: boolean) => h)(this.pendingRequestsInterceptor.pendingRequestsStatus$);
 
         this.isVisible$ = merge(
@@ -53,6 +56,7 @@ export class NgHttpLoaderComponent implements OnInit {
     }
 
     public ngOnInit(): void {
+        this.initIsvisibleObservable();
         this.nullifySpinnerIfEntryComponentIsDefined();
         this.initFilters();
     }
