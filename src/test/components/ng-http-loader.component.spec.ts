@@ -122,9 +122,10 @@ describe('NgHttpLoaderComponent', () => {
         tick();
         expect(isVisible).toBeTruthy();
         firstRequest.flush({});
-        expect(isVisible).toBeTruthy();
 
         tick();
+        expect(isVisible).toBeTruthy();
+
         secondRequest.flush({});
         tick();
         expect(isVisible).toBeFalsy();
@@ -456,6 +457,7 @@ describe('NgHttpLoaderComponent', () => {
         tick();
         fixture.detectChanges();
         expect(isVisible).toBeTruthy();
+
         httpMock.expectOne('/fake2').flush({});
         tick();
         expect(isVisible).toBeFalsy();
