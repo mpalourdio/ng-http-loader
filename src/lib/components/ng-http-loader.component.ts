@@ -8,8 +8,8 @@
  */
 
 import { Component, Input, OnInit } from '@angular/core';
-import { merge, Observable, timer } from 'rxjs';
-import { debounce, distinctUntilChanged, partition, switchMap, tap } from 'rxjs/operators';
+import { merge, Observable, partition, timer } from 'rxjs';
+import { debounce, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
 import { PendingRequestsInterceptor } from '../services/pending-requests-interceptor.service';
 import { SpinnerVisibilityService } from '../services/spinner-visibility.service';
 import { Spinkit } from '../spinkits';
@@ -41,7 +41,7 @@ export class NgHttpLoaderComponent implements OnInit {
     }
 
     private initIsvisibleObservable(): void {
-        const [showSpinner$, hideSpinner$] = partition((h: boolean) => h)(this.pendingRequestsInterceptor.pendingRequestsStatus$);
+        const [showSpinner$, hideSpinner$] = partition(this.pendingRequestsInterceptor.pendingRequestsStatus$, h => h);
 
         this.isVisible$ = merge(
             this.pendingRequestsInterceptor.pendingRequestsStatus$
