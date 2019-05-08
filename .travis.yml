@@ -17,7 +17,7 @@ before_install:
 
 script:
   - yarn lint
-  - yarn audit
+#  - yarn audit
   - yarn test --code-coverage
   - yarn build
 
