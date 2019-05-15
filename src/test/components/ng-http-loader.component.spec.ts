@@ -184,8 +184,8 @@ describe('NgHttpLoaderComponent', () => {
         http.get(
             '/api/service',
             {
-                'params': {
-                    'foo': 'bar'
+                params: {
+                    foo: 'bar'
                 }
             }
         ).subscribe();

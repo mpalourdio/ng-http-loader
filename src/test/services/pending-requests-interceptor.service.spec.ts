@@ -80,17 +80,17 @@ describe('PendingRequestsInterceptor', () => {
     }));
 
     it('should fail correctly', () => {
-        const statusText = 'NOT FOUND';
+        const statusTextNotFound = 'NOT FOUND';
 
         http.get('/fake').subscribe(
             () => expect(true).toBe(false),
-            (error: HttpErrorResponse) => expect(error.statusText).toBe(statusText)
+            (error: HttpErrorResponse) => expect(error.statusText).toBe(statusTextNotFound)
         );
 
         const testRequest = httpMock.expectOne('/fake');
         testRequest.flush({}, {
-            'status': 404,
-            'statusText': statusText
+            status: 404,
+            statusText: statusTextNotFound
         });
         httpMock.verify();
     });
