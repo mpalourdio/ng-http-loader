@@ -3,20 +3,17 @@
   "compilerOptions": {
     "outDir": "./out-tsc/lib",
     "target": "es2015",
-    "module": "es2015",
     "declaration": true,
     "inlineSources": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "types": [],
-    "baseUrl": "./",
     "lib": [
       "dom",
       "es2018"
     ]
   },
   "angularCompilerOptions": {
-    "annotateForClosureCompiler": true,
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true,
     "fullTemplateTypeCheck": true,
