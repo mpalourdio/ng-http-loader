@@ -2,6 +2,7 @@
 
 ## v6.0.0
 - The `subscription` in `NgHttpLoaderComponent` has completely been removed in favor of an `observable`. As there's no need to unsubscribe anymore, `ngOnDestroy` has been removed.
+- The `observable` initialization has been moved to `ngOnInit`.
 - The test suite could fail (and succeed) in some unexpected ways. This was caused by timing/subscriptions issues which are now (hopefully) fixed.
 - Angular 8.x is now the default supported version.
  
