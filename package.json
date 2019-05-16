@@ -37,21 +37,21 @@
     "url": "https://github.com/mpalourdio/ng-http-loader/issues"
   },
   "peerDependencies": {
-    "@angular/common": "^8.0.0-rc.2",
-    "@angular/core": "^8.0.0-rc.2",
+    "@angular/common": "^8.0.0-rc.4",
+    "@angular/core": "^8.0.0-rc.4",
     "rxjs": "^6.4.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.800.0-rc.2",
-    "@angular-devkit/build-ng-packagr": "~0.800.0-rc.2",
-    "@angular/cli": "~8.0.0-rc.3",
-    "@angular/common": "^8.0.0-rc.2",
-    "@angular/compiler": "^8.0.0-rc.2",
-    "@angular/compiler-cli": "^8.0.0-rc.2",
-    "@angular/core": "^8.0.0-rc.2",
-    "@angular/language-service": "^8.0.0-rc.2",
-    "@angular/platform-browser": "^8.0.0-rc.2",
-    "@angular/platform-browser-dynamic": "^8.0.0-rc.2",
+    "@angular-devkit/build-angular": "~0.800.0-rc.4",
+    "@angular-devkit/build-ng-packagr": "~0.800.0-rc.4",
+    "@angular/cli": "~8.0.0-rc.4",
+    "@angular/common": "^8.0.0-rc.4",
+    "@angular/compiler": "^8.0.0-rc.4",
+    "@angular/compiler-cli": "^8.0.0-rc.4",
+    "@angular/core": "^8.0.0-rc.4",
+    "@angular/language-service": "^8.0.0-rc.4",
+    "@angular/platform-browser": "^8.0.0-rc.4",
+    "@angular/platform-browser-dynamic": "^8.0.0-rc.4",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
@@ -72,7 +72,7 @@
     "tslib": "^1.9.0",
     "tslint": "~5.15.0",
     "typescript": "~3.4.3",
-    "zone.js": "~0.9.0"
+    "zone.js": "~0.9.1"
   },
   "engines": {
     "node": ">= 8.9.0",
