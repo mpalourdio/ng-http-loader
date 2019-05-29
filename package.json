@@ -39,7 +39,7 @@
   "peerDependencies": {
     "@angular/common": "^8.0.0",
     "@angular/core": "^8.0.0",
-    "rxjs": "^6.4.0"
+    "rxjs": "^6.5.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.800.0",
