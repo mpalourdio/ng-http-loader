@@ -1,5 +1,8 @@
 # Changelog
 
+## v6.0.1
+- The `rxjs` peer dependency is now `^6.5.0`, because the module uses the new `creation function partition observable` introduced in [v6.5.0](https://github.com/ReactiveX/rxjs/blob/f07d349da8c2e0dbddca17d33a9b4a1ceaf59354/CHANGELOG.md#650-2019-04-23).
+
 ## v6.0.0
 - Angular 8.x is now the default supported version.
 - The `subscription` in `NgHttpLoaderComponent` has completely been removed in favor of an `observable`. As there's no need to unsubscribe anymore, `ngOnDestroy` has been removed.
