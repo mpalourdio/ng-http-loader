@@ -1,5 +1,11 @@
 # Changelog
 
+## v6.0.0
+- Angular 8.x is now the default supported version.
+- The `subscription` in `NgHttpLoaderComponent` has completely been removed in favor of an `observable`. As there's no need to unsubscribe anymore, `ngOnDestroy` has been removed.
+- The `observable` initialization has been moved to `ngOnInit`.
+- The tests suite could fail (and succeed) in some unexpected ways. This was caused by some race conditions introduced in v5.0.0. Those are now (hopefully) fixed.
+ 
 ## v5.1.0
 - This release introduces 2 new options: 
     - **backdrop** (`true` by default): If set to `false`, the spinner background elements will remain clickable, without any background color.

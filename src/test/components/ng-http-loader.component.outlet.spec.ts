@@ -10,7 +10,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import { BehaviorSubject } from 'rxjs';
+import { of } from 'rxjs';
 import { NgHttpLoaderComponent } from '../../lib/components/ng-http-loader.component';
 import { SkThreeBounceComponent } from '../../lib/components/sk-three-bounce/sk-three-bounce.component';
 import { SPINKIT_COMPONENTS } from '../../lib/spinkits';
@@ -32,12 +32,11 @@ describe('NgHttpLoaderComponentOutlet', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(NgHttpLoaderComponent);
         component = fixture.componentInstance;
+        fixture.detectChanges();
     });
 
     it('should be possible to specify an entryComponent', () => {
-        spyOnProperty(component, 'isVisible$')
-            .and.returnValue(new BehaviorSubject(true).asObservable());
-
+        component.isVisible$ = of(true);
         component.entryComponent = SkThreeBounceComponent;
         fixture.detectChanges();
 
@@ -50,48 +49,36 @@ describe('NgHttpLoaderComponentOutlet', () => {
     });
 
     it('should force [spinner] to null if [entryComponent] is defined', () => {
-        spyOnProperty(component, 'isVisible$')
-            .and.returnValue(new BehaviorSubject(true).asObservable());
-
         component.spinner = 'spinner-name';
         component.entryComponent = SkThreeBounceComponent;
-        fixture.detectChanges();
+        component.ngOnInit();
 
         expect(component.spinner).toBeNull();
     });
 
     it('should correctly check [entryComponent] with empty string', () => {
-        spyOnProperty(component, 'isVisible$')
-            .and.returnValue(new BehaviorSubject(true).asObservable());
-
         const spinnerName = 'spinner-name';
         component.spinner = spinnerName;
         component.entryComponent = '';
-        fixture.detectChanges();
+        component.ngOnInit();
 
         expect(component.spinner).toBe(spinnerName);
     });
 
     it('should correctly check [entryComponent] with null', () => {
-        spyOnProperty(component, 'isVisible$')
-            .and.returnValue(new BehaviorSubject(true).asObservable());
-
         const spinnerName = 'spinner-name';
         component.spinner = spinnerName;
         component.entryComponent = null;
-        fixture.detectChanges();
+        component.ngOnInit();
 
         expect(component.spinner).toBe(spinnerName);
     });
 
     it('should correctly check [entryComponent] with undefined', () => {
-        spyOnProperty(component, 'isVisible$')
-            .and.returnValue(new BehaviorSubject(true).asObservable());
-
         const spinnerName = 'spinner-name';
         component.spinner = spinnerName;
         component.entryComponent = undefined;
-        fixture.detectChanges();
+        component.ngOnInit();
 
         expect(component.spinner).toBe(spinnerName);
     });
