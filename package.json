@@ -66,7 +66,7 @@
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
     "ng-packagr": "^5.1.0",
-    "rxjs": "^6.4.0",
+    "rxjs": "^6.5.0",
     "rxjs-tslint-rules": "^4.13.0",
     "ts-node": "~7.0.0",
     "tsickle": "^0.35.0",
