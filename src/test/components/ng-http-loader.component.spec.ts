@@ -9,6 +9,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { Type } from '@angular/core';
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { forkJoin, Observable, of, Subscription } from 'rxjs';
@@ -39,7 +40,7 @@ describe('NgHttpLoaderComponent', () => {
         fixture = TestBed.createComponent(NgHttpLoaderComponent);
         component = fixture.componentInstance;
         http = TestBed.get(HttpClient);
-        httpMock = TestBed.get(HttpTestingController);
+        httpMock = TestBed.get(HttpTestingController as Type<HttpTestingController>);
         spinner = TestBed.get(SpinnerVisibilityService);
         isVisible = false;
         fixture.detectChanges();
