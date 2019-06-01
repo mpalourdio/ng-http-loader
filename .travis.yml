@@ -16,10 +16,10 @@ before_install:
   - export PATH=$HOME/.yarn/bin:$PATH
 
 script:
-  - NODE_OPTIONS=--max_old_space_size=4096 yarn lint
+  - yarn lint
   - yarn audit
-  - NODE_OPTIONS=--max_old_space_size=4096 yarn test --code-coverage
-  - NODE_OPTIONS=--max_old_space_size=4096 yarn build
+  - yarn test --code-coverage
+  - yarn build
 
 after_script:
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
