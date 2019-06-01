@@ -16,6 +16,7 @@ import { finalize } from 'rxjs/operators';
     providedIn: 'root'
 })
 export class PendingRequestsInterceptor implements HttpInterceptor {
+
     private _pendingRequests = 0;
     private _pendingRequestsStatus$ = new ReplaySubject<boolean>(1);
     private _filteredUrlPatterns: RegExp[] = [];
