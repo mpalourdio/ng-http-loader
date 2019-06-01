@@ -14,7 +14,6 @@ node_js:
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s
   - export PATH=$HOME/.yarn/bin:$PATH
-  - export NODE_OPTIONS=--max_old_space_size=4096
 
 script:
   - yarn lint
