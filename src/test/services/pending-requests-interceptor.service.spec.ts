@@ -30,7 +30,7 @@ describe('PendingRequestsInterceptor', () => {
 
         pendingRequestsInterceptor = TestBed.get(PendingRequestsInterceptor);
         http = TestBed.get(HttpClient);
-        httpMock = TestBed.get(HttpTestingController as Type<HttpTestingController>);
+        httpMock = TestBed.get(HttpTestingController);
     });
 
     it('should be created', () => {

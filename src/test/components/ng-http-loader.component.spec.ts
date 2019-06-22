@@ -40,7 +40,7 @@ describe('NgHttpLoaderComponent', () => {
         fixture = TestBed.createComponent(NgHttpLoaderComponent);
         component = fixture.componentInstance;
         http = TestBed.get(HttpClient);
-        httpMock = TestBed.get(HttpTestingController as Type<HttpTestingController>);
+        httpMock = TestBed.get(HttpTestingController);
         spinner = TestBed.get(SpinnerVisibilityService);
         isVisible = false;
         fixture.detectChanges();
