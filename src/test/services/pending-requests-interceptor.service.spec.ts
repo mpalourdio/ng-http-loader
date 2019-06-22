@@ -9,7 +9,6 @@
 
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { Type } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { forkJoin, Observable } from 'rxjs';
 import {
