@@ -1,5 +1,8 @@
 # Changelog
 
+## v7.0.0
+- Added angular 9 support. 
+
 ## v6.0.1
 - The `rxjs` peer dependency is now `^6.5.0`, because the module uses the new `creation function partition observable` introduced in [v6.5.0](https://github.com/ReactiveX/rxjs/blob/f07d349da8c2e0dbddca17d33a9b4a1ceaf59354/CHANGELOG.md#650-2019-04-23).
 
