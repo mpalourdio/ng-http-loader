@@ -38,9 +38,9 @@ describe('NgHttpLoaderComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(NgHttpLoaderComponent);
         component = fixture.componentInstance;
-        http = TestBed.get(HttpClient);
-        httpMock = TestBed.get(HttpTestingController);
-        spinner = TestBed.get(SpinnerVisibilityService);
+        http = TestBed.inject(HttpClient);
+        httpMock = TestBed.inject(HttpTestingController);
+        spinner = TestBed.inject(SpinnerVisibilityService);
         isVisible = false;
         fixture.detectChanges();
         isVisibleSubscription = component.isVisible$.subscribe(v => isVisible = v);

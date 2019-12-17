@@ -27,9 +27,9 @@ describe('PendingRequestsInterceptor', () => {
             providers: [PendingRequestsInterceptorProvider]
         });
 
-        pendingRequestsInterceptor = TestBed.get(PendingRequestsInterceptor);
-        http = TestBed.get(HttpClient);
-        httpMock = TestBed.get(HttpTestingController);
+        pendingRequestsInterceptor = TestBed.inject(PendingRequestsInterceptor);
+        http = TestBed.inject(HttpClient);
+        httpMock = TestBed.inject(HttpTestingController);
     });
 
     it('should be created', () => {

@@ -15,7 +15,7 @@ describe('SpinnerVisibilityService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({});
-        spinnerVisibilityService = TestBed.get(SpinnerVisibilityService);
+        spinnerVisibilityService = TestBed.inject(SpinnerVisibilityService);
     });
 
     it('should be created', () => {
