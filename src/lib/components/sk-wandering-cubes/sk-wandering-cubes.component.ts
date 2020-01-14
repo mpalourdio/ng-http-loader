@@ -8,12 +8,12 @@
  */
 
 import { Component } from '@angular/core';
-import { AbstractLoader } from '../abstract.loader.component';
+import { AbstractLoaderDirective } from '../abstract.loader.directive';
 
 @Component({
     selector: 'sk-wandering-cubes',
     templateUrl: './sk-wandering-cubes.component.html',
     styleUrls: ['./sk-wandering-cubes.component.scss']
 })
-export class SkWanderingCubesComponent extends AbstractLoader {
+export class SkWanderingCubesComponent extends AbstractLoaderDirective {
 }

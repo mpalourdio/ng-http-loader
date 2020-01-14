@@ -8,12 +8,12 @@
  */
 
 import { Component } from '@angular/core';
-import { AbstractLoader } from '../abstract.loader.component';
+import { AbstractLoaderDirective } from '../abstract.loader.directive';
 
 @Component({
     selector: 'sk-three-bounce',
     templateUrl: './sk-three-bounce.component.html',
     styleUrls: ['./sk-three-bounce.component.scss']
 })
-export class SkThreeBounceComponent extends AbstractLoader {
+export class SkThreeBounceComponent extends AbstractLoaderDirective {
 }

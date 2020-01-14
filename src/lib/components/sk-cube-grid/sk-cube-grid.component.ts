@@ -8,12 +8,12 @@
  */
 
 import { Component } from '@angular/core';
-import { AbstractLoader } from '../abstract.loader.component';
+import { AbstractLoaderDirective } from '../abstract.loader.directive';
 
 @Component({
     selector: 'sk-cube-grid',
     templateUrl: './sk-cube-grid.component.html',
     styleUrls: ['./sk-cube-grid.component.scss']
 })
-export class SkCubeGridComponent extends AbstractLoader {
+export class SkCubeGridComponent extends AbstractLoaderDirective {
 }

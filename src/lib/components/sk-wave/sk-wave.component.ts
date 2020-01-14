@@ -8,12 +8,12 @@
  */
 
 import { Component } from '@angular/core';
-import { AbstractLoader } from '../abstract.loader.component';
+import { AbstractLoaderDirective } from '../abstract.loader.directive';
 
 @Component({
     selector: 'sk-wave',
     templateUrl: './sk-wave.component.html',
     styleUrls: ['./sk-wave.component.scss']
 })
-export class SkWaveComponent extends AbstractLoader {
+export class SkWaveComponent extends AbstractLoaderDirective {
 }
