@@ -40,7 +40,7 @@
   "peerDependencies": {
     "@angular/common": "^9.0.0-rc.11",
     "@angular/core": "^9.0.0-rc.11",
-    "rxjs": "^6.5.3",
+    "rxjs": "^6.5.4",
     "tslib": "^1.10.0"
   },
   "devDependencies": {
@@ -73,7 +73,7 @@
     "ts-node": "~8.3.0",
     "tslib": "^1.10.0",
     "tslint": "~5.18.0",
-    "typescript": "~3.6.4",
+    "typescript": "~3.7.4",
     "zone.js": "~0.10.2"
   }
 }
