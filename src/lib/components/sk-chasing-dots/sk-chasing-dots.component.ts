@@ -8,12 +8,12 @@
  */
 
 import { Component } from '@angular/core';
-import { AbstractLoader } from '../abstract.loader.component';
+import { AbstractLoaderDirective } from '../abstract.loader.directive';
 
 @Component({
     selector: 'sk-chasing-dots',
     templateUrl: './sk-chasing-dots.component.html',
     styleUrls: ['./sk-chasing-dots.component.scss']
 })
-export class SkChasingDotsComponent extends AbstractLoader {
+export class SkChasingDotsComponent extends AbstractLoaderDirective {
 }

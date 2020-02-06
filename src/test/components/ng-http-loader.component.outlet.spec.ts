@@ -9,7 +9,6 @@
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { of } from 'rxjs';
 import { NgHttpLoaderComponent } from '../../lib/components/ng-http-loader.component';
 import { SkThreeBounceComponent } from '../../lib/components/sk-three-bounce/sk-three-bounce.component';
@@ -23,9 +22,6 @@ describe('NgHttpLoaderComponentOutlet', () => {
         TestBed.configureTestingModule({
             declarations: [NgHttpLoaderComponent, ...SPINKIT_COMPONENTS],
         })
-            .overrideModule(BrowserDynamicTestingModule, {
-                set: { entryComponents: [SkThreeBounceComponent] }
-            })
             .compileComponents();
     }));
 

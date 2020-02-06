@@ -8,12 +8,12 @@
  */
 
 import { Component } from '@angular/core';
-import { AbstractLoader } from '../abstract.loader.component';
+import { AbstractLoaderDirective } from '../abstract.loader.directive';
 
 @Component({
     selector: 'sk-spinner-pulse',
     templateUrl: './sk-spinner-pulse.component.html',
     styleUrls: ['./sk-spinner-pulse.component.scss']
 })
-export class SkSpinnerPulseComponent extends AbstractLoader {
+export class SkSpinnerPulseComponent extends AbstractLoaderDirective {
 }

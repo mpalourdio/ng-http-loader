@@ -8,12 +8,12 @@
  */
 
 import { Component } from '@angular/core';
-import { AbstractLoader } from '../abstract.loader.component';
+import { AbstractLoaderDirective } from '../abstract.loader.directive';
 
 @Component({
     selector: 'sk-rotating-plane',
     templateUrl: './sk-rotating-plane.component.html',
     styleUrls: ['./sk-rotating-plane.component.scss']
 })
-export class SkRotatingPlaneComponent extends AbstractLoader {
+export class SkRotatingPlaneComponent extends AbstractLoaderDirective {
 }

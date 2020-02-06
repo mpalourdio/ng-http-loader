@@ -35,7 +35,8 @@ The HTTP interceptor listens to all HTTP requests and shows a spinner / loader i
 | >=0.4.0 <1.0.0 | ^5.0.0             |
 | >=1.0.0 <3.2.0 | ^6.0.0             |
 | >=3.2.0 <5.1.0 | ^7.0.0             |
-| >=6.0.0        | ^8.0.0             |
+| >=6.0.0 <7.0.0 | ^8.0.0             |
+| >=7.0.0        | ^9.0.0             |
 
 If you experience errors like below, **please double check the version you use.**
 
@@ -105,6 +106,7 @@ You can customize the following parameters:
 **_To specify the spinner type this way, you must reference the `Spinkit` const as a public property in your app.component.ts_**:
 
 ```typescript
+import { Component } from '@angular/core'; 
 import { Spinkit } from 'ng-http-loader'; // <============
 
 @Component({
@@ -130,7 +132,7 @@ The different spinners available are referenced in [this file](src/lib/spinkits.
 You can define your own spinner component in place of the built-in ones. The needed steps are:
 
 - Create your component
-- Add it to the [entryComponents](https://angular.io/guide/ngmodule-faq#what-is-an-entry-component) array in your module's configuration
+- Add it to the [entryComponents](https://angular.io/guide/ngmodule-faq#what-is-an-entry-component) array in your module's configuration (not necessary anymore with [ivy](https://next.angular.io/guide/deprecations#entryComponents))
 - Reference your component as a public property in your `app.component.ts`
 - Reference the predefined property in the ng-http-loader component selector like this:
 ```xml
@@ -165,6 +167,7 @@ Sometimes, when manually showing the spinner, an HTTP request could be performed
 **For this reason, when calling `SpinnerVisibilityService#show()`, it prevents the HTTP interceptor from being triggered unless you explicitly call `SpinnerVisibilityService#hide()`.**
 
 ```typescript
+import { Component } from '@angular/core'; 
 import { SpinnerVisibilityService } from 'ng-http-loader';
 
 @Component({

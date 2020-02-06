@@ -38,8 +38,8 @@ describe('NgHttpLoaderComponent OnPush', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(HostComponent);
         component = fixture.componentInstance;
-        http = TestBed.get(HttpClient);
-        httpMock = TestBed.get(HttpTestingController);
+        http = TestBed.inject(HttpClient);
+        httpMock = TestBed.inject(HttpTestingController);
         fixture.detectChanges();
     });
 

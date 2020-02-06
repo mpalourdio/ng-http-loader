@@ -7,9 +7,10 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { Input } from '@angular/core';
+import { Input, Directive } from '@angular/core';
 
-export abstract class AbstractLoader {
+@Directive()
+export abstract class AbstractLoaderDirective {
 
     @Input() public backgroundColor: string;
 }
