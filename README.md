@@ -132,7 +132,7 @@ The different spinners available are referenced in [this file](src/lib/spinkits.
 You can define your own spinner component in place of the built-in ones. The needed steps are:
 
 - Create your component
-- Add it to the [entryComponents](https://angular.io/guide/ngmodule-faq#what-is-an-entry-component) array in your module's configuration
+- Add it to the [entryComponents](https://angular.io/guide/ngmodule-faq#what-is-an-entry-component) array in your module's configuration (not necessary anymore with [ivy](https://next.angular.io/guide/deprecations#entryComponents))
 - Reference your component as a public property in your `app.component.ts`
 - Reference the predefined property in the ng-http-loader component selector like this:
 ```xml
