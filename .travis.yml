@@ -2,11 +2,6 @@ dist: xenial
 
 language: node_js
 
-addons:
-  apt:
-    packages:
-      - chromium-browser
-
 node_js:
   - lts/*
   - node
@@ -18,8 +13,8 @@ before_install:
 script:
   - yarn lint
   - yarn audit
-  - yarn test --code-coverage
   - yarn build --prod
+  - yarn test --code-coverage
 
 after_script:
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
