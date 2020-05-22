@@ -37,11 +37,13 @@
   "bugs": {
     "url": "https://github.com/mpalourdio/ng-http-loader/issues"
   },
+  "dependencies": {
+    "tslib": "^1.10.0"
+  },
   "peerDependencies": {
     "@angular/common": "^9.1.0",
     "@angular/core": "^9.1.0",
-    "rxjs": "^6.5.4",
-    "tslib": "^1.10.0"
+    "rxjs": "^6.5.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.901.0",
@@ -51,7 +53,6 @@
     "@angular/compiler": "^9.1.0",
     "@angular/compiler-cli": "^9.1.0",
     "@angular/core": "^9.1.0",
-    "@angular/language-service": "^9.1.0",
     "@angular/platform-browser": "^9.1.0",
     "@angular/platform-browser-dynamic": "^9.1.0",
     "@types/jasmine": "~3.5.0",
