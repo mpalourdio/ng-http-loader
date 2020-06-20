@@ -24,7 +24,7 @@ import { SPINKIT_COMPONENTS } from './spinkits';
     exports: [
         NgHttpLoaderComponent,
         ...SPINKIT_COMPONENTS,
-    ],
+    ]
 })
 export class NgHttpLoaderModule {
     public static forRoot(): ModuleWithProviders<NgHttpLoaderModule> {
@@ -32,7 +32,7 @@ export class NgHttpLoaderModule {
             ngModule: NgHttpLoaderModule,
             providers: [
                 PendingRequestsInterceptorProvider,
-            ],
+            ]
         };
     }
 }

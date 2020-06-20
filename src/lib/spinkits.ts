@@ -24,7 +24,7 @@ export const Spinkit = {
     skSpinnerPulse: 'sk-spinner-pulse',
     skThreeBounce: 'sk-three-bounce',
     skWanderingCubes: 'sk-wandering-cubes',
-    skWave: 'sk-wave',
+    skWave: 'sk-wave'
 };
 
 export const SPINKIT_COMPONENTS = [

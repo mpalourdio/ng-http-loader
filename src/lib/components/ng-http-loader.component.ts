@@ -48,7 +48,7 @@ export class NgHttpLoaderComponent implements OnInit {
                 .pipe(switchMap(() => showSpinner$.pipe(debounce(() => timer(this.debounceDelay))))),
             showSpinner$
                 .pipe(switchMap(() => hideSpinner$.pipe(debounce(() => this.getVisibilityTimer$())))),
-            this.spinnerVisibility.visibility$,
+            this.spinnerVisibility.visibility$
         ).pipe(
             distinctUntilChanged(),
             tap(h => this.updateExpirationDelay(h))

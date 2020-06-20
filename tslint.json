@@ -31,6 +31,7 @@
       null,
       "kebab-case"
     ],
+    "eofline": true,
     "import-blacklist": [
       true,
       "rxjs/Rx"
@@ -83,6 +84,7 @@
       true,
       "single"
     ],
+    "prefer-template": true,
     "semicolon": {
       "options": [
         "always"
@@ -97,6 +99,22 @@
         "named": "never"
       }
     },
+    "trailing-comma": [
+      true,
+      {
+        "multiline": {
+          "objects": "never",
+          "arrays": "always",
+          "functions": "never",
+          "typeLiterals": "never"
+        }
+      }
+    ],
+    "typedef": [
+      true,
+      "call-signature",
+      "parameter"
+    ],
     "typedef-whitespace": {
       "options": [
         {
