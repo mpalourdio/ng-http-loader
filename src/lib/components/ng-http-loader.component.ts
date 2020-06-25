@@ -22,11 +22,11 @@ import { Spinkit } from '../spinkits';
 export class NgHttpLoaderComponent implements OnInit {
 
     public spinkit = Spinkit;
-    public isVisible$: Observable<boolean>;
+    public isVisible$!: Observable<boolean>;
     private visibleUntil = Date.now();
 
     @Input() public backdrop = true;
-    @Input() public backgroundColor: string;
+    @Input() public backgroundColor!: string;
     @Input() public debounceDelay = 0;
     @Input() public entryComponent: any = null;
     @Input() public extraDuration = 0;
@@ -35,9 +35,15 @@ export class NgHttpLoaderComponent implements OnInit {
     @Input() public filteredUrlPatterns: string[] = [];
     @Input() public minDuration = 0;
     @Input() public opacity = '.7';
-    @Input() public spinner = Spinkit.skWave;
+    @Input() public spinner: string | null = Spinkit.skWave;
 
     constructor(private pendingRequestsInterceptor: PendingRequestsInterceptor, private spinnerVisibility: SpinnerVisibilityService) {
+    }
+
+    public ngOnInit(): void {
+        this.initIsvisibleObservable();
+        this.nullifySpinnerIfEntryComponentIsDefined();
+        this.initFilters();
     }
 
     private initIsvisibleObservable(): void {
@@ -55,12 +61,6 @@ export class NgHttpLoaderComponent implements OnInit {
         );
     }
 
-    public ngOnInit(): void {
-        this.initIsvisibleObservable();
-        this.nullifySpinnerIfEntryComponentIsDefined();
-        this.initFilters();
-    }
-
     private nullifySpinnerIfEntryComponentIsDefined(): void {
         if (this.entryComponent) {
             this.spinner = null;
@@ -74,10 +74,6 @@ export class NgHttpLoaderComponent implements OnInit {
     }
 
     private initFilteredUrlPatterns(): void {
-        if (!(this.filteredUrlPatterns instanceof Array)) {
-            throw new TypeError('`filteredUrlPatterns` must be an array.');
-        }
-
         if (!!this.filteredUrlPatterns.length) {
             this.filteredUrlPatterns.forEach(e =>
                 this.pendingRequestsInterceptor.filteredUrlPatterns.push(new RegExp(e))
@@ -86,16 +82,10 @@ export class NgHttpLoaderComponent implements OnInit {
     }
 
     private initFilteredMethods(): void {
-        if (!(this.filteredMethods instanceof Array)) {
-            throw new TypeError('`filteredMethods` must be an array.');
-        }
         this.pendingRequestsInterceptor.filteredMethods = this.filteredMethods;
     }
 
     private initFilteredHeaders(): void {
-        if (!(this.filteredHeaders instanceof Array)) {
-            throw new TypeError('`filteredHeaders` must be an array.');
-        }
         this.pendingRequestsInterceptor.filteredHeaders = this.filteredHeaders;
     }
 

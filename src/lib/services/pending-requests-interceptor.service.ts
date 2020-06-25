@@ -22,7 +22,7 @@ export class PendingRequestsInterceptor implements HttpInterceptor {
     private _filteredUrlPatterns: RegExp[] = [];
     private _filteredMethods: string[] = [];
     private _filteredHeaders: string[] = [];
-    private _forceByPass: boolean;
+    private _forceByPass = false;
 
     get pendingRequestsStatus$(): Observable<boolean> {
         return this._pendingRequestsStatus$.asObservable();
