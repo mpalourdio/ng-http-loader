@@ -23,6 +23,7 @@ describe('NgHttpLoaderModule', () => {
 
     it('should create an instance with providers via forRoot()', () => {
         const ngHttpLoaderModuleWithProviders = NgHttpLoaderModule.forRoot();
+        // @ts-ignore
         expect(ngHttpLoaderModuleWithProviders.providers[0][0].useExisting.name).toEqual(PendingRequestsInterceptor.name);
     });
 });

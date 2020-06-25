@@ -252,21 +252,6 @@ describe('NgHttpLoaderComponent', () => {
         expect(isVisible).toBeFalsy();
     }));
 
-    it('should throw an error if filteredUrlPatterns is not an array', () => {
-        component.filteredUrlPatterns = null;
-        expect(() => component.ngOnInit()).toThrow(new Error('`filteredUrlPatterns` must be an array.'));
-    });
-
-    it('should throw an error if filteredMethods is not an array', () => {
-        component.filteredMethods = null;
-        expect(() => component.ngOnInit()).toThrow(new Error('`filteredMethods` must be an array.'));
-    });
-
-    it('should throw an error if filteredHeaders is not an array', () => {
-        component.filteredHeaders = null;
-        expect(() => component.ngOnInit()).toThrow(new Error('`filteredHeaders` must be an array.'));
-    });
-
     it('should show the spinner even if the component is created after the HTTP request is performed', fakeAsync(() => {
         http.get('/fake').subscribe();
 
