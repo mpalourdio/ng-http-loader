@@ -1,5 +1,8 @@
 # Changelog
 
+## v8.0.0
+- Added angular 10 support. 
+
 ## v7.0.0
 - Added angular 9 support. 
 - BC break : `AbstractLoader` has been renamed to `AbstractLoaderDirective`. See [here](https://next.angular.io/guide/deprecations#undecorated-base-classes) and [here](https://angular.io/guide/styleguide#style-02-03).
