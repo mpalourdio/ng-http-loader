@@ -69,7 +69,7 @@
     "karma-jasmine": "~3.3.0",
     "karma-jasmine-html-reporter": "^1.5.0",
     "ng-packagr": "^10.0.0",
-    "puppeteer": "^3.0.0",
+    "puppeteer": "^5.1.0",
     "rxjs": "^6.5.5",
     "rxjs-tslint-rules": "^4.13.0",
     "ts-node": "~8.3.0",
