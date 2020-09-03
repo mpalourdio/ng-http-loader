@@ -9,7 +9,7 @@
 
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { async, TestBed } from '@angular/core/testing';
+import { async, TestBed, waitForAsync } from '@angular/core/testing';
 import { forkJoin, Observable } from 'rxjs';
 import {
     PendingRequestsInterceptor,
@@ -55,7 +55,7 @@ describe('PendingRequestsInterceptor', () => {
         httpMock.verify();
     });
 
-    it('should correctly notify the pendingRequestsStatus observable', async(() => {
+    it('should correctly notify the pendingRequestsStatus observable', waitForAsync(() => {
         pendingRequestsInterceptor
             .pendingRequestsStatus$
             .subscribe(
@@ -67,7 +67,7 @@ describe('PendingRequestsInterceptor', () => {
         httpMock.expectOne('/fake');
     }));
 
-    it('should correctly notify the pendingRequestsStatus observable, even if subscribed after', async(() => {
+    it('should correctly notify the pendingRequestsStatus observable, even if subscribed after', waitForAsync(() => {
         http.get('/fake').subscribe();
         httpMock.expectOne('/fake');
 

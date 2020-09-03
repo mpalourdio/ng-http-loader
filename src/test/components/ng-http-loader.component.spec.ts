@@ -9,7 +9,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { forkJoin, Observable, of, Subscription } from 'rxjs';
 import { NgHttpLoaderComponent } from '../../lib/components/ng-http-loader.component';
@@ -26,7 +26,7 @@ describe('NgHttpLoaderComponent', () => {
     let isVisible: boolean;
     let isVisibleSubscription: Subscription;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [NgHttpLoaderComponent, ...SPINKIT_COMPONENTS],
             imports: [HttpClientTestingModule],
@@ -411,7 +411,7 @@ describe('NgHttpLoaderComponent', () => {
         expect(isVisible).toBeFalsy();
     });
 
-    it('should be possible to manually show/hide the spinner in a Promise context', async(() => {
+    it('should be possible to manually show/hide the spinner in a Promise context', waitForAsync(() => {
         spinner.show();
         expect(isVisible).toBeTruthy();
         Promise.resolve('resolved').then(() => {

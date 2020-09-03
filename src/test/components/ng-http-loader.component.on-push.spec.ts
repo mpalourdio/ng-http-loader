@@ -10,7 +10,7 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NgHttpLoaderModule } from '../../lib/ng-http-loader.module';
 
@@ -27,7 +27,7 @@ describe('NgHttpLoaderComponent OnPush', () => {
     let http: HttpClient;
     let httpMock: HttpTestingController;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [HostComponent],
             imports: [HttpClientTestingModule, NgHttpLoaderModule.forRoot()]
