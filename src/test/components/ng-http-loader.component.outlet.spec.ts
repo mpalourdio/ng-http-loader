@@ -18,12 +18,12 @@ describe('NgHttpLoaderComponentOutlet', () => {
     let component: NgHttpLoaderComponent;
     let fixture: ComponentFixture<NgHttpLoaderComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
             declarations: [NgHttpLoaderComponent, ...SPINKIT_COMPONENTS]
         })
             .compileComponents();
-    }));
+    });
 
     beforeEach(() => {
         fixture = TestBed.createComponent(NgHttpLoaderComponent);

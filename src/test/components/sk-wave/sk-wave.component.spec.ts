@@ -7,7 +7,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { async, ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SkWaveComponent } from '../../../lib/components/sk-wave/sk-wave.component';
 
@@ -15,12 +15,12 @@ describe('SkWaveComponent', () => {
     let component: SkWaveComponent;
     let fixture: ComponentFixture<SkWaveComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
             declarations: [SkWaveComponent]
         })
             .compileComponents();
-    }));
+    });
 
     beforeEach(() => {
         fixture = TestBed.createComponent(SkWaveComponent);

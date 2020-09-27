@@ -15,12 +15,12 @@ describe('SkCubeGridComponent', () => {
     let component: SkCubeGridComponent;
     let fixture: ComponentFixture<SkCubeGridComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
             declarations: [SkCubeGridComponent]
         })
             .compileComponents();
-    }));
+    });
 
     beforeEach(() => {
         fixture = TestBed.createComponent(SkCubeGridComponent);

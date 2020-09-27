@@ -27,13 +27,13 @@ describe('NgHttpLoaderComponent OnPush', () => {
     let http: HttpClient;
     let httpMock: HttpTestingController;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
             declarations: [HostComponent],
             imports: [HttpClientTestingModule, NgHttpLoaderModule.forRoot()]
         })
             .compileComponents();
-    }));
+    });
 
     beforeEach(() => {
         fixture = TestBed.createComponent(HostComponent);

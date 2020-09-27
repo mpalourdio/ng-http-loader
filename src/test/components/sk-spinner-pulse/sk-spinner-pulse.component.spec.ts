@@ -7,7 +7,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SkSpinnerPulseComponent } from '../../../lib/components/sk-spinner-pulse/sk-spinner-pulse.component';
 
@@ -15,12 +15,12 @@ describe('SkSpinnerPulseComponent', () => {
     let component: SkSpinnerPulseComponent;
     let fixture: ComponentFixture<SkSpinnerPulseComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
             declarations: [SkSpinnerPulseComponent]
         })
             .compileComponents();
-    }));
+    });
 
     beforeEach(() => {
         fixture = TestBed.createComponent(SkSpinnerPulseComponent);

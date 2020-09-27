@@ -15,12 +15,12 @@ describe('SkChasingDotsComponent', () => {
     let component: SkChasingDotsComponent;
     let fixture: ComponentFixture<SkChasingDotsComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
             declarations: [SkChasingDotsComponent]
         })
             .compileComponents();
-    }));
+    });
 
     beforeEach(() => {
         fixture = TestBed.createComponent(SkChasingDotsComponent);

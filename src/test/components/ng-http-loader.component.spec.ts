@@ -26,14 +26,14 @@ describe('NgHttpLoaderComponent', () => {
     let isVisible: boolean;
     let isVisibleSubscription: Subscription;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
             declarations: [NgHttpLoaderComponent, ...SPINKIT_COMPONENTS],
             imports: [HttpClientTestingModule],
             providers: [PendingRequestsInterceptorProvider]
         })
             .compileComponents();
-    }));
+    });
 
     beforeEach(() => {
         fixture = TestBed.createComponent(NgHttpLoaderComponent);
