@@ -7,19 +7,29 @@ on: [push, pull_request, workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-latest
-
     strategy:
       max-parallel: 6
       matrix:
         node-version: [10.x, 12.x]
     steps:
-      - uses: actions/checkout@v2
+      - name: checkout
+        uses: actions/checkout@v2
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: yarn
-      - run: yarn lint
-      - run: yarn test
-      - run: yarn build --prod
-      - run: yarn test --code-coverage
+
+      - name: yarn, lint, audit, build, test
+        run: |
+          yarn
+          yarn lint
+          yarn audit
+          yarn build --prod
+          yarn test --code-coverage
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+            github-token: ${{ secrets.GITHUB_TOKEN }}
+            path-to-lcov: ./coverage/lcov.info
