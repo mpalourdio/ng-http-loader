@@ -1,5 +1,8 @@
 # Changelog
 
+## v9.0.0
+- Added angular 11 support. 
+
 ## v8.0.0
 - Added angular 10 support. 
 

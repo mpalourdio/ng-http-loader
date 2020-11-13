@@ -9,9 +9,12 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 end_of_line = lf
 
-[{package.json,ng-package.json,angular.json,tslint.json,karma.conf.js,tsconfig*.json,test.ts,main.ts,polyfills.ts,.travis.yml}]
+[{package.json,ng-package.json,angular.json,tslint.json,karma.conf.js,tsconfig*.json,test.ts,main.ts,polyfills.ts}]
 indent_size = 2
 
 [*.md]
 max_line_length = off
 trim_trailing_whitespace = false
+
+[*.yml]
+indent_size = 2

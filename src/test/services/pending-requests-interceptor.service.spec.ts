@@ -9,7 +9,7 @@
 
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { async, TestBed, waitForAsync } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { forkJoin, Observable } from 'rxjs';
 import {
     PendingRequestsInterceptor,
