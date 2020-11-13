@@ -1,5 +1,3 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI
 
 on: [ push, pull_request, workflow_dispatch ]
@@ -12,7 +10,7 @@ jobs:
       matrix:
         node-version: [ 14.x, 15.x ]
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v2
 
       - name: Use Node.js ${{ matrix.node-version }}
