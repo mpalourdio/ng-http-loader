@@ -1,6 +1,6 @@
 # ng-http-loader
 
-[![Build Status](https://travis-ci.org/mpalourdio/ng-http-loader.svg?branch=master)](https://travis-ci.org/mpalourdio/ng-http-loader)
+![Build Status](https://github.com/mpalourdio/ng-http-loader/workflows/CI/badge.svg?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/mpalourdio/ng-http-loader/badge.svg?branch=master)](https://coveralls.io/github/mpalourdio/ng-http-loader?branch=master)
 [![npm](https://img.shields.io/npm/v/ng-http-loader.svg)](https://www.npmjs.com/package/ng-http-loader)
 [![npm](https://img.shields.io/npm/dm/ng-http-loader.svg)](https://www.npmjs.com/package/ng-http-loader)
