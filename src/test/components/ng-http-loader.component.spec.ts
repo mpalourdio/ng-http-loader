@@ -798,4 +798,29 @@ describe('NgHttpLoaderComponent', () => {
 
         expect(element.style.opacity).toBe(`0${component.opacity}`);
     });
+
+    it('should have a default backdrop background color', () => {
+        component.isVisible$ = of(true);
+        fixture.detectChanges();
+
+        const element: HTMLElement = fixture
+            .debugElement
+            .query(By.css('#spinner'))
+            .nativeElement;
+
+        expect(element.style.backgroundColor).toBe('rgb(241, 241, 241)');
+    });
+
+    it('should be possible to override backdrop background color', () => {
+        component.isVisible$ = of(true);
+        component.backdropBackgroundColor = '#777777';
+        fixture.detectChanges();
+
+        const element: HTMLElement = fixture
+            .debugElement
+            .query(By.css('#spinner'))
+            .nativeElement;
+
+        expect(element.style.backgroundColor).toBe('rgb(119, 119, 119)');
+    });
 });
