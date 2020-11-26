@@ -35,6 +35,7 @@ export class NgHttpLoaderComponent implements OnInit {
     @Input() public filteredUrlPatterns: string[] = [];
     @Input() public minDuration = 0;
     @Input() public opacity = '.7';
+    @Input() public backdropBackgroundColor = '#f1f1f1';
     @Input() public spinner: string | null = Spinkit.skWave;
 
     constructor(private pendingRequestsInterceptor: PendingRequestsInterceptor, private spinnerVisibility: SpinnerVisibilityService) {

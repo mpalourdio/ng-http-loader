@@ -91,6 +91,7 @@ You can customize the following parameters:
   - The **extra duration** (ie. how many extra milliseconds should the spinner be visible).
   - The **minimum duration** (ie. how many milliseconds should the spinner be visible at least).
   - The spinner **opacity**.
+  - The backdrop **background-color** (ie. the color of the spinner backdrop, if enabled).
   - The **spinner type**.
 
 ```xml
@@ -101,6 +102,7 @@ You can customize the following parameters:
     [extraDuration]="300"
     [minDuration]="300"
     [opacity]=".6"
+    [backdropBackgroundColor]="#777777"
     [spinner]="spinkit.skWave">
 </ng-http-loader>
 ```
