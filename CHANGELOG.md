@@ -1,5 +1,8 @@
 # Changelog
 
+## v9.1.0
+- Added the possibility to specify the backdrop `background-color`. Contribution by [krishnakumarp](https://github.com/krishnakumarp).
+
 ## v9.0.0
 - Added angular 11 support. 
 
