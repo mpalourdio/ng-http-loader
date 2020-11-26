@@ -102,7 +102,7 @@ You can customize the following parameters:
     [extraDuration]="300"
     [minDuration]="300"
     [opacity]=".6"
-    [backdropBackgroundColor]="#777777"
+    [backdropBackgroundColor]="'#777777'"
     [spinner]="spinkit.skWave">
 </ng-http-loader>
 ```
