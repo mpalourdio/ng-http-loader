@@ -2,7 +2,7 @@
      *ngIf="isVisible$ | async"
      [class.backdrop]="backdrop"
      [style.opacity]="opacity"
-     [style.backgroundColor]="backdropBackgroundColor">
+     [ngStyle]="{'background-color': backdrop ? backdropBackgroundColor : 'transparent'}">
 
     <ng-container *ngComponentOutlet="entryComponent"></ng-container>
 
