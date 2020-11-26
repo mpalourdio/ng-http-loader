@@ -91,7 +91,7 @@ You can customize the following parameters:
   - The **extra duration** (ie. how many extra milliseconds should the spinner be visible).
   - The **minimum duration** (ie. how many milliseconds should the spinner be visible at least).
   - The spinner **opacity**.
-  - The spinner **background-color** (ie. the color of the spinner backdrop).
+  - The backdrop **background-color** (ie. the color of the spinner backdrop, if enabled).
   - The **spinner type**.
 
 ```xml
