@@ -34,6 +34,7 @@
             "karmaConfig": "./karma.conf.js",
             "polyfills": "./polyfills.ts",
             "tsConfig": "./tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
             "watch": false
           }
         },
