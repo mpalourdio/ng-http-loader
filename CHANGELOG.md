@@ -1,7 +1,7 @@
 # Changelog
 
 ## v10.0.0
-- Added angular 11 support.
+- Added angular 12 support.
 - BC break: The library is not `view-engine`compatible anymore.
 
 ## v9.1.0
