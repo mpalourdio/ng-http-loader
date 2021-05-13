@@ -22,8 +22,8 @@ jobs:
         run: |
           yarn
           yarn lint
-          yarn audit
-          yarn build --prod
+          yarn audit:prod
+          yarn build
           yarn test --code-coverage
 
       - name: Coveralls
