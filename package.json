@@ -1,13 +1,14 @@
 {
   "name": "ng-http-loader",
-  "version": "9.1.0",
+  "version": "10.0.0",
   "scripts": {
     "ng": "ng",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
+    "audit:prod": "yarn audit --groups dependencies",
     "preversion": "yarn lint && yarn test",
-    "version": "yarn build --prod",
+    "version": "yarn build",
     "postversion": "git push && git push --tags"
   },
   "repository": {
@@ -40,40 +41,36 @@
     "url": "https://github.com/mpalourdio/ng-http-loader/issues"
   },
   "dependencies": {
-    "tslib": "^2.0.0"
+    "tslib": "^2.1.0"
   },
   "peerDependencies": {
-    "@angular/common": "^11.0.0",
-    "@angular/core": "^11.0.0",
     "rxjs": "^6.6.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1102.0",
-    "@angular/cli": "^11.0.0",
-    "@angular/common": "^11.0.0",
-    "@angular/compiler": "^11.0.0",
-    "@angular/compiler-cli": "^11.0.0",
-    "@angular/core": "^11.0.0",
-    "@angular/platform-browser": "^11.0.0",
-    "@angular/platform-browser-dynamic": "^11.0.0",
+    "@angular-devkit/build-angular": "~12.0.0",
+    "@angular/cli": "^12.0.0",
+    "@angular/common": "^12.0.0",
+    "@angular/compiler": "^12.0.0",
+    "@angular/compiler-cli": "^12.0.0",
+    "@angular/core": "^12.0.0",
+    "@angular/platform-browser": "^12.0.0",
+    "@angular/platform-browser-dynamic": "^12.0.0",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
-    "jasmine-core": "~3.6.0",
-    "jasmine-spec-reporter": "~5.0.0",
-    "karma": "~6.1.0",
+    "jasmine-core": "~3.7.0",
+    "karma": "~6.3.2",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.0.3",
     "karma-firefox-launcher": "^1.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
-    "ng-packagr": "^11.0.0",
-    "puppeteer": "^8.0.0",
+    "ng-packagr": "^12.0.0",
+    "puppeteer": "^9.0.0",
     "rxjs": "^6.6.0",
     "rxjs-tslint-rules": "^4.13.0",
-    "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~4.1.2",
-    "zone.js": "~0.11.3"
+    "typescript": "~4.2.4",
+    "zone.js": "~0.11.4"
   }
 }

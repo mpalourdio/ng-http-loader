@@ -1,5 +1,9 @@
 # Changelog
 
+## v10.0.0
+- Added angular 12 support.
+- BC break: The library is not `view-engine`compatible anymore.
+
 ## v9.1.0
 - Added the possibility to specify the backdrop `background-color`. Contribution by [krishnakumarp](https://github.com/krishnakumarp).
 
@@ -11,7 +15,7 @@
 
 ## v7.0.0
 - Added angular 9 support. 
-- BC break : `AbstractLoader` has been renamed to `AbstractLoaderDirective`. See [here](https://next.angular.io/guide/deprecations#undecorated-base-classes) and [here](https://angular.io/guide/styleguide#style-02-03).
+- BC break: `AbstractLoader` has been renamed to `AbstractLoaderDirective`. See [here](https://next.angular.io/guide/deprecations#undecorated-base-classes) and [here](https://angular.io/guide/styleguide#style-02-03).
 
 ## v6.0.1
 - The `rxjs` peer dependency is now `^6.5.0`, because the module uses the new `creation function partition observable` introduced in [v6.5.0](https://github.com/ReactiveX/rxjs/blob/f07d349da8c2e0dbddca17d33a9b4a1ceaf59354/CHANGELOG.md#650-2019-04-23).

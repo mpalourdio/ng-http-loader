@@ -39,6 +39,7 @@ The HTTP interceptor listens to all HTTP requests and shows a spinner / loader i
 | >=7.0.0 <8.0.0 | ^9.0.0             |
 | >=8.0.0 <9.0.0 | ^10.0.0            |
 | >=9.0.0        | ^11.0.0            |
+| >=10.0.0       | ^12.0.0            |
 
 If you experience errors like below, **please double check the version you use.**
 
