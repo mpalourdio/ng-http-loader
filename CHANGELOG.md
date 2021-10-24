@@ -1,5 +1,8 @@
 # Changelog
 
+## v10.1.0
+- Add minimal RxJS 7 support.
+
 ## v10.0.0
 - Added angular 12 support.
 - BC break: The library is not `view-engine`compatible anymore.
