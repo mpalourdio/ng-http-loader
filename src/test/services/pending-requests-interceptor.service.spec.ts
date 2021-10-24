@@ -58,10 +58,10 @@ describe('PendingRequestsInterceptor', () => {
     it('should correctly notify the pendingRequestsStatus observable', waitForAsync(() => {
         pendingRequestsInterceptor
             .pendingRequestsStatus$
-            .subscribe(
-                (next: boolean) => expect(next).toBeTruthy(),
-                () => expect(1).toBe(2)
-            );
+            .subscribe({
+                next: (next: boolean) => expect(next).toBeTruthy(),
+                error: () => expect(1).toBe(2)
+            });
 
         http.get('/fake').subscribe();
         httpMock.expectOne('/fake');
@@ -73,19 +73,19 @@ describe('PendingRequestsInterceptor', () => {
 
         pendingRequestsInterceptor
             .pendingRequestsStatus$
-            .subscribe(
-                (next: boolean) => expect(next).toBeTruthy(),
-                () => expect(1).toBe(2)
-            );
+            .subscribe({
+                next: (next: boolean) => expect(next).toBeTruthy(),
+                error: () => expect(1).toBe(2)
+            });
     }));
 
     it('should fail correctly', () => {
         const statusTextNotFound = 'NOT FOUND';
 
-        http.get('/fake').subscribe(
-            () => expect(true).toBe(false),
-            (error: HttpErrorResponse) => expect(error.statusText).toBe(statusTextNotFound)
-        );
+        http.get('/fake').subscribe({
+            next: () => expect(true).toBe(false),
+            error: (error: HttpErrorResponse) => expect(error.statusText).toBe(statusTextNotFound)
+        });
 
         const testRequest = httpMock.expectOne('/fake');
         testRequest.flush({}, {
