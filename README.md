@@ -120,7 +120,7 @@ import { Spinkit } from 'ng-http-loader'; // <============
     styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-    public spinkit = Spinkit; // <============
+    spinkit = Spinkit; // <============
 }
 ```
 The different spinners available are referenced in [this file](src/lib/spinkits.ts).

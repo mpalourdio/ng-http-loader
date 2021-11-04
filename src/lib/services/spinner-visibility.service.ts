@@ -25,12 +25,12 @@ export class SpinnerVisibilityService {
         return this._visibility$.asObservable();
     }
 
-    public show(): void {
+    show(): void {
         this.pendingRequestsInterceptor.forceByPass = true;
         this._visibility$.next(true);
     }
 
-    public hide(): void {
+    hide(): void {
         this._visibility$.next(false);
         this.pendingRequestsInterceptor.forceByPass = false;
     }

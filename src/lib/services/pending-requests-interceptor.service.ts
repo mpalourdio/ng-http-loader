@@ -73,7 +73,7 @@ export class PendingRequestsInterceptor implements HttpInterceptor {
             || this.shouldBypassHeader(req);
     }
 
-    public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const shouldBypass = this.shouldBypass(req);
 
         if (!shouldBypass) {

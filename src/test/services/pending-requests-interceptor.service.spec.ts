@@ -84,7 +84,7 @@ describe('PendingRequestsInterceptor', () => {
 
         http.get('/fake').subscribe({
             next: () => expect(true).toBe(false),
-            error: (error: HttpErrorResponse) => expect(error.statusText).toBe(statusTextNotFound)
+            error: (error: any) => expect(error.statusText).toBe(statusTextNotFound)
         });
 
         const testRequest = httpMock.expectOne('/fake');
