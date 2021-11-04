@@ -40,14 +40,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "./tsconfig.lib.json",
-              "./tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
             ]
           }
         }
@@ -56,6 +53,7 @@
   },
   "defaultProject": "ng-http-loader",
   "cli": {
-    "packageManager": "yarn"
+    "packageManager": "yarn",
+    "defaultCollection": "@angular-eslint/schematics"
   }
 }

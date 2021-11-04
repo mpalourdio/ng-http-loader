@@ -21,27 +21,27 @@ import { Spinkit } from '../spinkits';
 })
 export class NgHttpLoaderComponent implements OnInit {
 
-    public spinkit = Spinkit;
-    public isVisible$!: Observable<boolean>;
-    private visibleUntil = Date.now();
+    spinkit = Spinkit;
+    isVisible$!: Observable<boolean>;
+    visibleUntil = Date.now();
 
-    @Input() public backdrop = true;
-    @Input() public backgroundColor!: string;
-    @Input() public debounceDelay = 0;
-    @Input() public entryComponent: any = null;
-    @Input() public extraDuration = 0;
-    @Input() public filteredHeaders: string[] = [];
-    @Input() public filteredMethods: string[] = [];
-    @Input() public filteredUrlPatterns: string[] = [];
-    @Input() public minDuration = 0;
-    @Input() public opacity = '.7';
-    @Input() public backdropBackgroundColor = '#f1f1f1';
-    @Input() public spinner: string | null = Spinkit.skWave;
+    @Input() backdrop = true;
+    @Input() backgroundColor!: string;
+    @Input() debounceDelay = 0;
+    @Input() entryComponent: any = null;
+    @Input() extraDuration = 0;
+    @Input() filteredHeaders: string[] = [];
+    @Input() filteredMethods: string[] = [];
+    @Input() filteredUrlPatterns: string[] = [];
+    @Input() minDuration = 0;
+    @Input() opacity = '.7';
+    @Input() backdropBackgroundColor = '#f1f1f1';
+    @Input() spinner: string | null = Spinkit.skWave;
 
     constructor(private pendingRequestsInterceptor: PendingRequestsInterceptor, private spinnerVisibility: SpinnerVisibilityService) {
     }
 
-    public ngOnInit(): void {
+    ngOnInit(): void {
         this.initIsvisibleObservable();
         this.nullifySpinnerIfEntryComponentIsDefined();
         this.initFilters();
