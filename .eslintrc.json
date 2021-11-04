@@ -17,7 +17,8 @@
       },
       "extends": [
         "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates"
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:rxjs/recommended"
       ],
       "rules": {
         "@angular-eslint/component-selector": [
@@ -42,6 +43,29 @@
             "objects": "never",
             "arrays": "always-multiline",
             "functions": "never"
+          }
+        ],
+        "rxjs/finnish": [
+          "error",
+          {
+            "functions": true,
+            "methods": true,
+            "names": {
+              "^(canActivate|canActivateChild|canDeactivate|canLoad|intercept|resolve|validate)$": false
+            },
+            "parameters": true,
+            "properties": true,
+            "strict": false,
+            "types": {
+              "^EventEmitter$": false
+            },
+            "variables": true
+          }
+        ],
+        "rxjs/no-implicit-any-catch": [
+          "error",
+          {
+            "allowExplicitAny": true
           }
         ]
       }
