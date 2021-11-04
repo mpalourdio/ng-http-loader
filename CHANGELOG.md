@@ -1,5 +1,9 @@
 # Changelog
 
+## v11.0.0
+- Added angular 13 support.
+- Drop RxJS 6 support.
+
 ## v10.1.0
 - Add minimal RxJS 7 support.
 
