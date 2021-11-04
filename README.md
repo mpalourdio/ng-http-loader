@@ -40,6 +40,7 @@ The HTTP interceptor listens to all HTTP requests and shows a spinner / loader i
 | >=8.0.0 <9.0.0 | ^10.0.0            |
 | >=9.0.0        | ^11.0.0            |
 | >=10.0.0       | ^12.0.0            |
+| >=11.0.0       | ^13.0.0            |
 
 If you experience errors like below, **please double check the version you use.**
 
@@ -120,7 +121,7 @@ import { Spinkit } from 'ng-http-loader'; // <============
     styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-    spinkit = Spinkit; // <============
+    public spinkit = Spinkit; // <============
 }
 ```
 The different spinners available are referenced in [this file](src/lib/spinkits.ts).
