@@ -1,5 +1,8 @@
 # Changelog
 
+## v11.0.1
+- RxJS 6 support is now **really** removed. I should have tagged a new major, but that was announced in `v11.0.0` but forgotten, sorry!
+
 ## v11.0.0
 - Added angular 13 support.
 - Drop RxJS 6 support.
