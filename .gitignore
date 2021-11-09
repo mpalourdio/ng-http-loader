@@ -10,3 +10,4 @@ dist
 coverage
 .idea/
 out-tsc
+/.angular/cache
