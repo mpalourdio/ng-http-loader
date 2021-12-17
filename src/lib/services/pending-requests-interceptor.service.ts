@@ -22,6 +22,7 @@ export class PendingRequestsInterceptor implements HttpInterceptor {
     private _filteredUrlPatterns: RegExp[] = [];
     private _filteredMethods: string[] = [];
     private _filteredHeaders: string[] = [];
+    private _includedUrlPatterns: RegExp[] = [];
     private _forceByPass = false;
 
     get pendingRequestsStatus$(): Observable<boolean> {
@@ -34,6 +35,10 @@ export class PendingRequestsInterceptor implements HttpInterceptor {
 
     get filteredUrlPatterns(): RegExp[] {
         return this._filteredUrlPatterns;
+    }
+
+    get includedUrlPatterns(): RegExp[] {
+      return this._includedUrlPatterns;
     }
 
     set filteredMethods(httpMethods: string[]) {
@@ -73,8 +78,17 @@ export class PendingRequestsInterceptor implements HttpInterceptor {
             || this.shouldBypassHeader(req);
     }
 
+    private shouldIncludeUrl(url: string): boolean {
+      return this._includedUrlPatterns.some(e => e.test(url));
+    }
+
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const shouldBypass = this.shouldBypass(req);
+        let shouldBypass = false;
+        if (!!this._includedUrlPatterns.length && !this.shouldIncludeUrl(req.urlWithParams)) {
+          shouldBypass = true;
+        } else {
+          shouldBypass = this.shouldBypass(req);
+        }
 
         if (!shouldBypass) {
             this._pendingRequests++;

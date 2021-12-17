@@ -154,6 +154,12 @@ You can filter the HTTP requests that shouldn't be caught by the interceptor by 
 <ng-http-loader [filteredUrlPatterns]="['\\d', '[a-zA-Z]', 'my-api']"></ng-http-loader>
 ```
 
+You can filter the HTTP requests that **should** be caught by the interceptor by providing **an array of regex patterns**:
+```xml
+<ng-http-loader [includedUrlPatterns]="['\\d', '[a-zA-Z], 'my-api']"></ng-http-loader>
+```
+Doing so will **only** trigger the loader when one of the patterns matches. If the same pattern (or overlapping patterns) are used in filteredUrlPatterns (to exclude) and includedUrlPatterns (to include), the loader **will** be displayed.
+
 You can filter the HTTP requests by providing **an array of HTTP methods** (case insensitive):
 ```xml
 <ng-http-loader [filteredMethods]="['gEt', 'POST', 'PuT']"></ng-http-loader>

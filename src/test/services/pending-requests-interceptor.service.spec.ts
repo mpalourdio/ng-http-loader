@@ -55,6 +55,46 @@ describe('PendingRequestsInterceptor', () => {
         httpMock.verify();
     });
 
+    it('should not include pending requests for URLs that are not in the include filter when there is an include filter applied', () => {
+      const runQuery$ = (url: string): Observable<any> => http.get(url);
+      pendingRequestsInterceptor.includedUrlPatterns.push(new RegExp('^/?included-url\w*'));
+
+      forkJoin([runQuery$('/included-url'), runQuery$('/non-included-url')]).subscribe();
+
+      const firstRequest = httpMock.expectOne('/non-included-url');
+      const secondRequest = httpMock.expectOne('/included-url');
+
+      expect(pendingRequestsInterceptor.pendingRequests).toBe(1);
+      firstRequest.flush({});
+
+      expect(pendingRequestsInterceptor.pendingRequests).toBe(1);
+      secondRequest.flush({});
+
+      expect(pendingRequestsInterceptor.pendingRequests).toBe(0);
+
+      httpMock.verify();
+    });
+
+    it('should not include pending requests for URLs that are in the filtered URLs', () => {
+      const runQuery$ = (url: string): Observable<any> => http.get(url);
+      pendingRequestsInterceptor.filteredUrlPatterns.push(new RegExp('^/?excluded-url\w*'));
+
+      forkJoin([runQuery$('/excluded-url'), runQuery$('/included-url')]).subscribe();
+
+      const firstRequest = httpMock.expectOne('/excluded-url');
+      const secondRequest = httpMock.expectOne('/included-url');
+
+      expect(pendingRequestsInterceptor.pendingRequests).toBe(1);
+      firstRequest.flush({});
+
+      expect(pendingRequestsInterceptor.pendingRequests).toBe(1);
+      secondRequest.flush({});
+
+      expect(pendingRequestsInterceptor.pendingRequests).toBe(0);
+
+      httpMock.verify();
+    });
+
     it('should correctly notify the pendingRequestsStatus observable', waitForAsync(() => {
         pendingRequestsInterceptor
             .pendingRequestsStatus$

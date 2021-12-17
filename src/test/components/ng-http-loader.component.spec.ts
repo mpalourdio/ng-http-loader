@@ -9,7 +9,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, discardPeriodicTasks, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { forkJoin, Observable, of, Subscription } from 'rxjs';
 import { NgHttpLoaderComponent } from '../../lib/components/ng-http-loader.component';
@@ -152,6 +152,16 @@ describe('NgHttpLoaderComponent', () => {
         httpMock.expectOne('/fake').flush({});
     }));
 
+    it('should not show the spinner if the request url is not included in the include filter', fakeAsync(() => {
+        component.includedUrlPatterns.push('include');
+        component.ngOnInit();
+
+        http.get('/fake').subscribe();
+        tick();
+        expect(isVisible).toBeFalsy();
+        httpMock.expectOne('/fake').flush({});
+    }));
+
     it('should not show the spinner if the request is filtered by HTTP method', fakeAsync(() => {
         component.filteredMethods.push('get');
         fixture.detectChanges();
@@ -195,17 +205,53 @@ describe('NgHttpLoaderComponent', () => {
     }));
 
     it('should correctly filter by URL with several requests and one pattern', fakeAsync(() => {
-        component.filteredUrlPatterns.push('\\d');
+        component.includedUrlPatterns.push('\\d');
         component.ngOnInit();
 
         http.get('/12345').subscribe();
         tick();
-        expect(isVisible).toBeFalsy();
+        expect(isVisible).toBeTruthy();
         httpMock.expectOne('/12345').flush({});
 
         http.get('/fake').subscribe();
         tick();
+        expect(isVisible).toBeFalsy();
+        httpMock.expectOne('/fake').flush({});
+
+        tick();
+        expect(isVisible).toBeFalsy();
+    }));
+
+    it('should take care of query strings in includedUrlPatterns', fakeAsync(() => {
+        component.includedUrlPatterns.push('include');
+        component.ngOnInit();
+
+        http.get(
+            '/api/service',
+            {
+                params: {
+                    foo: 'include'
+                }
+            }
+        ).subscribe();
+        tick();
         expect(isVisible).toBeTruthy();
+        httpMock.expectOne('/api/service?foo=include').flush({});
+        discardPeriodicTasks();
+    }));
+
+    it('should correctly filter by included URL with several requests and one pattern', fakeAsync(() => {
+        component.includedUrlPatterns.push('\\d');
+        component.ngOnInit();
+
+        http.get('/12345').subscribe();
+        tick();
+        expect(isVisible).toBeTruthy();
+        httpMock.expectOne('/12345').flush({});
+
+        http.get('/fake').subscribe();
+        tick();
+        expect(isVisible).toBeFalsy();
         httpMock.expectOne('/fake').flush({});
 
         tick();
