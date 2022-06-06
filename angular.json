@@ -51,9 +51,10 @@
       }
     }
   },
-  "defaultProject": "ng-http-loader",
   "cli": {
-    "packageManager": "yarn",
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ],
+    "packageManager": "yarn"
   }
 }
