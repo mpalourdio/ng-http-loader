@@ -33,6 +33,7 @@ export class NgHttpLoaderComponent implements OnInit {
     @Input() filteredHeaders: string[] = [];
     @Input() filteredMethods: string[] = [];
     @Input() filteredUrlPatterns: string[] = [];
+    @Input() includedUrlPatterns: string[] = [];
     @Input() minDuration = 0;
     @Input() opacity = '.7';
     @Input() backdropBackgroundColor = '#f1f1f1';
@@ -72,6 +73,7 @@ export class NgHttpLoaderComponent implements OnInit {
         this.initFilteredUrlPatterns();
         this.initFilteredMethods();
         this.initFilteredHeaders();
+        this.initFilteredIncludeUrlPatterns();
     }
 
     private initFilteredUrlPatterns(): void {
@@ -88,6 +90,14 @@ export class NgHttpLoaderComponent implements OnInit {
 
     private initFilteredHeaders(): void {
         this.pendingRequestsInterceptor.filteredHeaders = this.filteredHeaders;
+    }
+
+    private initFilteredIncludeUrlPatterns(): void {
+      if (!!this.includedUrlPatterns.length) {
+        this.includedUrlPatterns.forEach(e =>
+          this.pendingRequestsInterceptor.includedUrlPatterns.push(new RegExp(e))
+        );
+      }
     }
 
     private updateExpirationDelay(showSpinner: boolean): void {
