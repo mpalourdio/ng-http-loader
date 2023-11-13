@@ -44,8 +44,9 @@ The HTTP interceptor listens to all HTTP requests and shows a spinner / loader i
 | >=12.0.0       | ^14.0.0 |
 | >=13.0.0       | ^15.0.0 |
 | >=14.0.0       | ^16.0.0 |
+| >=15.0.0       | ^17.0.0 |
 
-If you experience errors like below, **please double check the version you use.**
+If you experience errors like below, **please double-check the version you use.**
 
 `ERROR in Error: Metadata version mismatch for module [...]/angular/node_modules/ng-http-loader/ng-http-loader.module.d.ts, found version x, expected y [...]`
 
