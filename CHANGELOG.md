@@ -1,5 +1,8 @@
 # Changelog
 
+## v15.0.0
+- Added angular 17 support.
+
 ## v14.0.0
 - Added angular 16 support.
  
