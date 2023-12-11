@@ -92,6 +92,12 @@ In your app.component.html, simply add:
 If you prefer using standalone components, you should configure your `ApplicationConfig` like following:
 
 ```typescript
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { NgHttpLoaderModule } from 'ng-http-loader';
+import { routes } from './app.routes';
+import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
+
 export const appConfig: ApplicationConfig = {
     providers: [
         provideRouter(routes),
