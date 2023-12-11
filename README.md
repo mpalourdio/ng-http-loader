@@ -89,7 +89,7 @@ In your app.component.html, simply add:
 ```
 ## Standalone components
 
-If you prefer using standalone components, you should configure your `ApplicationConfig` like following
+If you prefer using standalone components, you should configure your `ApplicationConfig` like following:
 
 ```typescript
 export const appConfig: ApplicationConfig = {
@@ -102,7 +102,7 @@ export const appConfig: ApplicationConfig = {
     ],
 };
 ```
-Then you can use `ng-http-loader` like this
+Then you can use `ng-http-loader` like this:
 ```typescript
 import { Component } from '@angular/core';
 import {NgHttpLoaderModule} from "ng-http-loader";
