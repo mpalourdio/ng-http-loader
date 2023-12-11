@@ -87,7 +87,38 @@ In your app.component.html, simply add:
 ```xml
 <ng-http-loader></ng-http-loader>
 ```
+## Standalone components
 
+If you prefer using standalone components, you should configure your `ApplicationConfig` like following
+
+```typescript
+export const appConfig: ApplicationConfig = {
+    providers: [
+        provideRouter(routes),
+        provideHttpClient(
+            withInterceptorsFromDi() // <== Don't forget to import the interceptors
+        ),
+        importProvidersFrom(NgHttpLoaderModule.forRoot()) //<== Always call `forRoot`
+    ],
+};
+```
+Then you can use `ng-http-loader` like this
+```typescript
+import { Component } from '@angular/core';
+import {NgHttpLoaderModule} from "ng-http-loader";
+
+@Component({
+  selector: 'my-selector',
+  standalone: true,
+  imports: [
+    NgHttpLoaderModule
+  ],
+  template: `
+    <ng-http-loader />`,
+})
+export class InlineComponent {
+}
+```
 ## Customizing the spinner
 
 You can customize the following parameters:
