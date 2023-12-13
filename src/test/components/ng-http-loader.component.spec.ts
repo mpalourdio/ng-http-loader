@@ -836,4 +836,17 @@ describe('NgHttpLoaderComponent', () => {
 
         expect(element.style.backgroundColor).toBe('transparent');
     });
+
+    it("should apply custom styling", () => {
+        component.isVisible$ = of(true);
+        component.customStyle = {"z-index": 86};
+        fixture.detectChanges();
+
+        const element: HTMLElement = fixture
+            .debugElement
+            .query(By.css('#spinner'))
+            .nativeElement;
+
+        expect(element.style.zIndex).toBe("86");
+    });
 });
