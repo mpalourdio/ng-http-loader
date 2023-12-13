@@ -8,7 +8,7 @@
  */
 
 import { Component, Input, OnInit } from '@angular/core';
-import { merge, Observable, partition, timer } from 'rxjs';
+import { Observable, merge, partition, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
 import { PendingRequestsInterceptor } from '../services/pending-requests-interceptor.service';
 import { SpinnerVisibilityService } from '../services/spinner-visibility.service';
@@ -27,7 +27,6 @@ export class NgHttpLoaderComponent implements OnInit {
 
     @Input() backdrop = true;
     @Input() backgroundColor!: string;
-    @Input() zIndex = 9999;
     @Input() debounceDelay = 0;
     @Input() entryComponent: any = null;
     @Input() extraDuration = 0;
@@ -38,6 +37,7 @@ export class NgHttpLoaderComponent implements OnInit {
     @Input() opacity = '.7';
     @Input() backdropBackgroundColor = '#f1f1f1';
     @Input() spinner: string | null = Spinkit.skWave;
+    @Input() styleClass = '';
 
     constructor(private pendingRequestsInterceptor: PendingRequestsInterceptor, private spinnerVisibility: SpinnerVisibilityService) {
     }

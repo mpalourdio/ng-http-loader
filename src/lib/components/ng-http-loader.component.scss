@@ -5,6 +5,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     position: fixed;
+    z-index: 9999;
 
     &.backdrop {
         top: 0;

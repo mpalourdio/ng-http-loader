@@ -837,8 +837,9 @@ describe('NgHttpLoaderComponent', () => {
         expect(element.style.backgroundColor).toBe('transparent');
     });
 
-    it("should have a default specified z-index of 9999 for the background", () => {
+    it("should have the specified styleClass", () => {
         component.isVisible$ = of(true);
+        component.styleClass = "test-class";
         fixture.detectChanges();
 
         const element: HTMLElement = fixture
@@ -846,19 +847,6 @@ describe('NgHttpLoaderComponent', () => {
             .query(By.css('#spinner'))
             .nativeElement;
 
-        expect(element.style.zIndex).toBe('9999');
-    })
-
-    it("should have the specified z-index set for the background", () => {
-        component.isVisible$ = of(true);
-        component.zIndex = 50;
-        fixture.detectChanges();
-
-        const element: HTMLElement = fixture
-            .debugElement
-            .query(By.css('#spinner'))
-            .nativeElement;
-
-        expect(element.style.zIndex).toBe('50');
-    })
+        expect(element.classList).toContain("test-class");
+    });
 });
