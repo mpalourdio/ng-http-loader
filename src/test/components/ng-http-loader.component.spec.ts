@@ -837,6 +837,18 @@ describe('NgHttpLoaderComponent', () => {
         expect(element.style.backgroundColor).toBe('transparent');
     });
 
+    it("should have a default specified z-index of 9999 for the background", () => {
+        component.isVisible$ = of(true);
+        fixture.detectChanges();
+
+        const element: HTMLElement = fixture
+            .debugElement
+            .query(By.css('#spinner'))
+            .nativeElement;
+
+        expect(element.style.zIndex).toBe('9999');
+    })
+
     it("should have the specified z-index set for the background", () => {
         component.isVisible$ = of(true);
         component.zIndex = 50;
