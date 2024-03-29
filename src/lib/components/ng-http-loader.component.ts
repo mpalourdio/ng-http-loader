@@ -7,7 +7,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Type } from '@angular/core';
 import { merge, Observable, partition, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
 import { PendingRequestsInterceptor } from '../services/pending-requests-interceptor.service';
@@ -28,7 +28,7 @@ export class NgHttpLoaderComponent implements OnInit {
     @Input() backdrop = true;
     @Input() backgroundColor!: string;
     @Input() debounceDelay = 0;
-    @Input() entryComponent: any = null;
+    @Input() entryComponent!: Type<unknown> | null;
     @Input() extraDuration = 0;
     @Input() filteredHeaders: string[] = [];
     @Input() filteredMethods: string[] = [];

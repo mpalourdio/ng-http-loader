@@ -7,7 +7,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { forkJoin, Observable } from 'rxjs';
@@ -37,7 +37,7 @@ describe('PendingRequestsInterceptor', () => {
     });
 
     it('should be aware of the pending HTTP requests', () => {
-        const runQuery$ = (url: string): Observable<any> => http.get(url);
+        const runQuery$ = (url: string): Observable<unknown> => http.get(url);
 
         forkJoin([runQuery$('/fake'), runQuery$('/fake2')]).subscribe();
 
@@ -81,10 +81,13 @@ describe('PendingRequestsInterceptor', () => {
 
     it('should fail correctly', () => {
         const statusTextNotFound = 'NOT FOUND';
-
         http.get('/fake').subscribe({
             next: () => expect(true).toBe(false),
-            error: (error: any) => expect(error.statusText).toBe(statusTextNotFound)
+            error: (error: unknown) => {
+                if (error instanceof HttpResponse) {
+                    expect(error.statusText).toBe(statusTextNotFound);
+                }
+            }
         });
 
         const testRequest = httpMock.expectOne('/fake');
