@@ -9,8 +9,14 @@
 
 import { HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { ExistingProvider, Injectable } from '@angular/core';
-import { Observable, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+
+export interface InterceptorFilters {
+    filteredUrlPatterns: RegExp[],
+    filteredMethods: string[],
+    filteredHeaders: string[]
+}
 
 @Injectable({
     providedIn: 'root'
@@ -19,9 +25,11 @@ export class PendingRequestsInterceptor implements HttpInterceptor {
 
     private _pendingRequests = 0;
     private _pendingRequestsStatus$ = new ReplaySubject<boolean>(1);
-    private _filteredUrlPatterns: RegExp[] = [];
-    private _filteredMethods: string[] = [];
-    private _filteredHeaders: string[] = [];
+    private _filters$ = new BehaviorSubject<InterceptorFilters>({
+        filteredUrlPatterns: [],
+        filteredHeaders: [],
+        filteredMethods: []
+    })
     private _forceByPass = false;
 
     get pendingRequestsStatus$(): Observable<boolean> {
@@ -33,15 +41,28 @@ export class PendingRequestsInterceptor implements HttpInterceptor {
     }
 
     get filteredUrlPatterns(): RegExp[] {
-        return this._filteredUrlPatterns;
+        return this._filters$.value.filteredUrlPatterns;
+    }
+
+    set filteredUrlPatterns(regexes: RegExp[]) {
+        this._filters$.next({
+            ...this._filters$.value,
+            filteredUrlPatterns: regexes
+        })
     }
 
     set filteredMethods(httpMethods: string[]) {
-        this._filteredMethods = httpMethods;
+        this._filters$.next({
+            ...this._filters$.value,
+            filteredMethods: httpMethods
+        })
     }
 
     set filteredHeaders(value: string[]) {
-        this._filteredHeaders = value;
+        this._filters$.next({
+            ...this._filters$.value,
+            filteredHeaders: value
+        })
     }
 
     set forceByPass(value: boolean) {
@@ -49,19 +70,19 @@ export class PendingRequestsInterceptor implements HttpInterceptor {
     }
 
     private shouldBypassUrl(url: string): boolean {
-        return this._filteredUrlPatterns.some(e => {
+        return this._filters$.value.filteredUrlPatterns.some(e => {
             return e.test(url);
         });
     }
 
-    private shouldBypassMethod(req: HttpRequest<unknown>): boolean {
-        return this._filteredMethods.some(e => {
+    private shouldBypassMethod(req: HttpRequest<any>): boolean {
+        return this._filters$.value.filteredMethods.some(e => {
             return e.toUpperCase() === req.method.toUpperCase();
         });
     }
 
-    private shouldBypassHeader(req: HttpRequest<unknown>): boolean {
-        return this._filteredHeaders.some(e => {
+    private shouldBypassHeader(req: HttpRequest<any>): boolean {
+        return this._filters$.value.filteredHeaders.some(e => {
             return req.headers.has(e);
         });
     }

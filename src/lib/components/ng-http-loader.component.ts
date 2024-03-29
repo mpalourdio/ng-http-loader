@@ -8,9 +8,9 @@
  */
 
 import { Component, Input, OnInit, Type } from '@angular/core';
-import { merge, Observable, partition, timer } from 'rxjs';
+import { Observable, merge, partition, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
-import { PendingRequestsInterceptor } from '../services/pending-requests-interceptor.service';
+import { InterceptorFilters, PendingRequestsInterceptor } from '../services/pending-requests-interceptor.service';
 import { SpinnerVisibilityService } from '../services/spinner-visibility.service';
 import { Spinkit } from '../spinkits';
 
@@ -30,9 +30,28 @@ export class NgHttpLoaderComponent implements OnInit {
     @Input() debounceDelay = 0;
     @Input() entryComponent!: Type<unknown> | null;
     @Input() extraDuration = 0;
-    @Input() filteredHeaders: string[] = [];
-    @Input() filteredMethods: string[] = [];
-    @Input() filteredUrlPatterns: string[] = [];
+
+    get filteredHeaders() {
+        return this.pendingRequestsInterceptor.filteredHeaders;
+    }
+    @Input()
+    set filteredHeaders(hs: string[]) {
+        this.updateFilters('filteredHeaders', hs);
+    }
+    get filteredMethods() {
+        return this.pendingRequestsInterceptor.filteredMethods;
+    }
+    @Input()
+    set filteredMethods(ms: string[]) {
+        this.updateFilters('filteredMethods', ms);
+    }
+    get filteredUrlPatterns() {
+        return this.pendingRequestsInterceptor.filteredUrlPatterns.map(p => `${p}`);
+    }
+    @Input()
+    set filteredUrlPatterns(ps: string[]) {
+        this.updateFilters('filteredUrlPatterns', ps.map(p => new RegExp(p)))
+    }
     @Input() minDuration = 0;
     @Input() opacity = '.7';
     @Input() backdropBackgroundColor = '#f1f1f1';
@@ -44,7 +63,6 @@ export class NgHttpLoaderComponent implements OnInit {
     ngOnInit(): void {
         this.initIsvisibleObservable();
         this.nullifySpinnerIfEntryComponentIsDefined();
-        this.initFilters();
     }
 
     private initIsvisibleObservable(): void {
@@ -68,26 +86,11 @@ export class NgHttpLoaderComponent implements OnInit {
         }
     }
 
-    private initFilters(): void {
-        this.initFilteredUrlPatterns();
-        this.initFilteredMethods();
-        this.initFilteredHeaders();
-    }
-
-    private initFilteredUrlPatterns(): void {
-        if (!!this.filteredUrlPatterns.length) {
-            this.filteredUrlPatterns.forEach(e =>
-                this.pendingRequestsInterceptor.filteredUrlPatterns.push(new RegExp(e))
-            );
-        }
-    }
-
-    private initFilteredMethods(): void {
-        this.pendingRequestsInterceptor.filteredMethods = this.filteredMethods;
-    }
-
-    private initFilteredHeaders(): void {
-        this.pendingRequestsInterceptor.filteredHeaders = this.filteredHeaders;
+    private updateFilters<K extends keyof InterceptorFilters>(
+        filterName: K,
+        value: InterceptorFilters[K]
+    ) {
+        (this.pendingRequestsInterceptor as InterceptorFilters)[filterName] = value;
     }
 
     private updateExpirationDelay(showSpinner: boolean): void {
