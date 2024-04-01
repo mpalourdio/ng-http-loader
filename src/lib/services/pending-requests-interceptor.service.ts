@@ -54,26 +54,26 @@ export class PendingRequestsInterceptor implements HttpInterceptor {
         });
     }
 
-    private shouldBypassMethod(req: HttpRequest<any>): boolean {
+    private shouldBypassMethod(req: HttpRequest<unknown>): boolean {
         return this._filteredMethods.some(e => {
             return e.toUpperCase() === req.method.toUpperCase();
         });
     }
 
-    private shouldBypassHeader(req: HttpRequest<any>): boolean {
+    private shouldBypassHeader(req: HttpRequest<unknown>): boolean {
         return this._filteredHeaders.some(e => {
             return req.headers.has(e);
         });
     }
 
-    private shouldBypass(req: HttpRequest<any>): boolean {
+    private shouldBypass(req: HttpRequest<unknown>): boolean {
         return this._forceByPass
             || this.shouldBypassUrl(req.urlWithParams)
             || this.shouldBypassMethod(req)
             || this.shouldBypassHeader(req);
     }
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
         const shouldBypass = this.shouldBypass(req);
 
         if (!shouldBypass) {

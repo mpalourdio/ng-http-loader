@@ -114,7 +114,7 @@ describe('NgHttpLoaderComponent', () => {
     });
 
     it('should show and hide the spinner according to the pending HTTP requests', fakeAsync(() => {
-        const runQuery$ = (url: string): Observable<any> => http.get(url);
+        const runQuery$ = (url: string): Observable<unknown> => http.get(url);
         forkJoin([runQuery$('/fake'), runQuery$('/fake2')]).subscribe();
         const firstRequest = httpMock.expectOne('/fake');
         const secondRequest = httpMock.expectOne('/fake2');
@@ -367,7 +367,7 @@ describe('NgHttpLoaderComponent', () => {
 
     it('should correctly handle the debounce delay for multiple HTTP requests', fakeAsync(() => {
         component.debounceDelay = 2000;
-        const runQuery$ = (url: string): Observable<any> => http.get(url);
+        const runQuery$ = (url: string): Observable<unknown> => http.get(url);
         forkJoin([runQuery$('/fake'), runQuery$('/fake2')]).subscribe();
         const firstRequest = httpMock.expectOne('/fake');
         const secondRequest = httpMock.expectOne('/fake2');
@@ -510,7 +510,7 @@ describe('NgHttpLoaderComponent', () => {
 
     it('should correctly handle the minimum spinner duration for multiple HTTP requests', fakeAsync(() => {
         component.minDuration = 5000;
-        const runQuery$ = (url: string): Observable<any> => http.get(url);
+        const runQuery$ = (url: string): Observable<unknown> => http.get(url);
         forkJoin([runQuery$('/fake'), runQuery$('/fake2')]).subscribe();
         const firstRequest = httpMock.expectOne('/fake');
         const secondRequest = httpMock.expectOne('/fake2');
@@ -548,7 +548,7 @@ describe('NgHttpLoaderComponent', () => {
 
     it('should correctly handle the extra spinner duration for multiple HTTP requests', fakeAsync(() => {
         component.extraDuration = 5000;
-        const runQuery$ = (url: string): Observable<any> => http.get(url);
+        const runQuery$ = (url: string): Observable<unknown> => http.get(url);
         forkJoin([runQuery$('/fake'), runQuery$('/fake2')]).subscribe();
         const firstRequest = httpMock.expectOne('/fake');
         const secondRequest = httpMock.expectOne('/fake2');
@@ -622,7 +622,7 @@ describe('NgHttpLoaderComponent', () => {
 
     it('should handle the extra spinner duration for multiple HTTP requests ran one after the others', fakeAsync(() => {
         component.extraDuration = 10;
-        const runQuery$ = (url: string): Observable<any> => http.get(url);
+        const runQuery$ = (url: string): Observable<unknown> => http.get(url);
         runQuery$('/fake').subscribe();
         const firstRequest = httpMock.expectOne('/fake');
 
