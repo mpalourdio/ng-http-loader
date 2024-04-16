@@ -12,7 +12,7 @@ import { ExistingProvider, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
-export interface InterceptorFilters {
+export type InterceptorFilters = {
     filteredUrlPatterns: RegExp[],
     filteredMethods: string[],
     filteredHeaders: string[]

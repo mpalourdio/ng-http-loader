@@ -8,7 +8,7 @@
  */
 
 import { Component, Input, OnInit, Type } from '@angular/core';
-import { Observable, merge, partition, timer } from 'rxjs';
+import { merge, Observable, partition, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
 import { InterceptorFilters, PendingRequestsInterceptor } from '../services/pending-requests-interceptor.service';
 import { SpinnerVisibilityService } from '../services/spinner-visibility.service';
@@ -31,21 +31,21 @@ export class NgHttpLoaderComponent implements OnInit {
     @Input() entryComponent!: Type<unknown> | null;
     @Input() extraDuration = 0;
 
-    get filteredHeaders() {
+    get filteredHeaders(): string[] {
         return this.pendingRequestsInterceptor.filteredHeaders;
     }
     @Input()
     set filteredHeaders(hs: string[]) {
         this.updateFilters('filteredHeaders', hs);
     }
-    get filteredMethods() {
+    get filteredMethods(): string[] {
         return this.pendingRequestsInterceptor.filteredMethods;
     }
     @Input()
     set filteredMethods(ms: string[]) {
         this.updateFilters('filteredMethods', ms);
     }
-    get filteredUrlPatterns() {
+    get filteredUrlPatterns(): string[] {
         return this.pendingRequestsInterceptor.filteredUrlPatterns.map(p => `${p}`);
     }
     @Input()
@@ -89,7 +89,7 @@ export class NgHttpLoaderComponent implements OnInit {
     private updateFilters<K extends keyof InterceptorFilters>(
         filterName: K,
         value: InterceptorFilters[K]
-    ) {
+    ): void {
         (this.pendingRequestsInterceptor as InterceptorFilters)[filterName] = value;
     }
 

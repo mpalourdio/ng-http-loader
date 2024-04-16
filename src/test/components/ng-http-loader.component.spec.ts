@@ -9,13 +9,13 @@
 
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { Observable, Subscription, forkJoin, of } from 'rxjs';
+import { forkJoin, Observable, of, Subscription } from 'rxjs';
 import { NgHttpLoaderComponent } from '../../lib/components/ng-http-loader.component';
 import { PendingRequestsInterceptorProvider } from '../../lib/services/pending-requests-interceptor.service';
 import { SpinnerVisibilityService } from '../../lib/services/spinner-visibility.service';
-import { SPINKIT_COMPONENTS, Spinkit } from '../../lib/spinkits';
+import { Spinkit, SPINKIT_COMPONENTS } from '../../lib/spinkits';
 
 describe('NgHttpLoaderComponent', () => {
     let component: NgHttpLoaderComponent;
