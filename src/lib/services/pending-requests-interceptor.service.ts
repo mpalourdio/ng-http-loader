@@ -75,13 +75,13 @@ export class PendingRequestsInterceptor implements HttpInterceptor {
         });
     }
 
-    private shouldBypassMethod(req: HttpRequest<any>): boolean {
+    private shouldBypassMethod(req: HttpRequest<unknown>): boolean {
         return this._filters$.value.filteredMethods.some(e => {
             return e.toUpperCase() === req.method.toUpperCase();
         });
     }
 
-    private shouldBypassHeader(req: HttpRequest<any>): boolean {
+    private shouldBypassHeader(req: HttpRequest<unknown>): boolean {
         return this._filters$.value.filteredHeaders.some(e => {
             return req.headers.has(e);
         });
