@@ -21,7 +21,7 @@ jobs:
 
       - name: install, lint, audit, build, test
         run: |
-          npm i
+          npm ci
           npm run lint
           npm run audit:prod
           npm run build
