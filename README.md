@@ -131,6 +131,7 @@ export class InlineComponent {
 You can customize the following parameters:
   - The spinner **backdrop** (visible by default).
   - The **background-color** (ie. the color of the spinner itself).
+  - The spinner and its backdrop **z-index**.
   - The **debounce delay** (ie. after how many milliseconds the spinner will be visible, if needed).
   - The **extra duration** (ie. how many extra milliseconds should the spinner be visible).
   - The **minimum duration** (ie. how many milliseconds should the spinner be visible at least).
@@ -142,6 +143,7 @@ You can customize the following parameters:
 <ng-http-loader 
     [backdrop]="false"
     [backgroundColor]="'#ff0000'"
+    [zIndex]=50
     [debounceDelay]="100"
     [extraDuration]="300"
     [minDuration]="300"
