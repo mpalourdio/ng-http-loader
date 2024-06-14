@@ -137,6 +137,7 @@ You can customize the following parameters:
   - The spinner **opacity**.
   - The backdrop **background-color** (ie. the color of the spinner backdrop, if enabled).
   - The **spinner type**.
+  - The spinner **style**.
 
 ```xml
 <ng-http-loader 
@@ -148,6 +149,7 @@ You can customize the following parameters:
     [opacity]=".6"
     [backdropBackgroundColor]="'#777777'"
     [spinner]="spinkit.skWave">
+    [customStyle]="{'z-index': 100}"
 </ng-http-loader>
 ```
 
