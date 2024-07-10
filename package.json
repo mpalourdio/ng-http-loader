@@ -71,7 +71,7 @@
     "ng-packagr": "^18.0.0",
     "puppeteer": "^22.0.0",
     "rxjs": "^7.8.0",
-    "typescript": "~5.4.2",
+    "typescript": "~5.5.2",
     "zone.js": "~0.14.3"
   }
 }
