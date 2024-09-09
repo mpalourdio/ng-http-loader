@@ -143,7 +143,7 @@ describe('NgHttpLoaderComponent', () => {
     }));
 
     it('should not show the spinner if the request is filtered by url', fakeAsync(() => {
-        component.filteredUrlPatterns.push('fake');
+        component.filteredUrlPatterns = ['fake'];
         component.ngOnInit();
 
         http.get('/fake').subscribe();
@@ -153,7 +153,7 @@ describe('NgHttpLoaderComponent', () => {
     }));
 
     it('should not show the spinner if the request is filtered by HTTP method', fakeAsync(() => {
-        component.filteredMethods.push('get');
+        component.filteredMethods = ['get'];
         fixture.detectChanges();
 
         http.get('/fake').subscribe();
@@ -163,7 +163,7 @@ describe('NgHttpLoaderComponent', () => {
     }));
 
     it('should not show the spinner if the request is filtered by HTTP header', fakeAsync(() => {
-        component.filteredHeaders.push('header-to-filter');
+        component.filteredHeaders = ['header-to-filter'];
         fixture.detectChanges();
 
         http.get('/fake', {
@@ -178,7 +178,7 @@ describe('NgHttpLoaderComponent', () => {
     }));
 
     it('should take care of query strings in filteredUrlPatterns', fakeAsync(() => {
-        component.filteredUrlPatterns.push('bar');
+        component.filteredUrlPatterns = ['bar'];
         component.ngOnInit();
 
         http.get(
@@ -195,7 +195,7 @@ describe('NgHttpLoaderComponent', () => {
     }));
 
     it('should correctly filter by URL with several requests and one pattern', fakeAsync(() => {
-        component.filteredUrlPatterns.push('\\d');
+        component.filteredUrlPatterns = ['\\d'];
         component.ngOnInit();
 
         http.get('/12345').subscribe();
@@ -213,7 +213,7 @@ describe('NgHttpLoaderComponent', () => {
     }));
 
     it('should correctly filter by HTTP method with several requests', fakeAsync(() => {
-        component.filteredMethods.push('pOsT');
+        component.filteredMethods = ['pOsT'];
         fixture.detectChanges();
 
         http.post('/12345', null).subscribe();
@@ -231,7 +231,7 @@ describe('NgHttpLoaderComponent', () => {
     }));
 
     it('should correctly filter by HTTP header with several requests', fakeAsync(() => {
-        component.filteredHeaders.push('My-HeAdER');
+        component.filteredHeaders = ['My-HeAdER'];
         fixture.detectChanges();
 
         http.get('/12345', {
