@@ -7,8 +7,8 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { HttpClient } from '@angular/common/http';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { forkJoin, Observable, of, Subscription } from 'rxjs';
@@ -29,8 +29,7 @@ describe('NgHttpLoaderComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [NgHttpLoaderComponent, ...SPINKIT_COMPONENTS],
-            imports: [HttpClientTestingModule],
-            providers: [PendingRequestsInterceptorProvider]
+            providers: [PendingRequestsInterceptorProvider, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
         })
             .compileComponents();
     });
