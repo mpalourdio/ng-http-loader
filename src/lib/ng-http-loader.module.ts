@@ -13,13 +13,14 @@ import { NgHttpLoaderComponent } from './components/ng-http-loader.component';
 import { PendingRequestsInterceptorProvider } from './services/pending-requests-interceptor.service';
 import { SPINKIT_COMPONENTS } from './spinkits';
 
+/**
+ * @deprecated Will be removed in the next release, standalone component will become the default.
+ */
 @NgModule({
-    declarations: [
-        NgHttpLoaderComponent,
-        ...SPINKIT_COMPONENTS,
-    ],
     imports: [
         CommonModule,
+        NgHttpLoaderComponent,
+        ...SPINKIT_COMPONENTS,
     ],
     exports: [
         NgHttpLoaderComponent,
@@ -27,6 +28,9 @@ import { SPINKIT_COMPONENTS } from './spinkits';
     ]
 })
 export class NgHttpLoaderModule {
+    /**
+     * @deprecated Will be removed in the next release, standalone component will become the default.
+     */
     static forRoot(): ModuleWithProviders<NgHttpLoaderModule> {
         return {
             ngModule: NgHttpLoaderModule,

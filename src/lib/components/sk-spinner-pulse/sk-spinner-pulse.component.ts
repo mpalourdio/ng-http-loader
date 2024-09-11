@@ -12,6 +12,7 @@ import { AbstractLoaderDirective } from '../abstract.loader.directive';
 
 @Component({
     selector: 'sk-spinner-pulse',
+    standalone: true,
     templateUrl: './sk-spinner-pulse.component.html',
     styleUrls: ['./sk-spinner-pulse.component.scss']
 })

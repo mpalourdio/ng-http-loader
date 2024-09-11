@@ -17,7 +17,7 @@ describe('SkThreeBounceComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [SkThreeBounceComponent]
+            imports: [SkThreeBounceComponent]
         })
             .compileComponents();
     });

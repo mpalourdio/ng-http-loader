@@ -15,7 +15,7 @@ import { forkJoin, Observable, of, Subscription } from 'rxjs';
 import { NgHttpLoaderComponent } from '../../lib/components/ng-http-loader.component';
 import { PendingRequestsInterceptorProvider } from '../../lib/services/pending-requests-interceptor.service';
 import { SpinnerVisibilityService } from '../../lib/services/spinner-visibility.service';
-import { Spinkit, SPINKIT_COMPONENTS } from '../../lib/spinkits';
+import { Spinkit } from '../../lib/spinkits';
 
 describe('NgHttpLoaderComponent', () => {
     let component: NgHttpLoaderComponent;
@@ -28,7 +28,7 @@ describe('NgHttpLoaderComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [NgHttpLoaderComponent, ...SPINKIT_COMPONENTS],
+            imports: [NgHttpLoaderComponent],
             providers: [PendingRequestsInterceptorProvider, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
         })
             .compileComponents();

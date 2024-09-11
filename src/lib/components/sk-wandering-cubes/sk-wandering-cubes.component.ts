@@ -12,6 +12,7 @@ import { AbstractLoaderDirective } from '../abstract.loader.directive';
 
 @Component({
     selector: 'sk-wandering-cubes',
+    standalone: true,
     templateUrl: './sk-wandering-cubes.component.html',
     styleUrls: ['./sk-wandering-cubes.component.scss']
 })

@@ -12,12 +12,15 @@ import { merge, Observable, partition, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
 import { PendingRequestsInterceptor } from '../services/pending-requests-interceptor.service';
 import { SpinnerVisibilityService } from '../services/spinner-visibility.service';
-import { Spinkit } from '../spinkits';
+import { Spinkit, SPINKIT_COMPONENTS } from '../spinkits';
+import { AsyncPipe, NgComponentOutlet, NgIf, NgStyle } from "@angular/common";
 
 @Component({
     selector: 'ng-http-loader',
+    standalone: true,
     templateUrl: './ng-http-loader.component.html',
-    styleUrls: ['./ng-http-loader.component.scss']
+    styleUrls: ['./ng-http-loader.component.scss'],
+    imports: [SPINKIT_COMPONENTS, NgStyle, NgComponentOutlet, NgIf, AsyncPipe]
 })
 export class NgHttpLoaderComponent implements OnInit {
 

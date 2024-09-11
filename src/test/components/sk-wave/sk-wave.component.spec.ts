@@ -17,7 +17,7 @@ describe('SkWaveComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [SkWaveComponent]
+            imports: [SkWaveComponent]
         })
             .compileComponents();
     });

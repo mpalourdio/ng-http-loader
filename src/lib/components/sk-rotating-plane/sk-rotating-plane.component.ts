@@ -12,6 +12,7 @@ import { AbstractLoaderDirective } from '../abstract.loader.directive';
 
 @Component({
     selector: 'sk-rotating-plane',
+    standalone: true,
     templateUrl: './sk-rotating-plane.component.html',
     styleUrls: ['./sk-rotating-plane.component.scss']
 })

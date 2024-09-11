@@ -12,6 +12,7 @@ import { AbstractLoaderDirective } from '../abstract.loader.directive';
 
 @Component({
     selector: 'sk-double-bounce',
+    standalone: true,
     templateUrl: './sk-double-bounce.component.html',
     styleUrls: ['./sk-double-bounce.component.scss']
 })

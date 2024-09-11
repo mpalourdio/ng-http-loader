@@ -12,6 +12,7 @@ import { AbstractLoaderDirective } from '../abstract.loader.directive';
 
 @Component({
     selector: 'sk-chasing-dots',
+    standalone: true,
     templateUrl: './sk-chasing-dots.component.html',
     styleUrls: ['./sk-chasing-dots.component.scss']
 })
