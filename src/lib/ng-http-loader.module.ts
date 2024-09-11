@@ -10,8 +10,9 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { NgHttpLoaderComponent } from './components/ng-http-loader.component';
-import { PendingRequestsInterceptorProvider } from './services/pending-requests-interceptor.service';
 import { SPINKIT_COMPONENTS } from './spinkits';
+import { pendingRequestsInterceptor$ } from "./services/pending-requests-interceptor";
+import { provideHttpClient, withInterceptors } from "@angular/common/http";
 
 /**
  * @deprecated Will be removed in the next release, standalone component will become the default.
@@ -35,7 +36,7 @@ export class NgHttpLoaderModule {
         return {
             ngModule: NgHttpLoaderModule,
             providers: [
-                PendingRequestsInterceptorProvider,
+                provideHttpClient(withInterceptors([pendingRequestsInterceptor$])),
             ]
         };
     }

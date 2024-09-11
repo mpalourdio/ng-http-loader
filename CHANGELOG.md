@@ -1,5 +1,13 @@
 # Changelog
 
+## v16.1.0
+- Add full standalone components support.
+- Deprecate `NgHttpLoaderModule` and `forRoot`.
+- `PendingRequestsInterceptor` has been refactored from `class` to `function`.
+- Needed`getters` and `setters` have been extracted in a new `PendingRequestsInterceptorConfigurer`. If you had injected `PendingRequestsInterceptor` somewhere, you must switch to `PendingRequestsInterceptorConfigurer`. This is a needed BC break.  
+- Note that `^16.0.0` is the last release supporting `NgModule`.
+- This is not semver compliant, I agree. But the direct usage of `PendingRequestsInterceptor` must be **very** low.
+
 ## v16.0.0
 - Added angular 18 support.
  

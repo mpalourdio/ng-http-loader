@@ -7,15 +7,14 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { ExistingProvider, Injectable } from '@angular/core';
+import { HttpRequest } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
-import { finalize } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
-export class PendingRequestsInterceptor implements HttpInterceptor {
+export class PendingRequestsInterceptorConfigurer {
 
     private _pendingRequests = 0;
     private _pendingRequestsStatus$ = new ReplaySubject<boolean>(1);
@@ -28,8 +27,16 @@ export class PendingRequestsInterceptor implements HttpInterceptor {
         return this._pendingRequestsStatus$.asObservable();
     }
 
+    get pendingRequestsStatusSubject$(): ReplaySubject<boolean> {
+        return this._pendingRequestsStatus$;
+    }
+
     get pendingRequests(): number {
         return this._pendingRequests;
+    }
+
+    set pendingRequests(pendingRequests: number) {
+        this._pendingRequests = pendingRequests;
     }
 
     get filteredUrlPatterns(): RegExp[] {
@@ -48,58 +55,28 @@ export class PendingRequestsInterceptor implements HttpInterceptor {
         this._forceByPass = value;
     }
 
-    private shouldBypassUrl(url: string): boolean {
+    shouldBypassUrl(url: string): boolean {
         return this._filteredUrlPatterns.some(e => {
             return e.test(url);
         });
     }
 
-    private shouldBypassMethod(req: HttpRequest<unknown>): boolean {
+    shouldBypassMethod(req: HttpRequest<unknown>): boolean {
         return this._filteredMethods.some(e => {
             return e.toUpperCase() === req.method.toUpperCase();
         });
     }
 
-    private shouldBypassHeader(req: HttpRequest<unknown>): boolean {
+    shouldBypassHeader(req: HttpRequest<unknown>): boolean {
         return this._filteredHeaders.some(e => {
             return req.headers.has(e);
         });
     }
 
-    private shouldBypass(req: HttpRequest<unknown>): boolean {
+    shouldBypass(req: HttpRequest<unknown>): boolean {
         return this._forceByPass
             || this.shouldBypassUrl(req.urlWithParams)
             || this.shouldBypassMethod(req)
             || this.shouldBypassHeader(req);
     }
-
-    intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-        const shouldBypass = this.shouldBypass(req);
-
-        if (!shouldBypass) {
-            this._pendingRequests++;
-
-            if (1 === this._pendingRequests) {
-                this._pendingRequestsStatus$.next(true);
-            }
-        }
-
-        return next.handle(req).pipe(
-            finalize(() => {
-                if (!shouldBypass) {
-                    this._pendingRequests--;
-
-                    if (0 === this._pendingRequests) {
-                        this._pendingRequestsStatus$.next(false);
-                    }
-                }
-            })
-        );
-    }
 }
-
-export const PendingRequestsInterceptorProvider: ExistingProvider[] = [{
-    provide: HTTP_INTERCEPTORS,
-    useExisting: PendingRequestsInterceptor,
-    multi: true
-}];
