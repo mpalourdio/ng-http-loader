@@ -17,7 +17,7 @@ describe('SkChasingDotsComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [SkChasingDotsComponent]
+            imports: [SkChasingDotsComponent]
         })
             .compileComponents();
     });

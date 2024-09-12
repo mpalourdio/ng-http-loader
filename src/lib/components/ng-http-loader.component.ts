@@ -10,14 +10,17 @@
 import { Component, Input, OnInit, Type } from '@angular/core';
 import { merge, Observable, partition, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
-import { PendingRequestsInterceptor } from '../services/pending-requests-interceptor.service';
 import { SpinnerVisibilityService } from '../services/spinner-visibility.service';
-import { Spinkit } from '../spinkits';
+import { Spinkit, SPINKIT_COMPONENTS } from '../spinkits';
+import { AsyncPipe, NgComponentOutlet, NgIf, NgStyle } from "@angular/common";
+import { PendingRequestsInterceptorConfigurer } from "../services/pending-requests-interceptor-configurer.service";
 
 @Component({
     selector: 'ng-http-loader',
+    standalone: true,
     templateUrl: './ng-http-loader.component.html',
-    styleUrls: ['./ng-http-loader.component.scss']
+    styleUrls: ['./ng-http-loader.component.scss'],
+    imports: [SPINKIT_COMPONENTS, NgStyle, NgComponentOutlet, NgIf, AsyncPipe]
 })
 export class NgHttpLoaderComponent implements OnInit {
 
@@ -38,7 +41,7 @@ export class NgHttpLoaderComponent implements OnInit {
     @Input() backdropBackgroundColor = '#f1f1f1';
     @Input() spinner: string | null = Spinkit.skWave;
 
-    constructor(private pendingRequestsInterceptor: PendingRequestsInterceptor, private spinnerVisibility: SpinnerVisibilityService) {
+    constructor(private pendingRequestsInterceptorConfigurer: PendingRequestsInterceptorConfigurer, private spinnerVisibility: SpinnerVisibilityService) {
     }
 
     ngOnInit(): void {
@@ -48,10 +51,10 @@ export class NgHttpLoaderComponent implements OnInit {
     }
 
     private initIsvisibleObservable(): void {
-        const [showSpinner$, hideSpinner$] = partition(this.pendingRequestsInterceptor.pendingRequestsStatus$, h => h);
+        const [showSpinner$, hideSpinner$] = partition(this.pendingRequestsInterceptorConfigurer.pendingRequestsStatus$, h => h);
 
         this.isVisible$ = merge(
-            this.pendingRequestsInterceptor.pendingRequestsStatus$
+            this.pendingRequestsInterceptorConfigurer.pendingRequestsStatus$
                 .pipe(switchMap(() => showSpinner$.pipe(debounce(() => timer(this.debounceDelay))))),
             showSpinner$
                 .pipe(switchMap(() => hideSpinner$.pipe(debounce(() => this.getVisibilityTimer$())))),
@@ -77,17 +80,17 @@ export class NgHttpLoaderComponent implements OnInit {
     private initFilteredUrlPatterns(): void {
         if (!!this.filteredUrlPatterns.length) {
             this.filteredUrlPatterns.forEach(e =>
-                this.pendingRequestsInterceptor.filteredUrlPatterns.push(new RegExp(e))
+                this.pendingRequestsInterceptorConfigurer.filteredUrlPatterns.push(new RegExp(e))
             );
         }
     }
 
     private initFilteredMethods(): void {
-        this.pendingRequestsInterceptor.filteredMethods = this.filteredMethods;
+        this.pendingRequestsInterceptorConfigurer.filteredMethods = this.filteredMethods;
     }
 
     private initFilteredHeaders(): void {
-        this.pendingRequestsInterceptor.filteredHeaders = this.filteredHeaders;
+        this.pendingRequestsInterceptorConfigurer.filteredHeaders = this.filteredHeaders;
     }
 
     private updateExpirationDelay(showSpinner: boolean): void {

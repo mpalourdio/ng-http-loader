@@ -9,7 +9,7 @@
 
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
-import { PendingRequestsInterceptor } from './pending-requests-interceptor.service';
+import { PendingRequestsInterceptorConfigurer } from "./pending-requests-interceptor-configurer.service";
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +18,7 @@ export class SpinnerVisibilityService {
 
     private _visibility$ = new ReplaySubject<boolean>(1);
 
-    constructor(private pendingRequestsInterceptor: PendingRequestsInterceptor) {
+    constructor(private pendingRequestsInterceptorConfigurer: PendingRequestsInterceptorConfigurer) {
     }
 
     get visibility$(): Observable<boolean> {
@@ -26,12 +26,12 @@ export class SpinnerVisibilityService {
     }
 
     show(): void {
-        this.pendingRequestsInterceptor.forceByPass = true;
+        this.pendingRequestsInterceptorConfigurer.forceByPass = true;
         this._visibility$.next(true);
     }
 
     hide(): void {
         this._visibility$.next(false);
-        this.pendingRequestsInterceptor.forceByPass = false;
+        this.pendingRequestsInterceptorConfigurer.forceByPass = false;
     }
 }

@@ -17,7 +17,7 @@ describe('SkSpinnerPulseComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [SkSpinnerPulseComponent]
+            imports: [SkSpinnerPulseComponent]
         })
             .compileComponents();
     });

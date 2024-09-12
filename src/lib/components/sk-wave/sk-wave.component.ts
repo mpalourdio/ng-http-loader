@@ -12,6 +12,7 @@ import { AbstractLoaderDirective } from '../abstract.loader.directive';
 
 @Component({
     selector: 'sk-wave',
+    standalone: true,
     templateUrl: './sk-wave.component.html',
     styleUrls: ['./sk-wave.component.scss']
 })

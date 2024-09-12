@@ -17,7 +17,7 @@ describe('SkRotatingPlaneComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [SkRotatingPlaneComponent]
+            imports: [SkRotatingPlaneComponent]
         })
             .compileComponents();
     });

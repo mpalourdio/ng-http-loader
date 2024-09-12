@@ -7,14 +7,17 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NgHttpLoaderModule } from '../../lib/ng-http-loader.module';
+import { NgHttpLoaderComponent } from "../../lib/components/ng-http-loader.component";
+import { pendingRequestsInterceptor$ } from "../../lib/services/pending-requests-interceptor";
 
 @Component({
+    standalone: true,
+    imports: [NgHttpLoaderComponent],
     template: '<ng-http-loader></ng-http-loader>',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -28,9 +31,8 @@ describe('NgHttpLoaderComponent OnPush', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [HostComponent],
-            imports: [NgHttpLoaderModule.forRoot()],
-            providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+            imports: [HostComponent],
+            providers: [provideHttpClient(withInterceptors([pendingRequestsInterceptor$])), provideHttpClientTesting()]
         })
             .compileComponents();
     });

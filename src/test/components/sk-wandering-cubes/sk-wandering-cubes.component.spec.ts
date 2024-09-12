@@ -17,7 +17,7 @@ describe('SkWanderingCubesComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [SkWanderingCubesComponent]
+            imports: [SkWanderingCubesComponent]
         })
             .compileComponents();
     });

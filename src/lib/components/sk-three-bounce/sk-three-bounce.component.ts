@@ -12,6 +12,7 @@ import { AbstractLoaderDirective } from '../abstract.loader.directive';
 
 @Component({
     selector: 'sk-three-bounce',
+    standalone: true,
     templateUrl: './sk-three-bounce.component.html',
     styleUrls: ['./sk-three-bounce.component.scss']
 })

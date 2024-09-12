@@ -7,32 +7,28 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { HttpClient, HttpResponse, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HttpClient, HttpResponse, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { forkJoin, Observable } from 'rxjs';
+import { pendingRequestsInterceptor$ } from "../../lib/services/pending-requests-interceptor";
 import {
-    PendingRequestsInterceptor,
-    PendingRequestsInterceptorProvider
-} from '../../lib/services/pending-requests-interceptor.service';
+    PendingRequestsInterceptorConfigurer
+} from "../../lib/services/pending-requests-interceptor-configurer.service";
 
 describe('PendingRequestsInterceptor', () => {
     let http: HttpClient;
     let httpMock: HttpTestingController;
-    let pendingRequestsInterceptor: PendingRequestsInterceptor;
+    let pendingRequestsInterceptorConfigurer: PendingRequestsInterceptorConfigurer;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [PendingRequestsInterceptorProvider, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+            providers: [provideHttpClient(withInterceptors([pendingRequestsInterceptor$])), provideHttpClientTesting()]
         });
 
-        pendingRequestsInterceptor = TestBed.inject(PendingRequestsInterceptor);
+        pendingRequestsInterceptorConfigurer = TestBed.inject(PendingRequestsInterceptorConfigurer);
         http = TestBed.inject(HttpClient);
         httpMock = TestBed.inject(HttpTestingController);
-    });
-
-    it('should be created', () => {
-        expect(pendingRequestsInterceptor).toBeTruthy();
     });
 
     it('should be aware of the pending HTTP requests', () => {
@@ -43,19 +39,19 @@ describe('PendingRequestsInterceptor', () => {
         const firstRequest = httpMock.expectOne('/fake');
         const secondRequest = httpMock.expectOne('/fake2');
 
-        expect(pendingRequestsInterceptor.pendingRequests).toBe(2);
+        expect(pendingRequestsInterceptorConfigurer.pendingRequests).toBe(2);
         firstRequest.flush({});
 
-        expect(pendingRequestsInterceptor.pendingRequests).toBe(1);
+        expect(pendingRequestsInterceptorConfigurer.pendingRequests).toBe(1);
         secondRequest.flush({});
 
-        expect(pendingRequestsInterceptor.pendingRequests).toBe(0);
+        expect(pendingRequestsInterceptorConfigurer.pendingRequests).toBe(0);
 
         httpMock.verify();
     });
 
     it('should correctly notify the pendingRequestsStatus observable', waitForAsync(() => {
-        pendingRequestsInterceptor
+        pendingRequestsInterceptorConfigurer
             .pendingRequestsStatus$
             .subscribe({
                 next: (next: boolean) => expect(next).toBeTruthy(),
@@ -70,7 +66,7 @@ describe('PendingRequestsInterceptor', () => {
         http.get('/fake').subscribe();
         httpMock.expectOne('/fake');
 
-        pendingRequestsInterceptor
+        pendingRequestsInterceptorConfigurer
             .pendingRequestsStatus$
             .subscribe({
                 next: (next: boolean) => expect(next).toBeTruthy(),

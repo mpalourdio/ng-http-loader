@@ -12,7 +12,6 @@ import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 import { NgHttpLoaderComponent } from '../../lib/components/ng-http-loader.component';
 import { SkThreeBounceComponent } from '../../lib/components/sk-three-bounce/sk-three-bounce.component';
-import { SPINKIT_COMPONENTS } from '../../lib/spinkits';
 
 describe('NgHttpLoaderComponentOutlet', () => {
     let component: NgHttpLoaderComponent;
@@ -20,7 +19,7 @@ describe('NgHttpLoaderComponentOutlet', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [NgHttpLoaderComponent, ...SPINKIT_COMPONENTS]
+            imports: [NgHttpLoaderComponent]
         })
             .compileComponents();
     });

@@ -7,15 +7,15 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { forkJoin, Observable, of, Subscription } from 'rxjs';
 import { NgHttpLoaderComponent } from '../../lib/components/ng-http-loader.component';
-import { PendingRequestsInterceptorProvider } from '../../lib/services/pending-requests-interceptor.service';
 import { SpinnerVisibilityService } from '../../lib/services/spinner-visibility.service';
-import { Spinkit, SPINKIT_COMPONENTS } from '../../lib/spinkits';
+import { Spinkit } from '../../lib/spinkits';
+import { pendingRequestsInterceptor$ } from "../../lib/services/pending-requests-interceptor";
 
 describe('NgHttpLoaderComponent', () => {
     let component: NgHttpLoaderComponent;
@@ -28,8 +28,8 @@ describe('NgHttpLoaderComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [NgHttpLoaderComponent, ...SPINKIT_COMPONENTS],
-            providers: [PendingRequestsInterceptorProvider, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+            imports: [NgHttpLoaderComponent],
+            providers: [provideHttpClient(withInterceptors([pendingRequestsInterceptor$])), provideHttpClientTesting()]
         })
             .compileComponents();
     });

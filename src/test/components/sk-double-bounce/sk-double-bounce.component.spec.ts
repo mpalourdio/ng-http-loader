@@ -17,7 +17,7 @@ describe('SkDoubleBounceComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [SkDoubleBounceComponent]
+            imports: [SkDoubleBounceComponent]
         })
             .compileComponents();
     });

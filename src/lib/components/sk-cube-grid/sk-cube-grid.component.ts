@@ -12,6 +12,7 @@ import { AbstractLoaderDirective } from '../abstract.loader.directive';
 
 @Component({
     selector: 'sk-cube-grid',
+    standalone: true,
     templateUrl: './sk-cube-grid.component.html',
     styleUrls: ['./sk-cube-grid.component.scss']
 })

@@ -8,7 +8,6 @@
  */
 
 import { NgHttpLoaderModule } from '../lib/ng-http-loader.module';
-import { PendingRequestsInterceptor } from '../lib/services/pending-requests-interceptor.service';
 
 describe('NgHttpLoaderModule', () => {
     let ngHttpLoaderModule: NgHttpLoaderModule;
@@ -23,7 +22,6 @@ describe('NgHttpLoaderModule', () => {
 
     it('should create an instance with providers via forRoot()', () => {
         const ngHttpLoaderModuleWithProviders = NgHttpLoaderModule.forRoot();
-        // @ts-expect-error This is error free
-        expect(ngHttpLoaderModuleWithProviders.providers[0][0].useExisting.name).toEqual(PendingRequestsInterceptor.name);
+        expect(ngHttpLoaderModuleWithProviders.providers?.length).toBeGreaterThan(0);
     });
 });

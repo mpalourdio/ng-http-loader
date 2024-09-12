@@ -17,7 +17,7 @@ describe('SkCubeGridComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [SkCubeGridComponent]
+            imports: [SkCubeGridComponent]
         })
             .compileComponents();
     });

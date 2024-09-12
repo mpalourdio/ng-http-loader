@@ -51,46 +51,29 @@ If you experience errors like below, **please double-check the version you use.*
 
 `ERROR in Error: Metadata version mismatch for module [...]/angular/node_modules/ng-http-loader/ng-http-loader.module.d.ts, found version x, expected y [...]`
 
-## Requirements - HttpClientModule
+## Requirements - HttpClient
 
-Performing HTTP requests with the `HttpClientModule` API is **mandatory**. Otherwise, the spinner will not be fired **at all**.
-
-See this [blog post](http://blog.ninja-squad.com/2017/07/17/http-client-module/) for an `HttpClientModule` introduction.
+Performing HTTP requests with the `HttpClient` API is **mandatory**. Otherwise, the spinner will not be fired **at all**.
 
 ## Usage
 
-From your Angular `AppModule`:
+From your Angular root component (`app.component.ts` for example):
 
 ```typescript
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-// [...]
-import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http'; // <============
-import { NgHttpLoaderModule } from 'ng-http-loader'; // <============
-
-@NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule, // <============ (Perform HTTP requests with this module)
-    NgHttpLoaderModule.forRoot(), // <============ Don't forget to call 'forRoot()'!
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+@Component({
+    selector: 'app-root',
+    standalone: true,
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    imports: [NgHttpLoaderComponent] <====== import the component
 })
-export class AppModule { }
 ```
 
-In your app.component.html, simply add:
+In your `app.component.html`, simply add:
 ```xml
 <ng-http-loader></ng-http-loader>
 ```
-## Standalone components
-
-If you prefer using standalone components, you should configure your `ApplicationConfig` like following:
+At last, configure your `ApplicationConfig` like following:
 
 ```typescript
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
@@ -102,30 +85,11 @@ import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 export const appConfig: ApplicationConfig = {
     providers: [
         provideRouter(routes),
-        provideHttpClient(
-            withInterceptorsFromDi() // <== Don't forget to import the interceptors
-        ),
-        importProvidersFrom(NgHttpLoaderModule.forRoot()) //<== Always call `forRoot`
+        withInterceptors([pendingRequestsInterceptor$])
     ],
 };
 ```
-Then you can use `ng-http-loader` like this:
-```typescript
-import { Component } from '@angular/core';
-import {NgHttpLoaderModule} from "ng-http-loader";
 
-@Component({
-  selector: 'my-selector',
-  standalone: true,
-  imports: [
-    NgHttpLoaderModule
-  ],
-  template: `
-    <ng-http-loader />`,
-})
-export class InlineComponent {
-}
-```
 ## Customizing the spinner
 
 You can customize the following parameters:
@@ -159,8 +123,10 @@ import { Spinkit } from 'ng-http-loader'; // <============
 
 @Component({
     selector: 'app-root',
+    standalone: true,
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
+    imports: [NgHttpLoaderComponent]
 })
 export class AppComponent {
     public spinkit = Spinkit; // <============
@@ -188,8 +154,10 @@ import { AwesomeComponent } from 'my.awesome.component';
 
 @Component({
     selector: 'app-root',
+    standalone: true,
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.css'],
+    imports: [NgHttpLoaderComponent]
 })
 export class AppComponent {
     public awesomeComponent = AwesomeComponent;
