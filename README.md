@@ -80,12 +80,13 @@ import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 import { routes } from './app.routes';
-import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { pendingRequestsInterceptor$ } from 'ng-http-loader';
 
 export const appConfig: ApplicationConfig = {
     providers: [
         provideRouter(routes),
-        withInterceptors([pendingRequestsInterceptor$])
+        provideHttpClient(withInterceptors([pendingRequestsInterceptor$])),
     ],
 };
 ```
