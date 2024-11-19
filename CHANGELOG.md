@@ -1,5 +1,8 @@
 # Changelog
 
+## v17.0.0
+- Added angular 19 support.
+
 ## v16.1.0
 - Add full standalone components support.
 - Deprecate `NgHttpLoaderModule` and `forRoot`.
