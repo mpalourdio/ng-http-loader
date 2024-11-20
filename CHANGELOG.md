@@ -2,6 +2,7 @@
 
 ## v17.0.0
 - Added angular 19 support.
+- Drop `NgModule` module support.
 
 ## v16.1.0
 - Add full standalone components support.
