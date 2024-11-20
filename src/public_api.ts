@@ -18,5 +18,4 @@ export * from './lib/services/pending-requests-interceptor-configurer.service';
 
 export * from './lib/services/spinner-visibility.service';
 
-export * from './lib/ng-http-loader.module';
 export * from './lib/spinkits';
