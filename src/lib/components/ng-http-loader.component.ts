@@ -40,6 +40,7 @@ export class NgHttpLoaderComponent implements OnInit {
     @Input() opacity = '.7';
     @Input() backdropBackgroundColor = '#f1f1f1';
     @Input() spinner: string | null = Spinkit.skWave;
+    @Input() customStyle: { [klass: string]: any; } = {};
 
     constructor(private pendingRequestsInterceptorConfigurer: PendingRequestsInterceptorConfigurer, private spinnerVisibility: SpinnerVisibilityService) {
     }
