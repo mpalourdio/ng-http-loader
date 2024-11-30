@@ -30,6 +30,7 @@ export class NgHttpLoaderComponent implements OnInit {
 
     @Input() backdrop = true;
     @Input() backgroundColor!: string;
+    @Input() zIndex = 9999;
     @Input() debounceDelay = 0;
     @Input() entryComponent!: Type<unknown> | null;
     @Input() extraDuration = 0;
