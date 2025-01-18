@@ -42,12 +42,16 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['ChromiumHeadless', 'FirefoxHeadless'],
+    browsers: ['ChromiumHeadlessNoSandbox', 'FirefoxHeadless'],
     customLaunchers: {
       FirefoxHeadless: {
         base: 'Firefox',
         flags: [ '-headless' ],
       },
+      ChromiumHeadlessNoSandbox: {
+        base: 'ChromiumHeadless',
+        flags: [ '--no-sandbox' ]
+      }
     },
     singleRun: false,
     browserNoActivityTimeout: 100000
