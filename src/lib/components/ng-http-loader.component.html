@@ -1,49 +1,49 @@
 <div id="spinner"
      *ngIf="isVisible$ | async"
-     [class.backdrop]="backdrop"
-     [style.opacity]="opacity"
-     [ngStyle]="{'background-color': backdrop ? backdropBackgroundColor : 'transparent'}">
+     [class.backdrop]="backdrop()"
+     [style.opacity]="opacity()"
+     [ngStyle]="{'background-color': backdrop() ? backdropBackgroundColor() : 'transparent'}">
 
-    <ng-container *ngComponentOutlet="entryComponent"></ng-container>
+    <ng-container *ngComponentOutlet="entryComponent()"></ng-container>
 
     <sk-cube-grid
-        *ngIf="spinner === spinkit.skCubeGrid"
-        [backgroundColor]="backgroundColor">
+        *ngIf="spinner() === spinkit.skCubeGrid"
+        [backgroundColor]="backgroundColor()">
     </sk-cube-grid>
 
     <sk-chasing-dots
-        *ngIf="spinner === spinkit.skChasingDots"
-        [backgroundColor]="backgroundColor">
+        *ngIf="spinner() === spinkit.skChasingDots"
+        [backgroundColor]="backgroundColor()">
     </sk-chasing-dots>
 
     <sk-double-bounce
-        *ngIf="spinner === spinkit.skDoubleBounce"
-        [backgroundColor]="backgroundColor">
+        *ngIf="spinner() === spinkit.skDoubleBounce"
+        [backgroundColor]="backgroundColor()">
     </sk-double-bounce>
 
     <sk-rotating-plane
-        *ngIf="spinner === spinkit.skRotatingPlane"
-        [backgroundColor]="backgroundColor">
+        *ngIf="spinner() === spinkit.skRotatingPlane"
+        [backgroundColor]="backgroundColor()">
     </sk-rotating-plane>
 
     <sk-spinner-pulse
-        *ngIf="spinner === spinkit.skSpinnerPulse"
-        [backgroundColor]="backgroundColor">
+        *ngIf="spinner() === spinkit.skSpinnerPulse"
+        [backgroundColor]="backgroundColor()">
     </sk-spinner-pulse>
 
     <sk-three-bounce
-        *ngIf="spinner === spinkit.skThreeBounce"
-        [backgroundColor]="backgroundColor">
+        *ngIf="spinner() === spinkit.skThreeBounce"
+        [backgroundColor]="backgroundColor()">
     </sk-three-bounce>
 
     <sk-wandering-cubes
-        *ngIf="spinner === spinkit.skWanderingCubes"
-        [backgroundColor]="backgroundColor">
+        *ngIf="spinner() === spinkit.skWanderingCubes"
+        [backgroundColor]="backgroundColor()">
     </sk-wandering-cubes>
 
     <sk-wave
-        *ngIf="spinner === spinkit.skWave"
-        [backgroundColor]="backgroundColor">
+        *ngIf="spinner() === spinkit.skWave"
+        [backgroundColor]="backgroundColor()">
     </sk-wave>
 
 </div>

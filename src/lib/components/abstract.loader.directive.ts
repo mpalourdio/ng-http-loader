@@ -7,10 +7,10 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { Input, Directive } from '@angular/core';
+import { Directive, model } from '@angular/core';
 
 @Directive()
 export abstract class AbstractLoaderDirective {
 
-    @Input() backgroundColor!: string;
+    backgroundColor = model<string>();
 }
