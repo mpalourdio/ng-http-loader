@@ -1,5 +1,8 @@
 # Changelog
 
+## v17.1.0
+- Drop `@Input` in favor of `signals`.
+
 ## v17.0.0
 - Added angular 19 support.
 - Drop `NgModule` module support.

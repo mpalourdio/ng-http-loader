@@ -7,7 +7,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { Component, Input, OnInit, Type } from '@angular/core';
+import { Component, model, OnInit, Type } from '@angular/core';
 import { merge, Observable, partition, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
 import { SpinnerVisibilityService } from '../services/spinner-visibility.service';
@@ -28,18 +28,18 @@ export class NgHttpLoaderComponent implements OnInit {
     isVisible$!: Observable<boolean>;
     visibleUntil = Date.now();
 
-    @Input() backdrop = true;
-    @Input() backgroundColor!: string;
-    @Input() debounceDelay = 0;
-    @Input() entryComponent!: Type<unknown> | null;
-    @Input() extraDuration = 0;
-    @Input() filteredHeaders: string[] = [];
-    @Input() filteredMethods: string[] = [];
-    @Input() filteredUrlPatterns: string[] = [];
-    @Input() minDuration = 0;
-    @Input() opacity = '.7';
-    @Input() backdropBackgroundColor = '#f1f1f1';
-    @Input() spinner: string | null = Spinkit.skWave;
+    backdrop = model<boolean>(true);
+    backgroundColor = model<string>();
+    debounceDelay = model<number>(0);
+    entryComponent = model<Type<unknown> | null>(null);
+    extraDuration = model<number>(0);
+    filteredHeaders = model<string[]>([]);
+    filteredMethods = model<string[]>([]);
+    filteredUrlPatterns = model<string[]>([]);
+    minDuration = model<number>(0);
+    opacity = model<string>('.7');
+    backdropBackgroundColor = model<string>('#f1f1f1');
+    spinner = model<string | null>(Spinkit.skWave);
 
     constructor(private pendingRequestsInterceptorConfigurer: PendingRequestsInterceptorConfigurer, private spinnerVisibility: SpinnerVisibilityService) {
     }
@@ -55,7 +55,7 @@ export class NgHttpLoaderComponent implements OnInit {
 
         this.isVisible$ = merge(
             this.pendingRequestsInterceptorConfigurer.pendingRequestsStatus$
-                .pipe(switchMap(() => showSpinner$.pipe(debounce(() => timer(this.debounceDelay))))),
+                .pipe(switchMap(() => showSpinner$.pipe(debounce(() => timer(this.debounceDelay()))))),
             showSpinner$
                 .pipe(switchMap(() => hideSpinner$.pipe(debounce(() => this.getVisibilityTimer$())))),
             this.spinnerVisibility.visibility$
@@ -66,8 +66,8 @@ export class NgHttpLoaderComponent implements OnInit {
     }
 
     private nullifySpinnerIfEntryComponentIsDefined(): void {
-        if (this.entryComponent) {
-            this.spinner = null;
+        if (this.entryComponent()) {
+            this.spinner.set(null);
         }
     }
 
@@ -78,28 +78,28 @@ export class NgHttpLoaderComponent implements OnInit {
     }
 
     private initFilteredUrlPatterns(): void {
-        if (!!this.filteredUrlPatterns.length) {
-            this.filteredUrlPatterns.forEach(e =>
+        if (!!this.filteredUrlPatterns().length) {
+            this.filteredUrlPatterns().forEach(e =>
                 this.pendingRequestsInterceptorConfigurer.filteredUrlPatterns.push(new RegExp(e))
             );
         }
     }
 
     private initFilteredMethods(): void {
-        this.pendingRequestsInterceptorConfigurer.filteredMethods = this.filteredMethods;
+        this.pendingRequestsInterceptorConfigurer.filteredMethods = this.filteredMethods();
     }
 
     private initFilteredHeaders(): void {
-        this.pendingRequestsInterceptorConfigurer.filteredHeaders = this.filteredHeaders;
+        this.pendingRequestsInterceptorConfigurer.filteredHeaders = this.filteredHeaders();
     }
 
     private updateExpirationDelay(showSpinner: boolean): void {
         if (showSpinner) {
-            this.visibleUntil = Date.now() + this.minDuration;
+            this.visibleUntil = Date.now() + this.minDuration();
         }
     }
 
     private getVisibilityTimer$(): Observable<number> {
-        return timer(Math.max(this.extraDuration, this.visibleUntil - Date.now()));
+        return timer(Math.max(this.extraDuration(), this.visibleUntil - Date.now()));
     }
 }

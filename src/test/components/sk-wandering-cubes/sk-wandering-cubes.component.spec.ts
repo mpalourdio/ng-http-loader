@@ -32,7 +32,7 @@ describe('SkWanderingCubesComponent', () => {
     });
 
     it('should be possible to set background-color', () => {
-        component.backgroundColor = '#ff0000';
+        component.backgroundColor.set('#ff0000');
         fixture.detectChanges();
 
         const element = fixture
