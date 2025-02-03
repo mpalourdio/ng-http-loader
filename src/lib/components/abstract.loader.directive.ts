@@ -12,5 +12,5 @@ import { Directive, model } from '@angular/core';
 @Directive()
 export abstract class AbstractLoaderDirective {
 
-    backgroundColor = model<string>();
+    readonly backgroundColor = model<string>();
 }

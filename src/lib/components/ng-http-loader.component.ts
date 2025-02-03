@@ -28,18 +28,18 @@ export class NgHttpLoaderComponent implements OnInit {
     isVisible$!: Observable<boolean>;
     visibleUntil = Date.now();
 
-    backdrop = model<boolean>(true);
-    backgroundColor = model<string>();
-    debounceDelay = model<number>(0);
-    entryComponent = model<Type<unknown> | null>(null);
-    extraDuration = model<number>(0);
-    filteredHeaders = model<string[]>([]);
-    filteredMethods = model<string[]>([]);
-    filteredUrlPatterns = model<string[]>([]);
-    minDuration = model<number>(0);
-    opacity = model<string>('.7');
-    backdropBackgroundColor = model<string>('#f1f1f1');
-    spinner = model<string | null>(Spinkit.skWave);
+    readonly backdrop = model<boolean>(true);
+    readonly backgroundColor = model<string>();
+    readonly debounceDelay = model<number>(0);
+    readonly entryComponent = model<Type<unknown> | null>(null);
+    readonly extraDuration = model<number>(0);
+    readonly filteredHeaders = model<string[]>([]);
+    readonly filteredMethods = model<string[]>([]);
+    readonly filteredUrlPatterns = model<string[]>([]);
+    readonly minDuration = model<number>(0);
+    readonly opacity = model<string>('.7');
+    readonly backdropBackgroundColor = model<string>('#f1f1f1');
+    readonly spinner = model<string | null>(Spinkit.skWave);
 
     constructor(private pendingRequestsInterceptorConfigurer: PendingRequestsInterceptorConfigurer, private spinnerVisibility: SpinnerVisibilityService) {
     }
