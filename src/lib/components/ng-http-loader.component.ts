@@ -7,13 +7,13 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { Component, model, OnInit, Type } from '@angular/core';
+import { AsyncPipe, NgComponentOutlet, NgIf, NgStyle } from '@angular/common';
+import { Component, input, model, OnInit, Type } from '@angular/core';
 import { merge, Observable, partition, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
+import { PendingRequestsInterceptorConfigurer } from '../services/pending-requests-interceptor-configurer.service';
 import { SpinnerVisibilityService } from '../services/spinner-visibility.service';
 import { Spinkit, SPINKIT_COMPONENTS } from '../spinkits';
-import { AsyncPipe, NgComponentOutlet, NgIf, NgStyle } from "@angular/common";
-import { PendingRequestsInterceptorConfigurer } from "../services/pending-requests-interceptor-configurer.service";
 
 @Component({
     selector: 'ng-http-loader',
@@ -28,17 +28,17 @@ export class NgHttpLoaderComponent implements OnInit {
     isVisible$!: Observable<boolean>;
     visibleUntil = Date.now();
 
-    readonly backdrop = model<boolean>(true);
-    readonly backgroundColor = model<string>();
-    readonly debounceDelay = model<number>(0);
-    readonly entryComponent = model<Type<unknown> | null>(null);
-    readonly extraDuration = model<number>(0);
-    readonly filteredHeaders = model<string[]>([]);
-    readonly filteredMethods = model<string[]>([]);
-    readonly filteredUrlPatterns = model<string[]>([]);
-    readonly minDuration = model<number>(0);
-    readonly opacity = model<string>('.7');
-    readonly backdropBackgroundColor = model<string>('#f1f1f1');
+    readonly backdrop = input<boolean>(true);
+    readonly backgroundColor = input<string>();
+    readonly debounceDelay = input<number>(0);
+    readonly entryComponent = input<Type<unknown> | null>(null);
+    readonly extraDuration = input<number>(0);
+    readonly filteredHeaders = input<string[]>([]);
+    readonly filteredMethods = input<string[]>([]);
+    readonly filteredUrlPatterns = input<string[]>([]);
+    readonly minDuration = input<number>(0);
+    readonly opacity = input<string>('.7');
+    readonly backdropBackgroundColor = input<string>('#f1f1f1');
     readonly spinner = model<string | null>(Spinkit.skWave);
 
     constructor(private pendingRequestsInterceptorConfigurer: PendingRequestsInterceptorConfigurer, private spinnerVisibility: SpinnerVisibilityService) {
@@ -67,7 +67,7 @@ export class NgHttpLoaderComponent implements OnInit {
 
     private nullifySpinnerIfEntryComponentIsDefined(): void {
         if (this.entryComponent()) {
-            this.spinner.set(null);
+            this.spinner.update(() => null);
         }
     }
 

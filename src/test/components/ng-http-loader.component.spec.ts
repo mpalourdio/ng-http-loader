@@ -13,9 +13,9 @@ import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angul
 import { By } from '@angular/platform-browser';
 import { forkJoin, Observable, of, Subscription } from 'rxjs';
 import { NgHttpLoaderComponent } from '../../lib/components/ng-http-loader.component';
+import { pendingRequestsInterceptor$ } from '../../lib/services/pending-requests-interceptor';
 import { SpinnerVisibilityService } from '../../lib/services/spinner-visibility.service';
 import { Spinkit } from '../../lib/spinkits';
-import { pendingRequestsInterceptor$ } from "../../lib/services/pending-requests-interceptor";
 
 describe('NgHttpLoaderComponent', () => {
     let component: NgHttpLoaderComponent;
@@ -67,7 +67,7 @@ describe('NgHttpLoaderComponent', () => {
 
     it('should not set the colored class if background-color is defined', () => {
         component.isVisible$ = of(true);
-        component.backgroundColor.set('#ff0000');
+        fixture.componentRef.setInput('backgroundColor', '#ff0000');
         fixture.detectChanges();
 
         const element = fixture
@@ -101,7 +101,7 @@ describe('NgHttpLoaderComponent', () => {
 
     it('should allow us to specify a custom background-color', () => {
         component.isVisible$ = of(true);
-        component.backgroundColor.set('#ff0000');
+        fixture.componentRef.setInput('backgroundColor', '#ff0000');
         fixture.detectChanges();
 
         const element = fixture
@@ -271,7 +271,7 @@ describe('NgHttpLoaderComponent', () => {
     }));
 
     it('should correctly handle the debounce delay for a single HTTP request', fakeAsync(() => {
-        component.debounceDelay.set(2000);
+        fixture.componentRef.setInput('debounceDelay', 2000);
         http.get('/fake').subscribe();
 
         // the HTTP request is pending for 1 second now
@@ -297,7 +297,7 @@ describe('NgHttpLoaderComponent', () => {
     }));
 
     it('should correctly handle the debounce delay for HTTP request finished before spinner should be shown', fakeAsync(() => {
-        component.debounceDelay.set(2000);
+        fixture.componentRef.setInput('debounceDelay', 2000);
         http.get('/fake').subscribe();
 
         // the HTTP request is pending for 1 second now
@@ -311,7 +311,7 @@ describe('NgHttpLoaderComponent', () => {
     }));
 
     it('should correctly handle the debounce delay for HTTP sequential requests finished before spinner should be shown', fakeAsync(() => {
-        component.debounceDelay.set(5000);
+        fixture.componentRef.setInput('debounceDelay', 5000);
         http.get('/fake').subscribe();
 
         // the first HTTP request is pending for 1 second now
@@ -339,7 +339,7 @@ describe('NgHttpLoaderComponent', () => {
     }));
 
     it('should correctly handle the debounce delay for HTTP parallel requests finished before spinner should be shown', fakeAsync(() => {
-        component.debounceDelay.set(5000);
+        fixture.componentRef.setInput('debounceDelay', 5000);
         http.get('/fake').subscribe();
         http.get('/fake2').subscribe();
 
@@ -365,7 +365,7 @@ describe('NgHttpLoaderComponent', () => {
     }));
 
     it('should correctly handle the debounce delay for multiple HTTP requests', fakeAsync(() => {
-        component.debounceDelay.set(2000);
+        fixture.componentRef.setInput('debounceDelay', 2000);
         const runQuery$ = (url: string): Observable<unknown> => http.get(url);
         forkJoin([runQuery$('/fake'), runQuery$('/fake2')]).subscribe();
         const firstRequest = httpMock.expectOne('/fake');
@@ -448,7 +448,7 @@ describe('NgHttpLoaderComponent', () => {
     }));
 
     it('should correctly handle the minimum spinner duration for a single HTTP request', fakeAsync(() => {
-        component.minDuration.set(5000);
+        fixture.componentRef.setInput('minDuration', 5000);
         http.get('/fake').subscribe();
 
         // the HTTP request is pending for 1 second now
@@ -482,7 +482,7 @@ describe('NgHttpLoaderComponent', () => {
     }));
 
     it('should correctly handle the extra spinner duration for a single HTTP request', fakeAsync(() => {
-        component.extraDuration.set(5000);
+        fixture.componentRef.setInput('extraDuration', 5000);
         http.get('/fake').subscribe();
 
         // the HTTP request is pending for 1 second now
@@ -508,7 +508,7 @@ describe('NgHttpLoaderComponent', () => {
     }));
 
     it('should correctly handle the minimum spinner duration for multiple HTTP requests', fakeAsync(() => {
-        component.minDuration.set(5000);
+        fixture.componentRef.setInput('minDuration', 5000);
         const runQuery$ = (url: string): Observable<unknown> => http.get(url);
         forkJoin([runQuery$('/fake'), runQuery$('/fake2')]).subscribe();
         const firstRequest = httpMock.expectOne('/fake');
@@ -546,7 +546,7 @@ describe('NgHttpLoaderComponent', () => {
     }));
 
     it('should correctly handle the extra spinner duration for multiple HTTP requests', fakeAsync(() => {
-        component.extraDuration.set(5000);
+        fixture.componentRef.setInput('extraDuration', 5000);
         const runQuery$ = (url: string): Observable<unknown> => http.get(url);
         forkJoin([runQuery$('/fake'), runQuery$('/fake2')]).subscribe();
         const firstRequest = httpMock.expectOne('/fake');
@@ -588,7 +588,7 @@ describe('NgHttpLoaderComponent', () => {
     }));
 
     it('should correctly handle the minimum spinner duration for multiple HTTP requests ran one after the others', fakeAsync(() => {
-        component.minDuration.set(2000);
+        fixture.componentRef.setInput('minDuration', 2000);
         http.get('/fake').subscribe();
         const firstRequest = httpMock.expectOne('/fake');
 
@@ -620,7 +620,7 @@ describe('NgHttpLoaderComponent', () => {
     }));
 
     it('should handle the extra spinner duration for multiple HTTP requests ran one after the others', fakeAsync(() => {
-        component.extraDuration.set(10);
+        fixture.componentRef.setInput('extraDuration', 10);
         const runQuery$ = (url: string): Observable<unknown> => http.get(url);
         runQuery$('/fake').subscribe();
         const firstRequest = httpMock.expectOne('/fake');
@@ -648,7 +648,7 @@ describe('NgHttpLoaderComponent', () => {
     }));
 
     it('should still display the spinner when the minimum duration is inferior to the HTTP request duration', fakeAsync(() => {
-        component.minDuration.set(1000);
+        fixture.componentRef.setInput('minDuration', 1000);
         http.get('/fake').subscribe();
 
         // the HTTP request is pending for 1 second now
@@ -666,7 +666,7 @@ describe('NgHttpLoaderComponent', () => {
     }));
 
     it('should be possible to set the minimum duration without side effect on manual show/hide', () => {
-        component.minDuration.set(10000);
+        fixture.componentRef.setInput('minDuration', 10000);
         spinner.show();
         expect(isVisible).toBeTruthy();
 
@@ -675,7 +675,7 @@ describe('NgHttpLoaderComponent', () => {
     });
 
     it('should be possible to set the extra duration without side effect on manual show/hide', () => {
-        component.extraDuration.set(10000);
+        fixture.componentRef.setInput('extraDuration', 10000);
         spinner.show();
         expect(isVisible).toBeTruthy();
 
@@ -685,8 +685,8 @@ describe('NgHttpLoaderComponent', () => {
 
     it('should be possible to mix debounce delay and minimum duration', fakeAsync(() => {
         // the spinner should not be visible the first second, then visible for 5 seconds
-        component.minDuration.set(5000);
-        component.debounceDelay.set(1000);
+        fixture.componentRef.setInput('minDuration', 5000);
+        fixture.componentRef.setInput('debounceDelay', 1000);
 
         http.get('/fake').subscribe();
 
@@ -718,8 +718,8 @@ describe('NgHttpLoaderComponent', () => {
 
     it('should be possible to mix debounce delay and extra duration', fakeAsync(() => {
         // the spinner should not be visible the first second, then visible for 5 seconds
-        component.extraDuration.set(5000);
-        component.debounceDelay.set(1000);
+        fixture.componentRef.setInput('extraDuration', 5000);
+        fixture.componentRef.setInput('debounceDelay', 1000);
 
         http.get('/fake').subscribe();
 
@@ -763,7 +763,7 @@ describe('NgHttpLoaderComponent', () => {
 
     it('should be possible to remove the backdrop CSS class', () => {
         component.isVisible$ = of(true);
-        component.backdrop.set(false);
+        fixture.componentRef.setInput('backdrop', false);
         fixture.detectChanges();
 
         const element = fixture
@@ -787,7 +787,7 @@ describe('NgHttpLoaderComponent', () => {
 
     it('should be possible to override opacity', () => {
         component.isVisible$ = of(true);
-        component.opacity.set('.3');
+        fixture.componentRef.setInput('opacity', '.3');
         fixture.detectChanges();
 
         const element: HTMLElement = fixture
@@ -812,7 +812,7 @@ describe('NgHttpLoaderComponent', () => {
 
     it('should be possible to override backdrop background color when backdrop is true', () => {
         component.isVisible$ = of(true);
-        component.backdropBackgroundColor.set('#777777');
+        fixture.componentRef.setInput('backdropBackgroundColor', '#777777');
         fixture.detectChanges();
 
         const element: HTMLElement = fixture
@@ -825,7 +825,7 @@ describe('NgHttpLoaderComponent', () => {
 
     it('should not have a transparent backdrop background color if backdrop is false', () => {
         component.isVisible$ = of(true);
-        component.backdrop.set(false);
+        fixture.componentRef.setInput('backdrop', false);
         fixture.detectChanges();
 
         const element: HTMLElement = fixture

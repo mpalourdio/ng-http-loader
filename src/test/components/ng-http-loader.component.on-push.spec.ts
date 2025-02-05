@@ -12,8 +12,8 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NgHttpLoaderComponent } from "../../lib/components/ng-http-loader.component";
-import { pendingRequestsInterceptor$ } from "../../lib/services/pending-requests-interceptor";
+import { NgHttpLoaderComponent } from '../../lib/components/ng-http-loader.component';
+import { pendingRequestsInterceptor$ } from '../../lib/services/pending-requests-interceptor';
 
 @Component({
     standalone: true,
