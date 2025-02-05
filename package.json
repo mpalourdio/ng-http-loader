@@ -43,11 +43,6 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.0.0",
-    "@angular-eslint/builder": "^19.0.0",
-    "@angular-eslint/eslint-plugin": "^19.0.0",
-    "@angular-eslint/eslint-plugin-template": "^19.0.0",
-    "@angular-eslint/schematics": "^19.0.0",
-    "@angular-eslint/template-parser": "^19.0.0",
     "@angular/cli": "^19.0.0",
     "@angular/common": "^19.0.0",
     "@angular/compiler": "^19.0.0",
@@ -55,12 +50,12 @@
     "@angular/core": "^19.0.0",
     "@angular/platform-browser": "^19.0.0",
     "@angular/platform-browser-dynamic": "^19.0.0",
+    "@smarttools/eslint-plugin-rxjs": "^1.0.18",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^22.0.0",
-    "@typescript-eslint/eslint-plugin": "7.10.0",
-    "@typescript-eslint/parser": "7.10.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-rxjs": "^5.0.2",
+    "@typescript-eslint/parser": "^8.23.0",
+    "angular-eslint": "^19.0.0",
+    "eslint": "^9.16.0",
     "jasmine-core": "~5.5.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -72,6 +67,7 @@
     "puppeteer": "^24.0.0",
     "rxjs": "^7.8.0",
     "typescript": "~5.7.2",
+    "typescript-eslint": "^8.18.0",
     "zone.js": "~0.15.0"
   }
 }
