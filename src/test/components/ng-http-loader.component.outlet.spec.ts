@@ -32,7 +32,7 @@ describe('NgHttpLoaderComponentOutlet', () => {
 
     it('should be possible to specify an entryComponent', () => {
         component.isVisible$ = of(true);
-        component.entryComponent.set(SkThreeBounceComponent);
+        fixture.componentRef.setInput('entryComponent', SkThreeBounceComponent);
         fixture.detectChanges();
 
         const element = fixture
@@ -45,7 +45,7 @@ describe('NgHttpLoaderComponentOutlet', () => {
 
     it('should force [spinner] to null if [entryComponent] is defined', () => {
         component.spinner.set('spinner-name');
-        component.entryComponent.set(SkThreeBounceComponent);
+        fixture.componentRef.setInput('entryComponent', SkThreeBounceComponent);
         component.ngOnInit();
 
         expect(component.spinner()).toBeNull();
@@ -54,7 +54,7 @@ describe('NgHttpLoaderComponentOutlet', () => {
     it('should correctly check [entryComponent] with null', () => {
         const spinnerName = 'spinner-name';
         component.spinner.set(spinnerName);
-        component.entryComponent.set(null);
+        fixture.componentRef.setInput('entryComponent', null);
         component.ngOnInit();
 
         expect(component.spinner()).toBe(spinnerName);

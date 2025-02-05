@@ -32,7 +32,7 @@ describe('SkWaveComponent', () => {
     });
 
     it('should be possible to set background-color', () => {
-        component.backgroundColor.set('#ff0000');
+        fixture.componentRef.setInput('backgroundColor', '#ff0000');
         fixture.detectChanges();
 
         const element = fixture
