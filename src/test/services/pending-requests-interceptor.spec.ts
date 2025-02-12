@@ -7,14 +7,14 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { HttpClient, HttpResponse, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { forkJoin, Observable } from 'rxjs';
-import { pendingRequestsInterceptor$ } from "../../lib/services/pending-requests-interceptor";
+import { pendingRequestsInterceptor$ } from '../../lib/services/pending-requests-interceptor';
 import {
     PendingRequestsInterceptorConfigurer
-} from "../../lib/services/pending-requests-interceptor-configurer.service";
+} from '../../lib/services/pending-requests-interceptor-configurer.service';
 
 describe('PendingRequestsInterceptor', () => {
     let http: HttpClient;
@@ -79,7 +79,7 @@ describe('PendingRequestsInterceptor', () => {
         http.get('/fake').subscribe({
             next: () => expect(true).toBe(false),
             error: (error: unknown) => {
-                if (error instanceof HttpResponse) {
+                if (error instanceof HttpErrorResponse) {
                     expect(error.statusText).toBe(statusTextNotFound);
                 }
             }
