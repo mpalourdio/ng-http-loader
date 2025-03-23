@@ -25,7 +25,7 @@ jobs:
           npm run lint
           npm run audit:prod
           npm run build
-          npm test -- --code-coverage
+          npm test -- --coverage
 
       - name: Coveralls
         uses: coverallsapp/github-action@v2
