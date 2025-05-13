@@ -39,5 +39,5 @@ jobs:
           branch: 'npm-update'
           delete-branch: 'true'
           title: 'chore: npm update'
-          labels: 'npm update'
+          labels: 'dependencies'
           body: ''
