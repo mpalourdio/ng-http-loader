@@ -10,6 +10,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SkWaveComponent } from '../../../lib/components/sk-wave/sk-wave.component';
+import { provideExperimentalZonelessChangeDetection } from "@angular/core";
 
 describe('SkWaveComponent', () => {
     let component: SkWaveComponent;
@@ -17,12 +18,13 @@ describe('SkWaveComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [SkWaveComponent]
+            imports: [SkWaveComponent],
+            providers: [
+                provideExperimentalZonelessChangeDetection(),
+            ]
         })
             .compileComponents();
-    });
 
-    beforeEach(() => {
         fixture = TestBed.createComponent(SkWaveComponent);
         component = fixture.componentInstance;
     });
@@ -31,9 +33,9 @@ describe('SkWaveComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should be possible to set background-color', () => {
+    it('should be possible to set background-color', async () => {
         fixture.componentRef.setInput('backgroundColor', '#ff0000');
-        fixture.detectChanges();
+        await fixture.whenStable();
 
         const element = fixture
             .debugElement

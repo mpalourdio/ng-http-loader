@@ -10,6 +10,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SkCubeGridComponent } from '../../../lib/components/sk-cube-grid/sk-cube-grid.component';
+import { provideExperimentalZonelessChangeDetection } from "@angular/core";
 
 describe('SkCubeGridComponent', () => {
     let component: SkCubeGridComponent;
@@ -17,12 +18,13 @@ describe('SkCubeGridComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [SkCubeGridComponent]
+            imports: [SkCubeGridComponent],
+            providers: [
+                provideExperimentalZonelessChangeDetection(),
+            ]
         })
             .compileComponents();
-    });
 
-    beforeEach(() => {
         fixture = TestBed.createComponent(SkCubeGridComponent);
         component = fixture.componentInstance;
     });
@@ -31,9 +33,9 @@ describe('SkCubeGridComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should be possible to set background-color', () => {
+    it('should be possible to set background-color', async () => {
         fixture.componentRef.setInput('backgroundColor', '#ff0000');
-        fixture.detectChanges();
+        await fixture.whenStable();
 
         const element = fixture
             .debugElement

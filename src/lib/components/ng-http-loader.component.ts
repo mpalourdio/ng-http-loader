@@ -7,25 +7,27 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { AsyncPipe, NgComponentOutlet, NgIf, NgStyle } from '@angular/common';
-import { Component, input, model, OnInit, Type } from '@angular/core';
+import { NgComponentOutlet, NgIf, NgStyle } from '@angular/common';
+import { Component, input, model, OnInit, Signal, Type } from '@angular/core';
 import { merge, Observable, partition, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
 import { PendingRequestsInterceptorConfigurer } from '../services/pending-requests-interceptor-configurer.service';
 import { SpinnerVisibilityService } from '../services/spinner-visibility.service';
 import { Spinkit, SPINKIT_COMPONENTS } from '../spinkits';
+import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: 'ng-http-loader',
     standalone: true,
     templateUrl: './ng-http-loader.component.html',
     styleUrls: ['./ng-http-loader.component.scss'],
-    imports: [SPINKIT_COMPONENTS, NgStyle, NgComponentOutlet, NgIf, AsyncPipe]
+    imports: [SPINKIT_COMPONENTS, NgStyle, NgComponentOutlet, NgIf]
 })
 export class NgHttpLoaderComponent implements OnInit {
 
     spinkit = Spinkit;
     isVisible$!: Observable<boolean>;
+    isVisible: Signal<boolean | undefined>;
     visibleUntil = Date.now();
 
     readonly backdrop = input<boolean>(true);
@@ -42,15 +44,6 @@ export class NgHttpLoaderComponent implements OnInit {
     readonly spinner = model<string | null>(Spinkit.skWave);
 
     constructor(private pendingRequestsInterceptorConfigurer: PendingRequestsInterceptorConfigurer, private spinnerVisibility: SpinnerVisibilityService) {
-    }
-
-    ngOnInit(): void {
-        this.initIsvisibleObservable();
-        this.nullifySpinnerIfEntryComponentIsDefined();
-        this.initFilters();
-    }
-
-    private initIsvisibleObservable(): void {
         const [showSpinner$, hideSpinner$] = partition(this.pendingRequestsInterceptorConfigurer.pendingRequestsStatus$, h => h);
 
         this.isVisible$ = merge(
@@ -63,6 +56,12 @@ export class NgHttpLoaderComponent implements OnInit {
             distinctUntilChanged(),
             tap(h => this.updateExpirationDelay(h))
         );
+        this.isVisible = toSignal(this.isVisible$);
+    }
+
+    ngOnInit(): void {
+        this.nullifySpinnerIfEntryComponentIsDefined();
+        this.initFilters();
     }
 
     private nullifySpinnerIfEntryComponentIsDefined(): void {

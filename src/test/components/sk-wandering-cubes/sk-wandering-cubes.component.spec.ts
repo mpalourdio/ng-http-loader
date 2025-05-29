@@ -10,6 +10,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SkWanderingCubesComponent } from '../../../lib/components/sk-wandering-cubes/sk-wandering-cubes.component';
+import { provideExperimentalZonelessChangeDetection } from "@angular/core";
 
 describe('SkWanderingCubesComponent', () => {
     let component: SkWanderingCubesComponent;
@@ -17,12 +18,13 @@ describe('SkWanderingCubesComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [SkWanderingCubesComponent]
+            imports: [SkWanderingCubesComponent],
+            providers: [
+                provideExperimentalZonelessChangeDetection(),
+            ]
         })
             .compileComponents();
-    });
 
-    beforeEach(() => {
         fixture = TestBed.createComponent(SkWanderingCubesComponent);
         component = fixture.componentInstance;
     });
@@ -31,9 +33,9 @@ describe('SkWanderingCubesComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should be possible to set background-color', () => {
+    it('should be possible to set background-color', async () => {
         fixture.componentRef.setInput('backgroundColor', '#ff0000');
-        fixture.detectChanges();
+        await fixture.whenStable();
 
         const element = fixture
             .debugElement

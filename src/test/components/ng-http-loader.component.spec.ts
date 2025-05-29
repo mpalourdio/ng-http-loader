@@ -10,6 +10,7 @@
 import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { provideExperimentalZonelessChangeDetection, signal } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { forkJoin, Observable, of, Subscription } from 'rxjs';
 import { NgHttpLoaderComponent } from '../../lib/components/ng-http-loader.component';
@@ -29,19 +30,20 @@ describe('NgHttpLoaderComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [NgHttpLoaderComponent],
-            providers: [provideHttpClient(withInterceptors([pendingRequestsInterceptor$])), provideHttpClientTesting()]
+            providers: [
+                provideHttpClient(withInterceptors([pendingRequestsInterceptor$])),
+                provideHttpClientTesting(),
+                provideExperimentalZonelessChangeDetection(),
+            ]
         })
             .compileComponents();
-    });
 
-    beforeEach(() => {
         fixture = TestBed.createComponent(NgHttpLoaderComponent);
         component = fixture.componentInstance;
         http = TestBed.inject(HttpClient);
         httpMock = TestBed.inject(HttpTestingController);
         spinner = TestBed.inject(SpinnerVisibilityService);
         isVisible = false;
-        fixture.detectChanges();
         isVisibleSubscription = component.isVisible$.subscribe(v => isVisible = v);
     });
 
@@ -53,9 +55,9 @@ describe('NgHttpLoaderComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should create the ng-http-loader component with default values', () => {
-        component.isVisible$ = of(true);
-        fixture.detectChanges();
+    it('should create the ng-http-loader component with default values', async () => {
+        component.isVisible = signal(true);
+        await fixture.whenStable();
 
         const element = fixture
             .debugElement
@@ -65,10 +67,10 @@ describe('NgHttpLoaderComponent', () => {
         expect(element.className).toBe('sk-wave colored');
     });
 
-    it('should not set the colored class if background-color is defined', () => {
-        component.isVisible$ = of(true);
+    it('should not set the colored class if background-color is defined', async () => {
+        component.isVisible = signal(true);
         fixture.componentRef.setInput('backgroundColor', '#ff0000');
-        fixture.detectChanges();
+        await fixture.whenStable();
 
         const element = fixture
             .debugElement
@@ -86,10 +88,10 @@ describe('NgHttpLoaderComponent', () => {
         expect(element).toBeNull();
     });
 
-    it('should be able to specify another known spinner', () => {
-        component.isVisible$ = of(true);
+    it('should be able to specify another known spinner', async () => {
+        component.isVisible = signal(true);
         component.spinner.set(Spinkit.skRotatingPlane);
-        fixture.detectChanges();
+        await fixture.whenStable();
 
         const element = fixture
             .debugElement
@@ -99,10 +101,10 @@ describe('NgHttpLoaderComponent', () => {
         expect(element.className).toBe('sk-rotating-plane colored-parent');
     });
 
-    it('should allow us to specify a custom background-color', () => {
-        component.isVisible$ = of(true);
+    it('should allow us to specify a custom background-color', async () => {
+        component.isVisible = signal(true);
         fixture.componentRef.setInput('backgroundColor', '#ff0000');
-        fixture.detectChanges();
+        await fixture.whenStable();
 
         const element = fixture
             .debugElement
@@ -749,9 +751,9 @@ describe('NgHttpLoaderComponent', () => {
         expect(isVisible).toBeFalsy();
     }));
 
-    it('should set the backdrop CSS class by default', () => {
-        component.isVisible$ = of(true);
-        fixture.detectChanges();
+    it('should set the backdrop CSS class by default', async () => {
+        component.isVisible = signal(true);
+        await fixture.whenStable();
 
         const element = fixture
             .debugElement
@@ -761,10 +763,10 @@ describe('NgHttpLoaderComponent', () => {
         expect(element).toBeTruthy();
     });
 
-    it('should be possible to remove the backdrop CSS class', () => {
+    it('should be possible to remove the backdrop CSS class', async () => {
         component.isVisible$ = of(true);
         fixture.componentRef.setInput('backdrop', false);
-        fixture.detectChanges();
+        await fixture.whenStable();
 
         const element = fixture
             .debugElement
@@ -773,9 +775,9 @@ describe('NgHttpLoaderComponent', () => {
         expect(element).toBeNull();
     });
 
-    it('should have a default opacity', () => {
-        component.isVisible$ = of(true);
-        fixture.detectChanges();
+    it('should have a default opacity', async () => {
+        component.isVisible = signal(true);
+        await fixture.whenStable();
 
         const element: HTMLElement = fixture
             .debugElement
@@ -785,10 +787,10 @@ describe('NgHttpLoaderComponent', () => {
         expect(element.style.opacity).toBe(`0${component.opacity()}`);
     });
 
-    it('should be possible to override opacity', () => {
-        component.isVisible$ = of(true);
+    it('should be possible to override opacity', async () => {
+        component.isVisible = signal(true);
         fixture.componentRef.setInput('opacity', '.3');
-        fixture.detectChanges();
+        await fixture.whenStable();
 
         const element: HTMLElement = fixture
             .debugElement
@@ -798,9 +800,9 @@ describe('NgHttpLoaderComponent', () => {
         expect(element.style.opacity).toBe(`0${component.opacity()}`);
     });
 
-    it('should have a default backdrop background color if backdrop is true', () => {
-        component.isVisible$ = of(true);
-        fixture.detectChanges();
+    it('should have a default backdrop background color if backdrop is true', async() => {
+        component.isVisible = signal(true);
+        await fixture.whenStable();
 
         const element: HTMLElement = fixture
             .debugElement
@@ -810,10 +812,10 @@ describe('NgHttpLoaderComponent', () => {
         expect(element.style.backgroundColor).toBe('rgb(241, 241, 241)');
     });
 
-    it('should be possible to override backdrop background color when backdrop is true', () => {
-        component.isVisible$ = of(true);
+    it('should be possible to override backdrop background color when backdrop is true', async () => {
+        component.isVisible = signal(true);
         fixture.componentRef.setInput('backdropBackgroundColor', '#777777');
-        fixture.detectChanges();
+        await fixture.whenStable();
 
         const element: HTMLElement = fixture
             .debugElement
@@ -823,10 +825,10 @@ describe('NgHttpLoaderComponent', () => {
         expect(element.style.backgroundColor).toBe('rgb(119, 119, 119)');
     });
 
-    it('should not have a transparent backdrop background color if backdrop is false', () => {
-        component.isVisible$ = of(true);
+    it('should not have a transparent backdrop background color if backdrop is false', async () => {
+        component.isVisible = signal(true);
         fixture.componentRef.setInput('backdrop', false);
-        fixture.detectChanges();
+        await fixture.whenStable();
 
         const element: HTMLElement = fixture
             .debugElement

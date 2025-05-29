@@ -10,6 +10,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SkRotatingPlaneComponent } from '../../../lib/components/sk-rotating-plane/sk-rotating-plane.component';
+import { provideExperimentalZonelessChangeDetection } from "@angular/core";
 
 describe('SkRotatingPlaneComponent', () => {
     let component: SkRotatingPlaneComponent;
@@ -17,12 +18,13 @@ describe('SkRotatingPlaneComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [SkRotatingPlaneComponent]
+            imports: [SkRotatingPlaneComponent],
+            providers: [
+                provideExperimentalZonelessChangeDetection(),
+            ]
         })
             .compileComponents();
-    });
 
-    beforeEach(() => {
         fixture = TestBed.createComponent(SkRotatingPlaneComponent);
         component = fixture.componentInstance;
     });
@@ -31,9 +33,9 @@ describe('SkRotatingPlaneComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should be possible to set background-color', () => {
+    it('should be possible to set background-color', async () => {
         fixture.componentRef.setInput('backgroundColor', '#ff0000');
-        fixture.detectChanges();
+        await fixture.whenStable();
 
         const element = fixture
             .debugElement
