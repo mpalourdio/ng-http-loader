@@ -10,6 +10,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SkSpinnerPulseComponent } from '../../../lib/components/sk-spinner-pulse/sk-spinner-pulse.component';
+import { provideExperimentalZonelessChangeDetection } from "@angular/core";
 
 describe('SkSpinnerPulseComponent', () => {
     let component: SkSpinnerPulseComponent;
@@ -17,12 +18,13 @@ describe('SkSpinnerPulseComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [SkSpinnerPulseComponent]
+            imports: [SkSpinnerPulseComponent],
+            providers: [
+                provideExperimentalZonelessChangeDetection(),
+            ]
         })
             .compileComponents();
-    });
 
-    beforeEach(() => {
         fixture = TestBed.createComponent(SkSpinnerPulseComponent);
         component = fixture.componentInstance;
     });
@@ -31,9 +33,9 @@ describe('SkSpinnerPulseComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should be possible to set background-color', () => {
+    it('should be possible to set background-color', async () => {
         fixture.componentRef.setInput('backgroundColor', '#ff0000');
-        fixture.detectChanges();
+        await fixture.whenStable();
 
         const element = fixture
             .debugElement

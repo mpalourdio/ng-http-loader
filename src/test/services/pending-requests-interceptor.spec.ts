@@ -15,6 +15,7 @@ import { pendingRequestsInterceptor$ } from '../../lib/services/pending-requests
 import {
     PendingRequestsInterceptorConfigurer
 } from '../../lib/services/pending-requests-interceptor-configurer.service';
+import { provideExperimentalZonelessChangeDetection } from "@angular/core";
 
 describe('PendingRequestsInterceptor', () => {
     let http: HttpClient;
@@ -23,7 +24,11 @@ describe('PendingRequestsInterceptor', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [provideHttpClient(withInterceptors([pendingRequestsInterceptor$])), provideHttpClientTesting()]
+            providers: [
+                provideHttpClient(withInterceptors([pendingRequestsInterceptor$])),
+                provideHttpClientTesting(),
+                provideExperimentalZonelessChangeDetection(),
+            ]
         });
 
         pendingRequestsInterceptorConfigurer = TestBed.inject(PendingRequestsInterceptorConfigurer);

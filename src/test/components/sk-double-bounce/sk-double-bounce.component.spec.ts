@@ -10,6 +10,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SkDoubleBounceComponent } from '../../../lib/components/sk-double-bounce/sk-double-bounce.component';
+import { provideExperimentalZonelessChangeDetection } from "@angular/core";
 
 describe('SkDoubleBounceComponent', () => {
     let component: SkDoubleBounceComponent;
@@ -17,12 +18,13 @@ describe('SkDoubleBounceComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [SkDoubleBounceComponent]
+            imports: [SkDoubleBounceComponent],
+            providers: [
+                provideExperimentalZonelessChangeDetection(),
+            ]
         })
             .compileComponents();
-    });
 
-    beforeEach(() => {
         fixture = TestBed.createComponent(SkDoubleBounceComponent);
         component = fixture.componentInstance;
     });
@@ -31,9 +33,9 @@ describe('SkDoubleBounceComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should be possible to set background-color', () => {
+    it('should be possible to set background-color', async () => {
         fixture.componentRef.setInput('backgroundColor', '#ff0000');
-        fixture.detectChanges();
+        await fixture.whenStable();
 
         const element = fixture
             .debugElement

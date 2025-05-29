@@ -10,6 +10,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SkChasingDotsComponent } from '../../../lib/components/sk-chasing-dots/sk-chasing-dots.component';
+import { provideExperimentalZonelessChangeDetection } from "@angular/core";
 
 describe('SkChasingDotsComponent', () => {
     let component: SkChasingDotsComponent;
@@ -17,12 +18,13 @@ describe('SkChasingDotsComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [SkChasingDotsComponent]
+            imports: [SkChasingDotsComponent],
+            providers: [
+                provideExperimentalZonelessChangeDetection(),
+            ]
         })
             .compileComponents();
-    });
 
-    beforeEach(() => {
         fixture = TestBed.createComponent(SkChasingDotsComponent);
         component = fixture.componentInstance;
     });
@@ -31,9 +33,9 @@ describe('SkChasingDotsComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should be possible to set background-color', () => {
+    it('should be possible to set background-color', async () => {
         fixture.componentRef.setInput('backgroundColor', '#ff0000');
-        fixture.detectChanges();
+        await fixture.whenStable();
 
         const element = fixture
             .debugElement

@@ -1,6 +1,6 @@
 {
   "name": "ng-http-loader",
-  "version": "17.2.0",
+  "version": "17.3.0",
   "scripts": {
     "ng": "ng",
     "build": "ng build",
@@ -61,7 +61,6 @@
     "ng-packagr": "^19.0.0",
     "rxjs": "^7.8.0",
     "typescript": "~5.7.2",
-    "typescript-eslint": "^8.18.0",
-    "zone.js": "~0.15.0"
+    "typescript-eslint": "^8.18.0"
   }
 }

@@ -1,5 +1,5 @@
 <div id="spinner"
-     *ngIf="isVisible$ | async"
+     *ngIf="isVisible()"
      [class.backdrop]="backdrop()"
      [style.opacity]="opacity()"
      [ngStyle]="{'background-color': backdrop() ? backdropBackgroundColor() : 'transparent'}">

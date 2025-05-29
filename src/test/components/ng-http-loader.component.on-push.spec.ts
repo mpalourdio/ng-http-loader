@@ -9,7 +9,7 @@
 
 import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NgHttpLoaderComponent } from '../../lib/components/ng-http-loader.component';
@@ -32,16 +32,17 @@ describe('NgHttpLoaderComponent OnPush', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [HostComponent],
-            providers: [provideHttpClient(withInterceptors([pendingRequestsInterceptor$])), provideHttpClientTesting()]
+            providers: [
+                provideHttpClient(withInterceptors([pendingRequestsInterceptor$])),
+                provideHttpClientTesting(),
+                provideExperimentalZonelessChangeDetection(),
+            ]
         })
             .compileComponents();
-    });
 
-    beforeEach(() => {
         fixture = TestBed.createComponent(HostComponent);
         http = TestBed.inject(HttpClient);
         httpMock = TestBed.inject(HttpTestingController);
-        fixture.detectChanges();
     });
 
     it('should work as expected when the host component has ChangeDetectionStrategy.OnPush', fakeAsync(() => {

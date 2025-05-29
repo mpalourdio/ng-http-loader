@@ -9,9 +9,9 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { of } from 'rxjs';
 import { NgHttpLoaderComponent } from '../../lib/components/ng-http-loader.component';
 import { SkThreeBounceComponent } from '../../lib/components/sk-three-bounce/sk-three-bounce.component';
+import { provideExperimentalZonelessChangeDetection, signal } from "@angular/core";
 
 describe('NgHttpLoaderComponentOutlet', () => {
     let component: NgHttpLoaderComponent;
@@ -19,21 +19,21 @@ describe('NgHttpLoaderComponentOutlet', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [NgHttpLoaderComponent]
+            imports: [NgHttpLoaderComponent],
+            providers: [
+                provideExperimentalZonelessChangeDetection(),
+            ]
         })
             .compileComponents();
-    });
 
-    beforeEach(() => {
         fixture = TestBed.createComponent(NgHttpLoaderComponent);
         component = fixture.componentInstance;
-        fixture.detectChanges();
     });
 
-    it('should be possible to specify an entryComponent', () => {
-        component.isVisible$ = of(true);
+    it('should be possible to specify an entryComponent', async () => {
+        component.isVisible = signal(true);
         fixture.componentRef.setInput('entryComponent', SkThreeBounceComponent);
-        fixture.detectChanges();
+        await fixture.whenStable();
 
         const element = fixture
             .debugElement
