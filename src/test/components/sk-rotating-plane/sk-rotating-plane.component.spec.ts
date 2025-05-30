@@ -10,7 +10,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SkRotatingPlaneComponent } from '../../../lib/components/sk-rotating-plane/sk-rotating-plane.component';
-import { provideExperimentalZonelessChangeDetection } from "@angular/core";
+import { provideZonelessChangeDetection } from "@angular/core";
 
 describe('SkRotatingPlaneComponent', () => {
     let component: SkRotatingPlaneComponent;
@@ -20,7 +20,7 @@ describe('SkRotatingPlaneComponent', () => {
         await TestBed.configureTestingModule({
             imports: [SkRotatingPlaneComponent],
             providers: [
-                provideExperimentalZonelessChangeDetection(),
+                provideZonelessChangeDetection(),
             ]
         })
             .compileComponents();
