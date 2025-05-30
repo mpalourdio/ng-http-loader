@@ -9,7 +9,7 @@
 
 import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { ChangeDetectionStrategy, Component, provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { ChangeDetectionStrategy, Component, provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NgHttpLoaderComponent } from '../../lib/components/ng-http-loader.component';
@@ -35,7 +35,7 @@ describe('NgHttpLoaderComponent OnPush', () => {
             providers: [
                 provideHttpClient(withInterceptors([pendingRequestsInterceptor$])),
                 provideHttpClientTesting(),
-                provideExperimentalZonelessChangeDetection(),
+                provideZonelessChangeDetection(),
             ]
         })
             .compileComponents();
