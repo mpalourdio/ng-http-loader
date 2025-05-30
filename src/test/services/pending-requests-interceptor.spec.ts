@@ -15,7 +15,7 @@ import { pendingRequestsInterceptor$ } from '../../lib/services/pending-requests
 import {
     PendingRequestsInterceptorConfigurer
 } from '../../lib/services/pending-requests-interceptor-configurer.service';
-import { provideExperimentalZonelessChangeDetection } from "@angular/core";
+import { provideZonelessChangeDetection } from "@angular/core";
 
 describe('PendingRequestsInterceptor', () => {
     let http: HttpClient;
@@ -27,7 +27,7 @@ describe('PendingRequestsInterceptor', () => {
             providers: [
                 provideHttpClient(withInterceptors([pendingRequestsInterceptor$])),
                 provideHttpClientTesting(),
-                provideExperimentalZonelessChangeDetection(),
+                provideZonelessChangeDetection(),
             ]
         });
 
