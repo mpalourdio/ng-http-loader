@@ -7,7 +7,8 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { NgComponentOutlet, NgIf, NgStyle } from '@angular/common';
+/* eslint-disable @angular-eslint/prefer-inject */
+import { NgComponentOutlet, NgStyle } from '@angular/common';
 import { Component, input, model, OnInit, Signal, Type } from '@angular/core';
 import { merge, Observable, partition, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
@@ -21,7 +22,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
     standalone: true,
     templateUrl: './ng-http-loader.component.html',
     styleUrls: ['./ng-http-loader.component.scss'],
-    imports: [SPINKIT_COMPONENTS, NgStyle, NgComponentOutlet, NgIf]
+    imports: [SPINKIT_COMPONENTS, NgStyle, NgComponentOutlet]
 })
 export class NgHttpLoaderComponent implements OnInit {
 
@@ -43,7 +44,10 @@ export class NgHttpLoaderComponent implements OnInit {
     readonly backdropBackgroundColor = input<string>('#f1f1f1');
     readonly spinner = model<string | null>(Spinkit.skWave);
 
-    constructor(private pendingRequestsInterceptorConfigurer: PendingRequestsInterceptorConfigurer, private spinnerVisibility: SpinnerVisibilityService) {
+    constructor(
+        private pendingRequestsInterceptorConfigurer: PendingRequestsInterceptorConfigurer,
+        private spinnerVisibility: SpinnerVisibilityService
+    ) {
         const [showSpinner$, hideSpinner$] = partition(this.pendingRequestsInterceptorConfigurer.pendingRequestsStatus$, h => h);
 
         this.isVisible$ = merge(

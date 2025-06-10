@@ -10,7 +10,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SkChasingDotsComponent } from '../../../lib/components/sk-chasing-dots/sk-chasing-dots.component';
-import { provideExperimentalZonelessChangeDetection } from "@angular/core";
+import { provideZonelessChangeDetection } from "@angular/core";
 
 describe('SkChasingDotsComponent', () => {
     let component: SkChasingDotsComponent;
@@ -20,7 +20,7 @@ describe('SkChasingDotsComponent', () => {
         await TestBed.configureTestingModule({
             imports: [SkChasingDotsComponent],
             providers: [
-                provideExperimentalZonelessChangeDetection(),
+                provideZonelessChangeDetection(),
             ]
         })
             .compileComponents();

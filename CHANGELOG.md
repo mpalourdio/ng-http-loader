@@ -1,6 +1,9 @@
 # Changelog
 
-## v17.3.0
+## v18.0.0
+- Added angular 20 support.
+ 
+- ## v17.3.0
 - Be Zoneless compatible before angular 20.
 
 ## v17.2.0

@@ -1,50 +1,51 @@
-<div id="spinner"
-     *ngIf="isVisible()"
-     [class.backdrop]="backdrop()"
-     [style.opacity]="opacity()"
-     [ngStyle]="{'background-color': backdrop() ? backdropBackgroundColor() : 'transparent'}">
-
-    <ng-container *ngComponentOutlet="entryComponent()"></ng-container>
-
-    <sk-cube-grid
-        *ngIf="spinner() === spinkit.skCubeGrid"
-        [backgroundColor]="backgroundColor()">
-    </sk-cube-grid>
-
-    <sk-chasing-dots
-        *ngIf="spinner() === spinkit.skChasingDots"
-        [backgroundColor]="backgroundColor()">
-    </sk-chasing-dots>
-
-    <sk-double-bounce
-        *ngIf="spinner() === spinkit.skDoubleBounce"
-        [backgroundColor]="backgroundColor()">
-    </sk-double-bounce>
-
-    <sk-rotating-plane
-        *ngIf="spinner() === spinkit.skRotatingPlane"
-        [backgroundColor]="backgroundColor()">
-    </sk-rotating-plane>
-
-    <sk-spinner-pulse
-        *ngIf="spinner() === spinkit.skSpinnerPulse"
-        [backgroundColor]="backgroundColor()">
-    </sk-spinner-pulse>
-
-    <sk-three-bounce
-        *ngIf="spinner() === spinkit.skThreeBounce"
-        [backgroundColor]="backgroundColor()">
-    </sk-three-bounce>
-
-    <sk-wandering-cubes
-        *ngIf="spinner() === spinkit.skWanderingCubes"
-        [backgroundColor]="backgroundColor()">
-    </sk-wandering-cubes>
-
-    <sk-wave
-        *ngIf="spinner() === spinkit.skWave"
-        [backgroundColor]="backgroundColor()">
-    </sk-wave>
-
-</div>
+@if (isVisible()) {
+    <div id="spinner"
+         [class.backdrop]="backdrop()"
+         [style.opacity]="opacity()"
+         [ngStyle]="{'background-color': backdrop() ? backdropBackgroundColor() : 'transparent'}">
+        <ng-container *ngComponentOutlet="entryComponent()"></ng-container>
+        @switch (spinner()) {
+            @case (spinkit.skCubeGrid) {
+                <sk-cube-grid
+                    [backgroundColor]="backgroundColor()">
+                </sk-cube-grid>
+            }
+            @case (spinkit.skChasingDots) {
+                <sk-chasing-dots
+                    [backgroundColor]="backgroundColor()">
+                </sk-chasing-dots>
+            }
+            @case (spinkit.skDoubleBounce) {
+                <sk-double-bounce
+                    [backgroundColor]="backgroundColor()">
+                </sk-double-bounce>
+            }
+            @case (spinkit.skRotatingPlane) {
+                <sk-rotating-plane
+                    [backgroundColor]="backgroundColor()">
+                </sk-rotating-plane>
+            }
+            @case (spinkit.skSpinnerPulse) {
+                <sk-spinner-pulse
+                    [backgroundColor]="backgroundColor()">
+                </sk-spinner-pulse>
+            }
+            @case (spinkit.skThreeBounce) {
+                <sk-three-bounce
+                    [backgroundColor]="backgroundColor()">
+                </sk-three-bounce>
+            }
+            @case (spinkit.skWanderingCubes) {
+                <sk-wandering-cubes
+                    [backgroundColor]="backgroundColor()">
+                </sk-wandering-cubes>
+            }
+            @case (spinkit.skWave) {
+                <sk-wave
+                    [backgroundColor]="backgroundColor()">
+                </sk-wave>
+            }
+        }
+    </div>
+}
 
