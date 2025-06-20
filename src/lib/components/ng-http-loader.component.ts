@@ -7,7 +7,6 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/* eslint-disable @angular-eslint/prefer-inject */
 import { NgComponentOutlet, NgStyle } from '@angular/common';
 import { Component, input, model, OnInit, Signal, Type } from '@angular/core';
 import { merge, Observable, partition, timer } from 'rxjs';

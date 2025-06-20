@@ -32,6 +32,9 @@ module.exports = tseslint.config(
             'no-extra-boolean-cast': [
                 'off'
             ],
+            '@angular-eslint/prefer-inject': [
+                'off'
+            ],
             '@angular-eslint/component-selector': [
                 'error',
                 {

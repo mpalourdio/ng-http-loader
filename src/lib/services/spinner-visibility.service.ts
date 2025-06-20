@@ -7,7 +7,6 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/* eslint-disable @angular-eslint/prefer-inject */
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
 import { PendingRequestsInterceptorConfigurer } from "./pending-requests-interceptor-configurer.service";
