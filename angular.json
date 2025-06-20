@@ -16,7 +16,7 @@
       },
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "tsConfig": "./tsconfig.lib.json",
             "project": "./ng-package.json"
