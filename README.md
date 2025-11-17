@@ -92,7 +92,15 @@ export const appConfig: ApplicationConfig = {
     ],
 };
 ```
+## Usage in a non-standalone Angular application
 
+- Import `NgHttpLoaderComponent` in your main module `imports` array.
+- Add the following to your module providers:
+```typescript
+providers: [
+    provideHttpClient(withInterceptors([pendingRequestsInterceptor$])),
+]
+````
 ## Customizing the spinner
 
 You can customize the following parameters:
