@@ -1,5 +1,8 @@
 # Changelog
 
+## v19.0.0
+- Added angular 21 support.
+
 ## v18.0.0
 - Added angular 20 support.
 

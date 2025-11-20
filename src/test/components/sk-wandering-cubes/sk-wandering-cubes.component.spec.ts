@@ -10,7 +10,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SkWanderingCubesComponent } from '../../../lib/components/sk-wandering-cubes/sk-wandering-cubes.component';
-import { provideZonelessChangeDetection } from "@angular/core";
 
 describe('SkWanderingCubesComponent', () => {
     let component: SkWanderingCubesComponent;
@@ -18,10 +17,7 @@ describe('SkWanderingCubesComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [SkWanderingCubesComponent],
-            providers: [
-                provideZonelessChangeDetection(),
-            ]
+            imports: [SkWanderingCubesComponent]
         })
             .compileComponents();
 

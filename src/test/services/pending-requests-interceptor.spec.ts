@@ -9,13 +9,12 @@
 
 import { HttpClient, HttpErrorResponse, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { TestBed, waitForAsync } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { forkJoin, Observable } from 'rxjs';
 import { pendingRequestsInterceptor$ } from '../../lib/services/pending-requests-interceptor';
 import {
     PendingRequestsInterceptorConfigurer
 } from '../../lib/services/pending-requests-interceptor-configurer.service';
-import { provideZonelessChangeDetection } from "@angular/core";
 
 describe('PendingRequestsInterceptor', () => {
     let http: HttpClient;
@@ -27,7 +26,6 @@ describe('PendingRequestsInterceptor', () => {
             providers: [
                 provideHttpClient(withInterceptors([pendingRequestsInterceptor$])),
                 provideHttpClientTesting(),
-                provideZonelessChangeDetection(),
             ]
         });
 
@@ -55,7 +53,7 @@ describe('PendingRequestsInterceptor', () => {
         httpMock.verify();
     });
 
-    it('should correctly notify the pendingRequestsStatus observable', waitForAsync(() => {
+    it('should correctly notify the pendingRequestsStatus observable', () => {
         pendingRequestsInterceptorConfigurer
             .pendingRequestsStatus$
             .subscribe({
@@ -65,9 +63,9 @@ describe('PendingRequestsInterceptor', () => {
 
         http.get('/fake').subscribe();
         httpMock.expectOne('/fake');
-    }));
+    });
 
-    it('should correctly notify the pendingRequestsStatus observable, even if subscribed after', waitForAsync(() => {
+    it('should correctly notify the pendingRequestsStatus observable, even if subscribed after', () => {
         http.get('/fake').subscribe();
         httpMock.expectOne('/fake');
 
@@ -77,7 +75,7 @@ describe('PendingRequestsInterceptor', () => {
                 next: (next: boolean) => expect(next).toBeTruthy(),
                 error: () => expect(1).toBe(2)
             });
-    }));
+    });
 
     it('should fail correctly', () => {
         const statusTextNotFound = 'NOT FOUND';
@@ -85,7 +83,7 @@ describe('PendingRequestsInterceptor', () => {
             next: () => expect(true).toBe(false),
             error: (error: unknown) => {
                 if (error instanceof HttpErrorResponse) {
-                    expect(error.statusText).toBe(statusTextNotFound);
+                    expect(error.status).toBe(404);
                 }
             }
         });

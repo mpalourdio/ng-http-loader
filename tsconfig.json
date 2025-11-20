@@ -19,7 +19,14 @@
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "typeCheckHostBindings": true,
     "strictTemplates": true
-  }
+  },
+  "references": [
+    {
+      "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./tsconfig.lib.json"
+    }
+  ]
 }

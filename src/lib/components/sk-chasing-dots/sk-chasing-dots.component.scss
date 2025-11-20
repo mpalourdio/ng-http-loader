@@ -19,16 +19,16 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 @use "sass:math";
-@import "../variables";
+@use '../variables' as vars;
 
 .sk-chasing-dots {
     $animationDuration: 2.0s;
 
-    top: $spinkit-top;
-    margin: $spinkit-spinner-margin;
-    width: $spinkit-size;
-    height: $spinkit-size;
-    position: $spinkit-position;
+    top: vars.$spinkit-top;
+    margin: vars.$spinkit-spinner-margin;
+    width: vars.$spinkit-size;
+    height: vars.$spinkit-size;
+    position: vars.$spinkit-position;
     text-align: center;
     animation: sk-chasingDotsRotate $animationDuration infinite linear;
 
@@ -45,7 +45,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     .sk-dot2 {
         top: auto;
         bottom: 0;
-        animation-delay: math.div(-$animationDuration, 2);
+        animation-delay: math.div(-($animationDuration), 2);
     }
 }
 

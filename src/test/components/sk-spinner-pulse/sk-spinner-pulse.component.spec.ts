@@ -10,7 +10,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SkSpinnerPulseComponent } from '../../../lib/components/sk-spinner-pulse/sk-spinner-pulse.component';
-import { provideZonelessChangeDetection } from "@angular/core";
 
 describe('SkSpinnerPulseComponent', () => {
     let component: SkSpinnerPulseComponent;
@@ -18,10 +17,7 @@ describe('SkSpinnerPulseComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [SkSpinnerPulseComponent],
-            providers: [
-                provideZonelessChangeDetection(),
-            ]
+            imports: [SkSpinnerPulseComponent]
         })
             .compileComponents();
 

@@ -19,21 +19,21 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 @use "sass:math";
-@import "../variables";
+@use '../variables' as vars;
 
 .sk-three-bounce {
     $animationDuration: 1.4s;
     $delayRange: 0.32s;
 
-    top: $spinkit-top;
-    position: $spinkit-position;
-    margin: $spinkit-spinner-margin;
-    width: $spinkit-size * 2;
+    top: vars.$spinkit-top;
+    position: vars.$spinkit-position;
+    margin: vars.$spinkit-spinner-margin;
+    width: vars.$spinkit-size * 2;
     text-align: center;
 
     .sk-child {
-        width: math.div($spinkit-size, 2);
-        height: math.div($spinkit-size, 2);
+        width: math.div(vars.$spinkit-size, 2);
+        height: math.div(vars.$spinkit-size, 2);
 
         border-radius: 100%;
         display: inline-block;
@@ -43,6 +43,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     .sk-bounce1 {
         animation-delay: -$delayRange;
     }
+
     .sk-bounce2 {
         animation-delay: math.div(-$delayRange, 2);
     }
