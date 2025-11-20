@@ -90,7 +90,7 @@ describe('NgHttpLoaderComponent', () => {
         expect(element).toBeNull();
     });
 
-    it('should be able to specify another known spinner', async () => {
+    it('should be able to specify another known spinner (skRotatingPlane)', async () => {
         component.isVisible = signal(true);
         component.spinner.set(Spinkit.skRotatingPlane);
         await fixture.whenStable();
@@ -101,6 +101,84 @@ describe('NgHttpLoaderComponent', () => {
             .nativeElement;
 
         expect(element.className).toBe('sk-rotating-plane colored-parent');
+    });
+
+    it('should be able to specify another known spinner (skChasingDots)', async () => {
+        component.isVisible = signal(true);
+        component.spinner.set(Spinkit.skChasingDots);
+        await fixture.whenStable();
+
+        const element = fixture
+            .debugElement
+            .query(By.css('.sk-child'))
+            .nativeElement;
+
+        expect(element.className).toBe('sk-child sk-dot1');
+    });
+
+    it('should be able to specify another known spinner (skCubeGrid)', async () => {
+        component.isVisible = signal(true);
+        component.spinner.set(Spinkit.skCubeGrid);
+        await fixture.whenStable();
+
+        const element = fixture
+            .debugElement
+            .query(By.css('.sk-cube'))
+            .nativeElement;
+
+        expect(element.className).toBe('sk-cube sk-cube1');
+    });
+
+    it('should be able to specify another known spinner (skDoubleBounce)', async () => {
+        component.isVisible = signal(true);
+        component.spinner.set(Spinkit.skDoubleBounce);
+        await fixture.whenStable();
+
+        const element = fixture
+            .debugElement
+            .query(By.css('.sk-child'))
+            .nativeElement;
+
+        expect(element.className).toBe('sk-child sk-double-bounce1');
+    });
+
+    it('should be able to specify another known spinner (skSpinnerPulse)', async () => {
+        component.isVisible = signal(true);
+        component.spinner.set(Spinkit.skSpinnerPulse);
+        await fixture.whenStable();
+
+        const element = fixture
+            .debugElement
+            .query(By.css('.sk-spinner'))
+            .nativeElement;
+
+        expect(element.className).toBe('sk-spinner sk-spinner-pulse colored-parent');
+    });
+
+    it('should be able to specify another known spinner (skThreeBounce)', async () => {
+        component.isVisible = signal(true);
+        component.spinner.set(Spinkit.skThreeBounce);
+        await fixture.whenStable();
+
+        const element = fixture
+            .debugElement
+            .query(By.css('.sk-child'))
+            .nativeElement;
+
+        expect(element.className).toBe('sk-child sk-bounce1');
+    });
+
+    it('should be able to specify another known spinner (skWanderingCubes)', async () => {
+        component.isVisible = signal(true);
+        component.spinner.set(Spinkit.skWanderingCubes);
+        await fixture.whenStable();
+
+        const element = fixture
+            .debugElement
+            .query(By.css('.sk-cube'))
+            .nativeElement;
+
+        expect(element.className).toBe('sk-cube sk-cube1');
     });
 
     it('should allow us to specify a custom background-color', async () => {
