@@ -9,17 +9,11 @@
 
 import { TestBed } from '@angular/core/testing';
 import { SpinnerVisibilityService } from '../../lib/services/spinner-visibility.service';
-import { provideZonelessChangeDetection } from "@angular/core";
 
 describe('SpinnerVisibilityService', () => {
     let spinnerVisibilityService: SpinnerVisibilityService;
 
     beforeEach(() => {
-        TestBed.configureTestingModule({
-            providers: [
-                provideZonelessChangeDetection(),
-            ]
-        });
         spinnerVisibilityService = TestBed.inject(SpinnerVisibilityService);
     });
 

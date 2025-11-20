@@ -10,7 +10,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SkWaveComponent } from '../../../lib/components/sk-wave/sk-wave.component';
-import { provideZonelessChangeDetection } from "@angular/core";
 
 describe('SkWaveComponent', () => {
     let component: SkWaveComponent;
@@ -18,10 +17,7 @@ describe('SkWaveComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [SkWaveComponent],
-            providers: [
-                provideZonelessChangeDetection(),
-            ]
+            imports: [SkWaveComponent]
         })
             .compileComponents();
 

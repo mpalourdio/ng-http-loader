@@ -7,11 +7,11 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NgHttpLoaderComponent } from '../../lib/components/ng-http-loader.component';
 import { SkThreeBounceComponent } from '../../lib/components/sk-three-bounce/sk-three-bounce.component';
-import { provideZonelessChangeDetection, signal } from "@angular/core";
 
 describe('NgHttpLoaderComponentOutlet', () => {
     let component: NgHttpLoaderComponent;
@@ -19,10 +19,7 @@ describe('NgHttpLoaderComponentOutlet', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [NgHttpLoaderComponent],
-            providers: [
-                provideZonelessChangeDetection(),
-            ]
+            imports: [NgHttpLoaderComponent]
         })
             .compileComponents();
 

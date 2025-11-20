@@ -1,4 +1,4 @@
-@import "variables";
+@use './variables' as vars;
 
 #spinner {
     top: 50% ;
@@ -20,5 +20,5 @@
 }
 
 ::ng-deep .colored-parent, ::ng-deep .colored > div {
-    background-color: $spinner-color;
+    background-color: vars.$spinner-color;
 }

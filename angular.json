@@ -24,16 +24,21 @@
           "configurations": {
             "production": {
               "tsConfig": "./tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "./tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
         },
         "test": {
-          "builder": "@angular-builders/jest:run",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "configPath": "./jest.config.ts",
             "tsConfig": "./tsconfig.spec.json",
-            "watch": false
+            "watch": false,
+            "coverageReporters": [
+              "lcovonly"
+            ]
           }
         },
         "lint": {

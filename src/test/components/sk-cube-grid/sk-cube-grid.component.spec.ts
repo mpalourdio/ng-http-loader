@@ -10,7 +10,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SkCubeGridComponent } from '../../../lib/components/sk-cube-grid/sk-cube-grid.component';
-import { provideZonelessChangeDetection } from "@angular/core";
 
 describe('SkCubeGridComponent', () => {
     let component: SkCubeGridComponent;
@@ -18,10 +17,7 @@ describe('SkCubeGridComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [SkCubeGridComponent],
-            providers: [
-                provideZonelessChangeDetection(),
-            ]
+            imports: [SkCubeGridComponent]
         })
             .compileComponents();
 

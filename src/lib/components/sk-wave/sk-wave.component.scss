@@ -19,18 +19,18 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 @use "sass:math";
-@import "../variables";
+@use '../variables' as vars;
 
 .sk-wave {
     $rectCount: 5;
     $animationDuration: 1.2s;
     $delayRange: 0.4s;
 
-    position: $spinkit-position;
-    top: $spinkit-top;
-    margin: $spinkit-spinner-margin;
-    width: $spinkit-size * 1.25;
-    height: $spinkit-size;
+    position: vars.$spinkit-position;
+    top: vars.$spinkit-top;
+    margin: vars.$spinkit-spinner-margin;
+    width: vars.$spinkit-size * 1.25;
+    height: vars.$spinkit-size;
     text-align: center;
     font-size: 10px;
 

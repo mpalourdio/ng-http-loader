@@ -9,8 +9,8 @@
 
 import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { ChangeDetectionStrategy, Component, provideZonelessChangeDetection } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NgHttpLoaderComponent } from '../../lib/components/ng-http-loader.component';
 import { pendingRequestsInterceptor$ } from '../../lib/services/pending-requests-interceptor';
@@ -30,12 +30,13 @@ describe('NgHttpLoaderComponent OnPush', () => {
     let httpMock: HttpTestingController;
 
     beforeEach(async () => {
+        vi.useFakeTimers({ shouldAdvanceTime: true });
+
         await TestBed.configureTestingModule({
             imports: [HostComponent],
             providers: [
                 provideHttpClient(withInterceptors([pendingRequestsInterceptor$])),
                 provideHttpClientTesting(),
-                provideZonelessChangeDetection(),
             ]
         })
             .compileComponents();
@@ -45,10 +46,14 @@ describe('NgHttpLoaderComponent OnPush', () => {
         httpMock = TestBed.inject(HttpTestingController);
     });
 
-    it('should work as expected when the host component has ChangeDetectionStrategy.OnPush', fakeAsync(() => {
+    afterEach(() => {
+        vi.clearAllTimers();
+    });
+
+    it('should work as expected when the host component has ChangeDetectionStrategy.OnPush', async () => {
         http.get('/fake').subscribe();
-        tick();
-        fixture.detectChanges();
+        await fixture.whenStable();
+
         let spinner = fixture
             .debugElement
             .query(By.css('#spinner'))
@@ -56,12 +61,13 @@ describe('NgHttpLoaderComponent OnPush', () => {
         expect(spinner).toBeTruthy();
 
         httpMock.expectOne('/fake').flush({});
-        tick();
-        fixture.detectChanges();
+
+        vi.advanceTimersToNextTimer();
+        await fixture.whenStable();
 
         spinner = fixture
             .debugElement
             .query(By.css('#spinner'));
         expect(spinner).toBeNull();
-    }));
+    });
 });

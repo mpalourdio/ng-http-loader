@@ -10,7 +10,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SkThreeBounceComponent } from '../../../lib/components/sk-three-bounce/sk-three-bounce.component';
-import { provideZonelessChangeDetection } from "@angular/core";
 
 describe('SkThreeBounceComponent', () => {
     let component: SkThreeBounceComponent;
@@ -18,10 +17,7 @@ describe('SkThreeBounceComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [SkThreeBounceComponent],
-            providers: [
-                provideZonelessChangeDetection(),
-            ]
+            imports: [SkThreeBounceComponent]
         })
             .compileComponents();
 
