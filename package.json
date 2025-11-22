@@ -52,7 +52,7 @@
     "@smarttools/eslint-plugin-rxjs": "^1.0.18",
     "@typescript-eslint/parser": "^8.23.0",
     "@vitest/coverage-v8": "^4.0.12",
-    "angular-eslint": "^20.0.0",
+    "angular-eslint": "^21.0.0",
     "eslint": "^9.28.0",
     "jsdom": "^27.1.0",
     "ng-packagr": "^21.0.0",
