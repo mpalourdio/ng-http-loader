@@ -30,6 +30,7 @@ jobs:
           npm update
 
       - name: Create Pull Request
+        id: cpr
         uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GH_PR_PAT }}
@@ -41,3 +42,9 @@ jobs:
           title: 'chore: npm update'
           labels: 'dependencies'
           body: ''
+
+      - name: Auto-merge PR
+        if: ${{ steps.cpr.outputs.pull-request-number }}
+        run: gh pr merge --merge --auto --delete-branch ${{steps.cpr.outputs.pull-request-number }}
+        env:
+          GH_TOKEN: ${{ secrets.GH_PR_PAT }}
