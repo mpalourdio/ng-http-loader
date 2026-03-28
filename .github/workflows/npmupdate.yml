@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * 2' # Every Tuesday at midnight
+      timezone: 'Europe/Paris'
 
 env:
   FORCE_COLOR: 3
