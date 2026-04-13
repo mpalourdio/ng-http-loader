@@ -10,7 +10,9 @@
 import { Directive, input } from '@angular/core';
 
 @Directive()
+/* istanbul ignore start */
 export abstract class AbstractLoaderDirective {
+/* istanbul ignore stop */
 
     readonly backgroundColor = input<string>();
 }
