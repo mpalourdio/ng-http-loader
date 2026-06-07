@@ -1,11 +1,10 @@
-// @ts-check
-const eslint = require('@eslint/js');
-const {defineConfig} = require("eslint/config");
-const tseslint = require('typescript-eslint');
-const angular = require('angular-eslint');
-const rxjs = require('@smarttools/eslint-plugin-rxjs');
+import eslint from '@eslint/js';
+import {defineConfig} from 'eslint/config';
+import tseslint from 'typescript-eslint';
+import angular from 'angular-eslint';
+import rxjs from '@smarttools/eslint-plugin-rxjs';
 
-module.exports = defineConfig([
+export default defineConfig([
     {
         files: ['**/*.ts'],
         extends: [
@@ -17,7 +16,7 @@ module.exports = defineConfig([
                 languageOptions: {
                     parserOptions: {
                         projectService: true,
-                        tsconfigRootDir: __dirname,
+                        tsconfigRootDir: import.meta.dirname,
                     },
                 },
             },
