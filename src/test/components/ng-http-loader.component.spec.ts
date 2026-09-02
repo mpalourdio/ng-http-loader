@@ -29,6 +29,7 @@ describe('NgHttpLoaderComponent', () => {
 
     beforeEach(async () => {
         vi.useFakeTimers({ shouldAdvanceTime: true });
+        await vi.runAllTimersAsync();
 
         await TestBed.configureTestingModule({
             imports: [NgHttpLoaderComponent],
@@ -49,7 +50,7 @@ describe('NgHttpLoaderComponent', () => {
     });
 
     afterEach(() => {
-        vi.clearAllTimers();
+        vi.useRealTimers();
         isVisibleSubscription.unsubscribe();
     });
 
@@ -194,41 +195,41 @@ describe('NgHttpLoaderComponent', () => {
         expect(element.style['background-color']).toBe('rgb(255, 0, 0)');
     });
 
-    it('should show and hide the spinner according to the pending HTTP requests', () => {
+    it('should show and hide the spinner according to the pending HTTP requests', async () => {
         const runQuery$ = (url: string): Observable<unknown> => http.get(url);
         forkJoin([runQuery$('/fake'), runQuery$('/fake2')]).subscribe();
         const firstRequest = httpMock.expectOne('/fake');
         const secondRequest = httpMock.expectOne('/fake2');
 
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeTruthy();
         firstRequest.flush({});
 
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeTruthy();
 
         secondRequest.flush({});
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeFalsy();
     });
 
-    it('should hide and show the spinner for a single HTTP request', () => {
+    it('should hide and show the spinner for a single HTTP request', async () => {
         http.get('/fake').subscribe();
 
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeTruthy();
         httpMock.expectOne('/fake').flush({});
 
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeFalsy();
     });
 
-    it('should not show the spinner if the request is filtered by url', () => {
+    it('should not show the spinner if the request is filtered by url', async () => {
         component.filteredUrlPatterns().push('fake');
         component.ngOnInit();
 
         http.get('/fake').subscribe();
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeFalsy();
         httpMock.expectOne('/fake').flush({});
     });
@@ -238,7 +239,7 @@ describe('NgHttpLoaderComponent', () => {
         await fixture.whenStable();
 
         http.get('/fake').subscribe();
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeFalsy();
         httpMock.expectOne('/fake').flush({});
     });
@@ -253,12 +254,12 @@ describe('NgHttpLoaderComponent', () => {
             }
         }).subscribe();
 
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeFalsy();
         httpMock.expectOne('/fake').flush({});
     });
 
-    it('should take care of query strings in filteredUrlPatterns', () => {
+    it('should take care of query strings in filteredUrlPatterns', async () => {
         component.filteredUrlPatterns().push('bar');
         component.ngOnInit();
 
@@ -270,26 +271,26 @@ describe('NgHttpLoaderComponent', () => {
                 }
             }
         ).subscribe();
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeFalsy();
         httpMock.expectOne('/api/service?foo=bar').flush({});
     });
 
-    it('should correctly filter by URL with several requests and one pattern', () => {
+    it('should correctly filter by URL with several requests and one pattern', async () => {
         component.filteredUrlPatterns().push('\\d');
         component.ngOnInit();
 
         http.get('/12345').subscribe();
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeFalsy();
         httpMock.expectOne('/12345').flush({});
 
         http.get('/fake').subscribe();
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeTruthy();
         httpMock.expectOne('/fake').flush({});
 
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeFalsy();
     });
 
@@ -298,16 +299,16 @@ describe('NgHttpLoaderComponent', () => {
         await fixture.whenStable();
 
         http.post('/12345', null).subscribe();
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeFalsy();
         httpMock.expectOne('/12345').flush({});
 
         http.get('/fake').subscribe();
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeTruthy();
         httpMock.expectOne('/fake').flush({});
 
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeFalsy();
     });
 
@@ -320,20 +321,20 @@ describe('NgHttpLoaderComponent', () => {
                 'my-header': 'value'
             }
         }).subscribe();
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeFalsy();
         httpMock.expectOne('/12345').flush({});
 
         http.get('/fake').subscribe();
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeTruthy();
         httpMock.expectOne('/fake').flush({});
 
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeFalsy();
     });
 
-    it('should show the spinner even if the component is created after the HTTP request is performed', () => {
+    it('should show the spinner even if the component is created after the HTTP request is performed', async () => {
         http.get('/fake').subscribe();
 
         const newFixture = TestBed.createComponent(NgHttpLoaderComponent);
@@ -343,110 +344,110 @@ describe('NgHttpLoaderComponent', () => {
         let isVisibleForNewComponent = false;
         newComponent.isVisible$.subscribe(v => isVisibleForNewComponent = v);
 
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisibleForNewComponent).toBeTruthy();
         httpMock.expectOne('/fake').flush({});
 
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisibleForNewComponent).toBeFalsy();
         httpMock.verify();
     });
 
-    it('should correctly handle the debounce delay for a single HTTP request', () => {
+    it('should correctly handle the debounce delay for a single HTTP request', async () => {
         fixture.componentRef.setInput('debounceDelay', 2000);
         http.get('/fake').subscribe();
 
         // the HTTP request is pending for 1 second now
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeFalsy();
 
         // the HTTP request is pending for 1,999 seconds now
-        vi.advanceTimersByTime(999);
+        await vi.advanceTimersByTimeAsync(999);
         expect(isVisible).toBeFalsy();
 
         // the HTTP request is pending for 2 seconds now - the spinner will be visible
-        vi.advanceTimersByTime(1);
+        await vi.advanceTimersByTimeAsync(1);
         expect(isVisible).toBeTruthy();
 
         // the HTTP request is pending for 5 seconds now - the spinner is still visible
-        vi.advanceTimersByTime(3000);
+        await vi.advanceTimersByTimeAsync(3000);
         expect(isVisible).toBeTruthy();
 
         // the HTTP request is finally over, the spinner is hidden
         httpMock.expectOne('/fake').flush({});
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeFalsy();
     });
 
-    it('should correctly handle the debounce delay for HTTP request finished before spinner should be shown', () => {
+    it('should correctly handle the debounce delay for HTTP request finished before spinner should be shown', async () => {
         fixture.componentRef.setInput('debounceDelay', 2000);
         http.get('/fake').subscribe();
 
         // the HTTP request is pending for 1 second now
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeFalsy();
 
         // the HTTP request is over, the spinner shouldn't be shown after debounceDelay terminated
         httpMock.expectOne('/fake').flush({});
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeFalsy();
     });
 
-    it('should correctly handle the debounce delay for HTTP sequential requests finished before spinner should be shown', () => {
+    it('should correctly handle the debounce delay for HTTP sequential requests finished before spinner should be shown', async () => {
         fixture.componentRef.setInput('debounceDelay', 5000);
         http.get('/fake').subscribe();
 
         // the first HTTP request is pending for 1 second now
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeFalsy();
 
         // the first HTTP request is over
         httpMock.expectOne('/fake').flush({});
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
 
         http.get('/fake2').subscribe();
 
         // the second HTTP request is pending for 1 second now
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeFalsy();
 
         // the second HTTP request is over
         httpMock.expectOne('/fake2').flush({});
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeFalsy();
 
         // the spinner shouldn't be shown after debounceDelay terminated
-        vi.advanceTimersByTime(2000);
+        await vi.advanceTimersByTimeAsync(2000);
         expect(isVisible).toBeFalsy();
     });
 
-    it('should correctly handle the debounce delay for HTTP parallel requests finished before spinner should be shown', () => {
+    it('should correctly handle the debounce delay for HTTP parallel requests finished before spinner should be shown', async () => {
         fixture.componentRef.setInput('debounceDelay', 5000);
         http.get('/fake').subscribe();
         http.get('/fake2').subscribe();
 
         // both HTTP requests are pending for 1s now
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeFalsy();
 
         // the first HTTP request is over
         httpMock.expectOne('/fake').flush({});
 
         // the second HTTP request is pending for 2s now
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeFalsy();
 
         // the second HTTP request is over
         httpMock.expectOne('/fake2').flush({});
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeFalsy();
 
         // the spinner shouldn't be shown after debounceDelay terminated
-        vi.advanceTimersByTime(3000);
+        await vi.advanceTimersByTimeAsync(3000);
         expect(isVisible).toBeFalsy();
     });
 
-    it('should correctly handle the debounce delay for multiple HTTP requests', () => {
+    it('should correctly handle the debounce delay for multiple HTTP requests', async () => {
         fixture.componentRef.setInput('debounceDelay', 2000);
         const runQuery$ = (url: string): Observable<unknown> => http.get(url);
         forkJoin([runQuery$('/fake'), runQuery$('/fake2')]).subscribe();
@@ -454,33 +455,33 @@ describe('NgHttpLoaderComponent', () => {
         const secondRequest = httpMock.expectOne('/fake2');
 
         // the HTTP requests are pending for 1 second now
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeFalsy();
 
         // the HTTP requests are pending for 1,999 seconds now
-        vi.advanceTimersByTime(999);
+        await vi.advanceTimersByTimeAsync(999);
         expect(isVisible).toBeFalsy();
 
         // the HTTP requests are pending for 2 seconds now - the spinner will be visible
-        vi.advanceTimersByTime(1);
+        await vi.advanceTimersByTimeAsync(1);
         expect(isVisible).toBeTruthy();
 
         // the HTTP requests are pending for 5 seconds now - the spinner is still visible
-        vi.advanceTimersByTime(3000);
+        await vi.advanceTimersByTimeAsync(3000);
         expect(isVisible).toBeTruthy();
 
         // the first HTTP request is finally over, the spinner is still visible
         firstRequest.flush({});
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeTruthy();
 
         // the second request is pending for 8 seconds now - the spinner is still visible
-        vi.advanceTimersByTime(3000);
+        await vi.advanceTimersByTimeAsync(3000);
         expect(isVisible).toBeTruthy();
 
         // the second HTTP request is finally over, the spinner is hidden
         secondRequest.flush({});
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeFalsy();
     });
 
@@ -507,12 +508,12 @@ describe('NgHttpLoaderComponent', () => {
         expect(isVisible).toBeTruthy();
         // then an HTTP request is performed
         http.get('/fake').subscribe();
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeTruthy();
 
         // the HTTP request ends, but we want the spinner to be still visible
         httpMock.expectOne('/fake').flush({});
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeTruthy();
 
         spinner.hide();
@@ -520,74 +521,75 @@ describe('NgHttpLoaderComponent', () => {
         expect(isVisible).toBeFalsy();
         // _forceByPass should be reset for next HTTP requests
         http.get('/fake2').subscribe();
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeTruthy();
 
         httpMock.expectOne('/fake2').flush({});
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeFalsy();
     });
 
-    it('should correctly handle the minimum spinner duration for a single HTTP request', () => {
+    it('should correctly handle the minimum spinner duration for a single HTTP request', async () => {
         fixture.componentRef.setInput('minDuration', 5000);
         http.get('/fake').subscribe();
 
         // the HTTP request is pending for 1 second now
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeTruthy();
 
         // the HTTP request is pending for 2 seconds now
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeTruthy();
 
         // the HTTP request is finally over, the spinner is still visible
         httpMock.expectOne('/fake').flush({});
-        // vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeTruthy();
 
         // the HTTP request is over but the spinner is still visible after 3 seconds
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeTruthy();
 
         // the spinner is still visible after 4 seconds
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeTruthy();
 
         // the spinner is still visible after 4,999 seconds
-        vi.advanceTimersByTime(999);
+        await vi.advanceTimersByTimeAsync(999);
         expect(isVisible).toBeTruthy();
 
         // the spinner is not visible anymore after 5 seconds
-        vi.advanceTimersByTime(1);
+        await vi.advanceTimersByTimeAsync(1);
         expect(isVisible).toBeFalsy();
     });
 
-    it('should correctly handle the extra spinner duration for a single HTTP request', () => {
+    it('should correctly handle the extra spinner duration for a single HTTP request', async () => {
         fixture.componentRef.setInput('extraDuration', 5000);
         http.get('/fake').subscribe();
 
         // the HTTP request is pending for 1 second now
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeTruthy();
 
         // the HTTP request is pending for 2 seconds now
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeTruthy();
 
         // the HTTP request is finally over, the spinner is still visible
         httpMock.expectOne('/fake').flush({});
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeTruthy();
 
         // 4 seconds after the HTTP request is over, the spinner is still visible
-        vi.advanceTimersByTime(4000);
+        await vi.advanceTimersByTimeAsync(4000);
         expect(isVisible).toBeTruthy();
 
         // the spinner is not visible anymore after 5 seconds
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeFalsy();
     });
 
-    it('should correctly handle the minimum spinner duration for multiple HTTP requests', () => {
+    it('should correctly handle the minimum spinner duration for multiple HTTP requests', async () => {
         fixture.componentRef.setInput('minDuration', 5000);
         const runQuery$ = (url: string): Observable<unknown> => http.get(url);
         forkJoin([runQuery$('/fake'), runQuery$('/fake2')]).subscribe();
@@ -595,35 +597,37 @@ describe('NgHttpLoaderComponent', () => {
         const secondRequest = httpMock.expectOne('/fake2');
 
         // the HTTP requests are pending for 1 second now
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeTruthy();
 
         // the HTTP requests are pending for 2 seconds now
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeTruthy();
 
         // the first HTTP request is finally over, the spinner is still visible
         firstRequest.flush({});
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeTruthy();
 
         // the second HTTP request is still pending after 3 seconds
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeTruthy();
 
         // the second HTTP request is still pending after 4 seconds
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeTruthy();
 
         // the second HTTP request is finally over too, the spinner is still visible
         secondRequest.flush({});
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeTruthy();
 
         // After 5 seconds, the spinner is hidden
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeFalsy();
     });
 
-    it('should correctly handle the extra spinner duration for multiple HTTP requests', () => {
+    it('should correctly handle the extra spinner duration for multiple HTTP requests', async () => {
         fixture.componentRef.setInput('extraDuration', 5000);
         const runQuery$ = (url: string): Observable<unknown> => http.get(url);
         forkJoin([runQuery$('/fake'), runQuery$('/fake2')]).subscribe();
@@ -631,52 +635,55 @@ describe('NgHttpLoaderComponent', () => {
         const secondRequest = httpMock.expectOne('/fake2');
 
         // the HTTP requests are pending for 1 second now
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeTruthy();
 
         // the HTTP requests are pending for 2 seconds now
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeTruthy();
 
         // the first HTTP request is finally over, the spinner is still visible
         firstRequest.flush({});
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeTruthy();
 
         // the second HTTP request is still pending after 3 seconds
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeTruthy();
 
         // the second HTTP request is still pending after 4 seconds
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeTruthy();
 
         // the second HTTP request is finally over too, the spinner is still visible
         secondRequest.flush({});
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeTruthy();
 
         // After 4 seconds, the spinner is still visible
-        vi.advanceTimersByTime(4000);
+        await vi.advanceTimersByTimeAsync(4000);
         expect(isVisible).toBeTruthy();
 
         // After 5 seconds, the spinner is hidden
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeFalsy();
     });
 
-    it('should correctly handle the minimum spinner duration for multiple HTTP requests ran one after the others', () => {
+    it('should correctly handle the minimum spinner duration for multiple HTTP requests ran one after the others', async () => {
         fixture.componentRef.setInput('minDuration', 2000);
         http.get('/fake').subscribe();
         const firstRequest = httpMock.expectOne('/fake');
 
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeTruthy();
 
         // the first HTTP request is finally over, the spinner is still visible for at least 1 second
         firstRequest.flush({});
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeTruthy();
 
         // But 200 ms after the first HTTP request has finished, a second HTTP request is launched
-        vi.advanceTimersByTime(200);
+        await vi.advanceTimersByTimeAsync(200);
         //the spinner is still visible because of min duration
         expect(isVisible).toBeTruthy();
         http.get('/fake2').subscribe();
@@ -685,30 +692,30 @@ describe('NgHttpLoaderComponent', () => {
 
         // After 900 ms, the spinner should
         // still be visible because the second HTTP request is still pending
-        vi.advanceTimersByTime(900);
+        await vi.advanceTimersByTimeAsync(900);
         expect(isVisible).toBeTruthy();
 
         // 500 ms later, the second http request ends. The spinner should be hidden
         // Total time spent visible (1000+200+1400==2600 > minDuration)
-        vi.advanceTimersByTime(500);
+        await vi.advanceTimersByTimeAsync(500);
         secondRequest.flush({});
 
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeFalsy();
     });
 
-    it('should handle the extra spinner duration for multiple HTTP requests ran one after the others', () => {
+    it('should handle the extra spinner duration for multiple HTTP requests ran one after the others', async () => {
         fixture.componentRef.setInput('extraDuration', 10);
         const runQuery$ = (url: string): Observable<unknown> => http.get(url);
         runQuery$('/fake').subscribe();
         const firstRequest = httpMock.expectOne('/fake');
 
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeTruthy();
 
         // the first HTTP request is finally over, the spinner is still visible for at least 10ms
         firstRequest.flush({});
-        vi.advanceTimersByTime(5);
+        await vi.advanceTimersByTimeAsync(5);
         expect(isVisible).toBeTruthy();
 
         // But 5 ms after the first HTTP request has finished, a second HTTP request has been launched
@@ -716,30 +723,30 @@ describe('NgHttpLoaderComponent', () => {
         const secondRequest = httpMock.expectOne('/fake2');
 
         // After 700ms, the second http request ends. The spinner is still visible
-        vi.advanceTimersByTime(700);
+        await vi.advanceTimersByTimeAsync(700);
         secondRequest.flush({});
         expect(isVisible).toBeTruthy();
 
         // 10ms later, the spinner should be hidden (extraDuration)
-        vi.advanceTimersByTime(10);
+        await vi.advanceTimersByTimeAsync(10);
         expect(isVisible).toBeFalsy();
     });
 
-    it('should still display the spinner when the minimum duration is inferior to the HTTP request duration', () => {
+    it('should still display the spinner when the minimum duration is inferior to the HTTP request duration', async () => {
         fixture.componentRef.setInput('minDuration', 1000);
         http.get('/fake').subscribe();
 
         // the HTTP request is pending for 1 second now
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeTruthy();
 
         // the HTTP request is pending for 2 seconds now
-        vi.advanceTimersByTime(1000);
+        await vi.advanceTimersByTimeAsync(1000);
         expect(isVisible).toBeTruthy();
 
         // the HTTP request is finally over after 2 seconds, the spinner is hidden
         httpMock.expectOne('/fake').flush({});
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeFalsy();
     });
 
@@ -761,7 +768,7 @@ describe('NgHttpLoaderComponent', () => {
         expect(isVisible).toBeFalsy();
     });
 
-    it('should be possible to mix debounce delay and minimum duration', () => {
+    it('should be possible to mix debounce delay and minimum duration', async () => {
         // the spinner should not be visible the first second, then visible for 5 seconds
         fixture.componentRef.setInput('minDuration', 5000);
         fixture.componentRef.setInput('debounceDelay', 1000);
@@ -769,31 +776,32 @@ describe('NgHttpLoaderComponent', () => {
         http.get('/fake').subscribe();
 
         // the HTTP request is pending for 0,5 second now - spinner not visible because debounce
-        vi.advanceTimersByTime(500);
+        await vi.advanceTimersByTimeAsync(500);
         expect(isVisible).toBeFalsy();
 
         // the HTTP request is pending for 1 second now - spinner visible
-        vi.advanceTimersByTime(500);
+        await vi.advanceTimersByTimeAsync(500);
         expect(isVisible).toBeTruthy();
 
         // the HTTP request is finally over, the spinner is still visible
         httpMock.expectOne('/fake').flush({});
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeTruthy();
 
         // after 3 seconds, the spinner is still visible
-        vi.advanceTimersByTime(2000);
+        await vi.advanceTimersByTimeAsync(2000);
         expect(isVisible).toBeTruthy();
 
         // after 5,999 seconds, the spinner is still visible
-        vi.advanceTimersByTime(2999);
+        await vi.advanceTimersByTimeAsync(2999);
         expect(isVisible).toBeTruthy();
 
         // after 6 seconds (1s for debounce + 5s extra. duration), the spinner is hidden
-        vi.advanceTimersByTime(1);
+        await vi.advanceTimersByTimeAsync(1);
         expect(isVisible).toBeFalsy();
     });
 
-    it('should be possible to mix debounce delay and extra duration', () => {
+    it('should be possible to mix debounce delay and extra duration', async () => {
         // the spinner should not be visible the first second, then visible for 5 seconds
         fixture.componentRef.setInput('extraDuration', 5000);
         fixture.componentRef.setInput('debounceDelay', 1000);
@@ -801,27 +809,28 @@ describe('NgHttpLoaderComponent', () => {
         http.get('/fake').subscribe();
 
         // the HTTP request is pending for 0,5 second now - spinner not visible because debounce
-        vi.advanceTimersByTime(500);
+        await vi.advanceTimersByTimeAsync(500);
         expect(isVisible).toBeFalsy();
 
         // the HTTP request is pending for 1 second now - spinner visible
-        vi.advanceTimersByTime(500);
+        await vi.advanceTimersByTimeAsync(500);
         expect(isVisible).toBeTruthy();
 
         // the HTTP request is finally over, the spinner is still visible
         httpMock.expectOne('/fake').flush({});
+        await vi.advanceTimersByTimeAsync(0);
         expect(isVisible).toBeTruthy();
 
         // after 3 seconds, the spinner is still visible
-        vi.advanceTimersByTime(2000);
+        await vi.advanceTimersByTimeAsync(2000);
         expect(isVisible).toBeTruthy();
 
         // after 5,999 seconds, the spinner is still visible
-        vi.advanceTimersByTime(2999);
+        await vi.advanceTimersByTimeAsync(2999);
         expect(isVisible).toBeTruthy();
 
         // after 6 seconds (1s for debounce + 5s min. duration), the spinner is hidden
-        vi.advanceTimersByTime(1);
+        await vi.advanceTimersByTimeAsync(1);
         expect(isVisible).toBeFalsy();
     });
 
