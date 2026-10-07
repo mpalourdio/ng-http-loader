@@ -47,7 +47,7 @@ describe('NgHttpLoaderComponent OnPush', () => {
     });
 
     afterEach(() => {
-        vi.clearAllTimers();
+        vi.useRealTimers();
     });
 
     it('should work as expected when the host component has ChangeDetectionStrategy.OnPush', async () => {
@@ -62,7 +62,7 @@ describe('NgHttpLoaderComponent OnPush', () => {
 
         httpMock.expectOne('/fake').flush({});
 
-        vi.advanceTimersToNextTimer();
+        await vi.advanceTimersByTimeAsync(0);
         await fixture.whenStable();
 
         spinner = fixture
